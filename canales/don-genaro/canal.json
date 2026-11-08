@@ -6,5 +6,57 @@
  "biblia": "Don Genaro es un hombre grande, de pelo y barba canosos, con gorra y delantal, que habla sentado en su galpón. Argentino, con más de sesenta años de huerta a cuestas: usa el vos, dice «che» y abre con «¡Hola, gente de YouTube! ¿Cómo andan?». Sabe mucho, pero nunca habla como el que sabe más: se ríe de sus propios errores y cuenta que él también recomendaba lo que ahora no recomienda. Habla de huerta casera y jardín: por qué falla una planta, cuándo plantar, mitos y plagas, siempre con datos verificados. No habla de política, ni de marcas, ni de soluciones mágicas, y jamás corrige a nadie desde arriba. A su señora, Elena, solo la nombra. Frases típicas: «Y quedate hasta el final, porque...», «Che, y acá te hago un paréntesis cortito... Listo. Sigo.», «Entonces.», «Contalo abajo, en los comentarios, y de dónde sos. Las leo todas.», «Nos vemos entre los surcos.». La serie va con un video por día, un tema fijo para cada día de la semana, y lo que pide la gente va primero. Nunca promete resultados garantizados, cosechas seguras ni remedios infalibles.",
  "prohibidas": "milagro, cura, garantizado, infalible, resultados seguros, siempre funciona, sin riesgo, magia",
  "min": 10,
- "cara_cx": 0.5008
+ "cara_cx": 0.5008,
+ "plan": [
+  {
+   "titulo": "Hojas de tomate amarillas: 3 causas y qué mirar antes de regar",
+   "idea": "Don Genaro arranca por el tema más pedido en comentarios: hojas de tomate que se ponen amarillas. Repasa las tres causas más comunes —exceso de agua, drenaje y falta de nutrientes— y muestra qué revisar en la maceta o en el cantero antes de sumar más agua. No da una receta única: cuenta qué le pasó a él y qué haría distinto.",
+   "minutos": null
+  },
+  {
+   "titulo": "Almácigos: por qué se estiran y cómo evitar que se ahilen",
+   "idea": "Los plantines finitos y largos suelen indicar que les falta luz, no que les falte agua. Explica la distancia entre semillas, las horas de sol y por qué no conviene compensar con más riego. Muestra cómo corregir la luz en una bandeja común y cuándo conviene empezar de nuevo.",
+   "minutos": null
+  },
+  {
+   "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
+   "idea": "Antes de rociar cualquier cosa, Don Genaro muestra cómo mirar el envés de las hojas y distinguir pulgones de otros bichos. Explica por qué no siempre conviene intervenir y qué labores de huerta ayudan a que no se propaguen. Cuenta que él también fumigaba de más y qué aprendió después.",
+   "minutos": null
+  },
+  {
+   "titulo": "Compost en 2 cajones: qué evitar para que no atraiga moscas",
+   "idea": "Una abonera bien manejada no debería ser un foco de moscas. Explica la proporción de verdes y secos, el tamaño de los restos y por qué no conviene tirar restos cocidos. Muestra cómo revisar la humedad con la mano y qué hacer si ya aparecieron larvas.",
+   "minutos": null
+  },
+  {
+   "titulo": "Riego en macetas: por qué regar todos los días puede matar la planta",
+   "idea": "El riego diario no siempre es sinónimo de cuidado. Don Genaro muestra cómo meter el dedo y levantar la maceta para saber si falta agua, y por qué el exceso ahoga las raíces. Lo relaciona con el drenaje y con el tipo de sustrato, sin recetas únicas.",
+   "minutos": null
+  },
+  {
+   "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
+   "idea": "El momento del trasplante es crítico y no siempre sale bien. Explica cómo manipular el pan de tierra, cuánto regar antes y después, y por qué la planta puede marchitarse aunque esté bien regada. Muestra su propio método para no romper raíces.",
+   "minutos": null
+  },
+  {
+   "titulo": "Huerta en balcón: 4 macetas para cosechar en poco espacio",
+   "idea": "No hace falta un terreno para tener algo de cosecha. Don Genaro elige cuatro cultivos que funcionan en maceta, explica cuántas horas de sol necesitan y qué tamaño de contenedor conviene. Aclara que el rendimiento depende del clima y del cuidado, y cuenta qué le rindió a él en su patio.",
+   "minutos": null
+  },
+  {
+   "titulo": "Hojas mordidas: cómo distinguir babosas, orugas y vaquitas",
+   "idea": "No todo agujero en la hoja es plaga. Muestra las diferencias entre los daños de babosas, orugas y vaquitas, y en qué horario conviene mirar. Explica qué señales indican que hay que actuar y cuándo conviene dejar hacer a los bichos benéficos.",
+   "minutos": null
+  },
+  {
+   "titulo": "Ajo: por qué se te hacen chiquitos y cuándo conviene plantarlo",
+   "idea": "Los ajos chicos suelen venir de bulbos mal elegidos o de una siembra fuera de época. Explica cómo seleccionar los dientes, la profundidad y el tipo de suelo, y por qué no conviene abonar de más. Cuenta su error de plantar ajos del supermercado y qué aprendió.",
+   "minutos": null
+  },
+  {
+   "titulo": "Zanahoria: por qué sale torcida o se raja y cómo evitarlo",
+   "idea": "La forma de la zanahoria depende del suelo y del riego, no de la suerte. Don Genaro muestra cómo preparar la tierra para que no encuentre piedras ni terrones, y por qué los riegos irregulares la rajan. Aclara que no hay fórmula mágica: cada suelo pide su ajuste.",
+   "minutos": null
+  }
+ ]
 }
