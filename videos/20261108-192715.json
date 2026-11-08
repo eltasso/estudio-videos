@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794181667.2514365,
+ "actualizado": 1794181730.3382049,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1071,
+  "deepseek": 0.1077,
   "gpt": 0.1941,
   "gpt_img": 88,
   "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.3589
+  "total": 0.3595
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "python -c \"\nimport json\nR=json.load(open('avatar_ranges.json'))\nfor r in R[:12]: print(r['file'], r['startMs'], r['endMs'], round((r['endMs']-r['startMs'])/1000,1), 'SPLIT' if r.get('foto') else '')\nprint('...')\nlargo=[(r['file'],round((r['endMs']-r['startMs'])/1000,1)) for r in R if (r['endMs']-r['startMs'])>6600 and not r.get('foto')]\nprint('sin split >6.6s:',largo)\n\""
-  },
-  {
-   "k": "res",
-   "t": "avatar/A0.mp4 0 14380 14.4 \navatar/A1.mp4 17840 22400 4.6 \navatar/A2.mp4 26400 31640 5.2 \navatar/A3.mp4 36800 42900 6.1 \navatar/A4.mp4 49620 59600 10.0 SPLIT\navatar/A5.mp4 71360 75680 4.3 \navatar/A6.mp4 80300 90260 10.0 SPLIT\navatar/A7.mp4 97680 103000 5.3 \navatar/A8.mp4 107800 112380 4.6 \navatar/A9.mp4 117340 122640 5.3 \navatar/A10.mp4 129280 134580 5.3 \navatar/A11.mp4 143900 149680 5.8 \n...\nsin "
-  },
   {
    "k": "tool",
    "t": "python -c \"\nimport json\nP=json.load(open('plan.json'))\navs=[s for s in P['segments'] if s['kind']=='av']\nprint('av',len(avs),'split',sum(1 for s in avs if s.get('split')))\nlargos=[(s['t0'],s['t1'],round(s['t1']-s['t0'],1),s['file'],s.get('split')) for s in avs if not s.get('split') and s['t1']-s['t0']>6.6]\nprint('largos sin split',len(largos))\nfor x in largos[:20]: print(x)\n\""
@@ -166,6 +158,14 @@
   {
    "k": "res",
    "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log avatar/it.log --busca \"clips cortados|⛔|FAILED|TIMED_OUT|CANCELLED\" --max 540"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · log: 23:17:53 estado: IN_PROGRESS → hacé otra cosa útil y volvé a llamar"
   },
   {
    "k": "tool",
