@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794182235.1106138,
+ "actualizado": 1794182298.0003016,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1077,
+  "deepseek": 0.1084,
   "gpt": 0.1941,
   "gpt_img": 88,
   "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.3595
+  "total": 0.3602
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "python -c \"\nimport json\nP=json.load(open('plan.json'))\navs=[s for s in P['segments'] if s['kind']=='av']\nprint('av',len(avs),'split',sum(1 for s in avs if s.get('split')))\nlargos=[(s['t0'],s['t1'],round(s['t1']-s['t0'],1),s['file'],s.get('split')) for s in avs if not s.get('split') and s['t1']-s['t0']>6.6]\nprint('largos sin split',len(largos))\nfor x in largos[:20]: print(x)\n\""
-  },
-  {
-   "k": "res",
-   "t": "av 43 split 0\nlargos sin split 18\n(0.0, 14.38, 14.4, './avatar/espera/904497b045.jpg', None)\n(49.62, 59.6, 10.0, './avatar/espera/904497b045.jpg', None)\n(80.3, 90.26, 10.0, './avatar/espera/904497b045.jpg', None)\n(177.94, 187.46, 9.5, './avatar/espera/904497b045.jpg', None)\n(213.2, 222.7, 9.5, './avatar/espera/904497b045.jpg', None)\n(254.34, 262.52, 8.2, './avatar/espera/904497b045.jpg', None)\n(27"
-  },
   {
    "k": "tool",
    "t": "python -c \"\nimport json\nW=json.load(open('captions.json',encoding='utf8'))\nfor w in W[:22]: print(w['startMs'], w['endMs'], repr(w['text']))\n\""
@@ -158,6 +150,14 @@
   {
    "k": "res",
    "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log avatar/it.log --busca \"clips cortados|⛔|FAILED|TIMED_OUT|CANCELLED\" --max 540"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · log: 23:17:53 estado: IN_PROGRESS → hacé otra cosa útil y volvé a llamar"
   },
   {
    "k": "tool",
