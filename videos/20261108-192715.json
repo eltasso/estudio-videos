@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794177107.9172468,
+ "actualizado": 1794177170.990527,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -17,7 +17,7 @@
    "k": "voz",
    "n": "Voz",
    "st": "active",
-   "info": "4 bloques"
+   "info": "9:36 min"
   },
   {
    "k": "tiempos",
@@ -51,38 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0232,
+  "deepseek": 0.0236,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0232
+  "total": 0.0236
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/hoja.py\"}"
-  },
-  {
-   "k": "res",
-   "t": "1\t# Hoja de contacto SIN texto (ffmpeg en Windows suele no tener fontconfig: drawtext revienta).\n2\t#   python <APP>/tools/hoja.py <salida.jpg> <img_o_video> [<img_o_video> …]   (hasta 12, grilla 4x3)\n3\t# Acepta fotos y videos (de un video toma el cuadro del medio). Después mirala con Read.\n4\timport os, subprocess, sys, tempfile\n5\t\n6\tout, items = sys.argv[1], sys.argv[2:14]\n7\tif not items: sys.exit"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/render.py\"}"
-  },
-  {
-   "k": "res",
-   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"HERRAMIENTA DEL ESTUDIO (no la copies ni la edites): python <APP>/tools/render.py <carpeta_del_video> [--limit N]\n3\tLee <carpeta>/shots_timed.json  = [{\"id\":\"b01_gancho\",\"startMs\":0,\"endMs\":3200}, ...]  (id = nombre sin extensión de una foto o clip en fotos/, clips/ o avatar/frames/)\n4\t     <carpeta>/avatar_ranges.json = [{\"file\":\"avatar/A1.mp4\",\"frame\":\"avatar/frame"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/assemble.py\"}"
-  },
-  {
-   "k": "res",
-   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"HERRAMIENTA DEL ESTUDIO (no la copies ni la edites): python <APP>/tools/assemble.py <carpeta_del_video>\n3\tUne segments/ (con los fundidos de xf.json) + voz/master.wav + SFX de cues.json -> final.mp4 (1920x1080 30fps, audio ESTÉREO AAC 192k).\n4\tcues.json = [{\"file\":\"tela.mp3\",\"t\":171100,\"gain\":0.07,\"fade\":0.4}, ...]  (archivos en <carpeta>/sfx/; t en ms; gain 0.035-0."
-  },
   {
    "k": "tool",
    "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/sonidos.py\"}"
@@ -178,6 +154,30 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe voz/master.wav --max 540"
+  },
+  {
+   "k": "res",
+   "t": "✓ existe voz/master.wav (50.9 MB, 115 s)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"taskId\": \"2\", \"status\": \"completed\"}"
+  },
+  {
+   "k": "res",
+   "t": "Updated task #2 status"
+  },
+  {
+   "k": "tool",
+   "t": "{\"taskId\": \"3\", \"status\": \"in_progress\"}"
+  },
+  {
+   "k": "res",
+   "t": "Updated task #3 status"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/tiempos.py . es"
   }
  ],
  "maquinas": 1,
