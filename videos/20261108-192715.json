@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794179460.2579868,
+ "actualizado": 1794179523.067159,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -35,7 +35,7 @@
    "k": "fotos",
    "n": "Fotos",
    "st": "done",
-   "info": "79 fotos"
+   "info": "80 fotos"
   },
   {
    "k": "armado",
@@ -51,58 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0923,
+  "deepseek": 0.1006,
   "gpt": 0.1941,
   "gpt_img": 88,
   "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.3441
+  "total": 0.3524
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "RENDER PID 11071"
-  },
-  {
-   "k": "tool",
-   "t": "Revisión del render de prueba (render.py --limit 10, qc/hoja_render.jpg).\n\nMiré los 10 primeros segmentos: alternan el avatar (todavía con el cartel «Esperando avatar», porque InfiniteTalk está en cola) con las fotos del gancho.\n- p001 (mujer con los plantines caídos) entra justo después de la primera ventana.\n- p002, p003, p004, p005 se ven nítidas, con el movimiento de zoom y sin bordes negros.\n"
-  },
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/gates/render_auto.txt (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log render.log --busca \"hechos|Traceback|FALLO\" --max 540"
-  },
-  {
-   "k": "res",
-   "t": "✓ el log tiene 'hechos' (150 s):\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A39.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A40.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A41.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A42.mp4\nclips=102 frames=17298 (576.60s)\nhechos 102"
-  },
-  {
-   "k": "tool",
-   "t": "tail -8 avatar/it.log; date"
-  },
-  {
-   "k": "res",
-   "t": "22:36:37 InfiniteTalk: 43 ventanas · reel 307.1 s · 1 llamada\n22:36:43 RUN 9e9c792b-24be-4cdb-b374-81694840f916-u2\n22:37:13 estado: IN_QUEUE\nSun Nov  8 22:50:24 UTC 2026"
-  },
-  {
-   "k": "ai",
-   "t": "El render completo está armado. Mientras InfiniteTalk sigue en cola, pruebo el ensamblado y la mezcla de sonido."
-  },
-  {
-   "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/assemble.py . > assemble.log 2>&1 & echo \"ASSEMBLE PID $!\""
-  },
-  {
-   "k": "res",
-   "t": "ASSEMBLE PID 13923"
-  },
-  {
-   "k": "tool",
-   "t": "{\"taskId\": \"4\", \"status\": \"completed\"}"
-  },
   {
    "k": "res",
    "t": "Updated task #4 status"
@@ -178,6 +134,50 @@
   {
    "k": "res",
    "t": "av 43 split 0\nlargos sin split 18\n(0.0, 14.38, 14.4, './avatar/espera/904497b045.jpg', None)\n(49.62, 59.6, 10.0, './avatar/espera/904497b045.jpg', None)\n(80.3, 90.26, 10.0, './avatar/espera/904497b045.jpg', None)\n(177.94, 187.46, 9.5, './avatar/espera/904497b045.jpg', None)\n(213.2, 222.7, 9.5, './avatar/espera/904497b045.jpg', None)\n(254.34, 262.52, 8.2, './avatar/espera/904497b045.jpg', None)\n(27"
+  },
+  {
+   "k": "tool",
+   "t": "python -c \"\nimport json\nW=json.load(open('captions.json',encoding='utf8'))\nfor w in W[:22]: print(w['startMs'], w['endMs'], repr(w['text']))\n\""
+  },
+  {
+   "k": "res",
+   "t": "0 280 ' ¡Hola'\n460 760 ' gente'\n760 960 ' de'\n960 1460 ' YouTube'\n1840 1960 ' ¿Cómo'\n1960 2480 ' andan'\n2780 2980 ' Hace'\n2980 3740 ' 23'\n3740 4120 ' años'\n4120 4440 ' saqué'\n4440 5220 ' 42'\n5220 5740 ' plantines'\n5740 6140 ' de'\n6140 6360 ' tomate'\n6360 6560 ' de'\n6560 6900 ' la'\n6900 7300 ' bandeja'\n7300 7620 ' y'\n7620 7860 ' los'\n7860 8140 ' pasé'\n8140 8340 ' al'\n8340 8880 ' cantero'"
+  },
+  {
+   "k": "tool",
+   "t": "python -c \"\nimport json\nW=json.load(open('captions.json',encoding='utf8'))\nfor w in W[18:45]: print(w['startMs'], w['endMs'], repr(w['text']))\nprint('gaps:')\nfor i in range(1,45):\n    g=W[i]['startMs']-W[i-1]['endMs']\n    if g>=200: print(round(g), 'before', W[i]['text'].strip(), 'at', W[i]['startMs'])\n\""
+  },
+  {
+   "k": "res",
+   "t": "7620 7860 ' los'\n7860 8140 ' pasé'\n8140 8340 ' al'\n8340 8880 ' cantero'\n9240 9760 ' 42'\n10260 10440 ' ni'\n10440 10640 ' uno'\n10640 11100 ' menos'\n11440 11480 ' A'\n11460 11820 ' la'\n11820 11880 ' tarde'\n11880 12800 ' 37'\n12800 13220 ' tenían'\n13220 13580 ' las'\n13580 13740 ' hojas'\n13740 14100 ' para'\n14100 14380 ' abajo'\n14680 14880 ' como'\n14880 15100 ' si'\n15100 15340 ' les'\n15340 15620 ' hubier"
+  },
+  {
+   "k": "ai",
+   "t": "Detecté que la primera ventana quedó en 14,4 s. La convierto en pantalla partida de 10,26 s con una foto propia (una variante ya generada), sin tocar el resto del plan."
+  },
+  {
+   "k": "tool",
+   "t": "cp fotos/p001_c.png fotos/s18.png && python -c \"\nimport json\nd=json.load(open('fotos/p001_c.json',encoding='utf8')); d['id']='s18'\njson.dump(d,open('fotos/s18.json','w',encoding='utf8'),ensure_ascii=False,indent=1)\nR=json.load(open('avatar_ranges.json',encoding='utf8'))\nR[0]['endMs']=10260; R[0]['foto']='s18'; R[0]['lado']='izq'\njson.dump(R,open('avatar_ranges.json','w',encoding='utf8'),ensure_asc"
+  },
+  {
+   "k": "res",
+   "t": "{'file': 'avatar/A0.mp4', 'frame': 'refs/avatar.png', 'startMs': 0, 'endMs': 10260, 'foto': 's18', 'lado': 'izq'}"
+  },
+  {
+   "k": "tool",
+   "t": "tail -4 avatar/it.log; date"
+  },
+  {
+   "k": "res",
+   "t": "22:36:37 InfiniteTalk: 43 ventanas · reel 307.1 s · 1 llamada\n22:36:43 RUN 9e9c792b-24be-4cdb-b374-81694840f916-u2\n22:37:13 estado: IN_QUEUE\nSun Nov  8 23:11:55 UTC 2026"
+  },
+  {
+   "k": "tool",
+   "t": "ffmpeg -hide_banner -ss 20 -t 6 -i final.mp4 -vn -af volumedetect -f null - 2>&1 | grep -E \"mean_volume|max_volume\"; echo \"--- sin sfx (33-39s) ---\"; ffmpeg -hide_banner -ss 33 -t 6 -i final.mp4 -vn -af volumedetect -f null - 2>&1 | grep -E \"mean_volume|max_volume\""
+  },
+  {
+   "k": "res",
+   "t": "[Parsed_volumedetect_0 @ 0x789c48002000] mean_volume: -17.0 dB\n[Parsed_volumedetect_0 @ 0x789c48002000] max_volume: -1.6 dB\n--- sin sfx (33-39s) ---\n[Parsed_volumedetect_0 @ 0x7b7aa8002000] mean_volume: -16.7 dB\n[Parsed_volumedetect_0 @ 0x7b7aa8002000] max_volume: -1.8 dB"
   }
  ],
  "maquinas": 1,
