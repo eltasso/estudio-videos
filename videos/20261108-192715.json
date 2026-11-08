@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794181162.7868872,
+ "actualizado": 1794181225.7157598,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1064,
+  "deepseek": 0.1071,
   "gpt": 0.1941,
   "gpt_img": 88,
   "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.3582
+  "total": 0.3589
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa render --min 10"
-  },
-  {
-   "k": "res",
-   "t": "Exit code 1\nVALIDAR /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los · etapa render\n  ✓ guion: 1570 palabras (esperado 1105-1724 para 10 min)\n  ✓ fotos: 79 · 0 sin su prompt al lado (no salieron de tools/fotos.py)\n  ✓ fotos: 0 con prompt incompleto\n  ✓ fotos: 6 imágenes creativas con detalle_narrativo (lo pedido: 4 a 6, KIT §4b)\n  ✓ render: movimiento al azar (plan_motion de tool"
-  },
   {
    "k": "tool",
    "t": "python -c \"\nimport json\nR=json.load(open('avatar_ranges.json'))\nfor r in R[:12]: print(r['file'], r['startMs'], r['endMs'], round((r['endMs']-r['startMs'])/1000,1), 'SPLIT' if r.get('foto') else '')\nprint('...')\nlargo=[(r['file'],round((r['endMs']-r['startMs'])/1000,1)) for r in R if (r['endMs']-r['startMs'])>6600 and not r.get('foto')]\nprint('sin split >6.6s:',largo)\n\""
@@ -174,6 +166,14 @@
   {
    "k": "res",
    "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log avatar/it.log --busca \"clips cortados|⛔|FAILED|TIMED_OUT|CANCELLED\" --max 540"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · log: 23:17:53 estado: IN_PROGRESS → hacé otra cosa útil y volvé a llamar"
   },
   {
    "k": "tool",
