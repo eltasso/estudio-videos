@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794177742.1122804,
+ "actualizado": 1794177805.1428683,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -35,7 +35,7 @@
    "k": "fotos",
    "n": "Fotos",
    "st": "active",
-   "info": "10 fotos"
+   "info": "79 fotos"
   },
   {
    "k": "armado",
@@ -51,34 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0541,
-  "gpt": 0.0204,
-  "gpt_img": 9,
+  "deepseek": 0.0553,
+  "gpt": 0.1711,
+  "gpt_img": 78,
   "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.1322
+  "total": 0.2841
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "python -c \"\nimport json\nW=json.load(open('captions.json',encoding='utf8'))\nfor w in W:\n    t=w['text'].strip().lower().strip('.,¡!¿?')\n    if t in ('regado','regué','regar','viento','agua','litro','helada','sombra','maceta'):\n        print(w['startMs'], t)\n\" | head -40"
-  },
-  {
-   "k": "res",
-   "t": "18760 agua\n21360 regado\n73400 agua\n89280 agua\n119520 maceta\n141520 maceta\n152000 maceta\n158380 maceta\n175140 maceta\n202600 viento\n209300 regar\n218220 agua\n229680 agua\n237740 agua\n239200 sombra\n249840 agua\n263080 litro\n267080 sombra\n290460 maceta\n294000 agua\n301420 maceta\n376360 sombra\n394820 agua\n407880 viento\n475340 helada\n528360 sombra"
-  },
-  {
-   "k": "tool",
-   "t": "[\n {\"file\": \"agua.mp3\", \"t\": 21360, \"gain\": 0.05, \"fade\": 0.5},\n {\"file\": \"viento_2.mp3\", \"t\": 202600, \"gain\": 0.05, \"fade\": 0.6},\n {\"file\": \"pajaros_2.mp3\", \"t\": 237740, \"gain\": 0.035, \"fade\": 0.8},\n {\"file\": \"agua.mp3\", \"t\": 249840, \"gain\": 0.04, \"fade\": 0.6},\n {\"file\": \"agua_2.mp3\", \"t\": 263080, \"gain\": 0.045, \"fade\": 0.3},\n {\"file\": \"pajaros_3.mp3\", \"t\": 573420, \"gain\": 0.04, \"fade\": 0.6}\n]\n"
-  },
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/cues.json (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "{\n \"title\": \"Trasplante de tomate: por qué se caen los plantines al pasarlos\",\n \"description\": \"Hola, gente de YouTube. En este video te cuento por qué se caen los plantines de tomate cuando los pasás al cantero y qué hago yo ahora para que no se me caigan. Me pasó muchas veces, y la primera fue la peor: cuarenta y dos plantines una mañana, y a la tarde casi todos con las hojas para abajo.\\n\\nLa c"
-  },
   {
    "k": "res",
    "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/meta.json (file state is current in your context — no need to Read it back)"
@@ -178,6 +158,26 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 79 --max 540"
+  },
+  {
+   "k": "res",
+   "t": "✓ hay 79 archivos (190 s)"
+  },
+  {
+   "k": "tool",
+   "t": "cd fotos && python /opt/estudio/repo/motor/tools/hoja.py ../qc/hoja_fotos_A.jpg $(for i in $(seq -w 1 12); do echo p0$i.png; done) && python /opt/estudio/repo/motor/tools/hoja.py ../qc/hoja_fotos_B.jpg $(for i in $(seq -w 13 24); do echo p0$i.png; done) && python /opt/estudio/repo/motor/tools/hoja.py ../qc/hoja_fotos_C.jpg $(for i in $(seq -w 25 36); do echo p0$i.png; done) && python /opt/estudio/"
+  },
+  {
+   "k": "res",
+   "t": "hoja: ../qc/hoja_fotos_A.jpg (12 cuadros, 4x3)\nhoja: ../qc/hoja_fotos_B.jpg (12 cuadros, 4x3)\nhoja: ../qc/hoja_fotos_C.jpg (12 cuadros, 4x3)\nhoja: ../qc/hoja_fotos_D.jpg (12 cuadros, 4x3)\nhoja: ../qc/hoja_fotos_E.jpg (12 cuadros, 4x3)\nhoja: ../qc/hoja_fotos_F.jpg (12 cuadros, 4x3)\nhoja: ../qc/hoja_fotos_G.jpg (4 cuadros, 4x1)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_fotos_A.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
   }
  ],
  "maquinas": 1,
