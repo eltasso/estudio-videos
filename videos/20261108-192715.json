@@ -1,0 +1,69 @@
+{
+ "vid": "20261108-192715",
+ "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
+ "canal": "don-genaro",
+ "estado": "trabajando",
+ "actualizado": 1794176895.3526351,
+ "creado": 1794176895.347455,
+ "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
+ "pasos": [
+  {
+   "k": "guion",
+   "n": "Guion",
+   "st": "pending",
+   "info": ""
+  },
+  {
+   "k": "voz",
+   "n": "Voz",
+   "st": "pending",
+   "info": ""
+  },
+  {
+   "k": "tiempos",
+   "n": "Tiempos",
+   "st": "pending",
+   "info": ""
+  },
+  {
+   "k": "avatar",
+   "n": "Avatar",
+   "st": "pending",
+   "info": ""
+  },
+  {
+   "k": "fotos",
+   "n": "Fotos",
+   "st": "pending",
+   "info": ""
+  },
+  {
+   "k": "armado",
+   "n": "Armado",
+   "st": "pending",
+   "info": ""
+  },
+  {
+   "k": "qc",
+   "n": "QC",
+   "st": "pending",
+   "info": ""
+  }
+ ],
+ "costo": {
+  "deepseek": 0.0,
+  "gpt": 0.0,
+  "gpt_img": 0,
+  "whisper": 0.0,
+  "avatar": 0.0,
+  "total": 0.0
+ },
+ "eventos": [
+  {
+   "k": "user",
+   "t": "Hacé este video completo de punta a punta, solo, sin preguntar y sin frenar. Tus herramientas están en el KIT del system prompt. Este es el brief entero (también quedó en /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/BRIEF.md por si lo necesitás releer después de una compactación):\n\n# BRIEF — Trasplante de tomate: por qué se caen los plantines al pasarlos · Don Genaro\n\nHacé un"
+  }
+ ],
+ "maquinas": 1,
+ "extrema": ""
+}
