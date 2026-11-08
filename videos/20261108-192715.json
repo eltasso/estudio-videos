@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794177044.824928,
+ "actualizado": 1794177107.9172468,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -17,7 +17,7 @@
    "k": "voz",
    "n": "Voz",
    "st": "active",
-   "info": "3 bloques"
+   "info": "4 bloques"
   },
   {
    "k": "tiempos",
@@ -51,18 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0224,
+  "deepseek": 0.0232,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0224
+  "total": 0.0232
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"HERRAMIENTA DEL ESTUDIO: espera UNA sola vez hasta que pase algo (en vez de sleep + ls + tail una y otra vez).\n3\t   python <APP>/tools/esperar.py --log <archivo.log> [--busca \"EXIT|FIN|✓|Traceback|Error\"]   termina cuando el log tiene esa palabra\n4\t   python <APP>/tools/esperar.py --existe <archivo>                                          termina cuando el archivo e"
-  },
   {
    "k": "tool",
    "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/hoja.py\"}"
@@ -178,6 +174,10 @@
   {
    "k": "res",
    "t": "voz: clon creado en Fish, sin filtros (no se vuelve a clonar)\nvoz: 4 bloques · 8390 caracteres\ntotal 10208\ndrwxrwxrwx+ 2 runner runner    4096 Nov  8 22:30 .\ndrwxrwxrwx+ 6 runner runner    4096 Nov  8 22:30 ..\n-rw-rw-rw-+ 1 sesion sesion 3482336 Nov  8 22:30 blk_000.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 3506350 Nov  8 22:30 blk_001.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 3431857 Nov  8 22:30 blk"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe voz/master.wav --max 540"
   }
  ],
  "maquinas": 1,
