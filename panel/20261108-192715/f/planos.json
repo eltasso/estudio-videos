@@ -1,0 +1,551 @@
+[
+ {
+  "id": "p001",
+  "startMs": 14380,
+  "endMs": 17840,
+  "seg": 3.5,
+  "texto": "como si les hubiera pasado un camión por encima"
+ },
+ {
+  "id": "p002",
+  "startMs": 22400,
+  "endMs": 26400,
+  "seg": 4.0,
+  "texto": "convencido de que las estaba ayudando Impasme nebu"
+ },
+ {
+  "id": "p003",
+  "startMs": 31640,
+  "endMs": 36800,
+  "seg": 5.2,
+  "texto": "es mover un pan de tierra con raíces adentro sin que se desarme"
+ },
+ {
+  "id": "p004",
+  "startMs": 42900,
+  "endMs": 49620,
+  "seg": 6.7,
+  "texto": "Hoy te cuento por qué se caen los plantines de tomate cuando los pasás ¿Y qué hago yo ahora para que no se caigan"
+ },
+ {
+  "id": "p005",
+  "startMs": 59600,
+  "endMs": 65480,
+  "seg": 5.9,
+  "texto": "Primero lo que pasa dentro de esa macetita Un plantín de tomate de cuatro o"
+ },
+ {
+  "id": "p006",
+  "startMs": 65480,
+  "endMs": 71360,
+  "seg": 5.9,
+  "texto": "cinco semanas tiene una raíz principal y miles de pelitos que salen para los costados"
+ },
+ {
+  "id": "p007",
+  "startMs": 75680,
+  "endMs": 80300,
+  "seg": 4.6,
+  "texto": "Cuando vos tirás de la planta para sacarla no se rompe la raíz grande"
+ },
+ {
+  "id": "p008",
+  "startMs": 90260,
+  "endMs": 93970,
+  "seg": 3.7,
+  "texto": "no tiene con qué tomarla Me pasó con don Aurelio"
+ },
+ {
+  "id": "p009",
+  "startMs": 93970,
+  "endMs": 97680,
+  "seg": 3.7,
+  "texto": "en el año 2011 en la quinta de él"
+ },
+ {
+  "id": "p010",
+  "startMs": 103000,
+  "endMs": 107800,
+  "seg": 4.8,
+  "texto": "uno por uno con una paciencia de relojero Y le salían bárbaro"
+ },
+ {
+  "id": "p011",
+  "startMs": 112380,
+  "endMs": 117340,
+  "seg": 5.0,
+  "texto": "Yo tenía 45 años y me acuerdo de que le dije"
+ },
+ {
+  "id": "p012",
+  "startMs": 122640,
+  "endMs": 129280,
+  "seg": 6.6,
+  "texto": "¿y por qué no me lo dijo antes mocoso Tenía razón yo también había hecho lo mismo durante años"
+ },
+ {
+  "id": "p013",
+  "startMs": 134580,
+  "endMs": 138720,
+  "seg": 4.1,
+  "texto": "Al otro día la tierra está húmeda pero no chorreando"
+ },
+ {
+  "id": "p014",
+  "startMs": 138720,
+  "endMs": 143900,
+  "seg": 5.2,
+  "texto": "Le das un golpecito suave al borde de la maceta con el canto de la mano"
+ },
+ {
+  "id": "p015",
+  "startMs": 149680,
+  "endMs": 153680,
+  "seg": 4.0,
+  "texto": "apretás apenas los costados de la maceta nunca el pan"
+ },
+ {
+  "id": "p016",
+  "startMs": 153680,
+  "endMs": 157800,
+  "seg": 4.1,
+  "texto": "Y si la planta sale con un terrón de barro pegado a la raíz"
+ },
+ {
+  "id": "p017",
+  "startMs": 163460,
+  "endMs": 168160,
+  "seg": 4.7,
+  "texto": "del tamaño de tu puño y en la mano no tiene que desarmarse"
+ },
+ {
+  "id": "p018",
+  "startMs": 172900,
+  "endMs": 177940,
+  "seg": 5.0,
+  "texto": "Algo para hacer hoy agarrá una maceta vacía de las que tengas guardadas"
+ },
+ {
+  "id": "p019",
+  "startMs": 187460,
+  "endMs": 192740,
+  "seg": 5.3,
+  "texto": "el riego antes y después y acá es donde se pierde la mayoría"
+ },
+ {
+  "id": "p020",
+  "startMs": 197320,
+  "endMs": 203420,
+  "seg": 6.1,
+  "texto": "En Berazategui plantamos 200 plantas de tomate en un día de mucho viento"
+ },
+ {
+  "id": "p021",
+  "startMs": 208020,
+  "endMs": 213200,
+  "seg": 5.2,
+  "texto": "mi primo quería regar otra vez y yo casi lo dejo menos mal que no"
+ },
+ {
+  "id": "p022",
+  "startMs": 222700,
+  "endMs": 228290,
+  "seg": 5.6,
+  "texto": "Viedera Torantani fresco Viedera Torantana Trollnader porque la planta"
+ },
+ {
+  "id": "p023",
+  "startMs": 228290,
+  "endMs": 233880,
+  "seg": 5.6,
+  "texto": "está perdiendo más agua por las hojas de la que puede tomar por las raíces lastimadas"
+ },
+ {
+  "id": "p024",
+  "startMs": 237900,
+  "endMs": 242760,
+  "seg": 4.9,
+  "texto": "se arregla con sombra y con paciencia lo que hago yo ahora"
+ },
+ {
+  "id": "p025",
+  "startMs": 248300,
+  "endMs": 254340,
+  "seg": 6.0,
+  "texto": "lleno el pozo de agua y espero a que se absorba recién ahí pongo el pan de tierra"
+ },
+ {
+  "id": "p026",
+  "startMs": 262520,
+  "endMs": 266680,
+  "seg": 4.2,
+  "texto": "un litro por planta ese primer riego ni más ni menos y"
+ },
+ {
+  "id": "p027",
+  "startMs": 266680,
+  "endMs": 270840,
+  "seg": 4.2,
+  "texto": "a la sombra los primeros dos días después sol de la mañana"
+ },
+ {
+  "id": "p028",
+  "startMs": 279480,
+  "endMs": 282860,
+  "seg": 3.4,
+  "texto": "si no ves nada déjalas una semana más"
+ },
+ {
+  "id": "p029",
+  "startMs": 282860,
+  "endMs": 287760,
+  "seg": 4.9,
+  "texto": "che y acá te hago un paréntesis cortito porque te quiero hacer una prueba"
+ },
+ {
+  "id": "p030",
+  "startMs": 297260,
+  "endMs": 301550,
+  "seg": 4.3,
+  "texto": "si pesa liviana y la tierra se despega del borde regala maceta"
+ },
+ {
+  "id": "p031",
+  "startMs": 301550,
+  "endMs": 305840,
+  "seg": 4.3,
+  "texto": "doce horas antes y pasa la mañana y una tercera"
+ },
+ {
+  "id": "p032",
+  "startMs": 310340,
+  "endMs": 315880,
+  "seg": 5.5,
+  "texto": "si sale con barro espera listo sigo tercer punto"
+ },
+ {
+  "id": "p033",
+  "startMs": 325880,
+  "endMs": 329700,
+  "seg": 3.8,
+  "texto": "sesenta plantines hermosos gordos verdes"
+ },
+ {
+  "id": "p034",
+  "startMs": 329700,
+  "endMs": 333700,
+  "seg": 4.0,
+  "texto": "el día que los pasé al cantero los puse directo al sol de la siesta"
+ },
+ {
+  "id": "p035",
+  "startMs": 338560,
+  "endMs": 342440,
+  "seg": 3.9,
+  "texto": "una planta criada adentro tiene las hojas finas"
+ },
+ {
+  "id": "p036",
+  "startMs": 342440,
+  "endMs": 347080,
+  "seg": 4.6,
+  "texto": "acostumbradas a poca luz y el sol fuerte las quema como una lupa"
+ },
+ {
+  "id": "p037",
+  "startMs": 355360,
+  "endMs": 360320,
+  "seg": 5.0,
+  "texto": "tres el tercero y así al final del séptimo día duerme afuera"
+ },
+ {
+  "id": "p038",
+  "startMs": 368420,
+  "endMs": 374200,
+  "seg": 5.8,
+  "texto": "solo siete días de paciencia algo para hacer hoy si tus plantines están en la ventana"
+ },
+ {
+  "id": "p039",
+  "startMs": 374200,
+  "endMs": 378220,
+  "seg": 4.0,
+  "texto": "sacalos una hora al patio a la sombra y volvelos a entrar"
+ },
+ {
+  "id": "p040",
+  "startMs": 388040,
+  "endMs": 391860,
+  "seg": 3.8,
+  "texto": "si lo enterras más profundo ese tallo hace raíces nuevas"
+ },
+ {
+  "id": "p041",
+  "startMs": 391860,
+  "endMs": 395680,
+  "seg": 3.8,
+  "texto": "y la planta queda más firme y toma más agua"
+ },
+ {
+  "id": "p042",
+  "startMs": 404520,
+  "endMs": 408840,
+  "seg": 4.3,
+  "texto": "como un budín las plantas se cayeron con el primer viento"
+ },
+ {
+  "id": "p043",
+  "startMs": 412900,
+  "endMs": 418790,
+  "seg": 5.9,
+  "texto": "hasta los dos primeros pares de hojas medida concreta el pan de tierra va enterrado cinco"
+ },
+ {
+  "id": "p044",
+  "startMs": 418790,
+  "endMs": 424680,
+  "seg": 5.9,
+  "texto": "centímetros y el tallo se tapa hasta justo debajo de las primeras hojas verdaderas"
+ },
+ {
+  "id": "p045",
+  "startMs": 430740,
+  "endMs": 434340,
+  "seg": 3.6,
+  "texto": "no lo hagas con otras plantas el morrón"
+ },
+ {
+  "id": "p046",
+  "startMs": 434340,
+  "endMs": 438280,
+  "seg": 3.9,
+  "texto": "la berenjena y la selga no aguantan que les tapes el tallo"
+ },
+ {
+  "id": "p047",
+  "startMs": 443900,
+  "endMs": 450440,
+  "seg": 6.5,
+  "texto": "dale al me gusta y suscríbete al canal no cuesta nada y me ayuda a seguir haciendo estos vídeos"
+ },
+ {
+  "id": "p048",
+  "startMs": 459060,
+  "endMs": 464520,
+  "seg": 5.5,
+  "texto": "y esta es la que casi nadie mira Vindvaf en el 2003"
+ },
+ {
+  "id": "p049",
+  "startMs": 469600,
+  "endMs": 476620,
+  "seg": 7.0,
+  "texto": "26 grados sol un día de manga corta a los cuatro días cayó una helada tardía"
+ },
+ {
+  "id": "p050",
+  "startMs": 481560,
+  "endMs": 486640,
+  "seg": 5.1,
+  "texto": "el tomate no es de frío necesita que la tierra esté a 15 grados"
+ },
+ {
+  "id": "p051",
+  "startMs": 494640,
+  "endMs": 501420,
+  "seg": 6.8,
+  "texto": "la raíz no crece y la planta se queda sentada y la noche tiene que estar arriba de 10 grados"
+ },
+ {
+  "id": "p052",
+  "startMs": 508460,
+  "endMs": 512840,
+  "seg": 4.4,
+  "texto": "tranplantá a la tardecita o un día nublado la planta tiene"
+ },
+ {
+  "id": "p053",
+  "startMs": 512840,
+  "endMs": 517220,
+  "seg": 4.4,
+  "texto": "toda la noche para acomodarse antes de que el sol la exija"
+ },
+ {
+  "id": "p054",
+  "startMs": 521600,
+  "endMs": 526340,
+  "seg": 4.7,
+  "texto": "15 grados de tierra y 10 de noche algo para hacer hoy"
+ },
+ {
+  "id": "p055",
+  "startMs": 532420,
+  "endMs": 537040,
+  "seg": 4.6,
+  "texto": "la tierra está fría esperá"
+ },
+ {
+  "id": "p056",
+  "startMs": 541580,
+  "endMs": 545240,
+  "seg": 3.7,
+  "texto": "endurece 7 días enterrá el tallo hasta las primeras"
+ },
+ {
+  "id": "p057",
+  "startMs": 545240,
+  "endMs": 548900,
+  "seg": 3.7,
+  "texto": "hojas y esperá que la tierra esté caliente"
+ },
+ {
+  "id": "p058",
+  "startMs": 558420,
+  "endMs": 562900,
+  "seg": 4.5,
+  "texto": "las leo todas y mañana acá en el canal te cuento por"
+ },
+ {
+  "id": "p059",
+  "startMs": 573420,
+  "endMs": 576600,
+  "seg": 3.2,
+  "texto": "Bansui nos vemos entre los surcos"
+ },
+ {
+  "id": "s01",
+  "startMs": 49620,
+  "endMs": 59600,
+  "seg": 10.0,
+  "texto": "Son cinco cosas y quédate hasta el final porque la última es la que casi nadie tiene en cuenta y es la que te arruina el plantín aunque hagas todo lo demás bien",
+  "split": true
+ },
+ {
+  "id": "s02",
+  "startMs": 80300,
+  "endMs": 90260,
+  "seg": 10.0,
+  "texto": "se arrancan los pelitos y la planta queda con la boca abierta pero sin poder tragar Por eso se cae aunque la tierra esté empapada No le falta agua en el suelo",
+  "split": true
+ },
+ {
+  "id": "s03",
+  "startMs": 177940,
+  "endMs": 187460,
+  "seg": 9.5,
+  "texto": "fíjate cuánta tierra entra y calculá que ese mismo volumen es el que tenés que mover con raíces adentro nada más que eso Segundo punto",
+  "split": true
+ },
+ {
+  "id": "s04",
+  "startMs": 213200,
+  "endMs": 222700,
+  "seg": 9.5,
+  "texto": "la tierra estaba empapada a 20 centímetros de profundidad si le sumábamos agua las raíces se quedaban sin aire y se pudrían en tres días",
+  "split": true
+ },
+ {
+  "id": "s05",
+  "startMs": 254340,
+  "endMs": 262520,
+  "seg": 8.2,
+  "texto": "después un solo riego suave alrededor para que la tierra se asiente contra la raíz y tres días sin tocar la manguera medida",
+  "split": true
+ },
+ {
+  "id": "s06",
+  "startMs": 270840,
+  "endMs": 279480,
+  "seg": 8.6,
+  "texto": "algo para hacer hoy mira el fondo de tus macetas de almácigo si ves raíces blancas asomando por los agujeros están pidiendo trasplantes",
+  "split": true
+ },
+ {
+  "id": "s07",
+  "startMs": 287760,
+  "endMs": 297260,
+  "seg": 9.5,
+  "texto": "antes de pasar cualquier plantín levanta la maceta con la mano si pesa como si estuviera llena de agua no la pases todavía espera dos o tres días",
+  "split": true
+ },
+ {
+  "id": "s08",
+  "startMs": 315880,
+  "endMs": 325880,
+  "seg": 10.0,
+  "texto": "el sol y este es el error que yo recomendaba y ahora no recomiendo en el 2007 Elena me pidió que le armara el almácigo en la ventana de la cocina",
+  "split": true
+ },
+ {
+  "id": "s09",
+  "startMs": 347080,
+  "endMs": 355360,
+  "seg": 8.3,
+  "texto": "ahora lo hago al revés siete días antes del trasplante la bandeja sale al aire libre una hora el primer día dos horas el segundo",
+  "split": true
+ },
+ {
+  "id": "s10",
+  "startMs": 360320,
+  "endMs": 368420,
+  "seg": 8.1,
+  "texto": "eso se llama endurecer el plantín y es la diferencia entre perder diez plantas y perder todas costo cero pesos",
+  "split": true
+ },
+ {
+  "id": "s11",
+  "startMs": 378220,
+  "endMs": 388040,
+  "seg": 9.8,
+  "texto": "mañana dos horas cuarto punto la profundidad el tomate tiene una cosa que no tienen casi todas las hortalizas le salen raíces del tallo",
+  "split": true
+ },
+ {
+  "id": "s12",
+  "startMs": 395680,
+  "endMs": 404520,
+  "seg": 8.8,
+  "texto": "cuando mi vecino Rubén en Claypool me mostró su primer trasplante en el 2015 había dejado el pan de tierra entero arriba de la superficie",
+  "split": true
+ },
+ {
+  "id": "s13",
+  "startMs": 450440,
+  "endMs": 459060,
+  "seg": 8.6,
+  "texto": "y si tenés un vecino que planta tomates compartíselo ahora sí el último punto Beira Puntvis Basun",
+  "split": true
+ },
+ {
+  "id": "s14",
+  "startMs": 486640,
+  "endMs": 494640,
+  "seg": 8.0,
+  "texto": "medidos con un termómetro de horno que ya no usas enterrado 10 centímetros a las 9 de la mañana si la tierra está más fría",
+  "split": true
+ },
+ {
+  "id": "s15",
+  "startMs": 501420,
+  "endMs": 508460,
+  "seg": 7.0,
+  "texto": "en mi zona eso pasa a mediados de septiembre no antes la hora también importa",
+  "split": true
+ },
+ {
+  "id": "s16",
+  "startMs": 548900,
+  "endMs": 558420,
+  "seg": 9.5,
+  "texto": "5 cosas ninguna complicada contame abajo en los comentarios y de dónde sos cuántos plantines perdiste en tu último trasplante",
+  "split": true
+ },
+ {
+  "id": "s17",
+  "startMs": 562900,
+  "endMs": 573420,
+  "seg": 10.5,
+  "texto": "qué las hojas del tomate se ponen amarillas justo cuando la planta empieza a cargar ese es otro dolor de cabeza y tiene 3 causas que se confunden todo el tiempo",
+  "split": true
+ }
+]
