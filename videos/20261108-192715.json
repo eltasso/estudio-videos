@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794178196.220267,
+ "actualizado": 1794178260.0374296,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -41,7 +41,7 @@
    "k": "armado",
    "n": "Armado",
    "st": "active",
-   "info": "92 segmentos"
+   "info": "102 segmentos"
   },
   {
    "k": "qc",
@@ -51,58 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.085,
+  "deepseek": 0.087,
   "gpt": 0.1941,
   "gpt_img": 88,
   "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.3368
+  "total": 0.3388
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "tail -6 avatar/it.log"
-  },
-  {
-   "k": "res",
-   "t": "22:36:37 InfiniteTalk: 43 ventanas · reel 307.1 s · 1 llamada\n22:36:43 RUN 9e9c792b-24be-4cdb-b374-81694840f916-u2\n22:37:13 estado: IN_QUEUE"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 79 --max 540"
-  },
-  {
-   "k": "res",
-   "t": "✓ hay 79 archivos (80 s)"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_redo.jpg fotos/s01.png fotos/s07.png fotos/s15.png fotos/s16.png fotos/p018.png fotos/p019.png fotos/p029.png fotos/p043.png fotos/p047.png fotos/p058.png"
-  },
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_redo.jpg (10 cuadros, 4x3)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_redo.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "ai",
-   "t": "Las 10 rehechas quedaron bien (texto en español y ninguna cara distinta). Cierro el plan de fotos y armo `shots_timed.json`."
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/planos.py . --shots && python /opt/estudio/repo/motor/tools/validar.py . --etapa fotos --min 10"
-  },
-  {
-   "k": "res",
-   "t": "✓ shots_timed.json: 59 planos, 59 fotos distintas (cero repetidas). Seguí con render.py.\nVALIDAR /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los · etapa fotos\n  ✓ guion: 1570 palabras (esperado 1105-1724 para 10 min)\n  ✓ fotos: 79 · 0 sin su prompt al lado (no salieron de tools/fotos.py)\n  ✓ fotos: 0 con prompt incompleto\nRESULTADO: OK"
-  },
   {
    "k": "tool",
    "t": "Revisión visual de las fotos (hojas qc/hoja_fotos.jpg, A-G, y qc/hoja_redo.jpg).\n\nTanda de prueba (9): miré la hoja completa. p001_a elegida como p001 (mujer con cara de preocupación y 30 plantines caídos: se entiende sin audio y en chico). p002, p004, p010, p034 correctas. Se repidieron p019 (repetía el concepto de p002) y s01 (texto en inglés).\n\nLote completo (69): revisé las 7 hojas de 12. Enco"
@@ -178,6 +134,50 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --log render.log --busca \"hechos|Traceback|FALLO\" --max 540"
+  },
+  {
+   "k": "res",
+   "t": "✓ el log tiene 'hechos' (150 s):\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A39.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A40.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A41.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A42.mp4\nclips=102 frames=17298 (576.60s)\nhechos 102"
+  },
+  {
+   "k": "tool",
+   "t": "tail -8 avatar/it.log; date"
+  },
+  {
+   "k": "res",
+   "t": "22:36:37 InfiniteTalk: 43 ventanas · reel 307.1 s · 1 llamada\n22:36:43 RUN 9e9c792b-24be-4cdb-b374-81694840f916-u2\n22:37:13 estado: IN_QUEUE\nSun Nov  8 22:50:24 UTC 2026"
+  },
+  {
+   "k": "ai",
+   "t": "El render completo está armado. Mientras InfiniteTalk sigue en cola, pruebo el ensamblado y la mezcla de sonido."
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/assemble.py . > assemble.log 2>&1 & echo \"ASSEMBLE PID $!\""
+  },
+  {
+   "k": "res",
+   "t": "ASSEMBLE PID 13923"
+  },
+  {
+   "k": "tool",
+   "t": "{\"taskId\": \"4\", \"status\": \"completed\"}"
+  },
+  {
+   "k": "res",
+   "t": "Updated task #4 status"
+  },
+  {
+   "k": "tool",
+   "t": "{\"taskId\": \"6\", \"status\": \"in_progress\"}"
+  },
+  {
+   "k": "res",
+   "t": "Updated task #6 status"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log assemble.log --busca \"final:|FALLO|Traceback\" --max 480"
   }
  ],
  "maquinas": 1,
