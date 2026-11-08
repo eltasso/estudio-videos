@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794177363.727527,
+ "actualizado": 1794177426.5766003,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -51,78 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0244,
+  "deepseek": 0.043,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.0821
+  "total": 0.1007
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/guion.txt (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"taskId\": \"1\", \"status\": \"in_progress\"}"
-  },
-  {
-   "k": "res",
-   "t": "Updated task #1 status"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa guion --min 10"
-  },
-  {
-   "k": "res",
-   "t": "VALIDAR /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los · etapa guion\n  ✓ guion: 1570 palabras (esperado 1105-1724 para 10 min)\nRESULTADO: OK"
-  },
-  {
-   "k": "ai",
-   "t": "Guion OK (1570 palabras). Lanzo la voz en segundo plano y mientras preparo el plan de planos."
-  },
-  {
-   "k": "tool",
-   "t": "{\"taskId\": \"1\", \"status\": \"completed\"}"
-  },
-  {
-   "k": "res",
-   "t": "Updated task #1 status"
-  },
-  {
-   "k": "tool",
-   "t": "{\"taskId\": \"2\", \"status\": \"in_progress\"}"
-  },
-  {
-   "k": "res",
-   "t": "Updated task #2 status"
-  },
-  {
-   "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/voz.py . > voz/voz.log 2>&1 & echo \"PID $!\""
-  },
-  {
-   "k": "res",
-   "t": "PID 3928"
-  },
-  {
-   "k": "ai",
-   "t": "Mientras se genera la voz, escribo el planificador de ventanas del avatar."
-  },
-  {
-   "k": "tool",
-   "t": "# -*- coding: utf-8 -*-\n\"\"\"Plan de ventanas del avatar para este video (KIT §3).\nLee captions.json y arma ventanas de 3-6 s (pantalla completa) y 7-11 s (pantalla partida),\ncon 3-6 s de foto entre ventana y ventana, empezando siempre en 0. Escribe avatar_ranges.json.\n\"\"\"\nimport json, os, sys\n\nB = os.path.abspath(sys.argv[1]).replace(\"\\\\\", \"/\").rstrip(\"/\")\nW = [w for w in json.load(open(B + \"/capti"
-  },
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/plan_avatar.py (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "tail -20 voz/voz.log 2>/dev/null; ls -la voz/"
-  },
   {
    "k": "res",
    "t": "voz: clon creado en Fish, sin filtros (no se vuelve a clonar)\nvoz: 4 bloques · 8390 caracteres\ntotal 10208\ndrwxrwxrwx+ 2 runner runner    4096 Nov  8 22:30 .\ndrwxrwxrwx+ 6 runner runner    4096 Nov  8 22:30 ..\n-rw-rw-rw-+ 1 sesion sesion 3482336 Nov  8 22:30 blk_000.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 3506350 Nov  8 22:30 blk_001.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 3431857 Nov  8 22:30 blk"
@@ -178,6 +114,70 @@
   {
    "k": "ai",
    "t": "Voz y tiempos listos (9,6 min). Ahora armo el plan de fotos: 76 planos (59 de b-roll + 17 de pantalla partida). Escribo los prompts."
+  },
+  {
+   "k": "tool",
+   "t": "# -*- coding: utf-8 -*-\n\"\"\"Prompts del b-roll: un prompt por plano de planos.json. Escribe pedidos_test.json y pedidos_all.json.\"\"\"\nimport json, os\n\nB = os.path.dirname(os.path.abspath(__file__))\nTYPE = (\"amateur phone photo, mild JPEG compression, real skin texture with pores, uneven ordinary indoor light, \"\n        \"slightly crooked framing, everyday clutter, nothing blurred out, everything in f"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python prompts_build.py && python -c \"\nimport json\nP={p['id'] for p in json.load(open('planos.json',encoding='utf8'))}\nQ={p['id'] for p in json.load(open('pedidos_all.json',encoding='utf8'))}\nprint('planos',len(P),'pedidos',len(Q))\nprint('faltan prompts:',sorted(P-Q))\nprint('sobran prompts:',sorted(Q-P))\n\""
+  },
+  {
+   "k": "res",
+   "t": "escenas: 78 · pedidos_all: 79 · test: 9\nplanos 76 pedidos 79\nfaltan prompts: []\nsobran prompts: ['p001_a', 'p001_b', 'p001_c']"
+  },
+  {
+   "k": "ai",
+   "t": "Lanzo en paralelo las fotos de prueba y la única llamada de avatar (el plan de ventanas ya está cerrado)."
+  },
+  {
+   "k": "tool",
+   "t": "{\"taskId\": \"4\", \"status\": \"in_progress\"}"
+  },
+  {
+   "k": "res",
+   "t": "Updated task #4 status"
+  },
+  {
+   "k": "tool",
+   "t": "{\"taskId\": \"5\", \"status\": \"in_progress\"}"
+  },
+  {
+   "k": "res",
+   "t": "Updated task #5 status"
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/avatar_it.py . > avatar/it.log 2>&1 & echo \"AVATAR PID $!\"; sleep 2; nohup python /opt/estudio/repo/motor/tools/fotos.py . pedidos_test.json > fotos/fotos_test.log 2>&1 & echo \"FOTOS PID $!\""
+  },
+  {
+   "k": "res",
+   "t": "AVATAR PID 4431\nFOTOS PID 4870"
+  },
+  {
+   "k": "tool",
+   "t": "sleep 15; echo \"--- AVATAR ---\"; cat avatar/it.log 2>/dev/null | tail -15; echo \"--- FOTOS ---\"; cat fotos/fotos_test.log 2>/dev/null | tail -20"
+  },
+  {
+   "k": "res",
+   "t": "--- AVATAR ---\n22:36:37 InfiniteTalk: 43 ventanas · reel 307.1 s · 1 llamada\n22:36:43 RUN 9e9c792b-24be-4cdb-b374-81694840f916-u2\n--- FOTOS ---\n22:36:39 → batch batch_6af0f977031c8190b72252baa068fbe3 · 9 fotos · sin referencia · low 1088x608\n22:36:39 batch a068fbe3: validating 0/0"
+  },
+  {
+   "k": "tool",
+   "t": "[\n {\"id\": \"agua\", \"tags\": [\"water\", \"pour\"], \"q\": \"water pour\", \"min\": 0.5, \"max\": 5},\n {\"id\": \"tierra\", \"tags\": [\"dig\", \"dirt\"], \"q\": \"dig soil\", \"min\": 0.4, \"max\": 5},\n {\"id\": \"viento\", \"tags\": [\"wind\", \"breeze\"], \"q\": \"wind\", \"min\": 2, \"max\": 8},\n {\"id\": \"pajaros\", \"tags\": [\"birds\", \"birds-chirping\"], \"q\": \"birds\", \"min\": 2, \"max\": 7}\n]\n"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/sfx_pedidos.json (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/sonidos.py . sfx_pedidos.json --tomas 3 > sonidos.log 2>&1; tail -20 sonidos.log"
   }
  ],
  "maquinas": 1,
