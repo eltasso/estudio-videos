@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794177237.4124033,
+ "actualizado": 1794177300.6893005,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -59,10 +59,6 @@
   "total": 0.0821
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "¡Hola, gente de YouTube! ¿Cómo andan? [emphatically] Hace veintitrés años saqué cuarenta y dos plantines de tomate de la bandeja y los pasé al cantero. Cuarenta y dos, ni uno menos. A la tarde, treinta y siete tenían las hojas para abajo, como si les hubiera pasado un camión por encima. Y no les faltaba agua, che. Al contrario: yo había regado de más, convencido de que las estaba ayudando.\n\nEse dí"
-  },
   {
    "k": "res",
    "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/guion.txt (file state is current in your context — no need to Read it back)"
@@ -178,6 +174,10 @@
   {
    "k": "res",
    "t": "p001 14380 17840  | como si les hubiera pasado un camión por encima\np002 22400 26400  | convencido de que las estaba ayudando Impasme nebu\np003 31640 36800  | es mover un pan de tierra con raíces adentro sin que se desarme\np004 42900 49620  | Hoy te cuento por qué se caen los plantines de tomate cuando los pasás ¿Y qué hago yo ahora para que no se cai\np005 59600 65480  | Primero lo que pasa dentro"
+  },
+  {
+   "k": "ai",
+   "t": "Voz y tiempos listos (9,6 min). Ahora armo el plan de fotos: 76 planos (59 de b-roll + 17 de pantalla partida). Escribo los prompts."
   }
  ],
  "maquinas": 1,
