@@ -3,21 +3,21 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794176981.5591457,
+ "actualizado": 1794177044.824928,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
   {
    "k": "guion",
    "n": "Guion",
-   "st": "pending",
-   "info": ""
+   "st": "done",
+   "info": "1.570 palabras"
   },
   {
    "k": "voz",
    "n": "Voz",
-   "st": "pending",
-   "info": ""
+   "st": "active",
+   "info": "3 bloques"
   },
   {
    "k": "tiempos",
@@ -51,90 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0109,
+  "deepseek": 0.0224,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0109
+  "total": 0.0224
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/validar.py\"}"
-  },
-  {
-   "k": "res",
-   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"Validador automático de un video DeepSeek. Uso:\n3\t   python <APP>/tools/validar.py <carpeta> --etapa guion|fotos|render|final [--min 15]\n4\tSale con código 1 SÓLO con errores importantes (✗): video roto o vacío, sin audio, desincronizado con la voz, no arranca\n5\t   con el avatar, avatar congelado, huecos negros > 0,5 s, menciones de IA, sin título. Todo lo demás es av"
-  },
-  {
-   "k": "tool",
-   "t": "{\"subject\": \"Escribir guion ~10 min y validar\", \"description\": \"guion.txt en español, Don Genaro, ~10 min, gancho, prueba interactiva min 4, like/sub, cierre; validar --etapa guion\", \"activeForm\": \"Escribiendo el guion\"}"
-  },
-  {
-   "k": "res",
-   "t": "Task #1 created successfully: Escribir guion ~10 min y validar"
-  },
-  {
-   "k": "tool",
-   "t": "{\"subject\": \"Generar voz y tiempos\", \"description\": \"voz.py en segundo plano, luego tiempos.py es → captions.json\", \"activeForm\": \"Generando voz y tiempos\"}"
-  },
-  {
-   "k": "res",
-   "t": "Task #2 created successfully: Generar voz y tiempos"
-  },
-  {
-   "k": "tool",
-   "t": "{\"subject\": \"Plan de avatar y planos\", \"description\": \"avatar_ranges.json (~50%, ventanas 3-6s, primera startMs 0), planos.py → planos.json\", \"activeForm\": \"Armando el plan de ventanas y planos\"}"
-  },
-  {
-   "k": "res",
-   "t": "Task #3 created successfully: Plan de avatar y planos"
-  },
-  {
-   "k": "tool",
-   "t": "{\"subject\": \"Generar fotos del b-roll\", \"description\": \"6 de prueba + 3 variantes p001, hoja, resto en pedidos grandes, rehechas, planos --shots\", \"activeForm\": \"Generando fotos\"}"
-  },
-  {
-   "k": "res",
-   "t": "Task #4 created successfully: Generar fotos del b-roll"
-  },
-  {
-   "k": "tool",
-   "t": "{\"subject\": \"Avatar InfiniteTalk\", \"description\": \"avatar_it.py 1 sola llamada en segundo plano\", \"activeForm\": \"Generando avatar\"}"
-  },
-  {
-   "k": "res",
-   "t": "Task #5 created successfully: Avatar InfiniteTalk"
-  },
-  {
-   "k": "tool",
-   "t": "{\"subject\": \"Sonidos, render, assemble, QC final\", \"description\": \"sonidos.py + cues.json, render prueba + completo, assemble, revisor, validar final, meta.json, REPORTE.md\", \"activeForm\": \"Renderizando y cerrando QC\"}"
-  },
-  {
-   "k": "res",
-   "t": "Task #6 created successfully: Sonidos, render, assemble, QC final"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/voz.py\"}"
-  },
-  {
-   "k": "res",
-   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"Voz con el CLON de la voz del canal (Fish Audio). Uso (en segundo plano, con log):\n3\t   python <APP>/tools/voz.py <carpeta_del_video> > <carpeta>/voz/voz.log 2>&1\n4\tLee <carpeta>/guion.txt y la muestra de voz del canal en <carpeta>/refs/voz.wav (+ refs/voz.txt = lo que se dice en la muestra).\n5\tParte el guion en bloques de ~2500 caracteres, genera 3 a la vez, rehace "
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/tiempos.py\"}"
-  },
-  {
-   "k": "res",
-   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"Tiempos POR PALABRA de la voz (Groq whisper GRATIS si hay clave \"groq\"; si no, OpenAI whisper-1). Uso:\n3\t   python <APP>/tools/tiempos.py <carpeta_del_video> [idioma: es|en|pt…]\n4\tLee voz/master.wav y escribe captions.json = [{\"text\":\" palabra\",\"startMs\":1234,\"endMs\":1500}, …].\n5\tCosto: US$0,006 por minuto de audio (queda anotado en gasto.jsonl).\"\"\"\n6\timport json, os"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/esperar.py\"}"
-  },
   {
    "k": "res",
    "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"HERRAMIENTA DEL ESTUDIO: espera UNA sola vez hasta que pase algo (en vez de sleep + ls + tail una y otra vez).\n3\t   python <APP>/tools/esperar.py --log <archivo.log> [--busca \"EXIT|FIN|✓|Traceback|Error\"]   termina cuando el log tiene esa palabra\n4\t   python <APP>/tools/esperar.py --existe <archivo>                                          termina cuando el archivo e"
@@ -178,6 +102,82 @@
   {
    "k": "res",
    "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"REVISOR FINAL (no frena): saca cuadros de final.mp4 y los mira con visión (deepseek-flash, menos de US$0,01 por video, con tu clave de DeepSeek).\n3\t   python <APP>/tools/revisor.py <carpeta>\n4\t1. Deja qc/f_001.jpg, f_002.jpg… (un cuadro cada 30 s) y qc/final_info.json. Mide los huecos negros ≥ 0,5 s (sin IA).\n5\t2. Busca fallas claras: cara o cuerpo deformes, glitch d"
+  },
+  {
+   "k": "ai",
+   "t": "Empiezo por el guion. Voy a escribirlo completo (≈10 min, voz Don Genaro) y validarlo."
+  },
+  {
+   "k": "tool",
+   "t": "¡Hola, gente de YouTube! ¿Cómo andan? [emphatically] Hace veintitrés años saqué cuarenta y dos plantines de tomate de la bandeja y los pasé al cantero. Cuarenta y dos, ni uno menos. A la tarde, treinta y siete tenían las hojas para abajo, como si les hubiera pasado un camión por encima. Y no les faltaba agua, che. Al contrario: yo había regado de más, convencido de que las estaba ayudando.\n\nEse dí"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/guion.txt (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"taskId\": \"1\", \"status\": \"in_progress\"}"
+  },
+  {
+   "k": "res",
+   "t": "Updated task #1 status"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa guion --min 10"
+  },
+  {
+   "k": "res",
+   "t": "VALIDAR /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los · etapa guion\n  ✓ guion: 1570 palabras (esperado 1105-1724 para 10 min)\nRESULTADO: OK"
+  },
+  {
+   "k": "ai",
+   "t": "Guion OK (1570 palabras). Lanzo la voz en segundo plano y mientras preparo el plan de planos."
+  },
+  {
+   "k": "tool",
+   "t": "{\"taskId\": \"1\", \"status\": \"completed\"}"
+  },
+  {
+   "k": "res",
+   "t": "Updated task #1 status"
+  },
+  {
+   "k": "tool",
+   "t": "{\"taskId\": \"2\", \"status\": \"in_progress\"}"
+  },
+  {
+   "k": "res",
+   "t": "Updated task #2 status"
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/voz.py . > voz/voz.log 2>&1 & echo \"PID $!\""
+  },
+  {
+   "k": "res",
+   "t": "PID 3928"
+  },
+  {
+   "k": "ai",
+   "t": "Mientras se genera la voz, escribo el planificador de ventanas del avatar."
+  },
+  {
+   "k": "tool",
+   "t": "# -*- coding: utf-8 -*-\n\"\"\"Plan de ventanas del avatar para este video (KIT §3).\nLee captions.json y arma ventanas de 3-6 s (pantalla completa) y 7-11 s (pantalla partida),\ncon 3-6 s de foto entre ventana y ventana, empezando siempre en 0. Escribe avatar_ranges.json.\n\"\"\"\nimport json, os, sys\n\nB = os.path.abspath(sys.argv[1]).replace(\"\\\\\", \"/\").rstrip(\"/\")\nW = [w for w in json.load(open(B + \"/capti"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/plan_avatar.py (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "tail -20 voz/voz.log 2>/dev/null; ls -la voz/"
+  },
+  {
+   "k": "res",
+   "t": "voz: clon creado en Fish, sin filtros (no se vuelve a clonar)\nvoz: 4 bloques · 8390 caracteres\ntotal 10208\ndrwxrwxrwx+ 2 runner runner    4096 Nov  8 22:30 .\ndrwxrwxrwx+ 6 runner runner    4096 Nov  8 22:30 ..\n-rw-rw-rw-+ 1 sesion sesion 3482336 Nov  8 22:30 blk_000.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 3506350 Nov  8 22:30 blk_001.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 3431857 Nov  8 22:30 blk"
   }
  ],
  "maquinas": 1,
