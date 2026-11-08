@@ -1,0 +1,127 @@
+name: video
+run-name: "🎬 ${{ inputs.titulo }} · ${{ inputs.vid }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      vid:     { description: "id del video (lo pone el panel)", required: true }
+      canal:   { description: "id del canal (carpeta canales/)", required: true }
+      titulo:  { description: "título", required: true }
+      idea:    { description: "idea opcional", required: false, default: "" }
+      minutos: { description: "duración en minutos", required: false, default: "" }
+      tope:    { description: "tope de gasto de DeepSeek en US$", required: false, default: "2" }
+      extrema: { description: "1 = edición extrema (motion graphics, tope duro US$0,20)", required: false, default: "" }
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: video-${{ inputs.vid }}
+  cancel-in-progress: false
+
+jobs:
+  video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+
+      - name: Herramientas
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null && (sudo apt-get install -y -qq fonts-inter > /dev/null || true)
+          npm i -g @anthropic-ai/claude-code > /dev/null
+          pip install -q -r motor/requirements.txt
+
+      - name: Separar la sesión de las claves
+        run: |
+          sudo apt-get install -y -qq acl > /dev/null
+          sudo useradd -m -s /bin/bash sesion
+          echo 'Defaults !use_pty' | sudo tee /etc/sudoers.d/estudio > /dev/null
+          sudo install -d -o "$(id -un)" -g "$(id -gn)" -m 755 /opt/estudio /opt/estudio/datos
+          sudo install -d -o root -g root -m 755 /opt/estudio/repo
+          sudo cp -r motor /opt/estudio/repo/
+          if [ -d canales ]; then sudo cp -r canales /opt/estudio/repo/; fi
+
+      - name: Recuperar lo hecho (si es una máquina siguiente)
+        uses: actions/cache/restore@v4
+        with:
+          path: /opt/estudio/datos
+          key: datos-${{ inputs.vid }}-${{ github.run_id }}
+          restore-keys: datos-${{ inputs.vid }}-
+
+      - name: Permisos de la carpeta de trabajo
+        run: |
+          U="$(id -un)"
+          sudo setfacl -R -m "u:sesion:rwX,u:$U:rwX,m:rwx" -m "d:u:sesion:rwX,d:u:$U:rwX,d:m:rwx" /opt/estudio/datos
+          install -d -m 700 "$HOME/privado"
+          chmod 700 "$HOME"
+          sudo -u sesion test ! -r "$HOME/privado"
+
+      - name: Hacer el video
+        env:
+          VID: ${{ inputs.vid }}
+          CANAL: ${{ inputs.canal }}
+          TITULO: ${{ inputs.titulo }}
+          IDEA: ${{ inputs.idea }}
+          MINUTOS: ${{ inputs.minutos }}
+          TOPE: ${{ inputs.tope }}
+          EXTREMA: ${{ inputs.extrema }}
+          ESTUDIO_DATA: /opt/estudio/datos
+          ESTUDIO_CONFIG_PUB: /opt/estudio/publico.json
+          ESTUDIO_USUARIO_SESION: sesion
+          ESTUDIO_CONFIG: /home/runner/privado/config.json
+          GH_TOKEN: ${{ github.token }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          FISH_API_KEY: ${{ secrets.FISH_API_KEY }}
+          RUNPOD_API_KEY: ${{ secrets.RUNPOD_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: python -u /opt/estudio/repo/motor/nube.py
+
+      - name: Sacar cualquier rastro de claves
+        id: limpieza
+        if: always()
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          FISH_API_KEY: ${{ secrets.FISH_API_KEY }}
+          RUNPOD_API_KEY: ${{ secrets.RUNPOD_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sudo pkill -9 -u sesion || true
+          sudo chown -R "$(id -un)" /opt/estudio/datos
+          sudo setfacl -R -b /opt/estudio/datos
+          chmod -R u+rwX /opt/estudio/datos
+          python -u motor/limpiar_datos.py /opt/estudio/datos
+
+      - name: Guardar lo hecho
+        if: always() && steps.limpieza.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: /opt/estudio/datos
+          key: datos-${{ inputs.vid }}-${{ github.run_id }}
+
+      - name: Seguir en otra máquina (límite de 6 h de GitHub)
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VID: ${{ inputs.vid }}
+          CANAL: ${{ inputs.canal }}
+          TITULO: ${{ inputs.titulo }}
+          IDEA: ${{ inputs.idea }}
+          MINUTOS: ${{ inputs.minutos }}
+          TOPE: ${{ inputs.tope }}
+          EXTREMA: ${{ inputs.extrema }}
+        run: |
+          if [ -f "/opt/estudio/datos/relanzar_$VID" ]; then
+            gh workflow run video.yml --repo "$GITHUB_REPOSITORY" --ref "$GITHUB_REF_NAME"               -f vid="$VID" -f canal="$CANAL" -f titulo="$TITULO" -f idea="$IDEA" -f minutos="$MINUTOS" -f tope="$TOPE" -f extrema="$EXTREMA"
+          fi

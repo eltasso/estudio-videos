@@ -1,0 +1,13 @@
+{
+ "name": "estudio-extrema",
+ "private": true,
+ "type": "module",
+ "dependencies": {
+  "remotion": "4.0.472",
+  "@remotion/bundler": "4.0.472",
+  "@remotion/renderer": "4.0.472",
+  "@remotion/google-fonts": "4.0.472",
+  "react": "19.2.3",
+  "react-dom": "19.2.3"
+ }
+}
