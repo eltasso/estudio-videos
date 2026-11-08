@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794178829.9630084,
+ "actualizado": 1794178893.2334626,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -41,7 +41,7 @@
    "k": "armado",
    "n": "Armado",
    "st": "active",
-   "info": "102 segmentos"
+   "info": "final.mp4 · 9.6 min"
   },
   {
    "k": "qc",
@@ -59,10 +59,6 @@
   "total": 0.3401
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/render.py . --limit 10 > render_test.log 2>&1 & echo \"RENDER TEST PID $!\""
-  },
   {
    "k": "res",
    "t": "RENDER TEST PID 10424"
@@ -178,6 +174,10 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --log assemble.log --busca \"final:|FALLO|Traceback\" --max 420"
+  },
+  {
+   "k": "res",
+   "t": "✓ el log tiene 'final:' (175 s):\ntramo 1 listo\ntramo 2 listo\ntramo 3 listo\ntramo 4 listo\ntramo 5 listo\nfinal: ./final.mp4 576.600000 s"
   }
  ],
  "maquinas": 1,
