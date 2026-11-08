@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794177170.990527,
+ "actualizado": 1794177237.4124033,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -16,14 +16,14 @@
   {
    "k": "voz",
    "n": "Voz",
-   "st": "active",
+   "st": "done",
    "info": "9:36 min"
   },
   {
    "k": "tiempos",
    "n": "Tiempos",
-   "st": "pending",
-   "info": ""
+   "st": "active",
+   "info": "por palabra"
   },
   {
    "k": "avatar",
@@ -51,34 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0236,
+  "deepseek": 0.0244,
   "gpt": 0.0,
   "gpt_img": 0,
-  "whisper": 0.0,
+  "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.0236
+  "total": 0.0821
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/sonidos.py\"}"
-  },
-  {
-   "k": "res",
-   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"EFECTOS DE SONIDO gratis (Mixkit: licencia libre, uso comercial, sin atribución y SIN clave). Baja SÓLO los que usa este video.\n3\t   python <APP>/tools/sonidos.py <carpeta> <pedidos.json> [--tomas 3]\n4\tpedidos.json = [{\"id\":\"agua\",\"tags\":[\"water\",\"splash\"],\"q\":\"water pour\",\"min\":0.5,\"max\":6}, …]\n5\t   id = nombre del archivo (sfx/<id>.mp3 y alternativas <id>_2, <id>_3"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/revisor.py\"}"
-  },
-  {
-   "k": "res",
-   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"REVISOR FINAL (no frena): saca cuadros de final.mp4 y los mira con visión (deepseek-flash, menos de US$0,01 por video, con tu clave de DeepSeek).\n3\t   python <APP>/tools/revisor.py <carpeta>\n4\t1. Deja qc/f_001.jpg, f_002.jpg… (un cuadro cada 30 s) y qc/final_info.json. Mide los huecos negros ≥ 0,5 s (sin IA).\n5\t2. Busca fallas claras: cara o cuerpo deformes, glitch d"
-  },
-  {
-   "k": "ai",
-   "t": "Empiezo por el guion. Voy a escribirlo completo (≈10 min, voz Don Genaro) y validarlo."
-  },
   {
    "k": "tool",
    "t": "¡Hola, gente de YouTube! ¿Cómo andan? [emphatically] Hace veintitrés años saqué cuarenta y dos plantines de tomate de la bandeja y los pasé al cantero. Cuarenta y dos, ni uno menos. A la tarde, treinta y siete tenían las hojas para abajo, como si les hubiera pasado un camión por encima. Y no les faltaba agua, che. Al contrario: yo había regado de más, convencido de que las estaba ayudando.\n\nEse dí"
@@ -178,6 +158,26 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/tiempos.py . es"
+  },
+  {
+   "k": "res",
+   "t": "✓ captions.json: 1543 palabras en 9.6 min"
+  },
+  {
+   "k": "tool",
+   "t": "python plan_avatar.py . && python /opt/estudio/repo/motor/tools/planos.py ."
+  },
+  {
+   "k": "res",
+   "t": "✓ avatar_ranges.json: 43 ventanas · 294 s de avatar (51 % de 577 s) · reel 307 s · 17 pantallas partidas\nhuecos >15 s sin avatar: ninguno\n✓ planos.json: 59 planos de b-roll (4.7 min de b-roll, 12.5 por minuto) + 17 fotos de pantalla partida · 43 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite."
+  },
+  {
+   "k": "tool",
+   "t": "python -c \"\nimport json\nP=json.load(open('planos.json',encoding='utf8'))\nfor p in P:\n    print(p['id'], p['startMs'], p['endMs'], 'SPLIT' if p.get('split') else '', '|', p['texto'][:110])\n\""
+  },
+  {
+   "k": "res",
+   "t": "p001 14380 17840  | como si les hubiera pasado un camión por encima\np002 22400 26400  | convencido de que las estaba ayudando Impasme nebu\np003 31640 36800  | es mover un pan de tierra con raíces adentro sin que se desarme\np004 42900 49620  | Hoy te cuento por qué se caen los plantines de tomate cuando los pasás ¿Y qué hago yo ahora para que no se cai\np005 59600 65480  | Primero lo que pasa dentro"
   }
  ],
  "maquinas": 1,
