@@ -89,7 +89,7 @@ if _XR:
 out = []
 for c in clips:
     p, a, b, isv = c
-    if not isv:
+    if not isv or "/clips/" in p:   # los clips de stock se recortan contra el avatar igual que una foto
         segs = [(a, b)]
         for r in ranges:
             ra, rb = r["startMs"], r["endMs"]
@@ -103,7 +103,7 @@ for c in clips:
             segs = ns
         for x, y in segs:
             if y - x >= 500:
-                out.append([p, x, y, False])
+                out.append([p, x, y, isv])
     else:
         out.append(c)
 
@@ -134,14 +134,18 @@ for r in ranges:
         q = esp(None, "Esperando avatar", "avatar", "sin_cuadro")
         if q: out.append([q, r["startMs"], r["endMs"], False])
 out.sort(key=lambda c: c[1])
-if _XR:   # huecos que dejaron las piezas: los tapa la foto vecina; si no hay, la pieza se queda quieta en su último cuadro (≤ 1,5 s)
-    for i in range(len(out) - 1):
-        c, d = out[i], out[i + 1]
-        if d[1] - c[2] <= 0: continue
-        if not c[3]: c[2] = d[1]
-        elif not d[3]: d[1] = c[2]
-        elif "/extrema/" in c[0] and d[1] - c[2] <= 1500: c[2] = d[1]
-        elif d[1] - c[2] <= 800: c[2] = d[1]                 # avatar que sigue un instante más (su clip continúa o queda quieto)
+# Sin huecos en la línea de tiempo, con o sin Edición extrema: los planos se pegan uno tras otro, así que un hueco (las piezas, o el
+# recorte de foto < 0,5 s que se descarta arriba) adelanta TODO lo que viene después y los labios se desfasan de la voz.
+# Los tapa la foto vecina; si no hay, la pieza se queda quieta en su último cuadro (≤ 1,5 s). El arranque de un video no se mueve (lipsync).
+if out and out[0][1] > 0 and not out[0][3]: out[0][1] = 0
+for i in range(len(out) - 1):
+    c, d = out[i], out[i + 1]
+    if d[1] - c[2] <= 0: continue
+    if not c[3]: c[2] = d[1]
+    elif not d[3]: d[1] = c[2]
+    elif "/extrema/" in c[0] and d[1] - c[2] <= 1500: c[2] = d[1]
+    elif d[1] - c[2] <= 800: c[2] = d[1]                 # avatar que sigue un instante más (su clip continúa o queda quieto)
+    else: print("⚠ HUECO sin tapar entre dos videos en", c[2], "ms: el video se va a adelantar", d[1] - c[2], "ms")
 # plan.json (lo dibuja el panel y lo revisa validar.py) sale de acá: nunca lo escribas a mano aparte
 def kind(p, isv):
     q = p.replace("\\", "/")
@@ -161,7 +165,8 @@ for i, (p, a, b, isv) in enumerate(out):
 XF_AV, XF_FOTO = 18, 9          # cuadros de fundido: avatar<->fotos 0.6 s, foto<->foto 0.3 s
 for i in range(len(plan)):
     if i == len(plan) - 1: plan[i].append(0); continue
-    av = ("/avatar/" in plan[i][0].replace("\\", "/")) or ("/avatar/" in plan[i + 1][0].replace("\\", "/")) or plan[i][2] or plan[i + 1][2]
+    _ea = lambda k: "/avatar/" in plan[k][0].replace("\\", "/") or (plan[k][2] and "/clips/" not in plan[k][0])   # un clip de stock funde corto, como una foto
+    av = _ea(i) or _ea(i + 1)
     xm = "/extrema/" in plan[i][0].replace("\\", "/") or "/extrema/" in plan[i + 1][0].replace("\\", "/")   # la pieza de edición extrema entra con corte corto: la 1ª palabra no queda tapada
     plan[i].append(XF_FOTO if xm and "/avatar/" not in plan[i][0] + plan[i + 1][0] else (XF_AV if av else XF_FOTO))
 os.makedirs(B + "/segments", exist_ok=True)

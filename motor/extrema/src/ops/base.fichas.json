@@ -1,0 +1,152 @@
+[
+{
+"op": "pleno",
+"para": "setup act, a concrete image before something happens",
+"ficha": "one photo full-bleed with a living camera; a 2nd photo punches in on the golpe. Only as a setup act, never alone.",
+"estilos": [
+"*"
+],
+"fotos": [
+1,
+2
+],
+"no_ultimo": true
+},
+{
+"op": "pared",
+"para": "too many, endless, all of them, breaking through",
+"ficha": "endless 3D wall of 5-12 photos; camera flies inside and breaks through into the first photo of the next act. Never last.",
+"estilos": [
+"papel",
+"cine",
+"archivo"
+],
+"fotos": [
+5,
+12
+],
+"no_ultimo": true
+},
+{
+"op": "forma",
+"para": "focus, a part of the whole, framing",
+"ficha": "full-bleed photo is cut into a shape on the golpe and lands on paper with the lines.",
+"estilos": [
+"papel",
+"cocina",
+"clinico"
+],
+"fotos": [
+1,
+2
+],
+"var": [
+"triangulo",
+"circulo",
+"rombo",
+"arco",
+"franja",
+"columna",
+"ventana",
+"grieta"
+]
+},
+{
+"op": "numeral",
+"para": "a number, size or blunt short word",
+"ficha": "we fly out of a giant number/word filled with photo 1 on the golpe; photo 2 hangs aside. texto = one spoken word or its digits, max 7 letters.",
+"estilos": [
+"*"
+],
+"fotos": [
+1,
+2
+]
+},
+{
+"op": "carrusel",
+"para": "lists, variety, all of them",
+"ficha": "4-7 photos as thick 3D slabs orbiting, one turn per line; the golpe appears huge behind them.",
+"estilos": [
+"papel",
+"cine",
+"cocina"
+],
+"fotos": [
+4,
+7
+]
+},
+{
+"op": "tiras",
+"para": "reveal, split, open, hidden, behind",
+"ficha": "photo 1 assembles from strips; on the golpe strips split and photo 2 is behind.",
+"estilos": [
+"*"
+],
+"fotos": [
+2,
+2
+],
+"var": [
+"horizontal",
+""
+]
+},
+{
+"op": "pila",
+"para": "accumulation, too much, buying, weight",
+"ficha": "3-7 photos drop with weight on a pile, each impact shakes the frame.",
+"estilos": [
+"papel",
+"cocina",
+"archivo"
+],
+"fotos": [
+3,
+7
+]
+},
+{
+"op": "pliegue",
+"para": "turn, change, but, then, before/after",
+"ficha": "photo 1 folds over like a lid on the golpe, photo 2 is on its back.",
+"estilos": [
+"*"
+],
+"fotos": [
+2,
+2
+],
+"var": [
+"lado",
+""
+]
+},
+{
+"op": "cortina",
+"para": "contrast, stop, cut, versus",
+"ficha": "hard diagonal wipe with accent edge from photo 1 to photo 2 on the golpe.",
+"estilos": [
+"*"
+],
+"fotos": [
+2,
+2
+]
+},
+{
+"op": "columna",
+"para": "time, years, routine, every day, sequence",
+"ficha": "tall ledger of 4-8 photos scrolling beside the lines, jumping one photo per line.",
+"estilos": [
+"papel",
+"archivo",
+"cocina"
+],
+"fotos": [
+4,
+8
+]
+}
+]

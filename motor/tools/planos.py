@@ -86,8 +86,9 @@ def shots(B):
     P = jload(f"{B}/planos.json")
     if not P: sys.exit(f"⛔ primero: python {os.path.abspath(__file__)} {B}")
     hay = lambda i: [x for x in glob.glob(f"{B}/fotos/{i}.*") if x.lower().endswith(IMG)]
-    falta = [p["id"] for p in P if not hay(p["id"])]
-    if falta: sys.exit(f"⛔ faltan {len(falta)} fotos ({', '.join(falta[:12])}{'…' if len(falta) > 12 else ''}). Esperalas con esperar.py o repedilas.")
+    clip = lambda i: os.path.exists(f"{B}/clips/{i}.mp4")   # modo Ahorro: el plano puede ir con un clip de stock
+    falta = [p["id"] for p in P if not hay(p["id"]) and (p.get("split") or not clip(p["id"]))]
+    if falta: sys.exit(f"⛔ faltan {len(falta)} fotos o clips ({', '.join(falta[:12])}{'…' if len(falta) > 12 else ''}). Esperalas con esperar.py o repedilas.")
     Q = [p for p in P if not p.get("split")]
     fin = voz_ms(B, jload(f"{B}/captions.json") or [])
     S = []

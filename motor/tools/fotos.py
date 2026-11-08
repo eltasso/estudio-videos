@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-"""Fotos del b-roll. Motor (Configuración → Fotos): "openai" = gpt-image-2 SIEMPRE low + Batch y SIN foto de referencia;
+"""Fotos del b-roll. Motor (Configuración → Fotos): "openai" = gpt-image-2.5-sunburst SIEMPRE low + Batch; referencia SOLO en las fotos del presentador;
 "manual" = las hace el usuario con lo que quiera (gratis).
    python <APP>/tools/fotos.py <carpeta_del_video> <pedidos.json> > <carpeta>/fotos/fotos.log 2>&1      (en segundo plano)
 pedidos.json = [{"id":"b01_gancho", "cara": true|false, "prompt": { JSON con los campos del KIT }}, …]
-  · "cara": true → sale el presentador: se le agrega su DESCRIPCIÓN física (Mis canales → Presentador) al "subject".
-    Nunca se manda la cara como imagen de referencia (costaba el triple). Todo por /images/generations en Batch.
+  · "cara": true → sale el presentador: se le agrega su DESCRIPCIÓN física al "subject" y va con refs/cara.png (128x192) por /images/edits
+    en Batch, para que coincida con el avatar. Tope: TOPE_CARA fotos por video. Todas las demás, sin referencia, por /images/generations en Batch.
   · manual: escribe fotos/PROMPTS.md y espera a que se suban fotos/<id>.png|jpg|webp desde el panel.
 Antes de gastar pasa la COMPUERTA (campos obligatorios, detalle, palabras prohibidas): si falla, no manda NADA.
 Guarda cada prompt al lado de su foto (fotos/<id>.json), manda los batches, espera (consulta cada 30 s) y baja fotos/<id>.png.
 Si se corta o fallan algunas, volver a correrlo con el mismo pedidos.json: sólo pide las que faltan y retoma los batches en vuelo.
 Opción --no-wait: manda y sale (volvé a correrlo después para bajar)."""
-import json, os, re, sys, time, base64, uuid, urllib.request, urllib.error, urllib.parse
+import glob, json, os, re, sys, time, base64, uuid, urllib.request, urllib.error, urllib.parse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import _cfg
 try: sys.stdout.reconfigure(encoding="utf-8")
@@ -20,7 +20,7 @@ B = os.path.abspath(sys.argv[1]).replace("\\", "/").rstrip("/")
 PED = sys.argv[2]
 NO_WAIT = "--no-wait" in sys.argv
 C = _cfg.leer()
-MODEL, SIZE, QUALITY = C.get("imagen_modelo") or "gpt-image-2", C.get("imagen_size") or "1088x608", "low"   # low: regla dura, no se cambia
+MODEL, SIZE, QUALITY = C.get("imagen_modelo") or "gpt-image-2.5-sunburst", C.get("imagen_size") or "1088x608", "low"   # low: regla dura, no se cambia
 O = B + "/fotos"; os.makedirs(O, exist_ok=True)
 ST = O + "/_batches.json"
 MOTOR = (C.get("fotos_motor") or "openai").lower()
@@ -28,6 +28,8 @@ try: CANAL = json.load(open(B + "/refs/canal.json", encoding="utf8"))
 except Exception: CANAL = {}
 PRESENTADOR = (CANAL.get("presentador") or "").strip()
 API = "https://api.openai.com/v1"
+REF, TOPE_CARA = B + "/refs/cara.png", 15   # la única referencia permitida: la cara del presentador, en pocas fotos
+TOPE_AHORRO = 20   # modo Ahorro: el resto de los planos va con clips de stock (tools/stock.py)
 
 
 def log(*a): print(time.strftime("%H:%M:%S"), *a, flush=True)
@@ -70,16 +72,34 @@ for p in peds:
         cam = re.sub(r"\W+", " ", str(j.get("camera", "")).lower()).strip(); camaras[cam] = camaras.get(cam, 0) + 1
     if p.get("cara"):
         if len(PRESENTADOR) < 60: problemas.append(f"{i}: pide al presentador pero el canal no tiene su descripción física detallada (Mis canales → Presentador, ≥60 caracteres)")
-        else:   # la identidad va en TEXTO, no en una foto de referencia
-            j = dict(j); j["subject"] = f"{PRESENTADOR} (always this exact same person). " + str(j.get("subject", ""))
+        else:   # descripción + refs/cara.png (si existe)
+            j = dict(j); j["subject"] = ("the same person as the reference photo: " if os.path.exists(REF) else "") + f"{PRESENTADOR} (always this exact same person). " + str(j.get("subject", ""))
     p["_j"] = j
 if len(peds) >= 6 and camaras and max(camaras.values()) / len(peds) > 0.3:
     problemas.append("lote: más del 30 % de las fotos con la MISMA cámara — variá (manos a 40 cm, plano medio, cenital, por encima del hombro, desde la puerta)")
+_otras = 0
+for _f in glob.glob(f"{B}/fotos/*.json"):
+    try:
+        _d = json.load(open(_f, encoding="utf8"))
+        if isinstance(_d, dict) and _d.get("cara") and _d.get("id") not in ids: _otras += 1
+    except Exception: pass
+_caras = _otras + sum(1 for p in peds if p.get("cara"))
+if _caras > TOPE_CARA: problemas.append(f"lote: {_caras} fotos con el presentador en este video (tope {TOPE_CARA}): dejá el gancho y las mejores, el resto con cara:false")
+if MOTOR == "ahorro":
+    try: _libres = set(json.load(open(f"{B}/clips/_sin_stock.json", encoding="utf8")))   # Pexels no tuvo clip: no cuentan
+    except Exception: _libres = set()
+    _todas = set(ids)
+    for _f in glob.glob(f"{B}/fotos/*.json"):
+        try:
+            _d = json.load(open(_f, encoding="utf8"))
+            if isinstance(_d, dict) and _d.get("id"): _todas.add(_d["id"])
+        except Exception: pass
+    if len(_todas - _libres) > TOPE_AHORRO: problemas.append(f"lote: modo Ahorro, {len(_todas - _libres)} fotos en este video (tope {TOPE_AHORRO}): dejá el gancho, las del presentador, las creativas y lo que un clip no puede mostrar; el resto va con tools/stock.py")
 if problemas:
     print("⛔ COMPUERTA: no mando nada. Reescribí los prompts:\n  · " + "\n  · ".join(problemas[:40]), flush=True); sys.exit(1)
 
 for p in peds:   # el prompt queda al lado de la foto (el panel lo muestra y el validador lo revisa)
-    json.dump({"id": p["id"], "cara": bool(p.get("cara")), "prompt": p["_j"], "motor": MOTOR if MOTOR != "openai" else f"{MODEL} {QUALITY} batch"},
+    json.dump({"id": p["id"], "cara": bool(p.get("cara")), "prompt": p["_j"], "motor": MOTOR if MOTOR == "manual" else f"{MODEL} {QUALITY} batch"},
               open(f"{O}/{p['id']}.json", "w", encoding="utf8"), ensure_ascii=False, indent=1)
 
 
@@ -157,19 +177,21 @@ if MOTOR == "manual":   # las hace el usuario con el generador que quiera: lista
         if NO_WAIT or time.time() - t0 > 24 * 3600: log("sigo esperando: volvé a correr este comando cuando estén"); sys.exit(1)
         time.sleep(20)
 
-for con in (False,):   # openai: un solo tipo de pedido, sin referencia
-    lote = list(faltan)
+for con in (False, True):   # la API no deja mezclar endpoints en un batch: con la cara va aparte
+    lote = [p for p in faltan if bool(p.get("cara") and os.path.exists(REF)) == con]
     if not lote: continue
-    ep = "/v1/images/generations"
+    ep = "/v1/images/edits" if con else "/v1/images/generations"
+    ref_uri = "data:image/png;base64," + base64.b64encode(open(REF, "rb").read()).decode() if con else ""
     lineas = []
     for p in lote:
         body = {"model": MODEL, "prompt": texto(p["_j"]), "size": SIZE, "quality": QUALITY, "n": 1}
+        if con: body["images"] = [{"image_url": ref_uri}]
         lineas.append(json.dumps({"custom_id": p["id"], "method": "POST", "url": ep, "body": body}, ensure_ascii=False))
     data, hd = multipart({"purpose": "batch"}, ("batch.jsonl", ("\n".join(lineas) + "\n").encode("utf8")))
     f = api("/files", data, hd)
     b = api("/batches", json.dumps({"input_file_id": f["id"], "endpoint": ep, "completion_window": "24h"}).encode(), {"Content-Type": "application/json"})
     est["batches"].append({"id": b["id"], "endpoint": ep, "names": [p["id"] for p in lote], "t": time.time()}); guardar()
-    log(f"→ batch {b['id']} · {len(lote)} fotos · sin referencia · low {SIZE}")
+    log(f"→ batch {b['id']} · {len(lote)} fotos · {'con la cara del presentador' if con else 'sin referencia'} · low {SIZE}")
 
 pend = lambda: [b for b in est["batches"] if not b.get("bajado")]
 if not pend(): log(f"✓ nada que pedir: {sum(hecha(p['id']) for p in peds)}/{len(peds)} fotos listas"); sys.exit(0)

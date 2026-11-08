@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Validador automático de un video DeepSeek. Uso:
    python <APP>/tools/validar.py <carpeta> --etapa guion|fotos|render|final [--min 15]
-Sale con código 1 SÓLO con errores importantes (✗): video roto o vacío, sin audio, desincronizado con la voz, no arranca
+Sale con código 1 SÓLO con errores importantes (✗): guion fuera de largo, video roto o vacío, sin audio, desincronizado con la voz, no arranca
    con el avatar, avatar congelado, huecos negros > 0,5 s, menciones de IA, sin título. Todo lo demás es aviso (!):
    se anota y se mejora, pero NO frena la entrega."""
 import json, os, re, subprocess, sys, glob
@@ -30,8 +30,9 @@ g = P("guion.txt")
 if not os.path.exists(g): F("falta guion.txt")
 else:
     t = open(g, encoding="utf8").read(); w = len(re.findall(r"[^\W\d_]+(?:'[^\W\d_]+)?", t))
-    lo, hi = MIN * 130 * 0.85, MIN * 150 * 1.15
-    (OK if lo <= w <= hi else A)("guion: %d palabras (esperado %d-%d para %g min)" % (w, lo, hi, MIN))
+    car = len(re.sub(r"\s+", " ", re.sub(r"\[[^\]]*\]|\([^)]*\)", "", t)).strip())   # lo que se dice, sin tags de emoción
+    lo, hi = MIN * 900, MIN * 1150
+    (OK if lo <= car <= hi else (F if etapa == "guion" else A))("guion: %d caracteres, %d palabras (hacen falta %d-%d para %g min: %s)" % (car, w, lo, hi, MIN, "bien" if lo <= car <= hi else "alargalo con puntos nuevos" if car < lo else "recortalo"))
     for bad in [r"as an ai", r"artificial intelligence", r"inteligencia artificial", r"soy una ia", r"generado por ia"]:
         n = len(re.findall(r"\b" + bad + r"\b", t, re.I))
         if n: F("guion menciona IA ('%s' %d vez/veces)" % (bad, n))
@@ -158,6 +159,7 @@ if hasta >= 3:
         if os.path.exists(mas):
             a = float(probe(mas).get("format", {}).get("duration", 0)); d = float(v.get("format", {}).get("duration", 0))
             (OK if abs(a - d) <= 0.3 else F)("final %.2f s vs voz %.2f s" % (d, a))
+            (OK if d >= MIN * 60 * 0.85 else A)("duración real: %.1f min (pedidos: %g)" % (d / 60, MIN))
     m = P("meta.json")
     if not os.path.exists(m): F("falta meta.json")
     else:

@@ -1,0 +1,172 @@
+[
+{
+"op": "map_ruta",
+"para": "a journey, trade route, migration, from A to B to C, how far it travels",
+"ficha": "Tilted 3D map; a glowing route is traced place by place, a pin drops on each spoken word; on the last word the camera pulls back to the whole journey.",
+"estilos": [
+"atlas",
+"cine",
+"archivo",
+"papel",
+"neon",
+"plano"
+],
+"fotos": [
+0,
+0
+],
+"var": [
+"arco",
+"tierra"
+],
+"datos": {
+"puntos": {
+"lista": {
+"lugar": "texto:16",
+"lat": "num:-85:85",
+"lon": "num:-180:180",
+"en": "palabra"
+},
+"min": 2,
+"max": 5
+},
+"dato": "texto:16?",
+"dato_en": "palabra?"
+}
+},
+{
+"op": "map_picada",
+"para": "a place named for the first time, here, where it happened, zooming in",
+"ficha": "3D Earth in space turns and the camera dives to one place, landing on the word with a dropping pin. Optional photo irises open from the pin.",
+"estilos": [
+"atlas",
+"cine",
+"neon",
+"alarma",
+"plano"
+],
+"fotos": [
+0,
+1
+],
+"var": [],
+"datos": {
+"lugar": "texto:18",
+"lat": "num:-85:85",
+"lon": "num:-180:180",
+"en": "palabra?"
+}
+},
+{
+"op": "map_maqueta",
+"para": "a country or region singled out, it stood alone, the one place that",
+"ficha": "Scale-model board: country pieces fall in one by one, then on the word the named country rises as a tall lit block while its neighbors dim.",
+"estilos": [
+"atlas",
+"papel",
+"plano",
+"cine",
+"clinico"
+],
+"fotos": [
+0,
+0
+],
+"var": [],
+"datos": {
+"lugar": "texto:18",
+"lat": "num:-85:85",
+"lon": "num:-180:180",
+"en": "palabra?"
+}
+},
+{
+"op": "map_pergamino",
+"para": "old voyage, treasure, a secret place, history, expedition, X marks the spot",
+"ficha": "A parchment scroll unrolls on a wooden table, an ink route draws itself place by place, and a red X slams on the last place.",
+"estilos": [
+"archivo",
+"papel",
+"cine",
+"cocina"
+],
+"fotos": [
+0,
+0
+],
+"var": [],
+"datos": {
+"puntos": {
+"lista": {
+"lugar": "texto:16",
+"lat": "num:-85:85",
+"lon": "num:-180:180",
+"en": "palabra"
+},
+"min": 1,
+"max": 4
+}
+}
+},
+{
+"op": "map_onda",
+"para": "it spread, reached everywhere, an outbreak, an empire, news, influence, from one place",
+"ficha": "Dark tilted map; on the word a wave of light leaves one place and ignites the land as the camera pulls back, arcs reaching other places.",
+"estilos": [
+"atlas",
+"cine",
+"alarma",
+"neon",
+"plano"
+],
+"fotos": [
+0,
+0
+],
+"var": [],
+"datos": {
+"lugar": "texto:18",
+"lat": "num:-85:85",
+"lon": "num:-180:180",
+"en": "palabra?",
+"destinos": {
+"lista": {
+"lugar": "texto:14?",
+"lat": "num:-85:85",
+"lon": "num:-180:180",
+"en": "palabra?"
+},
+"min": 0,
+"max": 5
+}
+}
+},
+{
+"op": "map_postales",
+"para": "visiting places, several locations each with a picture, a tour, stops along the way",
+"ficha": "3D map; a framed photo stands up from each place on its word while the camera flies from one to the next along a drawn line.",
+"estilos": [
+"atlas",
+"papel",
+"cine",
+"cocina"
+],
+"fotos": [
+2,
+4
+],
+"var": [],
+"datos": {
+"puntos": {
+"lista": {
+"lugar": "texto:16",
+"lat": "num:-85:85",
+"lon": "num:-180:180",
+"en": "palabra"
+},
+"min": 2,
+"max": 4
+}
+}
+}
+]

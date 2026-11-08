@@ -14,14 +14,15 @@ mirá la hoja de contacto con Read y escribí `gates/<etapa>_auto.txt` (qué mir
 - Primeros 30 s: corte cada 2-3 s, alternando fotos del gancho con el avatar.
 
 ## Qué video es
-- Canal: **{CANAL}** · Idioma: **{IDIOMA}** · Largo: **~{MIN} min**
+- Canal: **{CANAL}** · Idioma: **{IDIOMA}** · Largo: **~{MIN} min = unos {CHARS} caracteres de guion**
 - Título: **{TITULO}**
 - La idea / el ángulo:
 {IDEA}
 - Biblia del canal (presentador, tono, reglas, serie):
 {BIBLIA}
 
-## 1. Guion ({IDIOMA}, ~{MIN} min)
+## 1. Guion ({IDIOMA}, ~{MIN} min = unos {CHARS} caracteres)
+- **El largo es un pedido del usuario: unos {CHARS} caracteres (~1.000 por minuto).** El control los cuenta y frena si no llega. Si te quedás corto, sumá puntos nuevos con su anécdota y su cambio concreto: nunca relleno ni repetir lo mismo.
 - Gancho 0-45 s con número + objeto concreto; credencial del presentador; una prueba interactiva ~min 4; cada punto = problema → anécdota con fecha/nombre/lugar → por qué pasa → cambio concreto con precio o medida → algo para hacer hoy. Pedido de like/suscripción antes del último punto. Cierre con una pregunta para comentar y el gancho al próximo video.
 - Prohibido: relleno, sermonear, "honestly/genuinely", consejos médicos o legales, mencionar IA.
 - Guardá `guion.txt` (sólo lo que se dice, con 2-4 tags de emoción donde sumen). **✅ Control guion** y seguí.

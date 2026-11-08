@@ -94,6 +94,7 @@ PUENTE_RUTAS = {
     "runpod": ("api.runpod.ai", r"^/v2/infinitetalk/"),
     "github": ("api.github.com", r"^/repos/{REPO}(/contents/|\?|$)"),
     "deepseek": ("api.deepseek.com", r"^/chat/completions(\?|$)"),
+    "pexels": ("api.pexels.com", r"^/videos/search\?"),
 }
 def _secretos():
     c = _cfg.leer()
@@ -128,7 +129,7 @@ class Proxy(http.server.BaseHTTPRequestHandler):
         data = self.cuerpo()
         fuera = ("host", "content-length", "transfer-encoding", "accept-encoding", "connection", "authorization", "x-api-key")
         hdr = {k: v for k, v in self.headers.items() if k.lower() not in fuera}
-        hdr["Authorization"] = f"Bearer {key}"; hdr["Accept-Encoding"] = "identity"
+        hdr["Authorization"] = key if m.group(1) == "pexels" else f"Bearer {key}"; hdr["Accept-Encoding"] = "identity"
         try:
             c = http.client.HTTPSConnection(reg[0], timeout=900); c.request(self.command, rest, body=data, headers=hdr); r = c.getresponse()
         except Exception:
@@ -245,7 +246,7 @@ def launch(rid, text):
     d = rdir(rid); meta = jload(os.path.join(d, "meta.json"), {})
     turns = meta.setdefault("turns", []); k = len(turns)
     M = _cfg.leer()["modelo"]
-    env = {k: v for k, v in os.environ.items() if k not in ("ANTHROPIC_API_KEY", "DEEPSEEK_API_KEY", "OPENAI_API_KEY", "FISH_API_KEY", "RUNPOD_API_KEY", "GROQ_API_KEY", "GH_TOKEN", "GITHUB_TOKEN")}   # ninguna clave en el entorno del agente
+    env = {k: v for k, v in os.environ.items() if k not in ("ANTHROPIC_API_KEY", "DEEPSEEK_API_KEY", "OPENAI_API_KEY", "FISH_API_KEY", "RUNPOD_API_KEY", "GROQ_API_KEY", "PEXELS_API_KEY", "GH_TOKEN", "GITHUB_TOKEN")}   # ninguna clave en el entorno del agente
     env.update(CLAUDE_CONFIG_DIR=BRAIN, ANTHROPIC_BASE_URL=f"http://127.0.0.1:{PROXY_PORT}/r/{rid}", ANTHROPIC_AUTH_TOKEN="via-proxy",
                ANTHROPIC_MODEL=M, ANTHROPIC_DEFAULT_OPUS_MODEL=M, ANTHROPIC_DEFAULT_SONNET_MODEL=M, ANTHROPIC_DEFAULT_HAIKU_MODEL=M,
                ANTHROPIC_SMALL_FAST_MODEL=M, CLAUDE_CODE_SUBAGENT_MODEL=M, API_TIMEOUT_MS="600000",
@@ -549,7 +550,8 @@ def cola_loop():   # entrega los mensajes en cola cuando el chat termina su turn
 # ───────────── configuración: claves (se guardan SÓLO en config.json de esta PC; nunca se devuelven enteras) ─────────────
 NOMBRES = {"deepseek": "DeepSeek (el cerebro que arma el video)", "openai": "OpenAI (fotos gpt-image low+Batch y tiempos por palabra)",
            "fish": "Fish Audio (clon de tu voz)", "runpod": "RunPod (avatar InfiniteTalk)", "github": "GitHub (aloja la cara y el audio un rato para RunPod)",
-           "groq": "Groq (opcional: tiempos por palabra GRATIS en vez de OpenAI)"}
+           "groq": "Groq (opcional: tiempos por palabra GRATIS en vez de OpenAI)",
+           "pexels": "Pexels (opcional y gratis: clips del modo Ahorro)"}
 def silencio_mp3():
     f = os.path.join(D, "_silencio.mp3")
     if not os.path.exists(f): subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "anullsrc=r=16000:cl=mono", "-t", "1", f], check=True)
@@ -572,6 +574,8 @@ def probar(k):
             whisper_minimo("https://api.openai.com/v1/audio/transcriptions", v, "whisper-1"); return {"ok": True, "msg": "clave válida y con crédito"}
         if k == "groq":
             whisper_minimo("https://api.groq.com/openai/v1/audio/transcriptions", v, "whisper-large-v3-turbo"); return {"ok": True, "msg": "anda (tiempos gratis)"}
+        if k == "pexels":
+            get("https://api.pexels.com/videos/search?query=sea&per_page=1", {"Authorization": v}); return {"ok": True, "msg": "anda (clips gratis)"}
         if k == "fish":
             try: j = get("https://api.fish.audio/wallet/self/api-credit", {"Authorization": "Bearer " + v}); return {"ok": True, "msg": "crédito " + str(j.get("credit", "ok"))}
             except urllib.error.HTTPError as e:
@@ -603,7 +607,7 @@ def guardar_config(b):
         v = re.sub(r"\s+", "", str(v or ""))
         if v == "-": c.pop(k, None)              # "-" = borrar
         elif v: c[k] = v
-    if b.get("fotos_motor") in ("openai", "manual"): c["fotos_motor"] = b["fotos_motor"]
+    if b.get("fotos_motor") in ("openai", "manual", "ahorro"): c["fotos_motor"] = b["fotos_motor"]
     c = {k: v for k, v in c.items() if k not in _cfg.DEFAULTS or v != _cfg.DEFAULTS[k]}
     _cfg.guardar(c)
 
@@ -687,6 +691,9 @@ def alertas():
 def faltan_para_video():
     c = _cfg.leer(); return [NOMBRES[k] for k in requeridas(c) if not (c.get(k) or "").strip()]
 
+AHORRO = ("\n**MODO AHORRO (lo eligió el usuario):** seguí el §4c del KIT. Máximo 20 fotos con gpt-image en todo el video, incluidas las del presentador y las creativas; "
+          "todos los demás planos van con clips de stock por tools/stock.py. Esto manda sobre lo que el brief diga de la cantidad de fotos.")
+
 def nuevo_video(b):
     f = faltan_para_video()
     if f: raise ValueError("faltan claves: " + "; ".join(f) + ". Cargalas en Configuración.")
@@ -709,11 +716,11 @@ def nuevo_video(b):
         if os.path.exists(s): shutil.copy2(s, os.path.join(cwd, "refs", x))
     idi = (c.get("idioma") or "es").strip()
     IDN = {"es": "español", "en": "inglés", "pt": "portugués", "fr": "francés", "it": "italiano", "de": "alemán"}
-    rep = {"{TITULO}": titulo, "{CANAL}": c.get("nombre", ""), "{IDIOMA}": IDN.get(idi, idi), "{IDI}": idi, "{MIN}": f"{mins:g}",
+    rep = {"{TITULO}": titulo, "{CANAL}": c.get("nombre", ""), "{IDIOMA}": IDN.get(idi, idi), "{IDI}": idi, "{MIN}": f"{mins:g}", "{CHARS}": f"{int(mins * 1000):,}".replace(",", "."), "{CHARS}": f"{int(mins * 1000):,}".replace(",", "."),
            "{IDEA}": (b.get("idea") or "").strip() or "(sin indicación: elegí vos el mejor ángulo para ese título)",
            "{BIBLIA}": (c.get("biblia") or "").strip() or "(no hay biblia: inventá lo mínimo y anotalo en el REPORTE)",
            "{PRESENTADOR}": c.get("presentador") or "el presentador de la foto", "{ESCENA}": c.get("escena") or "su casa",
-           "{NFOTOS}": str(int(mins * 60 * (1 - min(0.5, 560 / (mins * 60))) / 4.5)), "{EXTRA}": ((b.get("extra") or "").strip() + ("\nPalabras PROHIBIDAS en el guion (el validador frena si aparecen): " + c["prohibidas"] if (c.get("prohibidas") or "").strip() else "")).strip(), "{CWD}": cwd, "{APP}": BASE}
+           "{NFOTOS}": str(int(mins * 60 * (1 - min(0.5, 560 / (mins * 60))) / 4.5)), "{EXTRA}": ((b.get("extra") or "").strip() + (AHORRO if _cfg.leer().get("fotos_motor") == "ahorro" else "") + ("\nPalabras PROHIBIDAS en el guion (el validador frena si aparecen): " + c["prohibidas"] if (c.get("prohibidas") or "").strip() else "")).strip(), "{CWD}": cwd, "{APP}": BASE}
     brief = open(BASE + "/plantilla_brief.md", encoding="utf8").read()
     for k, v in rep.items(): brief = brief.replace(k, v)
     open(cwd + "/BRIEF.md", "w", encoding="utf8").write(brief)

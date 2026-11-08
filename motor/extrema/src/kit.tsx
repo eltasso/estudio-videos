@@ -14,6 +14,9 @@ import {loadFont as i} from '@remotion/google-fonts/Fraunces';
 import {loadFont as j} from '@remotion/google-fonts/ArchivoBlack';
 import {loadFont as k} from '@remotion/google-fonts/Oswald';
 import {loadFont as l} from '@remotion/google-fonts/InstrumentSerif';
+import {loadFont as m1} from '@remotion/google-fonts/Caveat';
+import {loadFont as m2} from '@remotion/google-fonts/SpecialElite';
+import {loadFont as m3} from '@remotion/google-fonts/JetBrainsMono';
 const op = {subsets: ['latin'] as any};
 export const F = {
   Inter: a('normal', {weights: ['400', '600', '800'], ...op}).fontFamily,
@@ -28,6 +31,9 @@ export const F = {
   ArchivoBlack: j('normal', {weights: ['400'], ...op}).fontFamily,
   Oswald: k('normal', {weights: ['400', '700'], ...op}).fontFamily,
   InstrumentSerif: l('normal', {weights: ['400'], ...op}).fontFamily,
+  Caveat: m1('normal', {weights: ['700'], ...op}).fontFamily,
+  SpecialElite: m2('normal', {weights: ['400'], ...op}).fontFamily,
+  JetBrainsMono: m3('normal', {weights: ['400', '700'], ...op}).fontFamily,
 };
 /** Una foto de este video, a cubrir su caja. `id` como "p012". */
 export const Foto: React.FC<{id: string; style?: React.CSSProperties}> = ({id, style}) => (

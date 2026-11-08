@@ -71,12 +71,12 @@ except OSError: pass
 
 # ── 1) claves (secretos del repo) → config.json local de esta máquina (nunca se imprime)
 c = _cfg.leer()
-for k in ("deepseek", "openai", "fish", "runpod", "groq"):
+for k in ("deepseek", "openai", "fish", "runpod", "groq", "pexels"):
     v = (E.get(k.upper() + "_API_KEY") or "").strip()
     if v: c[k] = v
 c["github"] = TOK                                  # token del propio workflow: sube cara+audio un rato a ESTE repo (público) para RunPod
 c["avatar_repo"] = REPO.split("/")[1]
-c["fotos_motor"] = "openai"
+c["fotos_motor"] = "ahorro" if str(E.get("AHORRO") or "") == "1" and c.get("pexels") else "openai"
 _cfg.guardar(c)
 os.chmod(_cfg.CONFIG, 0o600)
 # La sesión de DeepSeek corre con otro usuario y solo ve esta copia SIN claves; las herramientas usan el puente del motor.
@@ -84,7 +84,7 @@ _pub = E.get("ESTUDIO_CONFIG_PUB")
 if _pub:
     with open(_pub, "w", encoding="utf8") as _f: json.dump({k: ("via-puente" if v and k in _cfg.CLAVES + _cfg.OPCIONALES else v) for k, v in c.items()}, _f)
     os.chmod(_pub, 0o644)
-for _k in ("DEEPSEEK_API_KEY", "OPENAI_API_KEY", "FISH_API_KEY", "RUNPOD_API_KEY", "GROQ_API_KEY"): E.pop(_k, None)
+for _k in ("DEEPSEEK_API_KEY", "OPENAI_API_KEY", "FISH_API_KEY", "RUNPOD_API_KEY", "GROQ_API_KEY", "PEXELS_API_KEY"): E.pop(_k, None)
 
 # ── 2) el canal (lo sube el panel a canales/<id>/ del repo)
 cid = E["CANAL"]
@@ -106,7 +106,7 @@ rama_estado()
 
 import re                                          # noqa: E402
 TAPAR = re.compile(r"(api[ _-]?key[^\n]{0,20}?)\S*\*+\S*|sk-[A-Za-z0-9_\-]{8,}|gh[ps]_[A-Za-z0-9]{8,}|rpa_[A-Za-z0-9]{8,}|gsk_[A-Za-z0-9]{8,}", re.I)
-SECRETOS = [v for v in (str(c.get(k) or "") for k in ("deepseek", "openai", "fish", "runpod", "groq", "github")) if len(v) >= 8] + [TOK]
+SECRETOS = [v for v in (str(c.get(k) or "") for k in ("deepseek", "openai", "fish", "runpod", "groq", "pexels", "github")) if len(v) >= 8] + [TOK]
 def tapar(t):                                      # el repo es público: nada que se parezca a una clave
     for v in SECRETOS: t = t.replace(v, "[oculto]")
     return TAPAR.sub(lambda m: (m.group(1) or "") + "[oculto]", t)
@@ -250,11 +250,11 @@ def publicar(estado, extra=None):
                 ev.append({"k": x.get("k"), "t": tapar(t or "")[:400]})
         o = {"vid": VID, "titulo": E.get("TITULO"), "canal": cid, "estado": estado, "actualizado": time.time(),
              "creado": st.get("creado"), "run": RUN_URL, "pasos": (v.get("pipeline") or {}).get("steps"),
-             "costo": v.get("cost"), "eventos": ev, "maquinas": st.get("maquinas", 1), "extrema": "1" if str(E.get("EXTREMA") or "") == "1" else ""}
+             "costo": v.get("cost"), "eventos": ev, "maquinas": st.get("maquinas", 1), "extrema": "1" if str(E.get("EXTREMA") or "") == "1" else "", "ahorro": "1" if str(E.get("AHORRO") or "") == "1" else ""}
         o.update(st.get("final") or {})
         o.update(extra or {})
         escribir_estado(f"videos/{VID}.json", o)
-        publicar_panel({k: o.get(k) for k in ("titulo", "canal", "run", "estado", "error", "final", "release", "actualizado", "maquinas", "extrema")})
+        publicar_panel({k: o.get(k) for k in ("titulo", "canal", "run", "estado", "error", "final", "release", "actualizado", "maquinas", "extrema", "ahorro")})
     except Exception as e: log("no pude publicar el estado:", type(e).__name__)
 
 

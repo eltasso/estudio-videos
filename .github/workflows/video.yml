@@ -11,6 +11,7 @@ on:
       minutos: { description: "duración en minutos", required: false, default: "" }
       tope:    { description: "tope de gasto de DeepSeek en US$", required: false, default: "2" }
       extrema: { description: "1 = edición extrema (motion graphics, tope duro US$0,20)", required: false, default: "" }
+      ahorro:  { description: "1 = modo Ahorro (clips de Pexels y pocas fotos)", required: false, default: "" }
 
 permissions:
   contents: write
@@ -74,6 +75,7 @@ jobs:
           MINUTOS: ${{ inputs.minutos }}
           TOPE: ${{ inputs.tope }}
           EXTREMA: ${{ inputs.extrema }}
+          AHORRO: ${{ inputs.ahorro }}
           ESTUDIO_DATA: /opt/estudio/datos
           ESTUDIO_CONFIG_PUB: /opt/estudio/publico.json
           ESTUDIO_USUARIO_SESION: sesion
@@ -84,6 +86,7 @@ jobs:
           FISH_API_KEY: ${{ secrets.FISH_API_KEY }}
           RUNPOD_API_KEY: ${{ secrets.RUNPOD_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
         run: python -u /opt/estudio/repo/motor/nube.py
 
       - name: Sacar cualquier rastro de claves
@@ -95,6 +98,7 @@ jobs:
           FISH_API_KEY: ${{ secrets.FISH_API_KEY }}
           RUNPOD_API_KEY: ${{ secrets.RUNPOD_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           GH_TOKEN: ${{ github.token }}
         run: |
           sudo pkill -9 -u sesion || true
@@ -121,7 +125,8 @@ jobs:
           MINUTOS: ${{ inputs.minutos }}
           TOPE: ${{ inputs.tope }}
           EXTREMA: ${{ inputs.extrema }}
+          AHORRO: ${{ inputs.ahorro }}
         run: |
           if [ -f "/opt/estudio/datos/relanzar_$VID" ]; then
-            gh workflow run video.yml --repo "$GITHUB_REPOSITORY" --ref "$GITHUB_REF_NAME"               -f vid="$VID" -f canal="$CANAL" -f titulo="$TITULO" -f idea="$IDEA" -f minutos="$MINUTOS" -f tope="$TOPE" -f extrema="$EXTREMA"
+            gh workflow run video.yml --repo "$GITHUB_REPOSITORY" --ref "$GITHUB_REF_NAME"               -f vid="$VID" -f canal="$CANAL" -f titulo="$TITULO" -f idea="$IDEA" -f minutos="$MINUTOS" -f tope="$TOPE" -f extrema="$EXTREMA" -f ahorro="$AHORRO"
           fi

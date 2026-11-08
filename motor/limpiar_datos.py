@@ -4,7 +4,7 @@ No imprime claves ni nombres de archivo con contenido: solo cuántos arreglos hi
 import os, sys
 
 BASE = sys.argv[1]
-NOMBRES = ("DEEPSEEK_API_KEY", "OPENAI_API_KEY", "FISH_API_KEY", "RUNPOD_API_KEY", "GROQ_API_KEY", "GH_TOKEN")
+NOMBRES = ("DEEPSEEK_API_KEY", "OPENAI_API_KEY", "FISH_API_KEY", "RUNPOD_API_KEY", "GROQ_API_KEY", "PEXELS_API_KEY", "GH_TOKEN")
 SECRETOS = [v.strip().encode() for v in (os.environ.get(n, "") for n in NOMBRES) if len(v.strip()) >= 8]
 MEDIA = (".mp4", ".mov", ".webm", ".mkv", ".wav", ".mp3", ".m4a", ".aac", ".flac", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".tflite", ".ttf", ".otf")
 borrados = tapados = 0

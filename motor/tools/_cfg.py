@@ -11,12 +11,12 @@ APP = os.path.dirname(os.path.dirname(os.path.abspath(__file__))).replace("\\", 
 TOOLS = APP + "/tools"
 
 CLAVES = ["deepseek", "openai", "fish", "runpod", "github"]
-OPCIONALES = ["groq"]   # groq: tiempos por palabra GRATIS (si no está, se usa OpenAI whisper)
+OPCIONALES = ["groq", "pexels"]   # groq: tiempos por palabra GRATIS (si no está, se usa OpenAI whisper) · pexels: clips del modo Ahorro
 DEFAULTS = {
     "modelo": "deepseek-flash",                       # modelo de DeepSeek en su endpoint compatible con Anthropic
     "precio": {"hit": 0.003, "miss": 0.15, "out": 0.6},  # US$ por 1M tokens (valle); hora pico x2
     "fish_backend": "s2.1-pro-free",
-    "imagen_modelo": "gpt-image-2",
+    "imagen_modelo": "gpt-image-2.5-sunburst",
     "imagen_size": "1088x608",
     "avatar_repo": "estudio-avatar-inputs",          # repo PÚBLICO de su GitHub donde se suben cara+audio un rato
 }
@@ -39,7 +39,7 @@ def clave(nombre):
     return v
 
 PUENTE = (os.environ.get("ESTUDIO_PUENTE") or "").rstrip("/")   # en la nube la sesión no tiene claves: el puente las agrega del otro lado
-_SERVICIOS = {"api.openai.com": "openai", "api.groq.com": "groq", "api.fish.audio": "fish", "api.runpod.ai": "runpod", "api.github.com": "github", "api.deepseek.com": "deepseek"}
+_SERVICIOS = {"api.openai.com": "openai", "api.groq.com": "groq", "api.fish.audio": "fish", "api.runpod.ai": "runpod", "api.github.com": "github", "api.deepseek.com": "deepseek", "api.pexels.com": "pexels"}
 def url(u):
     if not PUENTE: return u
     h, _, r = u.split("://", 1)[1].partition("/")

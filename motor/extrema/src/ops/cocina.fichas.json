@@ -1,0 +1,145 @@
+[
+ {
+  "op": "coc_termometro",
+  "para": "rising, heating up, getting worse, cooling down, a level",
+  "ficha": "wall thermometer over a grey photo; the liquid slowly climbs, shoots up on the golpe and floods the photo with color. var baja drains it.",
+  "estilos": [
+   "cocina",
+   "papel",
+   "archivo"
+  ],
+  "fotos": [
+   1,
+   1
+  ],
+  "var": [
+   "sube",
+   "baja"
+  ]
+ },
+ {
+  "op": "coc_perilla",
+  "para": "switch on, set it, turn it up, the moment it starts",
+  "ficha": "enamel oven front: dark window. On the golpe the big knob snaps round and clicks; the oven light flickers on and shows the photo inside.",
+  "estilos": [
+   "cocina",
+   "papel",
+   "archivo"
+  ],
+  "fotos": [
+   1,
+   1
+  ]
+ },
+ {
+  "op": "coc_temporizador",
+  "para": "time, minutes, waiting, deadline, too late",
+  "ficha": "wind-up kitchen timer rolls in; its sweep uncovers the photo on the dial. On the golpe it completes the circle and the bell rings.",
+  "estilos": [
+   "cocina",
+   "papel",
+   "archivo"
+  ],
+  "fotos": [
+   1,
+   1
+  ]
+ },
+ {
+  "op": "coc_receta",
+  "para": "instructions, the rule, the secret, what to do, not this but that",
+  "ficha": "ruled recipe card with a taped photo writes itself word by word. Golpe in big ink, double underlined. var tacha crosses out the lead on the golpe. Use var tacha only when the sentence rejects the words being crossed out.",
+  "estilos": [
+   "cocina",
+   "papel",
+   "archivo"
+  ],
+  "fotos": [
+   1,
+   1
+  ],
+  "var": [
+   "",
+   "tacha"
+  ]
+ },
+ {
+  "op": "coc_libro",
+  "para": "the old way, it was written, knowledge, the record, the answer",
+  "ficha": "closed cloth book with the lead on its label; pages fly and it thuds open on the golpe, photo pasted on one page, golpe on the other.",
+  "estilos": [
+   "cocina",
+   "papel",
+   "archivo"
+  ],
+  "fotos": [
+   1,
+   1
+  ]
+ },
+ {
+  "op": "coc_instantaneas",
+  "para": "memories, family, people, those days, examples, proof",
+  "ficha": "instant prints drop on a table around a note; on the golpe the first photo slams on top, knocks the others away and develops.",
+  "estilos": [
+   "cocina",
+   "papel",
+   "archivo"
+  ],
+  "fotos": [
+   3,
+   5
+  ],
+  "datos": {
+   "notas": {
+    "lista": {
+     "t": "dicho:14"
+    },
+    "min": 0,
+    "max": 4
+   }
+  }
+ },
+ {
+  "op": "coc_marcador",
+  "para": "look at this, the detail, notice, right here, the key part",
+  "ficha": "printed photo on a sheet; a real marker circles the subject, closing on the golpe, then an arrow to the golpe handwritten in the margin.",
+  "estilos": [
+   "cocina",
+   "papel",
+   "archivo"
+  ],
+  "fotos": [
+   1,
+   1
+  ]
+ },
+ {
+  "op": "coc_tamiz",
+  "para": "only one, filter, the best, what is left, separate",
+  "ficha": "photos shake in a metal sieve while flour falls. On the golpe photo 1 alone drops through and slams on the table in a flour puff.",
+  "estilos": [
+   "cocina",
+   "papel",
+   "archivo"
+  ],
+  "fotos": [
+   3,
+   5
+  ]
+ },
+ {
+  "op": "coc_frasco",
+  "para": "saving, little by little, adding up, put aside, keep it",
+  "ficha": "glass jar with the photo inside fills with coins one by one; on the golpe a last pour and the metal lid slams shut. Words on a tied tag.",
+  "estilos": [
+   "cocina",
+   "papel",
+   "archivo"
+  ],
+  "fotos": [
+   1,
+   1
+  ]
+ }
+]

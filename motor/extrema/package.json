@@ -8,6 +8,12 @@
   "@remotion/renderer": "4.0.472",
   "@remotion/google-fonts": "4.0.472",
   "react": "19.2.3",
-  "react-dom": "19.2.3"
+  "react-dom": "19.2.3",
+  "@remotion/three": "4.0.472",
+  "three": "0.178.0",
+  "@react-three/fiber": "9.2.0",
+  "world-atlas": "2.0.2",
+  "d3-geo": "3.1.1",
+  "topojson-client": "3.1.0"
  }
 }

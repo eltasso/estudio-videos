@@ -4,7 +4,7 @@ Herramientas del Estudio: `{APP}/tools/`. Trabajá SOLO en tu carpeta de video (
 Las claves ya están configuradas: las herramientas las leen solas. **Nunca las busques, leas ni imprimas.**
 
 ## 🚀 CAMINO RECTO (hacelo de primera: cada vuelta extra atrasa la entrega)
-1. **Guion** → `guion.txt` (largo del brief). Validá `--etapa guion` UNA vez.
+1. **Guion** → `guion.txt` (largo del brief). Validá `--etapa guion`: si marca ✗ por el largo, alargalo o recortalo y volvé a validar hasta que pase. El largo lo pidió el usuario.
 2. **Voz** (§1) en segundo plano y, **en paralelo**, pensá el gancho y las 4-6 imágenes creativas (§4b).
 3. **Tiempos** (§2) → `captions.json`. Con eso escribí de UNA `avatar_ranges.json` (§3) y corré `python {APP}/tools/planos.py <carpeta>` → `planos.json` (un plano de b-roll cada ~5 s, con el texto de cada uno). **No escribas scripts propios de planos ni `shots_timed.json` a mano.**
 4. **Fotos**: UN prompt por plano (`id` = el del plano: p001, p002…). 6 de prueba → hoja → mirala → resto del lote en 1 o 2 pedidos grandes (§4; el Batch tarda: pedilo temprano). Mientras llegan, seguí. Cuando están todas: UNA sola ronda de rehechas con todas las malas juntas y `python {APP}/tools/planos.py <carpeta> --shots` → `shots_timed.json`.
@@ -17,12 +17,12 @@ Las claves ya están configuradas: las herramientas las leen solas. **Nunca las 
 Reglas anti-vueltas:
 - **Esperar = SÓLO `python {APP}/tools/esperar.py`** (hasta 9 min de una: `--log render.log`, `--cuenta "fotos/*.png" 120`, `--existe final.mp4`; llamala con timeout 600000). **Prohibido `sleep` en bucle** y mirar con `ls`/`tail` cada minuto.
 - Todo lo que tarde > 1 min (voz, fotos, avatar, render, assemble) va en segundo plano con log (`nohup … > x.log 2>&1 &`) y lo esperás con `esperar.py` mientras hacés otra cosa.
-- Antes de escribir un script propio, fijate si ya hay herramienta (voz, tiempos, planos, fotos, avatar_it, sonidos, render, assemble, hoja, esperar, validar, revisor). No reinventes.
+- Antes de escribir un script propio, fijate si ya hay herramienta (voz, tiempos, planos, fotos, stock, avatar_it, sonidos, render, assemble, hoja, esperar, validar, revisor). No reinventes.
 - Leé cada archivo UNA vez. El validador: arreglá sólo los **✗**; los **!** son avisos (mejoralos si es rápido o anotalos en REPORTE.md y SEGUÍ). Máximo 2 corridas por etapa.
 
 ## ⛔ Reglas duras
 - **Nunca imprimas, copies ni leas claves** (el guardián lo bloquea).
-- No usar: git push, YouTube, ni APIs directo. RunPod SÓLO por `tools/avatar_it.py`; imágenes SÓLO por `tools/fotos.py`.
+- No usar: git push, YouTube, ni APIs directo. RunPod SÓLO por `tools/avatar_it.py`; imágenes SÓLO por `tools/fotos.py` (clips de stock SÓLO por `tools/stock.py`, en modo Ahorro).
 - **gpt-image SIEMPRE quality low + Batch** (lo hace `fotos.py`; no hay otra forma).
 - Nunca marcar el contenido como IA dentro del video ni en la descripción. Sin claims médicos ni legales.
 - **Scripts y JSON largos: escribilos con Write a un archivo y después corré `python archivo.py`.** Nunca en heredoc ni `python -c '…'` (los apóstrofos rompen las comillas).
@@ -62,8 +62,8 @@ python {APP}/tools/avatar_it.py <carpeta> > <carpeta>/avatar/it.log 2>&1 &
 ```
 python {APP}/tools/fotos.py <carpeta> <carpeta>/pedidos_01.json > <carpeta>/fotos/fotos_01.log 2>&1 &
 ```
-- `pedidos = [{"id":"p001","cara":true,"prompt":{…JSON…}}]` (`id` = el id del plano en `planos.json`; las fotos de pantalla partida vienen ahí con su propio id). `cara: true` = sale el presentador (se le agrega su descripción física; NUNCA va una foto de referencia); `false` = escena sin él.
-  El presentador ya aparece en el avatar la mitad del video: usá `cara: true` sólo en el gancho y en pocas fotos más (≤ 15 %).
+- `pedidos = [{"id":"p001","cara":true,"prompt":{…JSON…}}]` (`id` = el id del plano en `planos.json`; las fotos de pantalla partida vienen ahí con su propio id). `cara: true` = sale el presentador (fotos.py le agrega su descripción y su cara, para que coincida con el avatar); `false` = escena sin él.
+  El presentador ya aparece en el avatar la mitad del video: usá `cara: true` en el gancho y en otras fotos clave: **mínimo 3 por video**, hasta el 15 % y nunca más de 15. Si una sale con otra cara, rehacela con `cara: true`; no la cambies por una sin él.
   Lo demás: manos, objetos, lugares, otras personas.
 - Si el usuario eligió **"Las hago yo"** (Configuración), fotos.py NO gasta: escribe `fotos/PROMPTS.md` y espera a que él las suba desde el panel. Corrélo igual en segundo plano, seguí con lo demás y esperá con `esperar.py --cuenta "fotos/*.*" N`. No le pidas que use otro programa ni le expliques: el panel ya le muestra la lista.
 - El Batch tarda (de minutos a un par de horas): **pedí temprano y en pocos pedidos grandes**, no de a una. Mientras tanto, seguí.
@@ -93,6 +93,19 @@ gpt-image puede hacer cualquier cosa. **4 a 6 por video**, en los momentos clave
 - **Cómo pedirla:** por `fotos.py`, como cualquier foto. El `type` dice QUÉ es + la cláusula de realismo. Texto legible: escribí el texto EXACTO entre comillas, corto y en el idioma del video, y en `avoid` poné `"misspelled words, extra text, watermark"`. Con `"detalle_narrativo"` la compuerta sólo te exige `type`, `subject`, `avoid` y la cláusula. Con el presentador: `"cara": true` (nunca foto de referencia).
 - Revisalas con Read: repedí si hay palabras mal escritas, cambia la cara, manos rotas o se ve "de stock". No dos seguidas. Pueden ir en el lado libre de una pantalla partida.
 
+## 4c. Modo Ahorro — sólo si el brief dice MODO AHORRO
+Clips reales de stock (gratis) en casi todo el video y pocas fotos, donde un clip no alcanza.
+```
+python {APP}/tools/stock.py <carpeta> <carpeta>/stock_01.json > <carpeta>/clips/stock.log 2>&1 &
+```
+- Antes creá la carpeta `clips/`. `stock_01.json = [{"id":"p003","buscar":["senior hands kneading dough","kneading bread close up"]}]` (`id` = el del plano). De 1 a 3 búsquedas por plano, de la más precisa a la más general.
+- **Máximo 20 fotos con `fotos.py` en todo el video** (la compuerta lo controla): las 3 del gancho, mínimo 3 con `cara: true`, 4 creativas (§4b), las de pantalla partida (siempre foto: usá pocas) y lo específico que un clip no puede mostrar (un objeto puntual, un papel con texto, este personaje haciendo algo). **Todo lo demás, clip.** Cada plano va con clip o con foto, nunca sin nada.
+- **Búsquedas en inglés, 2 a 5 palabras, sólo lo que se VE:** objeto + acción + lugar. "pouring tea into cup", "old man walking in park", "rain on window". Nunca ideas abstractas ("health", "success"), títulos, marcas ni frases del guion traducidas.
+- Si el video habla de alguien mayor, que la búsqueda lo diga ("senior", "elderly"). Preferí manos, objetos, naturaleza, lugares y gente de espaldas o a lo lejos: nadie debe parecer otro presentador hablando a cámara.
+- Armá hojas de 12 con `hoja.py` (acepta videos) y miralas. Cambiá sólo lo que no tenga NADA que ver con la frase o muestre una marca grande o un cartel en otro idioma: borrá `clips/<id>.mp4` y pedí ese id con otra búsqueda, todas juntas en UNA sola ronda. No busques el clip perfecto.
+- Los ids que Pexels no tenga quedan en `clips/_sin_stock.json`: probá otra búsqueda una vez; si tampoco, hacelos con `fotos.py` (no cuentan para el tope).
+- Con clips y fotos listos, `planos.py <carpeta> --shots` toma cada plano de donde esté. El render recorta y funde los clips solo.
+
 ## 5. Armado (herramientas del Estudio: no las copies ni las edites)
 ```
 python {APP}/tools/render.py <carpeta> [--limit 10]
@@ -114,7 +127,7 @@ python {APP}/tools/sonidos.py <carpeta> <carpeta>/sfx_pedidos.json --tomas 3 > <
 - Si `sonidos.py` no trae nada, seguí sin efectos y anotalo en REPORTE.md: nunca frena el video.
 
 ## 6. Control de calidad (no frena)
-- `python {APP}/tools/validar.py <carpeta> --etapa guion|fotos|render|final --min <minutos>`. Sólo frena con ✗ (video roto, sin audio, desincronizado, no arranca con el avatar, avatar congelado, hueco negro > 0,5 s, fotos repetidas, menciones de IA, sin título).
+- `python {APP}/tools/validar.py <carpeta> --etapa guion|fotos|render|final --min <minutos>`. Sólo frena con ✗ (guion fuera de largo, video roto, sin audio, desincronizado, no arranca con el avatar, avatar congelado, hueco negro > 0,5 s, fotos repetidas, menciones de IA, sin título).
 - En fotos/render/final mirá la hoja con Read y escribí en `gates/<etapa>_auto.txt` qué miraste y qué arreglaste. Después SEGUÍ.
 - **Revisor final:** con `final.mp4` listo, `python {APP}/tools/revisor.py <carpeta>`. Deja los cuadros en `qc/f_*.jpg`, mide los huecos negros y mira con visión si hay fallas claras (cara deforme, glitch del avatar, marca de agua, foto repetida). Lo que encuentra queda en `gates/correcciones.txt`: aplicalo, anotalo en `gates/correcciones_hechas.txt`, volvé a armar y corrélo una vez más. Máximo 2 revisiones. Si algo de eso no se puede arreglar, anotalo en REPORTE.md y SEGUÍ.
 - Si el usuario te escribe correcciones en el chat, aplicalas antes del armado final.

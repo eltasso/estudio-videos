@@ -1,0 +1,199 @@
+[
+ {
+  "op": "cli_etiqueta",
+  "para": "ingredient, hidden in the label, what it really contains, read the fine print",
+  "ficha": "glass bottle with the photo on its label; a light beam scans it and on the golpe rips one line out as a big tag. Golpe = the ingredient, 1-2 words.",
+  "estilos": [
+   "clinico",
+   "plano",
+   "alarma",
+   "papel"
+  ],
+  "fotos": [
+   1,
+   1
+  ],
+  "var": [
+   "a",
+   "b"
+  ]
+ },
+ {
+  "op": "cli_sello",
+  "para": "verdict, approved, banned, proven, rejected",
+  "ficha": "a heavy rubber stamp drops on a printed photo and leaves the golpe in ink. Var b greys the photo out. Golpe = 1-2 words.",
+  "estilos": [
+   "clinico",
+   "plano",
+   "alarma",
+   "papel"
+  ],
+  "fotos": [
+   1,
+   2
+  ],
+  "var": [
+   "a",
+   "b"
+  ]
+ },
+ {
+  "op": "cli_cohorte",
+  "para": "study, patients, groups, most people, only one of them",
+  "ficha": "crowd of little figures on a grid; on the golpe it splits in two groups under hanging photos and one group lights up. Var uno: one figure steps forward.",
+  "estilos": [
+   "clinico",
+   "plano",
+   "alarma",
+   "papel"
+  ],
+  "fotos": [
+   1,
+   2
+  ],
+  "var": [
+   "dos",
+   "uno"
+  ],
+  "datos": {
+   "a": "texto:16?",
+   "b": "texto:16?",
+   "gana": "opcion:izq|der?"
+  }
+ },
+ {
+  "op": "cli_anillo",
+  "para": "routine, daily cycle, steps that repeat, it all comes back",
+  "ficha": "ring of 3-6 round photos; a light travels and turns each on at its word; the golpe closes the circle inside.",
+  "estilos": [
+   "clinico",
+   "plano",
+   "alarma",
+   "papel"
+  ],
+  "fotos": [
+   1,
+   6
+  ],
+  "datos": {
+   "filas": {
+    "lista": {
+     "t": "texto:14?",
+     "en": "palabra",
+     "foto": "foto?"
+    },
+    "min": 3,
+    "max": 6
+   }
+  }
+ },
+ {
+  "op": "cli_muro",
+  "para": "barrier, protection, blocked; or breaking through, it falls apart",
+  "ficha": "var sube: bricks rise over the photo, last one lands on the golpe with the word on the wall. Var cae: wall made of photo 1 explodes showing photo 2.",
+  "estilos": [
+   "clinico",
+   "plano",
+   "alarma",
+   "papel"
+  ],
+  "fotos": [
+   1,
+   2
+  ],
+  "var": [
+   "sube",
+   "cae"
+  ]
+ },
+ {
+  "op": "cli_corte",
+  "para": "goes deep, under the surface, layers, it reaches the",
+  "ficha": "3D block cut open with the photo on top; a drop sinks layer by layer, each named at its word; the golpe names the deepest layer it hits. Do not repeat a layer label in the golpe.",
+  "estilos": [
+   "clinico",
+   "plano",
+   "alarma",
+   "papel"
+  ],
+  "fotos": [
+   1,
+   1
+  ],
+  "datos": {
+   "capas": {
+    "lista": {
+     "t": "texto:18",
+     "en": "palabra"
+    },
+    "min": 1,
+    "max": 3
+   }
+  }
+ },
+ {
+  "op": "cli_rayos",
+  "para": "what you cannot see, inside, in reality, behind appearances",
+  "ficha": "a magnifier searches photo 1 and through its glass shows photo 2; on the golpe the glass swallows the whole frame.",
+  "estilos": [
+   "clinico",
+   "plano",
+   "alarma",
+   "papel"
+  ],
+  "fotos": [
+   2,
+   2
+  ]
+ },
+ {
+  "op": "cli_balanza",
+  "para": "compare two things, which one wins, worth more, weighs more",
+  "ficha": "balance scale with a photo on each pan; on the golpe one side crashes down and the other greys out.",
+  "estilos": [
+   "clinico",
+   "plano",
+   "alarma",
+   "papel"
+  ],
+  "fotos": [
+   2,
+   2
+  ],
+  "datos": {
+   "a": "texto:14?",
+   "b": "texto:14?",
+   "gana": "opcion:izq|der?",
+   "en_a": "palabra?",
+   "en_b": "palabra?"
+  }
+ },
+ {
+  "op": "cli_frascos",
+  "para": "how much each one has, amounts, ranking, too much of one",
+  "ficha": "2-4 glass jars with photo labels fill at their word; on the golpe the key jar overflows and the rest go grey.",
+  "estilos": [
+   "clinico",
+   "plano",
+   "alarma",
+   "papel"
+  ],
+  "fotos": [
+   2,
+   4
+  ],
+  "datos": {
+   "filas": {
+    "lista": {
+     "t": "texto:14?",
+     "en": "palabra",
+     "nivel": "opcion:alto|medio|bajo?",
+     "foto": "foto?"
+    },
+    "min": 2,
+    "max": 4
+   },
+   "clave": "num:0:3?"
+  }
+ }
+]
