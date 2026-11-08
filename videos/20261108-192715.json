@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794177872.9200075,
+ "actualizado": 1794177935.9212298,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -35,7 +35,7 @@
    "k": "fotos",
    "n": "Fotos",
    "st": "active",
-   "info": "79 fotos"
+   "info": "69 fotos"
   },
   {
    "k": "armado",
@@ -51,113 +51,21 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0666,
+  "deepseek": 0.0767,
   "gpt": 0.1711,
   "gpt_img": 78,
   "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.2954
+  "total": 0.3055
  },
  "eventos": [
   {
    "k": "res",
-   "t": "[imagen]"
+   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
   },
   {
    "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/fotos/p005.png\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_fotos_B.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/fotos/p018.png\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_fotos_C.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_fotos_D.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_fotos_E.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_fotos_F.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_fotos_G.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/fotos/s16.png\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/refs/avatar.png\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/fotos/p047.png\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "ai",
-   "t": "Detecté fotos con texto en inglés (s01, s07, s15, s16, p018, p043) y los tres retratos del presentador no coinciden con la cara del avatar. Van todas a la única ronda de rehechas."
-  },
-  {
-   "k": "tool",
-   "t": " dict(id=\"p018\",\n  subj=\"a close-up of a handwritten note in Spanish propped against an empty terracotta pot, beside a bag of soil\",\n  moment=\"The note explains the volume trick in one line and is propped against the empty pot so it can be read at a glance, the video's 'something to do today' turned into a card.\",\n  action=\"a thumb holds the paper flat against the dusty pot while the other hand re"
+   "t": " dict(id=\"p047\",\n  subj=\"a dirty hand giving a thumbs-up over a black seedling tray on the bench\",\n  moment=\"The thumb comes up right over the seedling tray, the like-and-subscribe moment before the last point; the hand still has soil under the nail and the gesture is a bit awkward.\",\n  action=\"the thumb rises while the other fingers stay curled against the tray edge, wrist turning to the light\",\n"
   },
   {
    "k": "res",
@@ -165,7 +73,7 @@
   },
   {
    "k": "tool",
-   "t": " dict(id=\"p029\",\n  subj=\"two weathered hands lifting a black seedling tray off a bench, palms underneath\",\n  moment=\"Both hands lift the tray at chest height as if weighing it, the invitation for the viewer to do the same test with their own tray; the gesture is the whole instruction.\",\n  action=\"the palms tilt the tray slightly to feel its weight, fingers spread under the corners\",\n  props=[\"blac"
+   "t": " dict(id=\"p058\",\n  subj=\"an over-the-shoulder view of a man in a flat cap and canvas apron holding an open notebook in the shed\",\n  moment=\"Seen from behind, he holds a worn notebook of viewer questions open on the bench, the closing invitation to write below; the notebook is full of other people's garden questions.\",\n  action=\"his thumb keeps a page open while the other hand lifts a pencil from b"
   },
   {
    "k": "res",
@@ -173,11 +81,103 @@
   },
   {
    "k": "tool",
-   "t": " dict(id=\"p043\",\n  subj=\"an open lined notebook with a pencil drawing of a tomato stem and hand-written notes in Spanish\",\n  moment=\"A hand draws the burial line on a sketch of a tomato stem, with the ruler laid on the page and the depth written beside it in Spanish; the drawing makes the measure stick.\",\n  action=\"a pencil draws a horizontal line across the stem while the ruler keeps it straight,"
+   "t": "  subj=\"an open lined notebook on a potting bench with five hand-written steps in Spanish: '1. Sacar el pan entero', '2. Regar antes', '3. Sombra dos días', '4. Enterrar el tallo', '5. Tierra a 15 grados'\",\n  moment=\"The old notebook is open at a page with five numbered steps written in Spanish, the whole promise of the video on one hand-written page; the pencil is still resting on the last line.\""
   },
   {
    "k": "res",
    "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "  subj=\"three phone photos taped to a wooden board showing the pot test, with hand-written Spanish labels 'PESA', 'LEVANTA' and 'DEDO 3 cm'\",\n  moment=\"Three small photos show the same pot on a scale, lifted by one hand, and a finger in the soil, with labels in Spanish; it is the test turned into a simple visual recipe.\",\n  action=\"a hand presses the last taped photo flat, the other still holding "
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": " dict(id=\"s15\",\n  subj=\"a wall calendar in Spanish with the month 'SEPTIEMBRE' and the days 15 to 21 circled in pencil\",\n  moment=\"A finger taps the middle of September on a wall calendar, the date the soil finally warms in this zone; the pencilled circle has been traced more than once.\",\n  action=\"the fingertip rests on the circled days while the other hand holds the calendar page flat\",\n  props="
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": " dict(id=\"s16\",\n  subj=\"hands writing in a notebook headed 'Preguntas de los suscriptores' in Spanish, next to a phone with Spanish comments on screen\",\n  moment=\"A hand writes a viewer's question in a notebook while the phone beside it shows a list of comments in Spanish, the bridge between the video and the people watching; the pen is mid-word.\",\n  action=\"the pen finishes a line while the other"
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "CARA = set()   # sin fotos del presentador: la cara la da el avatar (evita otra cara distinta)"
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "redo_ids = {\"s01\", \"p019\", \"p018\", \"p029\", \"p043\", \"p047\", \"p058\", \"s07\", \"s15\", \"s16\"}"
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python prompts_build.py && python -c \"\nimport json\nfor p in json.load(open('pedidos_redo.json',encoding='utf8')):\n    print(p['id'], 'cara=',p['cara'])\n\" && ps aux | grep -c \"[f]otos.py\""
+  },
+  {
+   "k": "res",
+   "t": "Exit code 2\npython: can't open file '/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/fotos/prompts_build.py': [Errno 2] No such file or directory"
+  },
+  {
+   "k": "tool",
+   "t": "cd /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los && python prompts_build.py && python -c \"\nimport json\nfor p in json.load(open('pedidos_redo.json',encoding='utf8')):\n    print(p['id'], 'cara=',p['cara'])\n\" && ps aux | grep -c \"[f]otos.py\""
+  },
+  {
+   "k": "res",
+   "t": "escenas: 78 · pedidos_all: 79 · test: 9 · redo: 10\np018 cara= False\np019 cara= False\np029 cara= False\ns07 cara= False\np043 cara= False\np047 cara= False\np058 cara= False\ns15 cara= False\ns16 cara= False\ns01 cara= False\n2"
+  },
+  {
+   "k": "tool",
+   "t": "ps aux | grep \"[f]otos.py\" | head; echo ---; tail -5 fotos/fotos_all.log; echo ---; cat fotos/_fotos.lock 2>/dev/null"
+  },
+  {
+   "k": "res",
+   "t": "Exit code 1\nroot        3557  0.0  0.0  12676  5812 ?        Ss   22:28   0:00 sudo -n -H -u sesion -- env -i ESTUDIO_DATA=/opt/estudio/datos LANG=C.UTF-8 GITHUB_SERVER_URL=https://github.com GITHUB_REPOSITORY=eltasso/estudio-videos PATH=/opt/hostedtoolcache/node/20.20.2/x64/bin:/opt/hostedtoolcache/Python/3.11.18/x64/bin:/opt/hostedtoolcache/Python/3.11.18/x64:/snap/bin:/home/runner/.local/bin:/o"
+  },
+  {
+   "k": "tool",
+   "t": "ls -la fotos/_fotos.lock 2>&1; echo \"---\"; grep -E \"FIN|batch|✗\" fotos/fotos_all.log | tail -5"
+  },
+  {
+   "k": "res",
+   "t": "ls: cannot access 'fotos/_fotos.lock': No such file or directory\n---\n22:42:04 batch e6421778: in_progress 56/69\n22:42:34 batch e6421778: in_progress 65/69\n22:43:04 batch e6421778: completed 69/69\n22:43:11 ✓ batch e6421778: 69 fotos bajadas, 0 fallidas (US$0.151)\n22:43:11 FIN: 79/79 fotos en fotos/ (4 min)"
+  },
+  {
+   "k": "tool",
+   "t": "rm -f fotos/p018.png fotos/p019.png fotos/p029.png fotos/p043.png fotos/p047.png fotos/p058.png fotos/s01.png fotos/s07.png fotos/s15.png fotos/s16.png && nohup python /opt/estudio/repo/motor/tools/fotos.py . pedidos_redo.json > fotos/fotos_redo.log 2>&1 & echo \"REDO PID $!\"; sleep 8; tail -5 fotos/fotos_redo.log"
+  },
+  {
+   "k": "res",
+   "t": "REDO PID 9961\n22:45:11 → batch batch_6af0fb77441881909a9d34c224448251 · 10 fotos · sin referencia · low 1088x608\n22:45:11 batch 24448251: validating 0/0"
+  },
+  {
+   "k": "tool",
+   "t": "tail -6 avatar/it.log"
+  },
+  {
+   "k": "res",
+   "t": "22:36:37 InfiniteTalk: 43 ventanas · reel 307.1 s · 1 llamada\n22:36:43 RUN 9e9c792b-24be-4cdb-b374-81694840f916-u2\n22:37:13 estado: IN_QUEUE"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 79 --max 540"
   }
  ],
  "maquinas": 1,
