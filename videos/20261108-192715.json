@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794176918.6647792,
+ "actualizado": 1794176981.5591457,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -51,61 +51,133 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0041,
+  "deepseek": 0.0109,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0041
+  "total": 0.0109
  },
  "eventos": [
   {
-   "k": "user",
-   "t": "Hacé este video completo de punta a punta, solo, sin preguntar y sin frenar. Tus herramientas están en el KIT del system prompt. Este es el brief entero (también quedó en /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/BRIEF.md por si lo necesitás releer después de una compactación):\n\n# BRIEF — Trasplante de tomate: por qué se caen los plantines al pasarlos · Don Genaro\n\nHacé un"
-  },
-  {
-   "k": "ai",
-   "t": "I'll start by examining the workspace and the brief."
-  },
-  {
    "k": "tool",
-   "t": "ls -la /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/ && echo \"---REFS---\" && ls -la /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/refs/ 2>/dev/null"
+   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/validar.py\"}"
   },
   {
    "k": "res",
-   "t": "total 60\ndrwxrwxrwx+ 6 runner runner 4096 Nov  8 22:28 .\ndrwxrwxrwx+ 3 runner runner 4096 Nov  8 22:28 ..\n-rw-rw-rw-+ 1 runner runner 8217 Nov  8 22:28 BRIEF.md\ndrwxrwxrwx+ 2 runner runner 4096 Nov  8 22:28 avatar\ndrwxrwxrwx+ 2 runner runner 4096 Nov  8 22:28 fotos\ndrwxrwxrwx+ 2 runner runner 4096 Nov  8 22:28 refs\ndrwxrwxrwx+ 2 runner runner 4096 Nov  8 22:28 voz\n---REFS---\ntotal 3972\ndrwxrwxrwx+"
+   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"Validador automático de un video DeepSeek. Uso:\n3\t   python <APP>/tools/validar.py <carpeta> --etapa guion|fotos|render|final [--min 15]\n4\tSale con código 1 SÓLO con errores importantes (✗): video roto o vacío, sin audio, desincronizado con la voz, no arranca\n5\t   con el avatar, avatar congelado, huecos negros > 0,5 s, menciones de IA, sin título. Todo lo demás es av"
   },
   {
    "k": "tool",
-   "t": "ls /opt/estudio/repo/motor/tools/"
+   "t": "{\"subject\": \"Escribir guion ~10 min y validar\", \"description\": \"guion.txt en español, Don Genaro, ~10 min, gancho, prueba interactiva min 4, like/sub, cierre; validar --etapa guion\", \"activeForm\": \"Escribiendo el guion\"}"
   },
   {
    "k": "res",
-   "t": "_cfg.py\nassemble.py\navatar_it.py\nespera.py\nesperar.py\nextrema.py\nfiltro_log.py\nfotos.py\nguard.py\nhoja.py\nplanos.py\nrender.py\nrevisor.py\nsonidos.py\ntiempos.py\nvalidar.py\nvoz.py"
+   "t": "Task #1 created successfully: Escribir guion ~10 min y validar"
   },
   {
    "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/BRIEF.md\"}"
+   "t": "{\"subject\": \"Generar voz y tiempos\", \"description\": \"voz.py en segundo plano, luego tiempos.py es → captions.json\", \"activeForm\": \"Generando voz y tiempos\"}"
   },
   {
    "k": "res",
-   "t": "1\t# BRIEF — Trasplante de tomate: por qué se caen los plantines al pasarlos · Don Genaro\n2\t\n3\tHacé un video terminado, sin preguntar nada y sin frenar: `/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/final.mp4` + `/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/REPORTE.md` + `/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/meta.json`. Traba"
+   "t": "Task #2 created successfully: Generar voz y tiempos"
   },
   {
    "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/refs/canal.json\"}"
+   "t": "{\"subject\": \"Plan de avatar y planos\", \"description\": \"avatar_ranges.json (~50%, ventanas 3-6s, primera startMs 0), planos.py → planos.json\", \"activeForm\": \"Armando el plan de ventanas y planos\"}"
   },
   {
    "k": "res",
-   "t": "1\t{\n2\t \"nombre\": \"Don Genaro\",\n3\t \"idioma\": \"es\",\n4\t \"presentador\": \"Don Genaro, a heavyset Argentine man in his late sixties, round weathered face, thick grey beard and short grey hair, warm dark eyes with deep crow's feet, bushy grey eyebrows, wearing a faded navy flat cap, a worn brown corduroy shirt under a canvas work apron, a small folding knife on a leather cord and soil under his fingernai"
+   "t": "Task #3 created successfully: Plan de avatar y planos"
   },
   {
    "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/refs/voz.txt\"}"
+   "t": "{\"subject\": \"Generar fotos del b-roll\", \"description\": \"6 de prueba + 3 variantes p001, hoja, resto en pedidos grandes, rehechas, planos --shots\", \"activeForm\": \"Generando fotos\"}"
   },
   {
    "k": "res",
-   "t": "1\tY otros, años después, vieron lo mismo con el fresco. La de la madrugada se arruinaba mucho más. Si la vas a usar ya, cortala cuando quieras. Pero si es para dejarla en el vaso unos días o para llevarle a alguien a la tardecita. Eso sí, en la heladera no te salva ninguna hora. Más de 60 años cortándola tempranito y orgulloso. Y te cuento de Don Aurelio."
+   "t": "Task #4 created successfully: Generar fotos del b-roll"
+  },
+  {
+   "k": "tool",
+   "t": "{\"subject\": \"Avatar InfiniteTalk\", \"description\": \"avatar_it.py 1 sola llamada en segundo plano\", \"activeForm\": \"Generando avatar\"}"
+  },
+  {
+   "k": "res",
+   "t": "Task #5 created successfully: Avatar InfiniteTalk"
+  },
+  {
+   "k": "tool",
+   "t": "{\"subject\": \"Sonidos, render, assemble, QC final\", \"description\": \"sonidos.py + cues.json, render prueba + completo, assemble, revisor, validar final, meta.json, REPORTE.md\", \"activeForm\": \"Renderizando y cerrando QC\"}"
+  },
+  {
+   "k": "res",
+   "t": "Task #6 created successfully: Sonidos, render, assemble, QC final"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/voz.py\"}"
+  },
+  {
+   "k": "res",
+   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"Voz con el CLON de la voz del canal (Fish Audio). Uso (en segundo plano, con log):\n3\t   python <APP>/tools/voz.py <carpeta_del_video> > <carpeta>/voz/voz.log 2>&1\n4\tLee <carpeta>/guion.txt y la muestra de voz del canal en <carpeta>/refs/voz.wav (+ refs/voz.txt = lo que se dice en la muestra).\n5\tParte el guion en bloques de ~2500 caracteres, genera 3 a la vez, rehace "
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/tiempos.py\"}"
+  },
+  {
+   "k": "res",
+   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"Tiempos POR PALABRA de la voz (Groq whisper GRATIS si hay clave \"groq\"; si no, OpenAI whisper-1). Uso:\n3\t   python <APP>/tools/tiempos.py <carpeta_del_video> [idioma: es|en|pt…]\n4\tLee voz/master.wav y escribe captions.json = [{\"text\":\" palabra\",\"startMs\":1234,\"endMs\":1500}, …].\n5\tCosto: US$0,006 por minuto de audio (queda anotado en gasto.jsonl).\"\"\"\n6\timport json, os"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/esperar.py\"}"
+  },
+  {
+   "k": "res",
+   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"HERRAMIENTA DEL ESTUDIO: espera UNA sola vez hasta que pase algo (en vez de sleep + ls + tail una y otra vez).\n3\t   python <APP>/tools/esperar.py --log <archivo.log> [--busca \"EXIT|FIN|✓|Traceback|Error\"]   termina cuando el log tiene esa palabra\n4\t   python <APP>/tools/esperar.py --existe <archivo>                                          termina cuando el archivo e"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/hoja.py\"}"
+  },
+  {
+   "k": "res",
+   "t": "1\t# Hoja de contacto SIN texto (ffmpeg en Windows suele no tener fontconfig: drawtext revienta).\n2\t#   python <APP>/tools/hoja.py <salida.jpg> <img_o_video> [<img_o_video> …]   (hasta 12, grilla 4x3)\n3\t# Acepta fotos y videos (de un video toma el cuadro del medio). Después mirala con Read.\n4\timport os, subprocess, sys, tempfile\n5\t\n6\tout, items = sys.argv[1], sys.argv[2:14]\n7\tif not items: sys.exit"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/render.py\"}"
+  },
+  {
+   "k": "res",
+   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"HERRAMIENTA DEL ESTUDIO (no la copies ni la edites): python <APP>/tools/render.py <carpeta_del_video> [--limit N]\n3\tLee <carpeta>/shots_timed.json  = [{\"id\":\"b01_gancho\",\"startMs\":0,\"endMs\":3200}, ...]  (id = nombre sin extensión de una foto o clip en fotos/, clips/ o avatar/frames/)\n4\t     <carpeta>/avatar_ranges.json = [{\"file\":\"avatar/A1.mp4\",\"frame\":\"avatar/frame"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/assemble.py\"}"
+  },
+  {
+   "k": "res",
+   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"HERRAMIENTA DEL ESTUDIO (no la copies ni la edites): python <APP>/tools/assemble.py <carpeta_del_video>\n3\tUne segments/ (con los fundidos de xf.json) + voz/master.wav + SFX de cues.json -> final.mp4 (1920x1080 30fps, audio ESTÉREO AAC 192k).\n4\tcues.json = [{\"file\":\"tela.mp3\",\"t\":171100,\"gain\":0.07,\"fade\":0.4}, ...]  (archivos en <carpeta>/sfx/; t en ms; gain 0.035-0."
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/sonidos.py\"}"
+  },
+  {
+   "k": "res",
+   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"EFECTOS DE SONIDO gratis (Mixkit: licencia libre, uso comercial, sin atribución y SIN clave). Baja SÓLO los que usa este video.\n3\t   python <APP>/tools/sonidos.py <carpeta> <pedidos.json> [--tomas 3]\n4\tpedidos.json = [{\"id\":\"agua\",\"tags\":[\"water\",\"splash\"],\"q\":\"water pour\",\"min\":0.5,\"max\":6}, …]\n5\t   id = nombre del archivo (sfx/<id>.mp3 y alternativas <id>_2, <id>_3"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/repo/motor/tools/revisor.py\"}"
+  },
+  {
+   "k": "res",
+   "t": "1\t# -*- coding: utf-8 -*-\n2\t\"\"\"REVISOR FINAL (no frena): saca cuadros de final.mp4 y los mira con visión (deepseek-flash, menos de US$0,01 por video, con tu clave de DeepSeek).\n3\t   python <APP>/tools/revisor.py <carpeta>\n4\t1. Deja qc/f_001.jpg, f_002.jpg… (un cuadro cada 30 s) y qc/final_info.json. Mide los huecos negros ≥ 0,5 s (sin IA).\n5\t2. Busca fallas claras: cara o cuerpo deformes, glitch d"
   }
  ],
  "maquinas": 1,
