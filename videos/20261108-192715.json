@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794177998.833122,
+ "actualizado": 1794178061.6719296,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -34,14 +34,14 @@
   {
    "k": "fotos",
    "n": "Fotos",
-   "st": "active",
-   "info": "69 fotos"
+   "st": "done",
+   "info": "79 fotos"
   },
   {
    "k": "armado",
    "n": "Armado",
-   "st": "pending",
-   "info": ""
+   "st": "active",
+   "info": "10 segmentos"
   },
   {
    "k": "qc",
@@ -51,102 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0767,
-  "gpt": 0.1711,
-  "gpt_img": 78,
+  "deepseek": 0.083,
+  "gpt": 0.1941,
+  "gpt_img": 88,
   "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.3055
+  "total": 0.3348
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": " dict(id=\"p047\",\n  subj=\"a dirty hand giving a thumbs-up over a black seedling tray on the bench\",\n  moment=\"The thumb comes up right over the seedling tray, the like-and-subscribe moment before the last point; the hand still has soil under the nail and the gesture is a bit awkward.\",\n  action=\"the thumb rises while the other fingers stay curled against the tray edge, wrist turning to the light\",\n"
-  },
-  {
-   "k": "res",
-   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": " dict(id=\"p058\",\n  subj=\"an over-the-shoulder view of a man in a flat cap and canvas apron holding an open notebook in the shed\",\n  moment=\"Seen from behind, he holds a worn notebook of viewer questions open on the bench, the closing invitation to write below; the notebook is full of other people's garden questions.\",\n  action=\"his thumb keeps a page open while the other hand lifts a pencil from b"
-  },
-  {
-   "k": "res",
-   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "  subj=\"an open lined notebook on a potting bench with five hand-written steps in Spanish: '1. Sacar el pan entero', '2. Regar antes', '3. Sombra dos días', '4. Enterrar el tallo', '5. Tierra a 15 grados'\",\n  moment=\"The old notebook is open at a page with five numbered steps written in Spanish, the whole promise of the video on one hand-written page; the pencil is still resting on the last line.\""
-  },
-  {
-   "k": "res",
-   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "  subj=\"three phone photos taped to a wooden board showing the pot test, with hand-written Spanish labels 'PESA', 'LEVANTA' and 'DEDO 3 cm'\",\n  moment=\"Three small photos show the same pot on a scale, lifted by one hand, and a finger in the soil, with labels in Spanish; it is the test turned into a simple visual recipe.\",\n  action=\"a hand presses the last taped photo flat, the other still holding "
-  },
-  {
-   "k": "res",
-   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": " dict(id=\"s15\",\n  subj=\"a wall calendar in Spanish with the month 'SEPTIEMBRE' and the days 15 to 21 circled in pencil\",\n  moment=\"A finger taps the middle of September on a wall calendar, the date the soil finally warms in this zone; the pencilled circle has been traced more than once.\",\n  action=\"the fingertip rests on the circled days while the other hand holds the calendar page flat\",\n  props="
-  },
-  {
-   "k": "res",
-   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": " dict(id=\"s16\",\n  subj=\"hands writing in a notebook headed 'Preguntas de los suscriptores' in Spanish, next to a phone with Spanish comments on screen\",\n  moment=\"A hand writes a viewer's question in a notebook while the phone beside it shows a list of comments in Spanish, the bridge between the video and the people watching; the pen is mid-word.\",\n  action=\"the pen finishes a line while the other"
-  },
-  {
-   "k": "res",
-   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "CARA = set()   # sin fotos del presentador: la cara la da el avatar (evita otra cara distinta)"
-  },
-  {
-   "k": "res",
-   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "redo_ids = {\"s01\", \"p019\", \"p018\", \"p029\", \"p043\", \"p047\", \"p058\", \"s07\", \"s15\", \"s16\"}"
-  },
-  {
-   "k": "res",
-   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/prompts_build.py has been updated successfully. (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "python prompts_build.py && python -c \"\nimport json\nfor p in json.load(open('pedidos_redo.json',encoding='utf8')):\n    print(p['id'], 'cara=',p['cara'])\n\" && ps aux | grep -c \"[f]otos.py\""
-  },
-  {
-   "k": "res",
-   "t": "Exit code 2\npython: can't open file '/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/fotos/prompts_build.py': [Errno 2] No such file or directory"
-  },
-  {
-   "k": "tool",
-   "t": "cd /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los && python prompts_build.py && python -c \"\nimport json\nfor p in json.load(open('pedidos_redo.json',encoding='utf8')):\n    print(p['id'], 'cara=',p['cara'])\n\" && ps aux | grep -c \"[f]otos.py\""
-  },
-  {
-   "k": "res",
-   "t": "escenas: 78 · pedidos_all: 79 · test: 9 · redo: 10\np018 cara= False\np019 cara= False\np029 cara= False\ns07 cara= False\np043 cara= False\np047 cara= False\np058 cara= False\ns15 cara= False\ns16 cara= False\ns01 cara= False\n2"
-  },
-  {
-   "k": "tool",
-   "t": "ps aux | grep \"[f]otos.py\" | head; echo ---; tail -5 fotos/fotos_all.log; echo ---; cat fotos/_fotos.lock 2>/dev/null"
-  },
   {
    "k": "res",
    "t": "Exit code 1\nroot        3557  0.0  0.0  12676  5812 ?        Ss   22:28   0:00 sudo -n -H -u sesion -- env -i ESTUDIO_DATA=/opt/estudio/datos LANG=C.UTF-8 GITHUB_SERVER_URL=https://github.com GITHUB_REPOSITORY=eltasso/estudio-videos PATH=/opt/hostedtoolcache/node/20.20.2/x64/bin:/opt/hostedtoolcache/Python/3.11.18/x64/bin:/opt/hostedtoolcache/Python/3.11.18/x64:/snap/bin:/home/runner/.local/bin:/o"
@@ -178,6 +90,94 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 79 --max 540"
+  },
+  {
+   "k": "res",
+   "t": "✓ hay 79 archivos (80 s)"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_redo.jpg fotos/s01.png fotos/s07.png fotos/s15.png fotos/s16.png fotos/p018.png fotos/p019.png fotos/p029.png fotos/p043.png fotos/p047.png fotos/p058.png"
+  },
+  {
+   "k": "res",
+   "t": "hoja: qc/hoja_redo.jpg (10 cuadros, 4x3)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_redo.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "ai",
+   "t": "Las 10 rehechas quedaron bien (texto en español y ninguna cara distinta). Cierro el plan de fotos y armo `shots_timed.json`."
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/planos.py . --shots && python /opt/estudio/repo/motor/tools/validar.py . --etapa fotos --min 10"
+  },
+  {
+   "k": "res",
+   "t": "✓ shots_timed.json: 59 planos, 59 fotos distintas (cero repetidas). Seguí con render.py.\nVALIDAR /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los · etapa fotos\n  ✓ guion: 1570 palabras (esperado 1105-1724 para 10 min)\n  ✓ fotos: 79 · 0 sin su prompt al lado (no salieron de tools/fotos.py)\n  ✓ fotos: 0 con prompt incompleto\nRESULTADO: OK"
+  },
+  {
+   "k": "tool",
+   "t": "Revisión visual de las fotos (hojas qc/hoja_fotos.jpg, A-G, y qc/hoja_redo.jpg).\n\nTanda de prueba (9): miré la hoja completa. p001_a elegida como p001 (mujer con cara de preocupación y 30 plantines caídos: se entiende sin audio y en chico). p002, p004, p010, p034 correctas. Se repidieron p019 (repetía el concepto de p002) y s01 (texto en inglés).\n\nLote completo (69): revisé las 7 hojas de 12. Enco"
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/gates/fotos_auto.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"taskId\": \"3\", \"status\": \"completed\"}"
+  },
+  {
+   "k": "res",
+   "t": "Updated task #3 status"
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/render.py . --limit 10 > render_test.log 2>&1 & echo \"RENDER TEST PID $!\""
+  },
+  {
+   "k": "res",
+   "t": "RENDER TEST PID 10424"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log render_test.log --busca \"hechos|Traceback|FALTA|ERR\" --max 420"
+  },
+  {
+   "k": "res",
+   "t": "✓ el log tiene 'hechos' (20 s):\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A39.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A40.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A41.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A42.mp4\nclips=102 frames=17298 (576.60s)\nhechos 10"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_render.jpg segments/0000.mp4 segments/0001.mp4 segments/0002.mp4 segments/0003.mp4 segments/0004.mp4 segments/0005.mp4 segments/0006.mp4 segments/0007.mp4 segments/0008.mp4 segments/0009.mp4"
+  },
+  {
+   "k": "res",
+   "t": "hoja: qc/hoja_render.jpg (10 cuadros, 4x3)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_render.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "tail -5 avatar/it.log; ps -p 4431 -o pid,etime,cmd= 2>/dev/null | head -3"
+  },
+  {
+   "k": "res",
+   "t": "22:36:37 InfiniteTalk: 43 ventanas · reel 307.1 s · 1 llamada\n22:36:43 RUN 9e9c792b-24be-4cdb-b374-81694840f916-u2\n22:37:13 estado: IN_QUEUE\n    PID     ELAPSED \n   4431       11:02 python /opt/estudio/repo/motor/tools/avatar_it.py ."
   }
  ],
  "maquinas": 1,
