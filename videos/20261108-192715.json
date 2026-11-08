@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794180595.3568556,
+ "actualizado": 1794180658.2349858,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -51,38 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1042,
+  "deepseek": 0.1064,
   "gpt": 0.1941,
   "gpt_img": 88,
   "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.356
+  "total": 0.3582
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log assemble.log --busca \"final:|FALLO|Traceback\" --max 420"
-  },
-  {
-   "k": "res",
-   "t": "✓ el log tiene 'final:' (175 s):\ntramo 1 listo\ntramo 2 listo\ntramo 3 listo\ntramo 4 listo\ntramo 5 listo\nfinal: ./final.mp4 576.600000 s"
-  },
-  {
-   "k": "tool",
-   "t": "tail -4 avatar/it.log; date; ffprobe -v error -show_entries format=duration,size -of default=nw=1 final.mp4"
-  },
-  {
-   "k": "res",
-   "t": "22:36:37 InfiniteTalk: 43 ventanas · reel 307.1 s · 1 llamada\n22:36:43 RUN 9e9c792b-24be-4cdb-b374-81694840f916-u2\n22:37:13 estado: IN_QUEUE\nSun Nov  8 23:01:35 UTC 2026\nduration=576.600000\nsize=304181092"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log avatar/it.log --busca \"clips cortados|⛔|FAILED|TIMED_OUT|CANCELLED\" --max 540"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · log: 22:37:13 estado: IN_QUEUE → hacé otra cosa útil y volvé a llamar"
-  },
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa render --min 10"
@@ -174,6 +150,30 @@
   {
    "k": "res",
    "t": "… sigue esperando tras 540 s · log: 23:17:53 estado: IN_PROGRESS → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log avatar/it.log --busca \"clips cortados|⛔|FAILED|TIMED_OUT|CANCELLED\" --max 540"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · log: 23:17:53 estado: IN_PROGRESS → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "for t in 120 240 330 420 500 560; do ffmpeg -v error -y -ss $t -i final.mp4 -frames:v 1 -vf scale=640:-2 qc/chk_$t.jpg; done; python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_chk.jpg qc/chk_120.jpg qc/chk_240.jpg qc/chk_330.jpg qc/chk_420.jpg qc/chk_500.jpg qc/chk_560.jpg"
+  },
+  {
+   "k": "res",
+   "t": "hoja: qc/hoja_chk.jpg (6 cuadros, 4x2)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_chk.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
   },
   {
    "k": "tool",
