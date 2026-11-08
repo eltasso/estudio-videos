@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794178061.6719296,
+ "actualizado": 1794178132.0861719,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -41,7 +41,7 @@
    "k": "armado",
    "n": "Armado",
    "st": "active",
-   "info": "10 segmentos"
+   "info": "55 segmentos"
   },
   {
    "k": "qc",
@@ -51,34 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.083,
+  "deepseek": 0.085,
   "gpt": 0.1941,
   "gpt_img": 88,
   "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.3348
+  "total": 0.3368
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "Exit code 1\nroot        3557  0.0  0.0  12676  5812 ?        Ss   22:28   0:00 sudo -n -H -u sesion -- env -i ESTUDIO_DATA=/opt/estudio/datos LANG=C.UTF-8 GITHUB_SERVER_URL=https://github.com GITHUB_REPOSITORY=eltasso/estudio-videos PATH=/opt/hostedtoolcache/node/20.20.2/x64/bin:/opt/hostedtoolcache/Python/3.11.18/x64/bin:/opt/hostedtoolcache/Python/3.11.18/x64:/snap/bin:/home/runner/.local/bin:/o"
-  },
-  {
-   "k": "tool",
-   "t": "ls -la fotos/_fotos.lock 2>&1; echo \"---\"; grep -E \"FIN|batch|✗\" fotos/fotos_all.log | tail -5"
-  },
-  {
-   "k": "res",
-   "t": "ls: cannot access 'fotos/_fotos.lock': No such file or directory\n---\n22:42:04 batch e6421778: in_progress 56/69\n22:42:34 batch e6421778: in_progress 65/69\n22:43:04 batch e6421778: completed 69/69\n22:43:11 ✓ batch e6421778: 69 fotos bajadas, 0 fallidas (US$0.151)\n22:43:11 FIN: 79/79 fotos en fotos/ (4 min)"
-  },
-  {
-   "k": "tool",
-   "t": "rm -f fotos/p018.png fotos/p019.png fotos/p029.png fotos/p043.png fotos/p047.png fotos/p058.png fotos/s01.png fotos/s07.png fotos/s15.png fotos/s16.png && nohup python /opt/estudio/repo/motor/tools/fotos.py . pedidos_redo.json > fotos/fotos_redo.log 2>&1 & echo \"REDO PID $!\"; sleep 8; tail -5 fotos/fotos_redo.log"
-  },
-  {
-   "k": "res",
-   "t": "REDO PID 9961\n22:45:11 → batch batch_6af0fb77441881909a9d34c224448251 · 10 fotos · sin referencia · low 1088x608\n22:45:11 batch 24448251: validating 0/0"
-  },
   {
    "k": "tool",
    "t": "tail -6 avatar/it.log"
@@ -178,6 +158,26 @@
   {
    "k": "res",
    "t": "22:36:37 InfiniteTalk: 43 ventanas · reel 307.1 s · 1 llamada\n22:36:43 RUN 9e9c792b-24be-4cdb-b374-81694840f916-u2\n22:37:13 estado: IN_QUEUE\n    PID     ELAPSED \n   4431       11:02 python /opt/estudio/repo/motor/tools/avatar_it.py ."
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/render.py . > render.log 2>&1 & echo \"RENDER PID $!\""
+  },
+  {
+   "k": "res",
+   "t": "RENDER PID 11071"
+  },
+  {
+   "k": "tool",
+   "t": "Revisión del render de prueba (render.py --limit 10, qc/hoja_render.jpg).\n\nMiré los 10 primeros segmentos: alternan el avatar (todavía con el cartel «Esperando avatar», porque InfiniteTalk está en cola) con las fotos del gancho.\n- p001 (mujer con los plantines caídos) entra justo después de la primera ventana.\n- p002, p003, p004, p005 se ven nítidas, con el movimiento de zoom y sin bordes negros.\n"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/gates/render_auto.txt (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log render.log --busca \"hechos|Traceback|FALLO\" --max 540"
   }
  ],
  "maquinas": 1,
