@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794180027.587968,
+ "actualizado": 1794180090.713159,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1035,
+  "deepseek": 0.1042,
   "gpt": 0.1941,
   "gpt_img": 88,
   "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.3553
+  "total": 0.356
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "ps -p 13923 -o pid,etime,cmd= 2>/dev/null; echo \"---log---\"; cat assemble.log; echo \"---files---\"; ls -la video_noaudio.mp4 xf_tmp/ 2>/dev/null | head; echo \"---avatar---\"; tail -3 avatar/it.log"
-  },
-  {
-   "k": "res",
-   "t": "    PID     ELAPSED \n  13923       08:06 python /opt/estudio/repo/motor/tools/assemble.py .\n---log---\n---files---\n-rw-rw-rw-+ 1 sesion sesion 180355120 Nov  8 22:58 video_noaudio.mp4\n\nxf_tmp/:\ntotal 444372\ndrwxrwxrwx+  2 sesion sesion      4096 Nov  8 22:53 .\ndrwxrwxrwx+ 11 runner runner      4096 Nov  8 22:53 ..\n-rw-rw-rw-+  1 sesion sesion 111753681 Nov  8 22:51 c000.mp4\n-rw-rw-rw-+  1 sesion se"
-  },
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --log assemble.log --busca \"final:|FALLO|Traceback\" --max 420"
@@ -174,6 +166,14 @@
   {
    "k": "res",
    "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/REPORTE.md (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log avatar/it.log --busca \"clips cortados|⛔|FAILED|TIMED_OUT|CANCELLED\" --max 540"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · log: 23:17:53 estado: IN_PROGRESS → hacé otra cosa útil y volvé a llamar"
   },
   {
    "k": "tool",
