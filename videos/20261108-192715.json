@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794179523.067159,
+ "actualizado": 1794179586.1451647,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -40,45 +40,25 @@
   {
    "k": "armado",
    "n": "Armado",
-   "st": "active",
+   "st": "done",
    "info": "final.mp4 · 9.6 min"
   },
   {
    "k": "qc",
    "n": "QC",
-   "st": "pending",
-   "info": ""
+   "st": "done",
+   "info": "REPORTE.md"
   }
  ],
  "costo": {
-  "deepseek": 0.1006,
+  "deepseek": 0.1035,
   "gpt": 0.1941,
   "gpt_img": 88,
   "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.3524
+  "total": 0.3553
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "Updated task #4 status"
-  },
-  {
-   "k": "tool",
-   "t": "{\"taskId\": \"6\", \"status\": \"in_progress\"}"
-  },
-  {
-   "k": "res",
-   "t": "Updated task #6 status"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log assemble.log --busca \"final:|FALLO|Traceback\" --max 480"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 480 s · log: (vacío) → hacé otra cosa útil y volvé a llamar"
-  },
   {
    "k": "tool",
    "t": "ps -p 13923 -o pid,etime,cmd= 2>/dev/null; echo \"---log---\"; cat assemble.log; echo \"---files---\"; ls -la video_noaudio.mp4 xf_tmp/ 2>/dev/null | head; echo \"---avatar---\"; tail -3 avatar/it.log"
@@ -178,6 +158,26 @@
   {
    "k": "res",
    "t": "[Parsed_volumedetect_0 @ 0x789c48002000] mean_volume: -17.0 dB\n[Parsed_volumedetect_0 @ 0x789c48002000] max_volume: -1.6 dB\n--- sin sfx (33-39s) ---\n[Parsed_volumedetect_0 @ 0x7b7aa8002000] mean_volume: -16.7 dB\n[Parsed_volumedetect_0 @ 0x7b7aa8002000] max_volume: -1.8 dB"
+  },
+  {
+   "k": "tool",
+   "t": "cat gasto.jsonl 2>/dev/null; echo \"---\"; ls -la final.mp4; du -sh fotos avatar segments 2>/dev/null"
+  },
+  {
+   "k": "res",
+   "t": "{\"t\": 1794177200.1065936, \"tag\": \"whisper\", \"usd\": 0.05766, \"seg\": 577}\n{\"t\": 1794177553.3422997, \"tag\": \"fotos_gpt\", \"usd\": 0.02037, \"n\": 9}\n{\"t\": 1794177791.7090046, \"tag\": \"fotos_gpt\", \"usd\": 0.15069, \"n\": 69}\n{\"t\": 1794178003.1410038, \"tag\": \"fotos_gpt\", \"usd\": 0.02306, \"n\": 10}\n---\n-rw-rw-rw-+ 1 sesion sesion 304181092 Nov  8 23:01 final.mp4\n98M\tfotos\n20M\tavatar\n158M\tsegments"
+  },
+  {
+   "k": "tool",
+   "t": "# Reporte — Trasplante de tomate: por qué se caen los plantines al pasarlos\n\n## Estado\nVideo terminado: `final.mp4` 1920x1080, 30 fps, H.264 + AAC, duración 9:36 (576,6 s), igual a la voz.\nGuion de 1.570 palabras en español rioplatense, voz clonada del canal, 43 ventanas de avatar (294 s, 51 % del video) y 76 planos de b-roll con fotos distintas.\n\n## Qué se hizo\n- **Guion** (1.570 palabras): ganch"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/REPORTE.md (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log avatar/it.log --busca \"clips cortados|⛔|FAILED|TIMED_OUT|CANCELLED\" --max 540"
   }
  ],
  "maquinas": 1,
