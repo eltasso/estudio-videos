@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794177426.5766003,
+ "actualizado": 1794177489.5416758,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -51,54 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.043,
+  "deepseek": 0.0464,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0577,
   "avatar": 0.0,
-  "total": 0.1007
+  "total": 0.1041
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "voz: clon creado en Fish, sin filtros (no se vuelve a clonar)\nvoz: 4 bloques · 8390 caracteres\ntotal 10208\ndrwxrwxrwx+ 2 runner runner    4096 Nov  8 22:30 .\ndrwxrwxrwx+ 6 runner runner    4096 Nov  8 22:30 ..\n-rw-rw-rw-+ 1 sesion sesion 3482336 Nov  8 22:30 blk_000.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 3506350 Nov  8 22:30 blk_001.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 3431857 Nov  8 22:30 blk"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe voz/master.wav --max 540"
-  },
-  {
-   "k": "res",
-   "t": "✓ existe voz/master.wav (50.9 MB, 115 s)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"taskId\": \"2\", \"status\": \"completed\"}"
-  },
-  {
-   "k": "res",
-   "t": "Updated task #2 status"
-  },
-  {
-   "k": "tool",
-   "t": "{\"taskId\": \"3\", \"status\": \"in_progress\"}"
-  },
-  {
-   "k": "res",
-   "t": "Updated task #3 status"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/tiempos.py . es"
-  },
-  {
-   "k": "res",
-   "t": "✓ captions.json: 1543 palabras en 9.6 min"
-  },
-  {
-   "k": "tool",
-   "t": "python plan_avatar.py . && python /opt/estudio/repo/motor/tools/planos.py ."
-  },
   {
    "k": "res",
    "t": "✓ avatar_ranges.json: 43 ventanas · 294 s de avatar (51 % de 577 s) · reel 307 s · 17 pantallas partidas\nhuecos >15 s sin avatar: ninguno\n✓ planos.json: 59 planos de b-roll (4.7 min de b-roll, 12.5 por minuto) + 17 fotos de pantalla partida · 43 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite."
@@ -178,6 +138,46 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/sonidos.py . sfx_pedidos.json --tomas 3 > sonidos.log 2>&1; tail -20 sonidos.log"
+  },
+  {
+   "k": "res",
+   "t": "ok agua: agua.mp3 (4 s, Pouring water to mug) · agua_2.mp3 (1 s, Pouring water) · agua_3.mp3 (1 s, Water bubble)\nok tierra: tierra.mp3 (5 s, Dirt debris falling)\nok viento: viento.mp3 (3 s, Transition windy swoosh) · viento_2.mp3 (3 s, Woosh wind) · viento_3.mp3 (2 s, Ending wind swoosh)\nok pajaros: pajaros.mp3 (2 s, Forest birds singing) · pajaros_2.mp3 (6 s, Birds chirping in the jungle) · pajar"
+  },
+  {
+   "k": "tool",
+   "t": "python -c \"\nimport json\nW=json.load(open('captions.json',encoding='utf8'))\nfor w in W:\n    t=w['text'].strip().lower().strip('.,¡!¿?')\n    if t in ('regado','regué','regar','viento','agua','litro','helada','sombra','maceta'):\n        print(w['startMs'], t)\n\" | head -40"
+  },
+  {
+   "k": "res",
+   "t": "18760 agua\n21360 regado\n73400 agua\n89280 agua\n119520 maceta\n141520 maceta\n152000 maceta\n158380 maceta\n175140 maceta\n202600 viento\n209300 regar\n218220 agua\n229680 agua\n237740 agua\n239200 sombra\n249840 agua\n263080 litro\n267080 sombra\n290460 maceta\n294000 agua\n301420 maceta\n376360 sombra\n394820 agua\n407880 viento\n475340 helada\n528360 sombra"
+  },
+  {
+   "k": "tool",
+   "t": "[\n {\"file\": \"agua.mp3\", \"t\": 21360, \"gain\": 0.05, \"fade\": 0.5},\n {\"file\": \"viento_2.mp3\", \"t\": 202600, \"gain\": 0.05, \"fade\": 0.6},\n {\"file\": \"pajaros_2.mp3\", \"t\": 237740, \"gain\": 0.035, \"fade\": 0.8},\n {\"file\": \"agua.mp3\", \"t\": 249840, \"gain\": 0.04, \"fade\": 0.6},\n {\"file\": \"agua_2.mp3\", \"t\": 263080, \"gain\": 0.045, \"fade\": 0.3},\n {\"file\": \"pajaros_3.mp3\", \"t\": 573420, \"gain\": 0.04, \"fade\": 0.6}\n]\n"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/cues.json (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "{\n \"title\": \"Trasplante de tomate: por qué se caen los plantines al pasarlos\",\n \"description\": \"Hola, gente de YouTube. En este video te cuento por qué se caen los plantines de tomate cuando los pasás al cantero y qué hago yo ahora para que no se me caigan. Me pasó muchas veces, y la primera fue la peor: cuarenta y dos plantines una mañana, y a la tarde casi todos con las hojas para abajo.\\n\\nLa c"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/meta.json (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "echo \"--- FOTOS ---\"; tail -8 fotos/fotos_test.log; ls fotos/*.png 2>/dev/null | wc -l; echo \"--- AVATAR ---\"; tail -5 avatar/it.log"
+  },
+  {
+   "k": "res",
+   "t": "--- FOTOS ---\n22:36:39 → batch batch_6af0f977031c8190b72252baa068fbe3 · 9 fotos · sin referencia · low 1088x608\n22:36:39 batch a068fbe3: validating 0/0\n0\n--- AVATAR ---\n22:36:37 InfiniteTalk: 43 ventanas · reel 307.1 s · 1 llamada\n22:36:43 RUN 9e9c792b-24be-4cdb-b374-81694840f916-u2\n22:37:13 estado: IN_QUEUE"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 9 --max 540"
   }
  ],
  "maquinas": 1,
