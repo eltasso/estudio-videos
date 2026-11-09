@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794186792.79856,
+ "actualizado": 1794186855.7694983,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,54 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1015,
+  "deepseek": 0.1099,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1525
+  "total": 0.1609
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_render.jpg (10 cuadros, 4x3)\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_render.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "ai",
-   "t": "El render de prueba se ve bien. Dejo anotado el control y lanzo el render completo en segundo plano (los tramos de avatar se rehacen solos cuando lleguen)."
-  },
-  {
-   "k": "tool",
-   "t": "df -h . | tail -1; nohup python /opt/estudio/repo/motor/tools/render.py . > render.log 2>&1 & echo \"RENDER_PID=$!\"; sleep 3; tail -3 render.log"
-  },
-  {
-   "k": "res",
-   "t": "/dev/root       145G   60G   85G  42% /\nRENDER_PID=17776"
-  },
-  {
-   "k": "tool",
-   "t": "CONTROL RENDER (prueba --limit 10)\n- Miré qc/hoja_render.jpg (10 cuadros de segments/0000-0009): el video abre con el avatar (foto fija con el cartel «Esperando avatar» porque los clips de InfiniteTalk todavía estaban corriendo), y justo después entra el gancho p001 (tomate con el culito negro en primer plano).\n- Los planos de b-roll se ven enteros, con movimiento suave y sin huecos negros. Clip d"
-  },
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gates/render_auto.txt (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa fotos --min 15 2>&1 | tail -30"
-  },
-  {
-   "k": "res",
-   "t": "VALIDAR /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue · etapa fotos\n  ✓ guion: 16161 caracteres, 3049 palabras (hacen falta 13500-17250 para 15 min: bien)\n  ✓ fotos: 17 · 0 sin su prompt al lado (no salieron de tools/fotos.py)\n  ✓ fotos: 0 con prompt incompleto\n  !  falta tu revisión visual de las fotos de prueba: mirá qc/hoja_fotos.jpg con Read y escribí gates/fotos_auto.txt "
-  },
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_fotos.jpg fotos/p001.png fotos/p005.png fotos/p006.png fotos/p011.png fotos/p024.png fotos/p030.png fotos/p036.png fotos/p050.png fotos/p077.png fotos/p098.png fotos/p099.png fotos/p103.png 2>&1 | tail -1; python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_fotos_split.jpg fotos/s01.png fotos/s02.png fotos/s03.png fotos/s04.png fotos/s05.png 2>"
@@ -174,6 +134,46 @@
   {
    "k": "ai",
    "t": "El render completo terminó (210 segmentos). El avatar sigue en RunPod; espero sus clips."
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa render --min 15 2>&1 | tail -30"
+  },
+  {
+   "k": "res",
+   "t": "VALIDAR /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue · etapa render\n  ✓ guion: 16161 caracteres, 3049 palabras (hacen falta 13500-17250 para 15 min: bien)\n  ✓ fotos: 17 · 0 sin su prompt al lado (no salieron de tools/fotos.py)\n  ✓ fotos: 0 con prompt incompleto\n  ✓ fotos: 6 imágenes creativas con detalle_narrativo (lo pedido: 4 a 6, KIT §4b)\n  ✓ render: movimiento al azar (pl"
+  },
+  {
+   "k": "tool",
+   "t": "python3 - <<'EOF'\nimport json\nP=json.load(open('plan.json',encoding='utf8'))\nprint(type(P), list(P)[:5] if isinstance(P,dict) else len(P))\nprint(json.dumps(P,ensure_ascii=False)[:600])\nEOF"
+  },
+  {
+   "k": "res",
+   "t": "<class 'dict'> ['voice_dur', 'segments']\n{\"voice_dur\": 1152.324, \"segments\": [{\"kind\": \"av\", \"t0\": 0.0, \"t1\": 5.08, \"file\": \"./avatar/espera/904497b045.jpg\"}, {\"kind\": \"foto\", \"t0\": 5.08, \"t1\": 10.94, \"file\": \"./fotos/p001.png\"}, {\"kind\": \"av\", \"t0\": 10.94, \"t1\": 16.1, \"file\": \"./avatar/espera/904497b045.jpg\"}, {\"kind\": \"clip\", \"t0\": 16.1, \"t1\": 22.08, \"file\": \"./clips/p002.mp4\"}, {\"kind\": \"av\", \""
+  },
+  {
+   "k": "tool",
+   "t": "python3 - <<'EOF'\nimport json\nP=json.load(open('plan.json',encoding='utf8'))['segments']\nfor s in P:\n    if 118 <= s['t0'] <= 132:\n        print(json.dumps(s,ensure_ascii=False))\nprint('---claves usadas---')\nks=set()\nfor s in P: ks.update(s.keys())\nprint(ks)\nprint('---split en avatar_ranges---')\nR=json.load(open('avatar_ranges.json',encoding='utf8'))\nfor r in R:\n    if 'foto' in r: print(json.dump"
+  },
+  {
+   "k": "res",
+   "t": "{\"kind\": \"av\", \"t0\": 120.62, \"t1\": 128.58, \"file\": \"./avatar/espera/904497b045.jpg\"}\n{\"kind\": \"clip\", \"t0\": 128.58, \"t1\": 132.3, \"file\": \"./clips/p012.mp4\"}\n---claves usadas---\n{'file', 't1', 'kind', 't0'}\n---split en avatar_ranges---\n{\"file\": \"avatar/A11.mp4\", \"frame\": \"refs/avatar.png\", \"startMs\": 120620, \"endMs\": 128580, \"foto\": \"s01\", \"lado\": \"izq\"}\n{\"file\": \"avatar/A27.mp4\", \"frame\": \"refs/av"
+  },
+  {
+   "k": "tool",
+   "t": "date; tail -3 avatar/it.log; ls -la avatar/ | head"
+  },
+  {
+   "k": "res",
+   "t": "Mon Nov  9 01:14:03 UTC 2026\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\ntotal 40\ndrwxrwxrwx+  4 runner runner 4096 Nov  9 00:53 .\ndrwxrwxrwx+ 11 runner runner 4096 Nov  9 00:54 ..\ndrwxrwxrwx+  2 sesion sesion 4096 Nov  9 00:53 espera\ndrwxrwxrwx+  2 sesion sesion 4096 Nov  9 00:13 it\n-rw-rw-rw-+  1"
   },
   {
    "k": "tool",
