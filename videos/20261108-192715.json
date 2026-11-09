@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794183777.730404,
+ "actualizado": 1794183840.9719837,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -51,26 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1244,
+  "deepseek": 0.1254,
   "gpt": 0.1941,
   "gpt_img": 88,
   "whisper": 0.0577,
   "avatar": 0.25,
-  "total": 0.6262
+  "total": 0.6272
  },
  "eventos": [
-  {
-   "k": "ai",
-   "t": "Video final ensamblado (9:36). Corro el revisor y la validación final."
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/revisor.py . 2>&1 | tail -25"
-  },
-  {
-   "k": "res",
-   "t": "  reintento 1: JSONDecodeError\n✓ el revisor no encontró fallas.\n(20 cuadros revisados, US$0.007)"
-  },
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa final --min 10"
@@ -178,6 +166,18 @@
   {
    "k": "tool",
    "t": "ffmpeg -v error -i final.mp4 -f null - 2>&1 | head -5; echo \"decode_exit=$?\""
+  },
+  {
+   "k": "res",
+   "t": "decode_exit=0"
+  },
+  {
+   "k": "ai",
+   "t": "Video terminado y validado. Resumen:\n\n**Entregables**\n- `final.mp4` — 9:36, 1920x1080, 30 fps, H.264 + AAC estéreo 48 kHz (363 MB).\n- `REPORTE.md` y `meta.json` con título y descripción en la voz de Don Genaro.\n- `gates/` con las revisiones de guion, fotos, render y final.\n\n**Montaje**\n- Guion de 1.570 palabras (español rioplatense), gancho con número y objeto, cinco puntos con anécdota fechada, m"
+  },
+  {
+   "k": "end",
+   "t": "Video terminado y validado. Resumen:\n\n**Entregables**\n- `final.mp4` — 9:36, 1920x1080, 30 fps, H.264 + AAC estéreo 48 kHz (363 MB).\n- `REPORTE.md` y `meta.json` con título y descripción en la voz de Don Genaro.\n- `gates/` con las revisiones de guion, fotos, render y final.\n\n**Montaje**\n- Guion de 1.570 palabras (español rioplatense), gancho con número y objeto, cinco puntos con anécdota fechada, m"
   }
  ],
  "maquinas": 1,
