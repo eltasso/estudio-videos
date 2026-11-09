@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794183556.1371484,
+ "actualizado": 1794183619.8263648,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,46 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.06,
+  "deepseek": 0.0644,
   "gpt": 0.0258,
   "gpt_img": 10,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0858
+  "total": 0.0902
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "✓ hay 9 archivos (95 s)"
-  },
-  {
-   "k": "ai",
-   "t": "Fotos de prueba listas. Armo la hoja y la miro."
-  },
-  {
-   "k": "tool",
-   "t": "ls fotos/*.png; echo '---LOG---'; tail -5 fotos/fotos_01.log; python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_fotos_test.jpg fotos/p001_a.png fotos/p001_b.png fotos/p001_c.png fotos/p005.png fotos/p006.png fotos/p011.png fotos/p024.png fotos/p036.png fotos/s01.png 2>&1 | tail -3; ls -la qc/hoja_fotos_test.jpg"
-  },
-  {
-   "k": "res",
-   "t": "fotos/p001_a.png\nfotos/p001_b.png\nfotos/p001_c.png\nfotos/p005.png\nfotos/p006.png\nfotos/p011.png\nfotos/p024.png\nfotos/p036.png\nfotos/s01.png\n---LOG---\n00:16:45 batch 546f6af7: completed 4/4\n00:16:47 ✓ batch 546f6af7: 4 fotos bajadas, 0 fallidas (US$0.012)\n00:17:17 batch 7c1df2b5: completed 5/5\n00:17:19 ✓ batch 7c1df2b5: 5 fotos bajadas, 0 fallidas (US$0.011)\n00:17:19 FIN: 9/9 fotos en fotos/ (3 min"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_fotos_test.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/refs/avatar.png\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
   {
    "k": "tool",
    "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/refs/cara.png\"}"
@@ -178,6 +146,38 @@
   {
    "k": "res",
    "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_clips_8.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "ai",
+   "t": "Revisé los 8 tableros de clips. Hay ~25 que no tienen nada que ver con la frase (flores, comida, estudio). Preparo UNA ronda de rehacer con búsquedas mejores."
+  },
+  {
+   "k": "tool",
+   "t": "[\n{\"id\":\"p004\",\"buscar\":[\"gardeners talking garden\",\"people gardening class\"]},\n{\"id\":\"p013\",\"buscar\":[\"flooded soil garden\",\"muddy garden after rain\"]},\n{\"id\":\"p017\",\"buscar\":[\"yellow leaves plant disease\",\"tomato leaf yellow spot\"]},\n{\"id\":\"p021\",\"buscar\":[\"marking calendar with pen\",\"crossing days off calendar\"]},\n{\"id\":\"p023\",\"buscar\":[\"eggshells in plastic bag\",\"woman holding eggshells\"]},\n{\""
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/stock_02.json (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python3 -c \"\nimport json,os\nfor p in json.load(open('stock_02.json',encoding='utf8')):\n    f='clips/'+p['id']+'.mp4'\n    if os.path.exists(f): os.remove(f)\nprint('borrados')\n\" && nohup python /opt/estudio/repo/motor/tools/stock.py . stock_02.json > clips/stock_redo.log 2>&1 & echo \"REDO_PID=$!\"; sleep 4; echo \"=== FOTOS2 ===\"; tail -5 fotos/fotos_02.log; echo \"=== AVATAR ===\"; tail -3 avatar/it.lo"
+  },
+  {
+   "k": "res",
+   "t": "REDO_PID=12222\nborrados\n=== FOTOS2 ===\n00:18:34 batch c55b80ee: in_progress 0/1\n00:19:04 batch 32ced0ad: in_progress 0/9\n00:19:04 batch c55b80ee: completed 1/1\n00:19:05 ✓ batch c55b80ee: 1 fotos bajadas, 0 fallidas (US$0.003)\n00:19:35 batch 32ced0ad: in_progress 0/9\n=== AVATAR ===\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 19"
   }
  ],
  "maquinas": 1,
