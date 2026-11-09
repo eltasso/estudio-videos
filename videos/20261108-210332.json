@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794182710.7989686,
+ "actualizado": 1794182773.7811487,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,12 +51,12 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0041,
+  "deepseek": 0.0097,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0041
+  "total": 0.0097
  },
  "eventos": [
   {
@@ -70,6 +70,22 @@
   {
    "k": "res",
    "t": "total 60\ndrwxrwxrwx+ 6 runner runner 4096 Nov  9 00:04 .\ndrwxrwxrwx+ 3 runner runner 4096 Nov  9 00:04 ..\n-rw-rw-rw-+ 1 runner runner 9187 Nov  9 00:04 BRIEF.md\ndrwxrwxrwx+ 2 runner runner 4096 Nov  9 00:04 avatar\ndrwxrwxrwx+ 2 runner runner 4096 Nov  9 00:04 fotos\ndrwxrwxrwx+ 2 runner runner 4096 Nov  9 00:04 refs\ndrwxrwxrwx+ 2 runner runner 4096 Nov  9 00:04 voz\n---REFS---\ntotal 3976\ndrwxrwxrwx+"
+  },
+  {
+   "k": "ai",
+   "t": "Voy a empezar por el guion. Primero me ubico con el canal y las herramientas."
+  },
+  {
+   "k": "tool",
+   "t": "cat refs/voz.txt && echo \"---CANAL (primeras lineas)---\" && head -c 2500 refs/canal.json"
+  },
+  {
+   "k": "res",
+   "t": "Y otros, años después, vieron lo mismo con el fresco. La de la madrugada se arruinaba mucho más. Si la vas a usar ya, cortala cuando quieras. Pero si es para dejarla en el vaso unos días o para llevarle a alguien a la tardecita. Eso sí, en la heladera no te salva ninguna hora. Más de 60 años cortándola tempranito y orgulloso. Y te cuento de Don Aurelio.---CANAL (primeras lineas)---\n{\n \"nombre\": \"D"
+  },
+  {
+   "k": "ai",
+   "t": "Ahora escribo el guion completo (~15.000 caracteres) en la voz de Don Genaro."
   }
  ],
  "maquinas": 1,
