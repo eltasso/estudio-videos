@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794185644.8446846,
+ "actualizado": 1794185708.0738132,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -41,7 +41,7 @@
    "k": "armado",
    "n": "Armado",
    "st": "active",
-   "info": "10 segmentos"
+   "info": "37 segmentos"
   },
   {
    "k": "qc",
@@ -51,74 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0882,
+  "deepseek": 0.0936,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1392
+  "total": 0.1446
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "00:37:05 → 1 clips por buscar\n00:37:08 bajados 1/1\n00:37:08 FIN: 1/1 clips en clips/\nhoja: qc/hoja_p078.jpg (1 cuadros, 1x1)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_p078.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "tail -6 fotos/fotos_03.log; ls -la fotos/p001_c.png fotos/p036.png 2>/dev/null"
-  },
-  {
-   "k": "res",
-   "t": "Exit code 2\n00:36:06 batch 992efbff: in_progress 0/1\n00:36:06 batch a1a32397: validating 0/0\n00:36:36 batch 992efbff: in_progress 0/1\n00:36:36 batch a1a32397: in_progress 0/1\n00:37:07 batch 992efbff: in_progress 0/1\n00:37:07 batch a1a32397: in_progress 0/1"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 19"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivos: 18/19 → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "ls fotos/p001_c.png fotos/p036.png 2>&1; echo \"=== AVATAR ===\"; tail -5 avatar/it.log; echo \"=== AVATAR FILES ===\"; ls avatar/*.mp4 2>/dev/null | wc -l"
-  },
-  {
-   "k": "res",
-   "t": "ls: cannot access 'fotos/p036.png': No such file or directory\nfotos/p001_c.png\n=== AVATAR ===\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n=== AVATAR FILES ===\n0"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/fotos/p001_c.png\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "ai",
-   "t": "El gancho rehecho quedó muy bien y coincide con el avatar. Lo fijo como `p001` y limpio las variantes."
-  },
-  {
-   "k": "tool",
-   "t": "cp fotos/p001_c.png fotos/p001.png && python3 - <<'EOF'\nimport json\nd=json.load(open('fotos/p001_c.json',encoding='utf8'))\nd['id']='p001'\njson.dump(d,open('fotos/p001.json','w',encoding='utf8'),ensure_ascii=False,indent=1)\nprint('p001 listo')\nEOF\nrm -f fotos/p001_a.png fotos/p001_a.json fotos/p001_b.png fotos/p001_b.json fotos/p001_c.png fotos/p001_c.json\nls fotos/*.png | wc -l; ls fotos/p036.png "
-  },
-  {
-   "k": "res",
-   "t": "p001 listo\n16\nls: cannot access 'fotos/p036.png': No such file or directory"
-  },
-  {
-   "k": "tool",
-   "t": "{\n \"title\": \"Mito o verdad: consejos de huerta que pueden arruinar tus tomates\",\n \"description\": \"Hay consejos de huerta que se repiten tanto que uno termina creyéndolos. Yo mismo recomendé varios de los que hoy te voy a desarmar, así que este video no es una clase: es una revisión honesta, con los pies en la tierra y las manos en el barro.\\n\\nVamos a revisar catorce consejos que circulan en feria"
-  },
   {
    "k": "res",
    "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/meta.json (file state is current in your context — no need to Read it back)"
@@ -178,6 +118,66 @@
   {
    "k": "res",
    "t": "[imagen]"
+  },
+  {
+   "k": "ai",
+   "t": "El render de prueba se ve bien. Dejo anotado el control y lanzo el render completo en segundo plano (los tramos de avatar se rehacen solos cuando lleguen)."
+  },
+  {
+   "k": "tool",
+   "t": "df -h . | tail -1; nohup python /opt/estudio/repo/motor/tools/render.py . > render.log 2>&1 & echo \"RENDER_PID=$!\"; sleep 3; tail -3 render.log"
+  },
+  {
+   "k": "res",
+   "t": "/dev/root       145G   60G   85G  42% /\nRENDER_PID=17776"
+  },
+  {
+   "k": "tool",
+   "t": "CONTROL RENDER (prueba --limit 10)\n- Miré qc/hoja_render.jpg (10 cuadros de segments/0000-0009): el video abre con el avatar (foto fija con el cartel «Esperando avatar» porque los clips de InfiniteTalk todavía estaban corriendo), y justo después entra el gancho p001 (tomate con el culito negro en primer plano).\n- Los planos de b-roll se ven enteros, con movimiento suave y sin huecos negros. Clip d"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gates/render_auto.txt (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa fotos --min 15 2>&1 | tail -30"
+  },
+  {
+   "k": "res",
+   "t": "VALIDAR /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue · etapa fotos\n  ✓ guion: 16161 caracteres, 3049 palabras (hacen falta 13500-17250 para 15 min: bien)\n  ✓ fotos: 17 · 0 sin su prompt al lado (no salieron de tools/fotos.py)\n  ✓ fotos: 0 con prompt incompleto\n  !  falta tu revisión visual de las fotos de prueba: mirá qc/hoja_fotos.jpg con Read y escribí gates/fotos_auto.txt "
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_fotos.jpg fotos/p001.png fotos/p005.png fotos/p006.png fotos/p011.png fotos/p024.png fotos/p030.png fotos/p036.png fotos/p050.png fotos/p077.png fotos/p098.png fotos/p099.png fotos/p103.png 2>&1 | tail -1; python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_fotos_split.jpg fotos/s01.png fotos/s02.png fotos/s03.png fotos/s04.png fotos/s05.png 2>"
+  },
+  {
+   "k": "res",
+   "t": "hoja: qc/hoja_fotos.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_fotos_split.jpg (5 cuadros, 4x2)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_fotos.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_fotos_split.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "CONTROL FOTOS — modo Ahorro\n- Miré qc/hoja_fotos.jpg (12 fotos) y qc/hoja_fotos_split.jpg (5 de pantalla partida), más las hojas de prueba qc/hoja_fotos_test.jpg y qc/hoja_fotos_test2.jpg.\n- Total: 17 fotos con gpt-image (tope Ahorro 20). 3 con el presentador (mínimo 3): p001 (gancho), p006 (credencial) y p103 (confesión). 5 creativas con detalle narrativo: p005 (grilla «CONSEJOS DE HUERTA / 3 DE "
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gates/fotos_auto.txt (file state is current in your context — no need to Read it back)"
   }
  ],
  "maquinas": 1,
