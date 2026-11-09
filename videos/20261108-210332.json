@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794191468.940751,
+ "actualizado": 1794191532.5113654,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,86 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1559,
+  "deepseek": 0.1711,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.4569
+  "total": 0.4721
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "<persisted-output>\nOutput too large (79.8KB). Full output saved to: /opt/estudio/datos/brain/projects/-opt-estudio-datos-videos-mito-o-verdad-consejos-de-huerta-que-pue/5834d122-b87b-4fa2-a094-200ca950f2d9/tool-results/bo06f5sgg.txt\n\nPreview (first 2KB):\n3587 sudo -n -H -u sesion -- env -i ESTUDIO_DATA=/opt/estudio/datos LANG=C.UTF-8 GITHUB_SERVER_URL=https://github.com GITHUB_REPOSITORY=eltasso/e"
-  },
-  {
-   "k": "tool",
-   "t": "ps -eo pid,comm,etime,pcpu --sort=-pcpu | head -12; echo '---final---'; ls -la /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/final.mp4 2>&1; echo '---log---'; wc -c /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/assemble.log"
-  },
-  {
-   "k": "res",
-   "t": "    PID COMMAND             ELAPSED %CPU\n  37320 ffmpeg                01:00  382\n  37690 python3               00:06  4.4\n   3589 claude             02:04:10  0.7\n   3584 python             02:04:10  0.3\n   2059 Runner.Worker      02:05:20  0.2\n    364 hv_kvp_daemon      02:05:32  0.1\n   2001 provjobd1863567    02:05:24  0.1\n   1106 containerd         02:05:27  0.0\n   1300 ExtHandler         02:0"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe final.mp4"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "wc -c assemble.log; ps -eo pid,comm,etime,pcpu --sort=-pcpu | head -6; echo '---tmp---'; ls -lah . | tail -8; echo '---segments count---'; ls segments/*.mp4 | wc -l"
-  },
-  {
-   "k": "res",
-   "t": "0 assemble.log\n    PID COMMAND             ELAPSED %CPU\n  38049 ffmpeg                08:29  381\n   3589 claude             02:13:18  0.7\n   3584 python             02:13:19  0.3\n   2059 Runner.Worker      02:14:28  0.2\n    364 hv_kvp_daemon      02:14:40  0.1\n---tmp---\n-rw-rw-rw-+  1 sesion sesion 7.4K Nov  9 00:13 stock_01.json\n-rw-rw-rw-+  1 sesion sesion 2.3K Nov  9 00:19 stock_02.json\n-rw-rw-"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe final.mp4"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "ps -eo pid,etime,pcpu,comm --sort=-pcpu | head -4; ls -lah video_noaudio.mp4 final.mp4 2>/dev/null; ffprobe -v error -show_entries format=duration -of csv=p=0 video_noaudio.mp4 2>/dev/null"
-  },
-  {
-   "k": "res",
-   "t": "Exit code 1\n    PID     ELAPSED %CPU COMMAND\n  38049       17:36  381 ffmpeg\n   3589    02:22:25  0.6 claude\n   3584    02:22:25  0.3 python\n-rw-rw-rw-+ 1 sesion sesion 638M Nov  9 02:27 video_noaudio.mp4"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe final.mp4"
-  },
-  {
-   "k": "res",
-   "t": "✓ existe final.mp4 (730.8 MB, 75 s)"
-  },
-  {
-   "k": "ai",
-   "t": "Final ensamblado. Verifico duración y corro el revisor de calidad."
-  },
-  {
-   "k": "tool",
-   "t": "tail -8 assemble.log; echo '---'; ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_name,width,height,r_frame_rate,channels,sample_rate -of default=nw=1 final.mp4 2>&1 | head -25"
-  },
-  {
-   "k": "res",
-   "t": "tramo 3 listo\ntramo 4 listo\ntramo 5 listo\ntramo 6 listo\ntramo 7 listo\ntramo 8 listo\ntramo 9 listo\nfinal: ./final.mp4 1152.400000 s\n---\ncodec_name=h264\nwidth=1920\nheight=1080\nr_frame_rate=30/1\ncodec_name=aac\nsample_rate=48000\nchannels=2\nr_frame_rate=0/0\nduration=1152.400000\nsize=730787873"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/revisor.py . 2>&1 | tail -25"
-  },
-  {
-   "k": "res",
-   "t": "✓ el revisor no encontró fallas.\n(39 cuadros revisados, US$0.003)"
-  },
   {
    "k": "tool",
    "t": "ls -la gates/; cat gates/correcciones.txt 2>/dev/null | head -20; echo '=== VALIDAR FINAL ==='; python /opt/estudio/repo/motor/tools/validar.py . --etapa final --min 15 2>&1 | tail -40"
@@ -178,6 +106,78 @@
   {
    "k": "res",
    "t": "[imagen]"
+  },
+  {
+   "k": "ai",
+   "t": "El revisor no encontró fallas y los 39 cuadros se ven bien. Dejo los controles escritos."
+  },
+  {
+   "k": "tool",
+   "t": "CONTROL FINAL — revisión visual de qc/hoja_final_1.jpg a qc/hoja_final_4.jpg\n- Miré los 39 cuadros que dejó el revisor (uno cada 30 s). El video abre con el avatar real hablando desde el segundo 0 y alterna avatar / foto / clip durante todo el metraje. No aparece ningún cartel de «Esperando avatar» ni de «Esperando imagen».\n- El gancho p001 (tomate con el culito negro) entra a los ~5 s, justo desp"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gates/final_auto.txt (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "El revisor final no encontró fallas (39 cuadros revisados, 0 malas, US$0,0032).\nNo se generó gates/correcciones.txt porque no hubo nada para corregir. No hizo falta re-ensamblar.\nControl visual final: ver gates/final_auto.txt.\n"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gates/correcciones_hechas.txt (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "- Fotos gpt-image (21 generaciones: 19 + 2 rehechas): **US$ 0,051**.\n- InfiniteTalk (1 llamada fija): **US$ 0,25**.\n- Revisor final (39 cuadros con visión): **US$ 0,0032**.\n- Voz, Pexels y Mixkit: gratis.\n- **Total estimado: US$ 0,304.**"
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/REPORTE.md has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "- La etapa render marcaba «avatar a pantalla completa de más de 6 s» en los 5 tramos largos porque todavía no estaban los clips reales. Con los 103 clips de InfiniteTalk, render.py aplicó la pantalla partida (s01-s05) y el validador final dio ese punto por bueno.\n\n## Control de calidad\n- `validar.py --etapa final`: **OK**, sin ✗. Avatar real desde el segundo 0, 48 % de avatar, huecos ≤ 8,2 s, sin "
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/REPORTE.md has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa final --min 15 2>&1 | tail -35; echo '=== ARCHIVOS ==='; ls -la final.mp4 meta.json REPORTE.md gates/final_auto.txt gates/correcciones_hechas.txt"
+  },
+  {
+   "k": "res",
+   "t": "VALIDAR /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue · etapa final\n  ✓ guion: 16161 caracteres, 3049 palabras (hacen falta 13500-17250 para 15 min: bien)\n  ✓ fotos: 17 · 0 sin su prompt al lado (no salieron de tools/fotos.py)\n  ✓ fotos: 0 con prompt incompleto\n  ✓ fotos: 6 imágenes creativas con detalle_narrativo (lo pedido: 4 a 6, KIT §4b)\n  ✓ render: movimiento al azar (pla"
+  },
+  {
+   "k": "ai",
+   "t": "Todo valida OK. Última verificación visual del arranque y de una pantalla partida."
+  },
+  {
+   "k": "tool",
+   "t": "ffmpeg -v error -y -ss 0.5 -i final.mp4 -frames:v 1 qc/chk_inicio.jpg; ffmpeg -v error -y -ss 123.5 -i final.mp4 -frames:v 1 qc/chk_split.jpg; python /opt/estudio/repo/motor/tools/hoja.py qc/chk_arranque_split.jpg qc/chk_inicio.jpg qc/chk_split.jpg 2>&1 | tail -1; echo '---AUDIO---'; ffmpeg -ss 10 -t 30 -i final.mp4 -af volumedetect -f null - 2>&1 | grep -E \"mean_volume|max_volume\""
+  },
+  {
+   "k": "res",
+   "t": "hoja: qc/chk_arranque_split.jpg (2 cuadros, 2x1)\n---AUDIO---\n[Parsed_volumedetect_0 @ 0x797b38002000] mean_volume: -16.3 dB\n[Parsed_volumedetect_0 @ 0x797b38002000] max_volume: -0.5 dB"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/chk_arranque_split.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "ai",
+   "t": "Listo. El video quedó terminado y validado de punta a punta.\n\n## Entrega — `final.mp4`\n\n- **Duración:** 19:12 (1.152,4 s), 1920x1080, 30 fps, H.264 + AAC 48 kHz estéreo.\n- **Apertura:** avatar real hablando desde el segundo 0 (5,1 s), y a los ~5 s entra el gancho: el tomate con el culito negro en primer plano.\n- **Avatar:** 103 ventanas, **548,9 s = 48 % del video**, en una sola llamada a Infinite"
+  },
+  {
+   "k": "end",
+   "t": "Listo. El video quedó terminado y validado de punta a punta.\n\n## Entrega — `final.mp4`\n\n- **Duración:** 19:12 (1.152,4 s), 1920x1080, 30 fps, H.264 + AAC 48 kHz estéreo.\n- **Apertura:** avatar real hablando desde el segundo 0 (5,1 s), y a los ~5 s entra el gancho: el tomate con el culito negro en primer plano.\n- **Avatar:** 103 ventanas, **548,9 s = 48 % del video**, en una sola llamada a Infinite"
   }
  ],
  "maquinas": 1,
