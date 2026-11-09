@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794183222.6350617,
+ "actualizado": 1794183285.6328077,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,38 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0363,
+  "deepseek": 0.0416,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0363
+  "total": 0.0416
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "The file /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gen_avatar.py has been updated successfully. (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "python3 gen_avatar.py"
-  },
-  {
-   "k": "res",
-   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gen_avatar.py\", line 76, in <module>\n    a, b = windows[i], windows[i+1]\n                       ~~~~~~~^^^^^\nIndexError: list index out of range"
-  },
-  {
-   "k": "tool",
-   "t": "    for i in range(len(windows)-2, -1, -1):"
-  },
-  {
-   "k": "res",
-   "t": "The file /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gen_avatar.py has been updated successfully. (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "python3 gen_avatar.py"
-  },
   {
    "k": "res",
    "t": "ventanas: 104 · contenido 548.6s · reel 579.8s · cobertura 47.6%\nhuecos: min 2.5s max 8.5s · >15s: 0\nprimera: {'file': 'avatar/A0.mp4', 'frame': 'refs/avatar.png', 'startMs': 0, 'endMs': 5080} (5.1s)\nSPLIT s01 izq 255.3-262.7s ::  la  falta  de  calcio  en  la  tierra  el  problema  es  que  ese  calcio  no  llega  al  fruto  porque  el  fruto  no  se  está  llenando  parejo\nSPLIT s02 der 634.3-64"
@@ -178,6 +154,30 @@
   {
    "k": "res",
    "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/stock_01.json (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/stock.py . stock_01.json > clips/stock.log 2>&1 & echo \"STOCK_PID=$!\"; sleep 8; tail -6 clips/stock.log"
+  },
+  {
+   "k": "res",
+   "t": "STOCK_PID=5827\n00:13:43 → 95 clips por buscar"
+  },
+  {
+   "k": "ai",
+   "t": "Ahora la primera tanda de fotos: 6 de prueba + 3 variantes del gancho."
+  },
+  {
+   "k": "tool",
+   "t": "[\n{\n \"id\": \"p001_a\",\n \"cara\": true,\n \"prompt\": {\n  \"type\": \"amateur phone photo, mild JPEG compression, real skin texture with pores, wrinkles, age spots, flyaway grey hairs, uneven ordinary indoor light, slightly crooked framing, everyday clutter, nothing blurred out, everything in focus, 16:9\",\n  \"moment\": \"In the middle of the shed, Don Genaro holds up the tomato with the rotten black bottom as"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/pedidos_01.json (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/fotos.py . pedidos_01.json > fotos/fotos_01.log 2>&1 & echo \"FOTOS1_PID=$!\"; sleep 6; tail -12 fotos/fotos_01.log"
   }
  ],
  "maquinas": 1,
