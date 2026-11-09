@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794191405.7220662,
+ "actualizado": 1794191468.940751,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,66 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1458,
+  "deepseek": 0.1559,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.4468
+  "total": 0.4569
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "✓ el log tiene 'hechos 210' (185 s):\nclips=210 frames=34572 (1152.40s)\nhechos 210"
-  },
-  {
-   "k": "tool",
-   "t": "python3 - <<'EOF'\nimport json\nP=json.load(open('plan.json',encoding='utf8'))['segments']\nfor s in P[:3]: print(s)\nfor s in P:\n    if 120<=s['t0']<=129: print('split seg:',s)\nEOF\ngrep -c \"espera\" plan.json; echo '---av---'; ls -la avatar/espera/ 2>/dev/null | head -3"
-  },
-  {
-   "k": "res",
-   "t": "{'kind': 'av', 't0': 0.0, 't1': 5.08, 'file': './avatar/A0.mp4'}\n{'kind': 'foto', 't0': 5.08, 't1': 10.94, 'file': './fotos/p001.png'}\n{'kind': 'av', 't0': 10.94, 't1': 16.1, 'file': './avatar/A1.mp4'}\nsplit seg: {'kind': 'av', 't0': 120.62, 't1': 128.58, 'file': './avatar/A11.mp4', 'split': True}\nsplit seg: {'kind': 'clip', 't0': 128.58, 't1': 132.3, 'file': './clips/p012.mp4'}\n0\n---av---\ntotal 4"
-  },
-  {
-   "k": "ai",
-   "t": "Render con avatar real listo (0 placeholders, split aplicado). Mando a ensamblar."
-  },
-  {
-   "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/assemble.py . > assemble.log 2>&1 & echo \"PID=$!\"; sleep 5; tail -5 assemble.log"
-  },
-  {
-   "k": "res",
-   "t": "PID=34843"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe final.mp4"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "tail -12 assemble.log; echo '---'; ls -la final.mp4 2>/dev/null; ps aux | grep \"[a]ssemble\" | wc -l"
-  },
-  {
-   "k": "res",
-   "t": "---\n5"
-  },
-  {
-   "k": "tool",
-   "t": "ps -eo pid,etime,pcpu,args | grep -E \"[a]ssemble|[f]fmpeg\" | head -10; echo '---'; ls -la segments/ | tail -3; df -h . | tail -1"
-  },
-  {
-   "k": "res",
-   "t": "<persisted-output>\nOutput too large (41.8KB). Full output saved to: /opt/estudio/datos/brain/projects/-opt-estudio-datos-videos-mito-o-verdad-consejos-de-huerta-que-pue/5834d122-b87b-4fa2-a094-200ca950f2d9/tool-results/b2ue5oruk.txt\n\nPreview (first 2KB):\n   3587    02:04:02  0.0 sudo -n -H -u sesion -- env -i ESTUDIO_DATA=/opt/estudio/datos LANG=C.UTF-8 GITHUB_SERVER_URL=https://github.com GITHUB_"
-  },
-  {
-   "k": "tool",
-   "t": "pgrep -af \"assemble.py\" | head -3; echo '---'; pgrep -af \"ffmpeg\" | head -5; echo '---'; ls -la /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/*.mp4 2>/dev/null; ls -la /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/tmp* 2>/dev/null | head"
-  },
   {
    "k": "res",
    "t": "<persisted-output>\nOutput too large (79.8KB). Full output saved to: /opt/estudio/datos/brain/projects/-opt-estudio-datos-videos-mito-o-verdad-consejos-de-huerta-que-pue/5834d122-b87b-4fa2-a094-200ca950f2d9/tool-results/bo06f5sgg.txt\n\nPreview (first 2KB):\n3587 sudo -n -H -u sesion -- env -i ESTUDIO_DATA=/opt/estudio/datos LANG=C.UTF-8 GITHUB_SERVER_URL=https://github.com GITHUB_REPOSITORY=eltasso/e"
@@ -178,6 +126,58 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/revisor.py . 2>&1 | tail -25"
+  },
+  {
+   "k": "res",
+   "t": "✓ el revisor no encontró fallas.\n(39 cuadros revisados, US$0.003)"
+  },
+  {
+   "k": "tool",
+   "t": "ls -la gates/; cat gates/correcciones.txt 2>/dev/null | head -20; echo '=== VALIDAR FINAL ==='; python /opt/estudio/repo/motor/tools/validar.py . --etapa final --min 15 2>&1 | tail -40"
+  },
+  {
+   "k": "res",
+   "t": "total 32\ndrwxrwxrwx+  2 sesion sesion 4096 Nov  9 02:30 .\ndrwxrwxrwx+ 12 runner runner 4096 Nov  9 02:28 ..\n-rw-rw-rw-+  1 sesion sesion 1619 Nov  9 00:55 fotos_auto.txt\n-rw-rw-rw-+  1 sesion sesion  997 Nov  9 00:15 guion_auto.txt\n-rw-rw-rw-+  1 sesion sesion  825 Nov  9 00:54 render_auto.txt\n-rw-rw-rw-+  1 sesion sesion  129 Nov  9 02:30 revisor_final.json\n=== VALIDAR FINAL ===\nVALIDAR /opt/estu"
+  },
+  {
+   "k": "tool",
+   "t": "cat gates/revisor_final.json; echo '---frames---'; ls qc/f_*.jpg 2>/dev/null | wc -l; python3 - <<'EOF'\nimport glob, subprocess, os\nfs=sorted(glob.glob('qc/f_*.jpg'))\nfor i in range(0,len(fs),12):\n    g=fs[i:i+12]\n    out=f'qc/hoja_final_{i//12+1}.jpg'\n    subprocess.run(['python','/opt/estudio/repo/motor/tools/hoja.py',out]+g,check=True)\n    print(out, ' '.join(os.path.basename(x)[2:-4] for x in "
+  },
+  {
+   "k": "res",
+   "t": "{\"t\": 1794191438.0272076, \"n\": 39, \"malas\": 0, \"costo_usd\": 0.0032, \"ia\": true, \"corridas\": 1, \"final_mtime\": 1794191304.3198836}---frames---\n39\nhoja: qc/hoja_final_1.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_final_2.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_final_3.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_final_4.jpg (3 cuadros, 3x1)\nqc/hoja_final_1.jpg 001 002 003 004 005 006 007 008 009 010 011 012\nqc/hoja_fina"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_final_1.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_final_2.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_final_3.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_final_4.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
   }
  ],
  "maquinas": 1,
