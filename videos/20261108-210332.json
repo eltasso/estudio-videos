@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794190071.3014948,
+ "actualizado": 1794190134.602124,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,42 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1303,
+  "deepseek": 0.1345,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.4313
+  "total": 0.4355
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "ls segments/xf.json && python3 -c \"\nimport json\nxf=json.load(open('segments/xf.json')); print('xf entries',len(xf))\n\" ; for f in sfx/agua.mp3 sfx/huevo_2.mp3 sfx/tijera.mp3 sfx/rocio.mp3; do printf '%s ' $f; ffprobe -v error -show_entries format=duration -of csv=p=0 $f; done; echo '---'; python3 -c \"\nimport json\nc=json.load(open('cues.json')); print('cues',len(c),c)\n\""
-  },
-  {
-   "k": "res",
-   "t": "segments/xf.json\nxf entries 210\nsfx/agua.mp3 4.600000\nsfx/huevo_2.mp3 3.500000\nsfx/tijera.mp3 2.939161\nsfx/rocio.mp3 2.500000\n---\ncues 4 [{'file': 'agua.mp3', 't': 202040, 'gain': 0.05, 'fade': 0.4}, {'file': 'huevo_2.mp3', 't': 234780, 'gain': 0.045, 'fade': 0.4}, {'file': 'tijera.mp3', 't': 615963, 'gain': 0.05, 'fade': 0.4}, {'file': 'rocio.mp3', 't': 1143705, 'gain': 0.045, 'fade': 0.4}]"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "ai",
-   "t": "Mientras termina RunPod, dejo armado el reporte con los datos ya cerrados."
-  },
   {
    "k": "tool",
    "t": "# REPORTE — Mito o verdad: consejos de huerta que pueden arruinar tus tomates\n\n## Qué se hizo\n- **Guion**: 16.161 caracteres (3.049 palabras), en la voz de Don Genaro. Abre con «¡Hola, gente de YouTube! ¿Cómo andan?», gancho con número y objeto (3 de cada 4 consejos / tomate con el culito negro), credencial, prueba del dedo y prueba de la flor, 15 consejos con anécdota fechada y cambio concreto, p"
@@ -178,6 +150,34 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe final.mp4"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "tail -12 assemble.log; echo '---'; ls -la final.mp4 2>/dev/null; ps aux | grep \"[a]ssemble\" | wc -l"
+  },
+  {
+   "k": "res",
+   "t": "---\n5"
+  },
+  {
+   "k": "tool",
+   "t": "ps -eo pid,etime,pcpu,args | grep -E \"[a]ssemble|[f]fmpeg\" | head -10; echo '---'; ls -la segments/ | tail -3; df -h . | tail -1"
+  },
+  {
+   "k": "res",
+   "t": "<persisted-output>\nOutput too large (41.8KB). Full output saved to: /opt/estudio/datos/brain/projects/-opt-estudio-datos-videos-mito-o-verdad-consejos-de-huerta-que-pue/5834d122-b87b-4fa2-a094-200ca950f2d9/tool-results/b2ue5oruk.txt\n\nPreview (first 2KB):\n   3587    02:04:02  0.0 sudo -n -H -u sesion -- env -i ESTUDIO_DATA=/opt/estudio/datos LANG=C.UTF-8 GITHUB_SERVER_URL=https://github.com GITHUB_"
+  },
+  {
+   "k": "tool",
+   "t": "pgrep -af \"assemble.py\" | head -3; echo '---'; pgrep -af \"ffmpeg\" | head -5; echo '---'; ls -la /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/*.mp4 2>/dev/null; ls -la /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/tmp* 2>/dev/null | head"
+  },
+  {
+   "k": "res",
+   "t": "<persisted-output>\nOutput too large (79.8KB). Full output saved to: /opt/estudio/datos/brain/projects/-opt-estudio-datos-videos-mito-o-verdad-consejos-de-huerta-que-pue/5834d122-b87b-4fa2-a094-200ca950f2d9/tool-results/bo06f5sgg.txt\n\nPreview (first 2KB):\n3587 sudo -n -H -u sesion -- env -i ESTUDIO_DATA=/opt/estudio/datos LANG=C.UTF-8 GITHUB_SERVER_URL=https://github.com GITHUB_REPOSITORY=eltasso/e"
   }
  ],
  "maquinas": 1,
