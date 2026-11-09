@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794183285.6328077,
+ "actualizado": 1794183348.6283934,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,74 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0416,
+  "deepseek": 0.0491,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0416
+  "total": 0.0491
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "ventanas: 104 · contenido 548.6s · reel 579.8s · cobertura 47.6%\nhuecos: min 2.5s max 8.5s · >15s: 0\nprimera: {'file': 'avatar/A0.mp4', 'frame': 'refs/avatar.png', 'startMs': 0, 'endMs': 5080} (5.1s)\nSPLIT s01 izq 255.3-262.7s ::  la  falta  de  calcio  en  la  tierra  el  problema  es  que  ese  calcio  no  llega  al  fruto  porque  el  fruto  no  se  está  llenando  parejo\nSPLIT s02 der 634.3-64"
-  },
-  {
-   "k": "tool",
-   "t": "python3 - <<'EOF'\nimport re\np='gen_avatar.py'\ns=open(p).read()\ns=s.replace(\"split = (ti < len(THRESH) and CONTENT >= THRESH[ti] and t > 30000)\",\"split = (ti < len(THRESH) and t >= THRESH[ti] and t > 30000)\")\ns=s.replace(\"# revisar huecos\\nhuecos = [b[\\\"startMs\\\"]-a[\\\"endMs\\\"] for a,b in zip(windows, windows[1:])]\\nif huecos:\",\"# revisar huecos\\nfor i in range(len(windows)-1):\\n    a, b = windows[i"
-  },
-  {
-   "k": "res",
-   "t": "ok\nventanas: 103 · contenido 548.9s · reel 579.8s · cobertura 47.6%\nhuecos: min 5.2s max 8.2s · >15s: 0\nprimera: {'file': 'avatar/A0.mp4', 'frame': 'refs/avatar.png', 'startMs': 0, 'endMs': 5080} (5.1s)\nSPLIT s01 izq 120.6-128.6s ::  tierra,  al  lado  del  tallo,  hasta  el  segundo  nudillo.  Sácalo  y  míralo.  Si  el  dedo  sale  seco  y  la  tierra  se  desarma,\nSPLIT s02 der 301.9-310.0s :: "
-  },
-  {
-   "k": "tool",
-   "t": "python3 - <<'EOF'\np='gen_avatar.py'\ns=open(p).read()\ns=s.replace(\"# bajar contenido si el reel se pasa\",\"# pantalla completa: nunca mas de 6 s\\nfor w in windows:\\n    if not w[\\\"split\\\"] and w[\\\"endMs\\\"]-w[\\\"startMs\\\"] > 6000:\\n        cand = [e for e in ends if w[\\\"startMs\\\"]+3000 <= e <= w[\\\"startMs\\\"]+6000]\\n        if cand:\\n            w[\\\"endMs\\\"] = int(max(cand))\\n\\n# bajar contenido si el "
-  },
-  {
-   "k": "res",
-   "t": "ok\nventanas: 103 · contenido 548.9s · reel 579.8s · cobertura 47.6%\nhuecos: min 5.2s max 8.2s · >15s: 0\nprimera: {'file': 'avatar/A0.mp4', 'frame': 'refs/avatar.png', 'startMs': 0, 'endMs': 5080} (5.1s)\nSPLIT s01 izq 120.6-128.6s ::  tierra,  al  lado  del  tallo,  hasta  el  segundo  nudillo.  Sácalo  y  míralo.  Si  el  dedo  sale  seco  y  la  tierra  se  desarma,\nSPLIT s02 der 301.9-310.0s :: "
-  },
-  {
-   "k": "tool",
-   "t": "python3 -c \"\nimport json\nR=json.load(open('avatar_ranges.json',encoding='utf8'))\nd=[(r['endMs']-r['startMs'],r['startMs']) for r in R]\nprint('max full', max(x for x,r in zip(d,R) if 'foto' not in r))\nprint('first 30s windows:',[(r['startMs'],r['endMs'],(r['endMs']-r['startMs'])/1000) for r in R if r['startMs']<30000])\nprint('durations >6000 full:',[(r['startMs'],(r['endMs']-r['startMs'])/1000) for"
-  },
-  {
-   "k": "res",
-   "t": "max full (5560, 967685)\nfirst 30s windows: [(0, 5080, 5.08), (10940, 16100, 5.16), (22080, 27360, 5.28)]\ndurations >6000 full: []\nn 103"
-  },
-  {
-   "k": "ai",
-   "t": "Plan de avatar cerrado (103 ventanas, 47,6 %, huecos ≤8,2 s, primera 5,1 s). Corro `planos.py`."
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/planos.py . 2>&1 | tail -20"
-  },
-  {
-   "k": "res",
-   "t": "✓ planos.json: 107 planos de b-roll (10.1 min de b-roll, 10.6 por minuto) + 5 fotos de pantalla partida · 103 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite."
-  },
-  {
-   "k": "ai",
-   "t": "Ahora reviso los 107 planos para asignar fotos (máx. 20) y clips de stock."
-  },
-  {
-   "k": "tool",
-   "t": "python3 -c \"\nimport json\nP=json.load(open('planos.json',encoding='utf8'))\nwith open('planos_legible.txt','w',encoding='utf8') as f:\n    for p in P:\n        f.write(f\\\"{p['id']} [{p['startMs']/1000:.0f}-{p['endMs']/1000:.0f}s]{' SPLIT' if p.get('split') else ''} {p['texto']}\\n\\\")\nprint(len(P))\n\" && wc -l planos_legible.txt && head -30 planos_legible.txt"
-  },
-  {
-   "k": "res",
-   "t": "112\n112 planos_legible.txt\np001 [5-11s] con el culito negro, la base del fruto podrida, marrón, como quemada. Y al\np002 [16-22s] de huevo todos los días, como si fueran pastillas. Yo también lo hice, durante años\np003 [27-33s] con el mortero y se las echaran al pie del tomate. Estaba repitiendo un consejo que no sirve\np004 [38-44s] Vamos a revisar 14 consejos de huerta que se repiten en todos los "
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/planos_legible.txt\"}"
-  },
-  {
-   "k": "res",
-   "t": "1\tp001 [5-11s] con el culito negro, la base del fruto podrida, marrón, como quemada. Y al\n2\tp002 [16-22s] de huevo todos los días, como si fueran pastillas. Yo también lo hice, durante años\n3\tp003 [27-33s] con el mortero y se las echaran al pie del tomate. Estaba repitiendo un consejo que no sirve\n4\tp004 [38-44s] Vamos a revisar 14 consejos de huerta que se repiten en todos los grupos, en todas\n5\t"
-  },
   {
    "k": "tool",
    "t": "sed -n '1,120p' /opt/estudio/repo/motor/tools/fotos.py"
@@ -178,6 +118,66 @@
   {
    "k": "tool",
    "t": "nohup python /opt/estudio/repo/motor/tools/fotos.py . pedidos_01.json > fotos/fotos_01.log 2>&1 & echo \"FOTOS1_PID=$!\"; sleep 6; tail -12 fotos/fotos_01.log"
+  },
+  {
+   "k": "res",
+   "t": "FOTOS1_PID=5941\n00:14:43 → batch batch_6af1107366d88190b710c0cc7c1df2b5 · 5 fotos · sin referencia · low 1088x608\n00:14:44 → batch batch_6af1107478ac8190aa5baebe546f6af7 · 4 fotos · con la cara del presentador · low 1088x608\n00:14:44 batch 7c1df2b5: validating 0/0\n00:14:44 batch 546f6af7: validating 0/0"
+  },
+  {
+   "k": "tool",
+   "t": "[\n{\n \"id\": \"p030\",\n \"prompt\": {\n  \"type\": \"amateur phone photo of an open notebook on a kitchen table, mild JPEG compression, uneven ordinary indoor light, slightly crooked framing, everyday clutter, nothing blurred out, everything in focus, 16:9\",\n  \"moment\": \"Héctor's old notebook lies open with the sugar recipe written in careful block letters, the exact advice that turned his soil sticky and h"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/pedidos_02.json (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "echo \"=== STOCK ===\"; tail -4 clips/stock.log; echo \"=== FOTOS ===\"; tail -4 fotos/fotos_01.log; echo \"=== AVATAR ===\"; tail -4 avatar/it.log; echo \"=== counts ===\"; ls clips/*.mp4 2>/dev/null | wc -l; ls fotos/*.png 2>/dev/null | wc -l"
+  },
+  {
+   "k": "res",
+   "t": "=== STOCK ===\n00:13:43 → 95 clips por buscar\n=== FOTOS ===\n00:14:44 batch 7c1df2b5: validating 0/0\n00:14:44 batch 546f6af7: validating 0/0\n00:15:14 batch 7c1df2b5: validating 0/0\n00:15:15 batch 546f6af7: in_progress 1/4\n=== AVATAR ===\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n=== counts ===\n0\n0"
+  },
+  {
+   "k": "ai",
+   "t": "Mientras corren las tandas, dejo el control de guion y los sonidos."
+  },
+  {
+   "k": "tool",
+   "t": "CONTROL GUION — mito o verdad: consejos de huerta\n- validar.py --etapa guion: OK (16.161 caracteres, 3.049 palabras, dentro de 13.500-17.250 para 15 min).\n- Revisado a mano: abre con «¡Hola, gente de YouTube! ¿Cómo andan?», gancho con número (3 de cada 4) y objeto concreto (tomate con el culito negro), credencial («más de sesenta años»), prueba interactiva del dedo al inicio y prueba de la flor (~"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gates/guion_auto.txt (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "- Tags de emoción: 3 ([excited] al abrir, [whispering] en la confesión, [emphatically] en la despedida)."
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gates/guion_auto.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "[\n{\"id\":\"agua\",\"tags\":[\"water\",\"pour\"],\"q\":\"water pour\",\"min\":0.8,\"max\":6},\n{\"id\":\"huevo\",\"tags\":[\"egg\",\"crack\"],\"q\":\"egg crack\",\"min\":0.3,\"max\":3},\n{\"id\":\"tijera\",\"tags\":[\"scissors\",\"cut\"],\"q\":\"scissors snip\",\"min\":0.3,\"max\":3},\n{\"id\":\"tierra\",\"tags\":[\"dirt\",\"soil\"],\"q\":\"digging soil\",\"min\":0.5,\"max\":4},\n{\"id\":\"rocio\",\"tags\":[\"spray\",\"water\"],\"q\":\"spray water\",\"min\":0.5,\"max\":4}\n]\n"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/sfx_pedidos.json (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/sonidos.py . sfx_pedidos.json --tomas 3 > sonidos.log 2>&1 & echo \"SFX_PID=$!\"; sleep 4; tail -4 sonidos.log"
+  },
+  {
+   "k": "res",
+   "t": "SFX_PID=6103\nok agua: agua.mp3 (4 s, Pouring water to mug) · agua_2.mp3 (1 s, Pouring water) · agua_3.mp3 (1 s, Water bubble)"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 9"
   }
  ],
  "maquinas": 1,
