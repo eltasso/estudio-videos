@@ -2,8 +2,8 @@
  "vid": "20261108-192715",
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
- "estado": "trabajando",
- "actualizado": 1794183840.9719837,
+ "estado": "listo",
+ "actualizado": 1794183876.5321522,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -181,5 +181,7 @@
   }
  ],
  "maquinas": 1,
- "extrema": ""
+ "extrema": "",
+ "final": "https://github.com/eltasso/estudio-videos/releases/download/video-20261108-192715/Trasplante-de-tomate-por-que-se-caen-los-plantines-al-pasarlos.mp4",
+ "release": "https://github.com/eltasso/estudio-videos/releases/tag/video-20261108-192715"
 }
