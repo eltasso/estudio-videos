@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794183714.3692117,
+ "actualizado": 1794183777.730404,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -51,126 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1155,
+  "deepseek": 0.1244,
   "gpt": 0.1941,
   "gpt_img": 88,
   "whisper": 0.0577,
   "avatar": 0.25,
-  "total": 0.6173
+  "total": 0.6262
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log avatar/it.log --busca \"clips cortados|⛔|FAILED|TIMED_OUT|CANCELLED\" --max 540"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · log: 23:17:53 estado: IN_PROGRESS → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log avatar/it.log --busca \"clips cortados|⛔|FAILED|TIMED_OUT|CANCELLED\" --max 540"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · log: 23:17:53 estado: IN_PROGRESS → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log avatar/it.log --busca \"clips cortados|⛔|FAILED|TIMED_OUT|CANCELLED\" --max 540"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · log: 23:17:53 estado: IN_PROGRESS → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log avatar/it.log --busca \"clips cortados|⛔|FAILED|TIMED_OUT|CANCELLED\" --max 540"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · log: 23:17:53 estado: IN_PROGRESS → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log avatar/it.log --busca \"clips cortados|⛔|FAILED|TIMED_OUT|CANCELLED\" --max 540"
-  },
-  {
-   "k": "res",
-   "t": "✓ el log tiene 'clips cortados' (45 s):\n22:36:37 InfiniteTalk: 43 ventanas · reel 307.1 s · 1 llamada\n22:36:43 RUN 9e9c792b-24be-4cdb-b374-81694840f916-u2\n22:37:13 estado: IN_QUEUE\n23:17:53 estado: IN_PROGRESS\n00:07:02 estado: COMPLETED\n✓ 43 clips cortados · desfase corregido (máx 200 ms)"
-  },
-  {
-   "k": "ai",
-   "t": "¡Llegó el avatar! 43 clips cortados y desfase corregido. Re-renderizo los tramos del avatar y vuelvo a ensamblar."
-  },
-  {
-   "k": "tool",
-   "t": "ls avatar/*.mp4 | wc -l; du -sh avatar; tail -3 avatar/it.log; nohup python /opt/estudio/repo/motor/tools/render.py . > render.log 2>&1 & echo \"RENDER PID $!\""
-  },
-  {
-   "k": "res",
-   "t": "43\n151M\tavatar\n23:17:53 estado: IN_PROGRESS\n00:07:02 estado: COMPLETED\n✓ 43 clips cortados · desfase corregido (máx 200 ms)\nRENDER PID 20368"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log render.log --busca \"hechos|Traceback|FALLO|ERR\" --max 540"
-  },
-  {
-   "k": "res",
-   "t": "✓ el log tiene 'hechos' (85 s):\nclips=102 frames=17298 (576.60s)\nhechos 102"
-  },
-  {
-   "k": "tool",
-   "t": "python -c \"\nimport json\nP=json.load(open('plan.json'))\ns=P['segments']\nprint('primeros 6:')\nfor x in s[:6]: print(x['kind'],x['t0'],x['t1'],x.get('split'),x['file'][-20:])\nprint('av split:',sum(1 for x in s if x['kind']=='av' and x.get('split')),'de',sum(1 for x in s if x['kind']=='av'))\n\"; nohup python /opt/estudio/repo/motor/tools/assemble.py . > assemble.log 2>&1 & echo \"ASSEMBLE PID $!\""
-  },
-  {
-   "k": "res",
-   "t": "primeros 6:\nav 0.0 10.26 True ./avatar/A0.mp4\nfoto 10.26 17.84 None ./fotos/p001.png\nav 17.84 22.4 None ./avatar/A1.mp4\nfoto 22.4 26.4 None ./fotos/p002.png\nav 26.4 31.64 None ./avatar/A2.mp4\nfoto 31.64 36.8 None ./fotos/p003.png\nav split: 18 de 43\nASSEMBLE PID 23215"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_avatar.jpg segments/0000.mp4 segments/0002.mp4 segments/0004.mp4 segments/0006.mp4 segments/0010.mp4 segments/0020.mp4"
-  },
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_avatar.jpg (6 cuadros, 4x2)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_avatar.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log assemble.log --busca \"final:|FALLO|Traceback\" --max 540"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · log: (vacío) → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "ps -p 23215 -o pid,etime= 2>/dev/null; ls -la video_noaudio.mp4 xf_tmp/ 2>/dev/null | tail -6"
-  },
-  {
-   "k": "res",
-   "t": "    PID            \n  23215       09:17\ndrwxrwxrwx+ 11 runner runner      4096 Nov  8 23:12 ..\n-rw-rw-rw-+  1 sesion sesion 136829195 Nov  9 00:09 c000.mp4\n-rw-rw-rw-+  1 sesion sesion 134491421 Nov  9 00:10 c001.mp4\n-rw-rw-rw-+  1 sesion sesion 131808519 Nov  9 00:11 c002.mp4\n-rw-rw-rw-+  1 sesion sesion 134903899 Nov  9 00:12 c003.mp4\n-rw-rw-rw-+  1 sesion sesion  15279715 Nov  9 00:12 c004.mp4"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log assemble.log --busca \"final:|FALLO|Traceback\" --max 420"
-  },
-  {
-   "k": "res",
-   "t": "✓ el log tiene 'final:' (60 s):\ntramo 1 listo\ntramo 2 listo\ntramo 3 listo\ntramo 4 listo\ntramo 5 listo\nfinal: ./final.mp4 576.600000 s"
-  },
   {
    "k": "ai",
    "t": "Video final ensamblado (9:36). Corro el revisor y la validación final."
@@ -178,6 +66,118 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/revisor.py . 2>&1 | tail -25"
+  },
+  {
+   "k": "res",
+   "t": "  reintento 1: JSONDecodeError\n✓ el revisor no encontró fallas.\n(20 cuadros revisados, US$0.007)"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa final --min 10"
+  },
+  {
+   "k": "res",
+   "t": "VALIDAR /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los · etapa final\n  ✓ guion: 1570 palabras (esperado 1105-1724 para 10 min)\n  ✓ fotos: 80 · 0 sin su prompt al lado (no salieron de tools/fotos.py)\n  ✓ fotos: 0 con prompt incompleto\n  ✓ fotos: 6 imágenes creativas con detalle_narrativo (lo pedido: 4 a 6, KIT §4b)\n  ✓ render: movimiento al azar (plan_motion de tools/render.py)\n"
+  },
+  {
+   "k": "tool",
+   "t": "ls qc/f_*.jpg | head -25; python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_final1.jpg $(ls qc/f_*.jpg | head -12); python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_final2.jpg $(ls qc/f_*.jpg | tail -8)"
+  },
+  {
+   "k": "res",
+   "t": "qc/f_001.jpg\nqc/f_002.jpg\nqc/f_003.jpg\nqc/f_004.jpg\nqc/f_005.jpg\nqc/f_006.jpg\nqc/f_007.jpg\nqc/f_008.jpg\nqc/f_009.jpg\nqc/f_010.jpg\nqc/f_011.jpg\nqc/f_012.jpg\nqc/f_013.jpg\nqc/f_014.jpg\nqc/f_015.jpg\nqc/f_016.jpg\nqc/f_017.jpg\nqc/f_018.jpg\nqc/f_019.jpg\nqc/f_020.jpg\nhoja: qc/hoja_final1.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_final2.jpg (8 cuadros, 4x2)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_final1.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_final2.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "Revisión visual del final (qc/f_001.jpg a f_020.jpg, un cuadro cada 30 s; hojas qc/hoja_final1.jpg y qc/hoja_final2.jpg).\n\n- 0:00: abre el avatar hablando, en pantalla partida con el detalle de la bandeja de plantines (segundo 0).\n- 0:30 a 5:30: alternan avatar y fotos del gancho y de los dos primeros puntos; los fundidos se ven normales (dos imágenes semitransparentes son el fundido, no un error)"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/gates/final_auto.txt (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "El revisor final no dejó correcciones: gates/correcciones.txt no existe o está vacío.\nSe revisaron igual los 20 cuadros cada 30 s (qc/f_*.jpg) a ojo y no hacía falta cambiar nada.\n"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/gates/correcciones_hechas.txt (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "Video terminado: `final.mp4` 1920x1080, 30 fps, H.264 + AAC, duración 9:36 (576,6 s), igual a la voz.\nGuion de 1.570 palabras en español rioplatense, voz clonada del canal, 43 ventanas de avatar (290 s, 50 % del video) y 76 planos de b-roll con fotos distintas.\nValidación final: **OK**, sin errores; el revisor automático revisó 20 cuadros y no encontró fallas."
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/REPORTE.md has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "- **Total: ~US$0,51.**"
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/REPORTE.md has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa final --min 10 | tail -8; echo \"---\"; ffprobe -v error -show_entries stream=codec_name,width,height,r_frame_rate,channels,sample_rate -show_entries format=duration,size -of default=nw=1 final.mp4"
+  },
+  {
+   "k": "res",
+   "t": "  ✓ final: 1920x1080\n  ✓ final: fps 30/1\n  ✓ final 576.60 s vs voz 576.59 s\n  ✓ meta.json con title\n  ✓ meta.json con title y description (>200 caracteres)\n  ✓ REPORTE.md\n  ✓ sonido: cues.json con sus archivos\nRESULTADO: OK\n---\ncodec_name=h264\nwidth=1920\nheight=1080\nr_frame_rate=30/1\ncodec_name=aac\nsample_rate=48000\nchannels=2\nr_frame_rate=0/0\nduration=576.600000\nsize=362994187"
+  },
+  {
+   "k": "tool",
+   "t": "- InfiniteTalk tardó en salir de la cola de RunPod (unos 40 minutos de cola y casi una hora de generación, en total ~1 h 30 min); mientras tanto se adelantó todo el resto del trabajo."
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/REPORTE.md has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"taskId\": \"5\", \"status\": \"completed\"}"
+  },
+  {
+   "k": "res",
+   "t": "Updated task #5 status"
+  },
+  {
+   "k": "tool",
+   "t": "{\"taskId\": \"6\", \"status\": \"completed\"}"
+  },
+  {
+   "k": "res",
+   "t": "Updated task #6 status"
+  },
+  {
+   "k": "tool",
+   "t": "ls -la final.mp4 meta.json REPORTE.md guion.txt captions.json planos.json shots_timed.json avatar_ranges.json plan.json cues.json; echo \"---gates---\"; ls gates/; echo \"---carpetas---\"; ls -d voz avatar fotos sfx segments qc refs 2>/dev/null"
+  },
+  {
+   "k": "res",
+   "t": "-rw-rw-rw-+ 1 sesion sesion      4096 Nov  9 00:22 REPORTE.md\n-rw-rw-rw-+ 1 sesion sesion      5057 Nov  8 23:11 avatar_ranges.json\n-rw-rw-rw-+ 1 sesion sesion    152154 Nov  8 22:33 captions.json\n-rw-rw-rw-+ 1 sesion sesion       398 Nov  8 22:37 cues.json\n-rw-rw-rw-+ 1 sesion sesion 362994187 Nov  9 00:19 final.mp4\n-rw-rw-rw-+ 1 sesion sesion      8603 Nov  8 22:30 guion.txt\n-rw-rw-rw-+ 1 sesion"
+  },
+  {
+   "k": "tool",
+   "t": "ffmpeg -v error -i final.mp4 -f null - 2>&1 | head -5; echo \"decode_exit=$?\""
   }
  ],
  "maquinas": 1,
