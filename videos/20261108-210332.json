@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794186226.0970423,
+ "actualizado": 1794186289.0487752,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,50 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0949,
+  "deepseek": 0.1015,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1459
+  "total": 0.1525
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/fotos/p036.png\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "ai",
-   "t": "Todas las fotos listas (17, con 3 del presentador y 5 creativas). Genero `shots_timed.json`."
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/planos.py . --shots 2>&1 | tail -5; echo \"=== AVATAR ===\"; tail -3 avatar/it.log"
-  },
-  {
-   "k": "res",
-   "t": "✓ shots_timed.json: 107 planos, 107 fotos distintas (cero repetidas). Seguí con render.py.\n=== AVATAR ===\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS"
-  },
-  {
-   "k": "ai",
-   "t": "Ahora el render de prueba (10 segmentos) mientras el avatar sigue en RunPod."
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/render.py . --limit 10 > render_test.log 2>&1; tail -15 render_test.log; ls -la segments/ 2>/dev/null | head"
-  },
-  {
-   "k": "res",
-   "t": "AVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A90.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A91.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A92.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A93.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A94.mp4\nAVATAR PENDIENT"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_render.jpg segments/0000.mp4 segments/0001.mp4 segments/0002.mp4 segments/0003.mp4 segments/0004.mp4 segments/0005.mp4 segments/0006.mp4 segments/0007.mp4 segments/0008.mp4 segments/0009.mp4 2>&1 | tail -1; tail -2 avatar/it.log"
-  },
   {
    "k": "res",
    "t": "hoja: qc/hoja_render.jpg (10 cuadros, 4x3)\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS"
@@ -174,6 +138,42 @@
   {
    "k": "res",
    "t": "=== RENDER ===\n40\n=== AVATAR ===\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n0"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "echo \"=== AVATAR ===\"; tail -5 avatar/it.log; cat avatar/it_llamada.json 2>/dev/null | head -8; echo; echo \"=== RENDER ===\"; tail -2 render.log; ls segments/*.mp4 2>/dev/null | wc -l"
+  },
+  {
+   "k": "res",
+   "t": "=== AVATAR ===\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n{\n \"estado\": \"corriendo\",\n \"t\": \"2026-11-09 00:13:32\",\n \"ventanas\": [\n  \"avatar/A0.mp4\",\n  \"avatar/A1.mp4\",\n  \"avatar/A2.mp4\",\n  \"avatar/A3.mp4\",\n\n=== RENDER ===\nclips=210 frames=34572 (1152.40s)\nhechos 210\n210"
+  },
+  {
+   "k": "tool",
+   "t": "grep -h \"US\\$\" fotos/fotos_0*.log 2>/dev/null; echo '---'; cat gasto.json 2>/dev/null; ls *gasto* 2>/dev/null; echo '---'; python3 -c \"\nimport json\nR=json.load(open('avatar_ranges.json',encoding='utf8'))\nprint('ventanas',len(R),'contenido',round(sum(r['endMs']-r['startMs'] for r in R)/1000,1),'s')\n\""
+  },
+  {
+   "k": "res",
+   "t": "---\ngasto.jsonl\n---\nventanas 103 contenido 548.9 s"
+  },
+  {
+   "k": "tool",
+   "t": "cat gasto.jsonl 2>/dev/null | tail -20; echo '---fotos03---'; tail -5 fotos/fotos_03.log"
+  },
+  {
+   "k": "res",
+   "t": "{\"t\": 1794183041.9094956, \"tag\": \"whisper\", \"usd\": 0.0, \"seg\": 1152}\n{\"t\": 1794183407.7853503, \"tag\": \"fotos_gpt\", \"usd\": 0.01174, \"n\": 4}\n{\"t\": 1794183439.098434, \"tag\": \"fotos_gpt\", \"usd\": 0.01115, \"n\": 5}\n{\"t\": 1794183545.6312764, \"tag\": \"fotos_gpt\", \"usd\": 0.00289, \"n\": 1}\n{\"t\": 1794184541.8396885, \"tag\": \"fotos_gpt\", \"usd\": 0.01992, \"n\": 9}\n{\"t\": 1794184689.3805969, \"tag\": \"fotos_gpt\", \"usd\":"
+  },
+  {
+   "k": "ai",
+   "t": "El render completo terminó (210 segmentos). El avatar sigue en RunPod; espero sus clips."
   },
   {
    "k": "tool",
