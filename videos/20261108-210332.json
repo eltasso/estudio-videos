@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794190134.602124,
+ "actualizado": 1794190198.0542378,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,26 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1345,
+  "deepseek": 0.1375,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.4355
+  "total": 0.4385
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "# REPORTE — Mito o verdad: consejos de huerta que pueden arruinar tus tomates\n\n## Qué se hizo\n- **Guion**: 16.161 caracteres (3.049 palabras), en la voz de Don Genaro. Abre con «¡Hola, gente de YouTube! ¿Cómo andan?», gancho con número y objeto (3 de cada 4 consejos / tomate con el culito negro), credencial, prueba del dedo y prueba de la flor, 15 consejos con anécdota fechada y cambio concreto, p"
-  },
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/REPORTE.md (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "ps aux | grep \"[a]vatar_it\" | awk '{print $2,$10,$11,$12,$13}'; echo '---'; date; tail -2 avatar/it.log; python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
-  },
   {
    "k": "res",
    "t": "3587 0:00 sudo -n -H\n3589 0:43 /opt/hostedtoolcache/node/20.20.2/x64/bin/claude -p --dangerously-skip-permissions\n4745 0:00 python /opt/estudio/repo/motor/tools/avatar_it.py .\n---\nMon Nov  9 01:32:35 UTC 2026\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
@@ -178,6 +166,18 @@
   {
    "k": "res",
    "t": "<persisted-output>\nOutput too large (79.8KB). Full output saved to: /opt/estudio/datos/brain/projects/-opt-estudio-datos-videos-mito-o-verdad-consejos-de-huerta-que-pue/5834d122-b87b-4fa2-a094-200ca950f2d9/tool-results/bo06f5sgg.txt\n\nPreview (first 2KB):\n3587 sudo -n -H -u sesion -- env -i ESTUDIO_DATA=/opt/estudio/datos LANG=C.UTF-8 GITHUB_SERVER_URL=https://github.com GITHUB_REPOSITORY=eltasso/e"
+  },
+  {
+   "k": "tool",
+   "t": "ps -eo pid,comm,etime,pcpu --sort=-pcpu | head -12; echo '---final---'; ls -la /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/final.mp4 2>&1; echo '---log---'; wc -c /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/assemble.log"
+  },
+  {
+   "k": "res",
+   "t": "    PID COMMAND             ELAPSED %CPU\n  37320 ffmpeg                01:00  382\n  37690 python3               00:06  4.4\n   3589 claude             02:04:10  0.7\n   3584 python             02:04:10  0.3\n   2059 Runner.Worker      02:05:20  0.2\n    364 hv_kvp_daemon      02:05:32  0.1\n   2001 provjobd1863567    02:05:24  0.1\n   1106 containerd         02:05:27  0.0\n   1300 ExtHandler         02:0"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe final.mp4"
   }
  ],
  "maquinas": 1,
