@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794183025.8297567,
+ "actualizado": 1794183096.538789,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -16,14 +16,14 @@
   {
    "k": "voz",
    "n": "Voz",
-   "st": "active",
+   "st": "done",
    "info": "19:12 min"
   },
   {
    "k": "tiempos",
    "n": "Tiempos",
-   "st": "pending",
-   "info": ""
+   "st": "active",
+   "info": "por palabra"
   },
   {
    "k": "avatar",
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0144,
+  "deepseek": 0.0205,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0144
+  "total": 0.0205
  },
  "eventos": [
-  {
-   "k": "user",
-   "t": "Hacé este video completo de punta a punta, solo, sin preguntar y sin frenar. Tus herramientas están en el KIT del system prompt. Este es el brief entero (también quedó en /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/BRIEF.md por si lo necesitás releer después de una compactación):\n\n# BRIEF — Mito o verdad: consejos de huerta que pueden arruinar tus tomates · Don Genaro\n\nHacé "
-  },
-  {
-   "k": "tool",
-   "t": "ls -la /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/ && echo \"---REFS---\" && ls -la /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/refs/ 2>/dev/null && echo \"---TOOLS---\" && ls /opt/estudio/repo/motor/tools/"
-  },
   {
    "k": "res",
    "t": "total 60\ndrwxrwxrwx+ 6 runner runner 4096 Nov  9 00:04 .\ndrwxrwxrwx+ 3 runner runner 4096 Nov  9 00:04 ..\n-rw-rw-rw-+ 1 runner runner 9187 Nov  9 00:04 BRIEF.md\ndrwxrwxrwx+ 2 runner runner 4096 Nov  9 00:04 avatar\ndrwxrwxrwx+ 2 runner runner 4096 Nov  9 00:04 fotos\ndrwxrwxrwx+ 2 runner runner 4096 Nov  9 00:04 refs\ndrwxrwxrwx+ 2 runner runner 4096 Nov  9 00:04 voz\n---REFS---\ntotal 3976\ndrwxrwxrwx+"
@@ -138,6 +130,54 @@
   {
    "k": "res",
    "t": "  ✓ bloque 5: 161 s (s2.1-pro-free)\n  ✓ bloque 4: 172 s (s2.1-pro-free)\n  ✓ bloque 7: 23 s (s2.1-pro-free)\n  ✓ bloque 6: 157 s (s2.1-pro-free)\n✓ voz/master.wav 19.2 min\n---\ntotal 198548\ndrwxrwxrwx+ 2 runner runner      4096 Nov  9 00:10 .\ndrwxrwxrwx+ 6 runner runner      4096 Nov  9 00:06 ..\n-rw-rw-rw-+ 1 sesion sesion  13551104 Nov  9 00:07 blk_000.wav\n-rw-rw-rw-+ 1 sesion sesion  14601570 Nov  9"
+  },
+  {
+   "k": "ai",
+   "t": "Voz lista (19,2 min). Ahora los tiempos por palabra."
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/tiempos.py . es 2>&1 | tail -20"
+  },
+  {
+   "k": "res",
+   "t": "✓ captions.json: 3080 palabras en 19.2 min"
+  },
+  {
+   "k": "tool",
+   "t": "sed -n '1,200p' /opt/estudio/repo/motor/tools/planos.py"
+  },
+  {
+   "k": "res",
+   "t": "# -*- coding: utf-8 -*-\n\"\"\"PLANOS — arma los planos del b-roll y shots_timed.json. NO escribas scripts propios para esto.\n  1) python <APP>/tools/planos.py <carpeta>\n       Necesita captions.json y avatar_ranges.json (el plan de ventanas: escribilo vos ANTES).\n       → planos.json: un plano de b-roll cada ~5 s (entre las ventanas del avatar), cortado en pausas del habla, con el\n         TEXTO que "
+  },
+  {
+   "k": "tool",
+   "t": "sed -n '1,140p' /opt/estudio/repo/motor/tools/avatar_it.py"
+  },
+  {
+   "k": "res",
+   "t": "# -*- coding: utf-8 -*-\r\n\"\"\"Avatar con InfiniteTalk (RunPod), UNA sola llamada por video (US$0,25 aprox.).\r\n   python <APP>/tools/avatar_it.py <carpeta_del_video> > <carpeta>/avatar/it.log 2>&1        (en segundo plano)\r\n\r\nLee <carpeta>/avatar_ranges.json (TODAS las ventanas donde se ve el avatar, plan CERRADO), voz/master.wav y la foto del\r\npresentador refs/avatar.png (máxima resolución, mirando "
+  },
+  {
+   "k": "ai",
+   "t": "Ahora armo el plan de ventanas del avatar (ritmo dinámico, ~50 %, cortes en pausas, con pantalla partida en tramos largos)."
+  },
+  {
+   "k": "tool",
+   "t": "# -*- coding: utf-8 -*-\nimport json, subprocess\n\nB = \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue\"\nW = [w for w in json.load(open(f\"{B}/captions.json\", encoding=\"utf8\")) if w.get(\"text\", \"\").strip()]\ndur = round(float(subprocess.run([\"ffprobe\",\"-v\",\"error\",\"-show_entries\",\"format=duration\",\"-of\",\"csv=p=0\",f\"{B}/voz/master.wav\"],capture_output=True,text=True).stdout.strip())*"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gen_avatar.py (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python3 gen_avatar.py"
+  },
+  {
+   "k": "res",
+   "t": "ventanas: 46 · contenido 565.9s · reel 579.7s (tope 590)\ncobertura 49.1% · huecos: min 4.2s max 52.8s · malos 11\nprimera: {'file': 'avatar/A0.mp4', 'frame': 'refs/avatar.png', 'startMs': 0, 'endMs': 19120}\nSPLIT s01 izq 268.8-284.2s ::  La  planta  manda  el  calcio  a  las  hojas  primero  y  cuando  el  fruto  se  queda  sin,  se  pudre  la  punta.  La  cáscara  de  huevo,  además,  tarda  meses"
   }
  ],
  "maquinas": 1,
