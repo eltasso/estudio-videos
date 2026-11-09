@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794184129.2800896,
+ "actualizado": 1794184192.217906,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,86 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0644,
+  "deepseek": 0.0713,
   "gpt": 0.0258,
   "gpt_img": 10,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0902
+  "total": 0.0971
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/refs/cara.png\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "ai",
-   "t": "Reviso la hoja: buena calidad general. Marco para rehacer `p001_c` (cara más redonda que el avatar) y `p036` (el clavo no se ve). Lanzo la segunda tanda."
-  },
-  {
-   "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/fotos.py . pedidos_02.json > fotos/fotos_02.log 2>&1 & echo \"FOTOS2_PID=$!\"; sleep 5; tail -8 fotos/fotos_02.log; echo \"=== STOCK ===\"; tail -3 clips/stock.log; ls clips/*.mp4 2>/dev/null | wc -l"
-  },
-  {
-   "k": "res",
-   "t": "FOTOS2_PID=9187\n00:18:03 → batch batch_6af1113aefd881909d64859f32ced0ad · 9 fotos · sin referencia · low 1088x608\n00:18:03 → batch batch_6af1113b9a3c8190bd9e716dc55b80ee · 1 fotos · con la cara del presentador · low 1088x608\n00:18:03 batch 32ced0ad: validating 0/0\n00:18:03 batch c55b80ee: validating 0/0\n=== STOCK ===\n00:13:43 → 95 clips por buscar\n00:16:20 bajados 95/95\n00:16:20 FIN: 95/95 clips e"
-  },
-  {
-   "k": "ai",
-   "t": "Stock completo (95/95 en 3 min). Armo hojas de control de los clips."
-  },
-  {
-   "k": "tool",
-   "t": "cd /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue\npython3 - <<'EOF'\nimport glob, subprocess, os\nclips=sorted(glob.glob('clips/*.mp4'))\nfor i in range(0,len(clips),12):\n    grupo=clips[i:i+12]\n    out=f'qc/hoja_clips_{i//12+1}.jpg'\n    subprocess.run(['python','/opt/estudio/repo/motor/tools/hoja.py',out]+grupo,check=True)\n    print(out, ' '.join(os.path.basename(c)[:-4] for c in"
-  },
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_clips_1.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_clips_2.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_clips_3.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_clips_4.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_clips_5.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_clips_6.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_clips_7.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_clips_8.jpg (11 cuadros, 4x3)\nqc/hoja_clips_1.jpg p002 p003 p004 p007 p008 p00"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_clips_1.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_clips_2.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_clips_3.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_clips_4.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_clips_5.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
   {
    "k": "tool",
    "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_clips_6.jpg\"}"
@@ -178,6 +106,78 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 19"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivos: 10/19 → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "echo \"=== STOCK REDO ===\"; tail -4 clips/stock_redo.log; echo \"=== SFX FUENTES ===\"; cat sfx/_sfx_fuentes.json 2>/dev/null | head -60; echo; ls sfx/"
+  },
+  {
+   "k": "res",
+   "t": "=== STOCK REDO ===\n00:19:47 → 29 clips por buscar\n00:20:34 bajados 29/29\n00:20:34 FIN: 29/29 clips en clips/\n=== SFX FUENTES ===\n{\n \"agua\": [\n  {\n   \"archivo\": \"agua.mp3\",\n   \"nombre\": \"Pouring water to mug\",\n   \"dur\": 4,\n   \"url\": \"https://assets.mixkit.co/active_storage/sfx/1310/1310-preview.mp3\",\n   \"pagina\": \"https://mixkit.co/free-sound-effects/water/\"\n  },\n  {\n   \"archivo\": \"agua_2.mp3\",\n   "
+  },
+  {
+   "k": "tool",
+   "t": "python3 - <<'EOF'\nimport json\nW=json.load(open('captions.json',encoding='utf8'))\nobjetivos=['profundo','cáscaras','poda','ducha','presión','regar','huevo']\nfor o in objetivos:\n    hits=[(w['text'],w['startMs']) for w in W if o.lower() in w['text'].lower()]\n    print(o, hits[:8])\nEOF\necho '---rocio---'; python3 -c \"\nimport json;d=json.load(open('sfx/_sfx_fuentes.json',encoding='utf8'));print(json.d"
+  },
+  {
+   "k": "res",
+   "t": "profundo [(' profundo', 202040), (' profundo', 958505)]\ncáscaras [(' cáscaras', 15500), (' cáscaras,', 24260), (' cáscaras', 233920), (' cáscaras', 246320), (' cáscaras', 251780), (' cáscaras.', 310002), (' cáscaras,', 518262)]\npoda [(' poda', 615963)]\nducha [(' ducha', 1142685)]\npresión [(' presión', 1143705)]\nregar [(' regar.', 134540), (' regar', 151260), (' Regar', 182940), (' Regar', 201620),"
+  },
+  {
+   "k": "tool",
+   "t": "[\n{\"file\":\"agua.mp3\",\"t\":202040,\"gain\":0.05,\"fade\":0.4},\n{\"file\":\"huevo_2.mp3\",\"t\":234780,\"gain\":0.045,\"fade\":0.4},\n{\"file\":\"tijera.mp3\",\"t\":615963,\"gain\":0.05,\"fade\":0.4},\n{\"file\":\"rocio.mp3\",\"t\":1143705,\"gain\":0.045,\"fade\":0.4}\n]\n"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/cues.json (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python3 - <<'EOF'\nimport json, subprocess, os\npeds=json.load(open('stock_02.json',encoding='utf8'))\nids=[p['id'] for p in peds]\nfor i in range(0,len(ids),12):\n    grupo=[f'clips/{x}.mp4' for x in ids[i:i+12] if os.path.exists(f'clips/{x}.mp4')]\n    out=f'qc/hoja_redo_{i//12+1}.jpg'\n    subprocess.run(['python','/opt/estudio/repo/motor/tools/hoja.py',out]+grupo,check=True)\n    print(out, ' '.join(o"
+  },
+  {
+   "k": "res",
+   "t": "hoja: qc/hoja_redo_1.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_redo_2.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_redo_3.jpg (5 cuadros, 4x2)\nqc/hoja_redo_1.jpg p004 p013 p017 p021 p023 p038 p039 p040 p041 p046 p047 p054\nqc/hoja_redo_2.jpg p056 p059 p060 p064 p066 p069 p074 p078 p079 p083 p089 p090\nqc/hoja_redo_3.jpg p093 p097 p101 p104 p106"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_redo_1.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_redo_2.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_redo_3.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "ai",
+   "t": "Quedan ~11 clips claramente fuera de tema. Hago una última ronda puntual (búsquedas más literales) y sigo."
+  },
+  {
+   "k": "tool",
+   "t": "python3 - <<'EOF'\nimport json\npeds=[\n{\"id\":\"p023\",\"buscar\":[\"egg carton eggs kitchen\",\"eggshells pile\"]},\n{\"id\":\"p038\",\"buscar\":[\"soil test kit\",\"garden soil testing\"]},\n{\"id\":\"p041\",\"buscar\":[\"tomato blossom\",\"yellow tomato flower\"]},\n{\"id\":\"p056\",\"buscar\":[\"mold on plant\",\"fungus close up\"]},\n{\"id\":\"p059\",\"buscar\":[\"pruning tomato plant\",\"plant stem leaves close up\"]},\n{\"id\":\"p060\",\"buscar\":[\"pr"
+  },
+  {
+   "k": "res",
+   "t": "listo 11\nPID=14308\n00:29:48 → 11 clips por buscar"
   }
  ],
  "maquinas": 1,
