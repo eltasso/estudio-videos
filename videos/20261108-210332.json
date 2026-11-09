@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794187928.2464736,
+ "actualizado": 1794187991.2096713,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -40,45 +40,25 @@
   {
    "k": "armado",
    "n": "Armado",
-   "st": "active",
+   "st": "done",
    "info": "210 segmentos"
   },
   {
    "k": "qc",
    "n": "QC",
-   "st": "pending",
-   "info": ""
+   "st": "active",
+   "info": "REPORTE.md"
   }
  ],
  "costo": {
-  "deepseek": 0.1132,
+  "deepseek": 0.1178,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1642
+  "total": 0.1688
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_fotos_split.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "CONTROL FOTOS — modo Ahorro\n- Miré qc/hoja_fotos.jpg (12 fotos) y qc/hoja_fotos_split.jpg (5 de pantalla partida), más las hojas de prueba qc/hoja_fotos_test.jpg y qc/hoja_fotos_test2.jpg.\n- Total: 17 fotos con gpt-image (tope Ahorro 20). 3 con el presentador (mínimo 3): p001 (gancho), p006 (credencial) y p103 (confesión). 5 creativas con detalle narrativo: p005 (grilla «CONSEJOS DE HUERTA / 3 DE "
-  },
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gates/fotos_auto.txt (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "echo \"=== RENDER ===\"; tail -3 render.log; ls segments/*.mp4 2>/dev/null | wc -l; echo \"=== AVATAR ===\"; tail -4 avatar/it.log; ls avatar/*.mp4 2>/dev/null | wc -l"
-  },
   {
    "k": "res",
    "t": "=== RENDER ===\n40\n=== AVATAR ===\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n0"
@@ -178,6 +158,26 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "ai",
+   "t": "Mientras termina RunPod, dejo armado el reporte con los datos ya cerrados."
+  },
+  {
+   "k": "tool",
+   "t": "# REPORTE — Mito o verdad: consejos de huerta que pueden arruinar tus tomates\n\n## Qué se hizo\n- **Guion**: 16.161 caracteres (3.049 palabras), en la voz de Don Genaro. Abre con «¡Hola, gente de YouTube! ¿Cómo andan?», gancho con número y objeto (3 de cada 4 consejos / tomate con el culito negro), credencial, prueba del dedo y prueba de la flor, 15 consejos con anécdota fechada y cambio concreto, p"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/REPORTE.md (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "ps aux | grep \"[a]vatar_it\" | awk '{print $2,$10,$11,$12,$13}'; echo '---'; date; tail -2 avatar/it.log; python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
   }
  ],
  "maquinas": 1,
