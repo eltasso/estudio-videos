@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794182962.6462855,
+ "actualizado": 1794183025.8297567,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -17,7 +17,7 @@
    "k": "voz",
    "n": "Voz",
    "st": "active",
-   "info": "8 bloques"
+   "info": "19:12 min"
   },
   {
    "k": "tiempos",
@@ -51,12 +51,12 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0141,
+  "deepseek": 0.0144,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0141
+  "total": 0.0144
  },
  "eventos": [
   {
@@ -126,6 +126,18 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe voz/master.wav"
+  },
+  {
+   "k": "res",
+   "t": "✓ existe voz/master.wav (101.6 MB, 220 s)"
+  },
+  {
+   "k": "tool",
+   "t": "tail -5 voz/voz.log; echo \"---\"; ls -la voz/; echo \"---\"; ffprobe -v error -show_entries format=duration -of csv=p=0 voz/master.wav 2>/dev/null; echo \"---PROC---\"; ps aux | grep -c \"[v]oz.py\""
+  },
+  {
+   "k": "res",
+   "t": "  ✓ bloque 5: 161 s (s2.1-pro-free)\n  ✓ bloque 4: 172 s (s2.1-pro-free)\n  ✓ bloque 7: 23 s (s2.1-pro-free)\n  ✓ bloque 6: 157 s (s2.1-pro-free)\n✓ voz/master.wav 19.2 min\n---\ntotal 198548\ndrwxrwxrwx+ 2 runner runner      4096 Nov  9 00:10 .\ndrwxrwxrwx+ 6 runner runner      4096 Nov  9 00:06 ..\n-rw-rw-rw-+ 1 sesion sesion  13551104 Nov  9 00:07 blk_000.wav\n-rw-rw-rw-+ 1 sesion sesion  14601570 Nov  9"
   }
  ],
  "maquinas": 1,
