@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """EDICIÓN EXTREMA (opcional, la activa el panel): python <APP>/tools/extrema.py <carpeta_del_video> [--tope 0.20] [--max 12] [--sin-render]
-Elige los mejores momentos SIN avatar, DeepSeek flash escribe una partitura corta por momento (qué operación, qué fotos,
-qué palabras en pantalla y en qué cuadro) y el motor de Remotion (APP/extrema) la vuelve una pieza de motion graphics.
-Deja extrema/xmNN.mp4 + extrema/manifest.json; render.py las mete en la línea (nunca encima del avatar).
+Por defecto va la edición LIBRE (extrema_libre.py): DeepSeek decide y programa cada componente; el código corre como el usuario sin claves.
+Deja extrema/manifest.json (escenas completas: render.py las mete en la línea, nunca sobre el avatar) y extrema/capas.json (capas con
+transparencia: assemble.py las pone encima, sin tapar la cara). Con --partituras va el método anterior, por catálogo.
 TOPE DURO: cuando lo gastado llega al tope deja de pedir; lo que no llegó queda con el b-roll normal.
 Si un momento falla (partitura inválida, render roto) ese momento queda con el b-roll normal: nunca rompe el video.
 El render a MP4 corre SOLO en GitHub Actions (en la PC usá --sin-render)."""
@@ -60,25 +60,27 @@ class Caja:
         with s.lk: s.reservado -= monto; s.gastado += real; s.n += 1
 
 
-def ia(caja, msgs, reserva, max_tokens=9000, pensar=True):
+def ia(caja, msgs, reserva, max_tokens=9000, pensar=True, js=True, timeout=400, intentos=3):
     if not caja.pedir(reserva): raise RuntimeError("tope")
     real = 0.0
     try:
-        body = {"model": _cfg.leer().get("modelo") or "deepseek-flash", "max_tokens": max_tokens, "temperature": 0.9, "messages": msgs, "response_format": {"type": "json_object"}}
+        body = {"model": _cfg.leer().get("modelo") or "deepseek-flash", "max_tokens": max_tokens, "temperature": 0.9, "messages": msgs}
+        if js: body["response_format"] = {"type": "json_object"}
+        if not js: body["thinking"] = {"type": "enabled"}
         if not pensar: body["thinking"] = {"type": "disabled"}                   # obra: medido, 10 veces más barata y la idea sale igual
         if "flash" not in body["model"]: body["model"] = "deepseek-flash"        # edición extrema va siempre en flash
         try: k = _cfg.clave("deepseek")
         except SystemExit: k = ""
         rq = urllib.request.Request(_cfg.url("https://api.deepseek.com/chat/completions"), data=json.dumps(body).encode(),
                                     headers={"Authorization": "Bearer " + k, "Content-Type": "application/json", "User-Agent": "estudio-videos/1.0"})
-        for i in range(3):
+        for i in range(intentos):
             if caja.gastado + real >= caja.tope: raise RuntimeError("tope")     # el tope es duro también entre reintentos
             try:
-                r = json.load(urllib.request.urlopen(rq, timeout=400)); u = r.get("usage") or {}
+                r = json.load(urllib.request.urlopen(rq, timeout=timeout)); u = r.get("usage") or {}
                 hit = u.get("prompt_cache_hit_tokens", 0)
                 real += (hit * PRECIO["hit"] + (u.get("prompt_tokens", 0) - hit) * PRECIO["miss"] + u.get("completion_tokens", 0) * PRECIO["out"]) / 1e6
                 c = (r["choices"][0]["message"].get("content") or "").strip()
-                if c: return json.loads(c[c.find("{"):c.rfind("}") + 1])
+                if c: return c if not js else json.loads(c[c.find("{"):c.rfind("}") + 1])
             except urllib.error.HTTPError as e:
                 if e.code in (401, 402, 403): raise RuntimeError("DeepSeek %d" % e.code)
             except (ValueError, KeyError): pass
@@ -373,6 +375,16 @@ def main():
         i, ext = os.path.splitext(f)
         if ext.lower() in (".png", ".jpg", ".jpeg", ".webp") and not i.startswith("_"): fotos[i] = B + "/fotos/" + f
     if len(fotos) < 8: log("muy pocas fotos (%d): no hay edición extrema" % len(fotos)); return
+    if "--partituras" not in a:
+        import extrema_libre
+        for i in fotos: FT.setdefault(i, {})["_d"] = descripcion(FT.get(i, {}).get("prompt"))
+        for f in glob.glob(B + "/clips/*.json"):        # los clips de stock traen lo que muestran
+            i = os.path.basename(f)[:-5]; m = (jl(f, {}) or {}).get("muestra") if not i.startswith("_") else None
+            if m: FT.setdefault(i, {})["_d"] = m
+        for i in [os.path.splitext(x)[0] for x in os.listdir(B + "/clips")] if os.path.isdir(B + "/clips") else []:
+            if not FT.get(i, {}).get("_d") and FT.get(i, {}).get("prompt"): FT[i]["_d"] = descripcion(FT[i]["prompt"])
+        extrema_libre.correr(B, X, W, AV, FT, fotos, PKG, caja, nmax, ia, log, _cfg.gasto)
+        return
     prev = jl(X + "/partituras.json", {}) or {}
     if prev.get("momentos") and "--rehacer" not in a:   # otra máquina ya las compuso (GitHub corta cada 6 h): no se paga dos veces
         momentos = prev["momentos"]; partes = {k: m["partitura"] for k, m in enumerate(momentos) if m.get("partitura")}
@@ -532,7 +544,7 @@ def renderizar(B, X, fotos, partes, momentos, caja):
         r = subprocess.run(["npm", "i", "--no-audit", "--no-fund", "--loglevel=error"], cwd=T, capture_output=True, text=True, timeout=900)
         if r.returncode: log("npm falló, queda el b-roll normal:", r.stderr[-400:]); return
     else:
-        shutil.copytree(PKG + "/src", T + "/src", dirs_exist_ok=True, ignore=shutil.ignore_patterns("gen")); shutil.copy2(PKG + "/render.mjs", T + "/render.mjs")
+        shutil.copytree(PKG + "/src", T + "/src", dirs_exist_ok=True, ignore=shutil.ignore_patterns("gen"), copy_function=shutil.copyfile); shutil.copyfile(PKG + "/render.mjs", T + "/render.mjs")
     G = T + "/src/gen"; shutil.rmtree(G, ignore_errors=True); os.makedirs(G)
     pub = T + "/public"; os.makedirs(pub + "/fotos", exist_ok=True)
     from PIL import Image
@@ -572,7 +584,7 @@ if __name__ == "__main__":
     _arg = sys.argv[1:]; _B = os.path.abspath(_arg[0] if _arg and not _arg[0].startswith("--") else os.getcwd())
     _marca = os.path.join(_B, "extrema", "EN_CURSO") if "--fondo" in _arg else None
     try:
-        if _marca and os.path.exists(os.path.join(_B, "extrema", "manifest.json")): log("las piezas ya estaban hechas"); sys.exit(0)
+        if _marca and os.path.exists(os.path.join(_B, "extrema", "capas.json")): log("las piezas ya estaban hechas"); sys.exit(0)
         if _marca: os.makedirs(os.path.dirname(_marca), exist_ok=True); open(_marca, "w").write(str(os.getpid()))
         main()
     except Exception as e:      # nunca rompe el video: sin manifest, render.py usa el b-roll normal

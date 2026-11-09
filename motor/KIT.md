@@ -11,8 +11,8 @@ Las claves ya están configuradas: las herramientas las leen solas. **Nunca las 
    ⛔ **CERO FOTOS REPETIDAS:** un plano = una foto distinta. El validador lo frena con ✗.
 5. **Avatar**: con el plan cerrado, `avatar_it.py` en segundo plano (1 sola llamada, §3).
 6. **Sonido** (§5b) mientras llega el avatar: `sonidos.py` + `cues.json`.
-7. **Render de prueba** (`render.py --limit 10`) → hoja → mirala. Después `render.py` completo + `assemble.py`.
-8. **Final**: corré el **revisor** (`revisor.py`, §6), aplicá lo que marque, validá `--etapa final`, `meta.json`, `REPORTE.md`. Listo: el usuario lo descarga desde el panel.
+7. **Render de prueba** (`render.py --limit 10`) → hoja → mirala. El render completo y el armado **los hace el motor solo**: los planos sin avatar mientras se espera y, cuando llega el avatar, sus segmentos y `final.mp4`. Vos esperá con `esperar.py --existe final.mp4` y usá ese tiempo para `meta.json` y `REPORTE.md`. Sólo si `final.mp4` no aparece a los 40 min de haber llegado el avatar, corré vos `render.py` + `assemble.py`.
+8. **Final**: corré el **revisor** (`revisor.py`, §6) una vez y validá `--etapa final`. Si no marcó nada, terminaste: no hagas otra revisión ni otro armado. Si marcó algo, hacé **una sola pasada** con lo marcado y nada más. Listo: el usuario lo descarga desde el panel.
 
 Reglas anti-vueltas:
 - **Esperar = SÓLO `python {APP}/tools/esperar.py`** (hasta 9 min de una: `--log render.log`, `--cuenta "fotos/*.png" 120`, `--existe final.mp4`; llamala con timeout 600000). **Prohibido `sleep` en bucle** y mirar con `ls`/`tail` cada minuto.
@@ -96,14 +96,14 @@ gpt-image puede hacer cualquier cosa. **4 a 6 por video**, en los momentos clave
 - Revisalas con Read: repedí si hay palabras mal escritas, cambia la cara, manos rotas o se ve "de stock". No dos seguidas. Pueden ir en el lado libre de una pantalla partida.
 
 ## 4c. Modo Ahorro — sólo si el brief dice MODO AHORRO
-Clips reales de stock (gratis) en casi todo el video y pocas fotos, donde un clip no alcanza.
+Más o menos mitad y mitad: clips reales de stock (gratis) y fotos. Las fotos son las que le dan identidad al canal: no las reduzcas a unas pocas.
 ```
 python {APP}/tools/stock.py <carpeta> <carpeta>/stock_01.json > <carpeta>/clips/stock.log 2>&1 &
 ```
 - Antes creá la carpeta `clips/`. `stock_01.json = [{"id":"p003","muestra":"hands pressing tomato seeds into a seed tray","buscar":["sowing tomato seeds tray","planting seeds seedling tray"]}]` (`id` = el del plano). De 1 a 3 búsquedas por plano, de la más precisa a la más general.
 - ⭐ **`muestra` en TODOS** (inglés, 3 a 30 palabras): lo que tiene que verse LITERAL en ese segundo, con el objeto que nombra la frase. stock.py junta hasta 10 candidatos y un juez con visión elige el que muestra eso (anota el puntaje en `clips/<id>.json` → `"juez"`). La 1ª búsqueda = acción + objeto exacto ("sowing tomato seeds", no "garden"); las otras, más generales.
-- **Primera persona → foto, no clip:** si la frase es algo que hizo el presentador ("tiré los huevos", "sembré", "le dije"), ese plano va con `fotos.py` y `cara: true`, dentro del tope de 20. Un clip de stock nunca puede mostrar al presentador.
-- **Máximo 20 fotos con `fotos.py` en todo el video** (la compuerta lo controla): las 3 del gancho, mínimo 3 con `cara: true`, 4 creativas (§4b), las de pantalla partida (siempre foto: usá pocas) y lo específico que un clip no puede mostrar (un objeto puntual, un papel con texto, este personaje haciendo algo). **Todo lo demás, clip.** Cada plano va con clip o con foto, nunca sin nada.
+- **Primera persona → foto, no clip:** si la frase es algo que hizo el presentador ("tiré los huevos", "sembré", "le dije"), ese plano va con `fotos.py` y `cara: true`, dentro del tope. Un clip de stock nunca puede mostrar al presentador.
+- **Alrededor de la MITAD de los planos va con foto de `fotos.py`** (tope: 60 % de los planos, nunca menos de 20; la compuerta lo controla), repartidas por todo el video: nunca más de 3 clips seguidos. Entre esas fotos: las 3 del gancho, mínimo 3 con `cara: true`, 4 creativas (§4b), las de pantalla partida (siempre foto: usá pocas) y lo específico que un clip no puede mostrar (un objeto puntual, un papel con texto, este personaje haciendo algo), más las que sostengan el look del canal. **Los demás planos, clip.** Cada plano va con clip o con foto, nunca sin nada.
 - **Búsquedas en inglés, 2 a 5 palabras, sólo lo que se VE:** objeto + acción + lugar. "pouring tea into cup", "old man walking in park", "rain on window". Nunca ideas abstractas ("health", "success"), títulos, marcas ni frases del guion traducidas.
 - Si el video habla de alguien mayor, que la búsqueda lo diga ("senior", "elderly"). Preferí manos, objetos, naturaleza, lugares y gente de espaldas o a lo lejos: nadie debe parecer otro presentador hablando a cámara. En nichos de manos (huerta, cocina, arreglos, cuidado) la búsqueda lleva "hands" y no van caras de otras personas.
 - Armá hojas de 12 con `hoja.py` (acepta videos) y miralas, sobre todo los de `"juez"` ≤ 4. Cambiá los que no muestren lo que dice la frase, una marca grande o un cartel en otro idioma: borrá `clips/<id>.mp4` y pedí ese id con una búsqueda MÁS LITERAL, todas juntas en UNA sola ronda (los clips no cuestan; el juez, centavos).
@@ -133,7 +133,7 @@ python {APP}/tools/sonidos.py <carpeta> <carpeta>/sfx_pedidos.json --tomas 3 > <
 ## 6. Control de calidad (no frena)
 - `python {APP}/tools/validar.py <carpeta> --etapa guion|fotos|render|final --min <minutos>`. Sólo frena con ✗ (guion fuera de largo, video roto, sin audio, desincronizado, no arranca con el avatar, avatar congelado, hueco negro > 0,5 s, fotos repetidas, menciones de IA, sin título).
 - En fotos/render/final mirá la hoja con Read y escribí en `gates/<etapa>_auto.txt` qué miraste y qué arreglaste. Después SEGUÍ.
-- **Revisor final:** con `final.mp4` listo, `python {APP}/tools/revisor.py <carpeta>`. Deja los cuadros en `qc/f_*.jpg`, mide los huecos negros y mira con visión si hay fallas claras (cara deforme, glitch del avatar, marca de agua, foto repetida). Lo que encuentra queda en `gates/correcciones.txt`: aplicalo, anotalo en `gates/correcciones_hechas.txt`, volvé a armar y corrélo una vez más. Máximo 2 revisiones. Si algo de eso no se puede arreglar, anotalo en REPORTE.md y SEGUÍ.
+- **Revisor final:** con `final.mp4` listo, `python {APP}/tools/revisor.py <carpeta>`. Deja los cuadros en `qc/f_*.jpg`, mide los huecos negros y mira con visión si hay fallas claras (cara deforme, glitch del avatar, marca de agua, foto repetida). Lo que encuentra queda en `gates/correcciones.txt`: arreglá SÓLO esos planos, anotalo en `gates/correcciones_hechas.txt` y corré `render.py` + `assemble.py` (rehacen únicamente lo que cambió, tarda minutos). Es **una sola pasada y una sola revisión con IA**: `assemble.py` se niega a una segunda. Si algo no se puede arreglar, anotalo en REPORTE.md y TERMINÁ.
 - Si el usuario te escribe correcciones en el chat, aplicalas antes del armado final.
 - `REPORTE.md`: qué se hizo, gasto, problemas y qué falta.
 

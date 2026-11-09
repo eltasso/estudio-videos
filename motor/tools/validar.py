@@ -142,6 +142,11 @@ if hasta >= 2:
             OK("avatar: desfase medido y corregido por avatar_it.py (máx %d ms)" % mx)
             if sy.get("perdidas"): A("avatar: el reel salió corto, sin clip: %s → sacalas de avatar_ranges.json (van con foto) y re-renderizá" % sy["perdidas"])
         else: A("avatar: no hay avatar/it_sync.json (el avatar no salió de avatar_it.py: el desfase no está medido)")
+    try: _ng = json.load(open(P("segments", "_malos.json"), encoding="utf8"))
+    except Exception: _ng = []
+    _ngs = [x for x in _ng if x.get("stock")]
+    (OK if not _ngs else F)("clips de stock sin negro ni roturas%s" % ((" — %d malos (ej. %s en %.0f s): borrá ese clips/<id>.mp4, pedí ese id con otra búsqueda en stock.py y corré render.py + assemble.py" % (len(_ngs), _ngs[0]["file"], _ngs[0]["t0"])) if _ngs else ""))
+    if len(_ng) > len(_ngs): A("%d planos que no son de stock con partes casi negras (ej. %s): miralos" % (len(_ng) - len(_ngs), [x for x in _ng if not x.get("stock")][0]["file"]))
     if not os.path.exists(P("gates", "render_auto.txt")):
         A("falta tu revisión visual de los 10 segmentos de prueba: mirá qc/hoja_render.jpg con Read y escribí gates/render_auto.txt (después SEGUÍ).")
 
@@ -184,4 +189,8 @@ for m in oks: print("  ✓", m)
 for m in avisos: print("  ! ", m)
 for m in fallos: print("  ✗", m)
 print("RESULTADO:", "FALLA (%d)" % len(fallos) if fallos else "OK")
+if etapa == "final" and not fallos:        # nube.py lo mira para no dejar que la sesión siga inventando vueltas después de un control que pasó
+    try:
+        os.makedirs(P("gates"), exist_ok=True); json.dump({"final_mtime": os.path.getmtime(fin), "t": __import__("time").time()}, open(P("gates", "qc_ok.json"), "w"))
+    except Exception: pass
 sys.exit(1 if fallos else 0)

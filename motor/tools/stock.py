@@ -38,7 +38,12 @@ def jsave(p, o):
 
 
 # ── compuerta ─────────────────────────────────────────────
-peds = jload(sys.argv[2], None)
+CAMBIAR = sys.argv[2] == "--cambiar"        # render.py encontró un clip negro o roto: va otro de los que ya salieron en su búsqueda
+if CAMBIAR:
+    peds = [{"id": i, "buscar": [str(jload(f"{O}/{i}.json", {}).get("buscar") or "stock footage clip")]} for i in sys.argv[3].split(",") if i]
+    for p in peds:
+        if os.path.exists(f"{O}/{p['id']}.mp4"): os.replace(f"{O}/{p['id']}.mp4", f"{O}/{p['id']}.descartado")
+else: peds = jload(sys.argv[2], None)
 planos = {p["id"]: p for p in (jload(B + "/planos.json", []) or [])}
 if not isinstance(peds, list) or not peds: sys.exit("⛔ el pedido tiene que ser una lista: [{\"id\":\"p003\",\"buscar\":[\"...\"]}]")
 if not planos: sys.exit("⛔ falta planos.json: corré tools/planos.py primero")
@@ -249,6 +254,12 @@ def medir(f):
     except Exception: return 0
 
 
+def roto_o_negro(f, seg):
+    """Antes de aceptar un clip: que se pueda leer entero y que no tenga negro. El mismo criterio que el revisor final."""
+    r = subprocess.run(["ffmpeg", "-hide_banner", "-t", "%.2f" % seg, "-f", "mp4", "-i", f, "-an", "-vf", "scale=320:-2,blackdetect=d=0.5:pix_th=0.10", "-f", "null", "-"], capture_output=True, text=True, encoding="utf8", errors="replace")
+    return r.returncode != 0 or "black_start" in r.stderr
+
+
 def bajar(t):
     p, v, q, need = t; i = p["id"]; tmp = f"{O}/_{i}.part"; dst = f"{O}/{i}.mp4"
     try:
@@ -262,6 +273,7 @@ def bajar(t):
                 f.write(b)
         r2 = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", tmp, "-t", "%.2f" % (need / 1000 + 1), "-an", "-c", "copy", "-movflags", "+faststart", "-f", "mp4", dst + ".tmp"], capture_output=True, text=True)
         if r2.returncode or medir(dst + ".tmp") < need / 1000 - .25: raise ValueError("clip ilegible o corto")
+        if roto_o_negro(dst + ".tmp", need / 1000): raise ValueError("clip negro o roto")
         os.replace(dst + ".tmp", dst)
         nota = next(([s, w] for x, s, w in notas.get(i, []) if x == str(v["id"])), None)
         jsave(f"{O}/{i}.json", {"id": i, "fuente": "Pexels", "buscar": q, "pexels": v["id"], "pagina": v["pagina"], "autor": v["autor"], **({"prev": v["prev"]} if v.get("prev") else {}), **({"juez": nota} if nota else {})})
@@ -277,7 +289,8 @@ def bajar(t):
 
 sin, corte = [], None
 log(f"→ {len(falta)} clips por buscar")
-try: juzgar_todos(falta)
+try:
+    if not CAMBIAR: juzgar_todos(falta)
 except SinAcceso as e: corte = str(e)
 except Exception as e: log(f"juez: falló ({type(e).__name__}) → sorteo como antes")
 pend = [] if corte else falta
@@ -302,5 +315,8 @@ if corte:
 sin = sorted(set(sin + [p["id"] for p in falta if not hecha(p["id"])]))
 previos = [x for x in jload(SIN, []) if not hecha(x)]
 jsave(SIN, sorted(set(previos + sin)))
+if CAMBIAR:
+    for p in peds:                     # si no apareció otro, vuelve el de antes y queda marcado para que lo vea la sesión
+        if not hecha(p["id"]) and os.path.exists(f"{O}/{p['id']}.descartado"): os.replace(f"{O}/{p['id']}.descartado", f"{O}/{p['id']}.mp4")
 log(f"FIN: {sum(hecha(p['id']) for p in peds)}/{len(peds)} clips en clips/" + (f" · sin clip: {', '.join(sin[:30])} → probá otra búsqueda una vez, o hacelos con fotos.py (no cuentan para el tope)" if sin else ""))
 sys.exit(0)

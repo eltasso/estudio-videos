@@ -9,10 +9,17 @@ Lee <carpeta>/shots_timed.json  = [{"id":"b01_gancho","startMs":0,"endMs":3200},
      <carpeta>/voz/master.wav (mide la duración sola).
 Si un clip de avatar todavía no existe usa su "frame" como foto fija con el cartel «Esperando avatar» (si falta una imagen, «Esperando imagen»); cuando el clip llega, volvé a correr: SOLO se rehacen los segmentos cuya fuente cambió.
 Escribe plan.json (para el panel y validar.py) + segments/NNNN.mp4 + segments/xf.json (fundidos avatar 0,6 s / foto 0,3 s). Después: python <APP>/tools/assemble.py <carpeta>."""
-import json, os, re, sys, subprocess, shutil, time
+import atexit, json, os, re, sys, subprocess, shutil, threading, time
 from concurrent.futures import ThreadPoolExecutor
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import etapas
+try: import fcntl
+except ImportError: fcntl = None
 
 B = (sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else os.getcwd()).replace("\\", "/").rstrip("/")
+PREVIO = "--previo" in sys.argv       # mientras se espera el avatar: sólo los planos que no dependen de él
+if "--limit" not in sys.argv:
+    etapas.marca(B, "previo" if PREVIO else "render", "ini"); atexit.register(lambda: etapas.marca(B, "previo" if PREVIO else "render", "fin"))
 FPS = 30
 W, H = 1920, 1080
 SW, SH = 3840, 2160
@@ -63,7 +70,7 @@ for s in shots:
 def _xm_en_curso():
     try: return time.time() - os.path.getmtime(B + "/extrema/EN_CURSO") < 100 * 60     # más viejo = quedó colgado: no se espera
     except OSError: return False
-if "--limit" not in sys.argv and _xm_en_curso() and all(os.path.exists(B + "/" + r["file"]) for r in ranges if r.get("file")):
+if "--limit" not in sys.argv and not PREVIO and _xm_en_curso() and all(os.path.exists(B + "/" + r["file"]) for r in ranges if r.get("file")):
     _t0 = time.time(); print("extrema: esperando las piezas (máx. 10 min)", flush=True)
     while _xm_en_curso() and time.time() - _t0 < 600: time.sleep(10)
     print("extrema: %s tras %d s" % ("llegaron" if not _xm_en_curso() else "no llegaron, va sin ellas", time.time() - _t0), flush=True)
@@ -128,7 +135,7 @@ _c0 = {}
 for r in ranges: _c0[r["file"]] = min(_c0.get(r["file"], 1e12), r.get("clipStartMs", r["startMs"]))
 for r in ranges:
     f = absp(r["file"])
-    if os.path.exists(f) and os.path.getsize(f) > 100000:
+    if PREVIO or (os.path.exists(f) and os.path.getsize(f) > 100000):     # en el previo el avatar cuenta como si estuviera: sus vecinos salen idénticos y no se rehacen
         out.append([f, r["startMs"], r["endMs"], True])
         OFF[(f, r["startMs"])] = max(0, r["startMs"] - r.get("clipStartMs", _c0[r["file"]])) / 1000
         if r.get("foto"):
@@ -155,17 +162,19 @@ for i in range(len(out) - 1):
     elif "/extrema/" in c[0] and d[1] - c[2] <= 1500: c[2] = d[1]
     elif d[1] - c[2] <= 800: c[2] = d[1]                 # avatar que sigue un instante más (su clip continúa o queda quieto)
     else: print("⚠ HUECO sin tapar entre dos videos en", c[2], "ms: el video se va a adelantar", d[1] - c[2], "ms")
+if out and abs(out[-1][2] - AUDIO_MS) <= 1500: out[-1][2] = AUDIO_MS     # el video termina justo con la voz, ni un cuadro de más
 # plan.json (lo dibuja el panel y lo revisa validar.py) sale de acá: nunca lo escribas a mano aparte
 def kind(p, isv):
     q = p.replace("\\", "/")
     return "av" if "/avatar/" in q else ("clip" if isv else "foto")
-json.dump({"voice_dur": round(AUDIO_MS / 1000, 3),
-           "segments": [dict({"kind": kind(p, v), "t0": round(a / 1000, 3), "t1": round(b / 1000, 3), "file": p}, **({"split": True} if (p, a) in SPL else {})) for p, a, b, v in out]},
-          open(B + "/plan.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+if not PREVIO:                        # el previo no cuenta para el panel: ahí sigue el plan con los carteles de espera
+    json.dump({"voice_dur": round(AUDIO_MS / 1000, 3),
+               "segments": [dict({"kind": kind(p, v), "t0": round(a / 1000, 3), "t1": round(b / 1000, 3), "file": p}, **({"split": True} if (p, a) in SPL else {})) for p, a, b, v in out]},
+              open(B + "/plan.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
 # frames exactos por limites acumulados
 total_frames = round(AUDIO_MS / 1000 * FPS)
-plan = []; OFFS = []; SPLS = []
+plan = []; OFFS = []; SPLS = []; T0S = [c[1] for c in out]
 for i, (p, a, b, isv) in enumerate(out):
     f0 = round(a / 1000 * FPS)
     f1 = round(b / 1000 * FPS)
@@ -179,7 +188,7 @@ for i in range(len(plan)):
     xm = "/extrema/" in plan[i][0].replace("\\", "/") or "/extrema/" in plan[i + 1][0].replace("\\", "/")   # la pieza de edición extrema entra con corte corto: la 1ª palabra no queda tapada
     plan[i].append(XF_FOTO if xm and "/avatar/" not in plan[i][0] + plan[i + 1][0] else (XF_AV if av else XF_FOTO))
 os.makedirs(B + "/segments", exist_ok=True)
-json.dump([{"n": x[1], "d": x[3]} for x in plan], open(B + "/segments/xf.json", "w"))
+if not PREVIO: json.dump([{"n": x[1], "d": x[3]} for x in plan], open(B + "/segments/xf.json", "w"))
 print("clips=%d frames=%d (%.2fs)" % (len(plan), sum(x[1] for x in plan), sum(x[1] for x in plan) / FPS))
 
 SEG = B + "/segments"
@@ -189,11 +198,14 @@ import random
 MOVES = ["in", "out", "izq", "der", "arriba", "abajo", "diag_in", "diag_out"]
 _MOT = {}
 def plan_motion():
-    """Movimiento al azar por foto (sin patron): tipo, intensidad y punto de foco distintos,
-    nunca el mismo tipo dos veces seguidas. Semilla fija = re-render identico."""
-    rng = random.Random(20261106); prev = None
-    for i, (p, n, isv, *_) in enumerate(plan):   # se sortea también para los videos: así un avatar que llega no corre el resto
-        t = rng.choice([m for m in MOVES if m != prev]); prev = t
+    """Movimiento al azar por foto (sin patron): tipo, intensidad y punto de foco distintos, nunca el mismo tipo dos veces seguidas.
+    La semilla sale del archivo y su momento, no de su posición: si entra una pieza o llega un avatar, lo demás no cambia y no se re-renderiza."""
+    prev = None
+    for i, (p, n, isv, *_) in enumerate(plan):   # se sortea también para los videos, para que nadie cambie de vecino al llegar un avatar
+        rng = random.Random("%s:%d" % (os.path.basename(p), T0S[i]))
+        t = rng.choice(MOVES)
+        if t == prev: t = MOVES[(MOVES.index(t) + 1) % len(MOVES)]
+        prev = t
         _MOT[i] = dict(t=t, A=rng.uniform(0.05, 0.13), Z=rng.uniform(1.07, 1.14),
                        cx=rng.uniform(0.3, 0.7), cy=rng.uniform(0.3, 0.65),
                        a=rng.uniform(0.0, 0.3), b=rng.uniform(0.7, 1.0))
@@ -216,14 +228,32 @@ def motion(idx, n):
         X = "(iw-iw/zoom)*(%.3f+%.3f*%s)" % (cx, d * 0.25, e)
     return "z='%s':x='%s':y='%s'" % (z, X, Y)
 
+def ver_negros(f):
+    """El mismo criterio que el revisor final, pero por plano y antes de armar."""
+    r = subprocess.run(["ffmpeg", "-hide_banner", "-i", f, "-an", "-vf", "scale=320:-2,blackdetect=d=0.5:pix_th=0.10", "-f", "null", "-"], capture_output=True, text=True, encoding="utf8", errors="replace")
+    return [[float(a), float(b)] for a, b in re.findall(r"black_start:([\d.]+) black_end:([\d.]+)", r.stderr)] or ([[-1, -1]] if r.returncode else [])
+
+
+def firma(i):
+    p, n0, isv, D = plan[i]; n = n0 + D; sp = SPLS[i]
+    _ver = lambda f: "%d:%d" % (os.path.getsize(f), int(os.path.getmtime(f)))   # si rehacés una foto con el mismo nombre, el segmento se rehace
+    return "%s|%d|%d|%.3f|%s|%s|%s" % (p, n, int(isv), OFFS[i], "" if isv and not sp else json.dumps(_MOT.get(i), sort_keys=True), json.dumps(sp, sort_keys=True) if sp else "", _ver(p) + ("," + _ver(sp["foto"]) if sp else ""))
+
+
+def rev_negro(p): return "/avatar/" not in p and "/extrema/" not in p
+
+
 def build(i):
     p, n0, isv, D = plan[i]
+    if PREVIO and ("/avatar/" in p or "/espera/" in p): return i, 0   # el avatar y los carteles quedan para cuando llegue
     n = n0 + D                      # cola para el fundido con el siguiente
-    dst = "%s/%04d.mp4" % (SEG, i)
+    final_seg = "%s/%04d.mp4" % (SEG, i); dst = "%s/_t%04d.mp4" % (SEG, i)   # se escribe al lado: un corte a mitad no deja un segmento roto con cara de bueno
     sp = SPLS[i]
-    _ver = lambda f: "%d:%d" % (os.path.getsize(f), int(os.path.getmtime(f)))   # si rehacés una foto con el mismo nombre, el segmento se rehace
-    firma = "%s|%d|%d|%.3f|%s|%s|%s" % (p, n, int(isv), OFFS[i], "" if isv and not sp else json.dumps(_MOT.get(i), sort_keys=True), json.dumps(sp, sort_keys=True) if sp else "", _ver(p) + ("," + _ver(sp["foto"]) if sp else ""))
-    if os.path.exists(dst) and os.path.exists(dst + ".src") and open(dst + ".src", encoding="utf-8").read() == firma:
+    frm = firma(i)
+    if os.path.exists(final_seg) and os.path.exists(final_seg + ".src") and open(final_seg + ".src", encoding="utf-8").read() == frm:
+        if rev_negro(p) and frm not in QC:
+            q = ver_negros(final_seg)
+            with QCL: QC[frm] = q
         return i, 0
     if sp:   # avatar en una mitad (encuadrado en la cara) + foto con movimiento en la otra, con una línea fina en el medio
         HW = W // 2
@@ -251,16 +281,82 @@ def build(i):
     r = subprocess.run(cmd, capture_output=True, text=True)
     if r.returncode != 0:
         return i, "ERR " + r.stderr[-300:]
-    open(dst + ".src", "w", encoding="utf-8").write(firma)
+    os.replace(dst, final_seg)
+    open(final_seg + ".src", "w", encoding="utf-8").write(frm)
+    if rev_negro(p):
+        q = ver_negros(final_seg)
+        with QCL: QC[frm] = q
     return i, 0
 
 plan_motion()
+QCF = SEG + "/_qc.json"; QCL = threading.Lock()
+try: QC = json.load(open(QCF, encoding="utf-8"))
+except Exception: QC = {}
+_lock = None
+if fcntl and "--limit" not in sys.argv:             # un render completo por vez: el que llega segundo espera y se encuentra todo hecho
+    try: _lock = open(SEG + "/.lock", "a"); fcntl.flock(_lock, fcntl.LOCK_EX)
+    except Exception as e: print("sin lock:", type(e).__name__)
+limit = int(sys.argv[sys.argv.index("--limit") + 1]) if "--limit" in sys.argv else len(plan)
+# lo ya renderizado se reusa aunque haya cambiado de lugar (una pieza de edición extrema corre todos los números)
+_previos = {}
+for f in os.listdir(SEG):
+    m = re.match(r"(\d{4})\.mp4\.src$", f)
+    if m and os.path.exists("%s/%s.mp4" % (SEG, m.group(1))):
+        try: _previos.setdefault(open("%s/%s" % (SEG, f), encoding="utf-8").read(), m.group(1))
+        except OSError: pass
+_mov, _reus = [], 0
+for i in range(limit):
+    try: fr = firma(i)
+    except OSError: continue
+    j = _previos.get(fr)
+    if j is None or j == "%04d" % i: continue
+    try:
+        if open("%s/%04d.mp4.src" % (SEG, i), encoding="utf-8").read() == fr: continue
+    except OSError: pass
+    t = "%s/_m%04d.mp4" % (SEG, i)
+    try: shutil.copyfile("%s/%s.mp4" % (SEG, j), t); _mov.append((i, t, fr))
+    except OSError: pass
+for i, t, fr in _mov:
+    os.replace(t, "%s/%04d.mp4" % (SEG, i)); open("%s/%04d.mp4.src" % (SEG, i), "w", encoding="utf-8").write(fr); _reus += 1
+if _reus: print("reusados de otra posición:", _reus)
 for f in os.listdir(SEG):            # segmentos sobrantes de un plan anterior más largo
     m = re.match(r"(\d{4})\.mp4(\.src)?$", f)
     if m and int(m.group(1)) >= len(plan): os.remove(os.path.join(SEG, f))
-limit = int(sys.argv[sys.argv.index("--limit") + 1]) if "--limit" in sys.argv else len(plan)
-with ThreadPoolExecutor(max_workers=int(os.environ.get("RENDER_WORKERS") or 6)) as ex:
-    for i, err in ex.map(build, range(limit)):
-        if err:
-            print("seg", i, err)
+WORKERS = int(os.environ.get("RENDER_WORKERS") or 4)      # medido en Actions: de 3 a 8 tarda igual; 4 usa menos memoria
+def correr(lista):
+    with ThreadPoolExecutor(max_workers=WORKERS) as ex:
+        for i, err in ex.map(build, lista):
+            if err: print("seg", i, err)
+correr(range(limit))
 print("hechos", min(limit, len(plan)))
+
+
+def oscuros():
+    M = []
+    for i in range(limit):
+        try: fr = firma(i)
+        except OSError: continue
+        if QC.get(fr) and rev_negro(plan[i][0]): M.append(i)
+    return M
+
+
+def guardar_qc(M):
+    json.dump(QC, open(QCF, "w", encoding="utf-8"))
+    json.dump([{"i": i, "file": os.path.relpath(plan[i][0], B).replace("\\", "/"), "t0": round(T0S[i] / 1000, 2), "stock": "/clips/" in plan[i][0]} for i in M], open(SEG + "/_malos.json", "w", encoding="utf-8"), ensure_ascii=False)
+
+
+if "--limit" not in sys.argv:         # un clip negro o roto se cambia acá, antes de armar: nunca llega al final
+    M = oscuros()
+    for _v in range(2):
+        cl = [i for i in M if "/clips/" in plan[i][0]]
+        if not cl: break
+        ids = sorted({os.path.splitext(os.path.basename(plan[i][0]))[0] for i in cl})
+        print("clips negros o rotos, se cambian:", ", ".join(ids), flush=True)
+        r = subprocess.run([sys.executable, os.path.dirname(os.path.abspath(__file__)) + "/stock.py", B, "--cambiar", ",".join(ids)], capture_output=True, text=True, errors="replace")
+        print(r.stdout[-300:], flush=True)
+        for c in ids:                      # si la búsqueda se cortó a la mitad, vuelve el que estaba: el aviso lo ve el revisor, pero el render sigue
+            d, f = "%s/clips/%s.descartado" % (B, c), "%s/clips/%s.mp4" % (B, c)
+            if os.path.exists(d) and not os.path.exists(f): os.replace(d, f)
+        correr(cl); M = oscuros()
+    guardar_qc(M)
+    for i in M: print("⛔ plano negro o roto: %s en %.1f s" % (os.path.basename(plan[i][0]), T0S[i] / 1000), flush=True)

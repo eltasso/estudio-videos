@@ -691,8 +691,8 @@ def alertas():
 def faltan_para_video():
     c = _cfg.leer(); return [NOMBRES[k] for k in requeridas(c) if not (c.get(k) or "").strip()]
 
-AHORRO = ("\n**MODO AHORRO (lo eligió el usuario):** seguí el §4c del KIT. Máximo 20 fotos con gpt-image en todo el video, incluidas las del presentador y las creativas; "
-          "todos los demás planos van con clips de stock por tools/stock.py. Esto manda sobre lo que el brief diga de la cantidad de fotos.")
+AHORRO = ("\n**MODO AHORRO (lo eligió el usuario):** seguí el §4c del KIT. Alrededor de la mitad de los planos va con foto de gpt-image (incluidas las del presentador y las creativas), repartidas por todo el video para que el canal no pierda su identidad; "
+          "los demás planos van con clips de stock por tools/stock.py. Esto manda sobre lo que el brief diga de la cantidad de fotos.")
 
 def nuevo_video(b):
     f = faltan_para_video()

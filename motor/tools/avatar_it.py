@@ -104,7 +104,7 @@ def rp(path, body=None):
                                headers={"Authorization": "Bearer " + _cfg.clave("runpod"), "Content-Type": "application/json"})
     return json.load(urllib.request.urlopen(q, timeout=120))
 
-led = {"estado": "corriendo", "t": time.strftime("%Y-%m-%d %H:%M:%S"), "ventanas": [r["file"] for r in R], "reel_s": round(t, 1)}
+led = {"estado": "corriendo", "t": time.strftime("%Y-%m-%d %H:%M:%S"), "enviado": round(time.time(), 1), "ventanas": [r["file"] for r in R], "reel_s": round(t, 1)}
 json.dump(led, open(LED, "w"), indent=1)
 reel = f"{O}/reel.mp4"
 try:
@@ -117,7 +117,9 @@ try:
         time.sleep(30)
         try: s = rp("/status/" + j["id"])
         except Exception as e: log("status:", e); continue
-        if s.get("status") != ult: ult = s.get("status"); log("estado:", ult)
+        if s.get("status") != ult:
+            ult = s.get("status"); log("estado:", ult)
+            if ult == "IN_PROGRESS" and not led.get("genera"): led["genera"] = round(time.time(), 1); json.dump(led, open(LED, "w"), indent=1)   # el panel separa la cola de RunPod de la generación
         if s.get("status") == "COMPLETED": fin = s; break
         if s.get("status") in ("FAILED", "CANCELLED", "TIMED_OUT"): raise RuntimeError(f"{s.get('status')}: {json.dumps(s.get('error') or s)[:300]}")
     out = fin.get("output") or {}
@@ -132,7 +134,7 @@ except Exception as e:
     borrar_inputs()
     sale(f"⛔ InfiniteTalk falló (un FAILED no cobra; podés volver a correr esta herramienta): {e}")
 borrar_inputs()
-led["estado"] = "ok"; json.dump(led, open(LED, "w"), indent=1)
+led["estado"] = "ok"; led["llego"] = round(time.time(), 1); json.dump(led, open(LED, "w"), indent=1)
 _cfg.gasto(B, "avatar_runpod", 0.25, reel_s=round(t, 1))
 
 

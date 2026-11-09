@@ -29,7 +29,7 @@ except Exception: CANAL = {}
 PRESENTADOR = (CANAL.get("presentador") or "").strip()
 API = "https://api.openai.com/v1"
 REF, TOPE_CARA = B + "/refs/cara.png", 15   # la única referencia permitida: la cara del presentador, en pocas fotos
-TOPE_AHORRO = 20   # modo Ahorro: el resto de los planos va con clips de stock (tools/stock.py)
+TOPE_AHORRO = 20   # modo Ahorro: piso del tope; el tope real es el 60 % de los planos (ver la compuerta). El resto va con clips de stock (tools/stock.py)
 
 
 def log(*a): print(time.strftime("%H:%M:%S"), *a, flush=True)
@@ -94,7 +94,10 @@ if MOTOR == "ahorro":
             _d = json.load(open(_f, encoding="utf8"))
             if isinstance(_d, dict) and _d.get("id"): _todas.add(_d["id"])
         except Exception: pass
-    if len(_todas - _libres) > TOPE_AHORRO: problemas.append(f"lote: modo Ahorro, {len(_todas - _libres)} fotos en este video (tope {TOPE_AHORRO}): dejá el gancho, las del presentador, las creativas y lo que un clip no puede mostrar; el resto va con tools/stock.py")
+    try: _planos = len(json.load(open(f"{B}/planos.json", encoding="utf8")))
+    except Exception: _planos = 0
+    _tope = max(TOPE_AHORRO, round(_planos * 0.6))   # alrededor de la mitad de los planos lleva foto: es lo que le da identidad al canal
+    if len(_todas - _libres) > _tope: problemas.append(f"lote: modo Ahorro, {len(_todas - _libres)} fotos en este video (tope {_tope}): dejá el gancho, las del presentador, las creativas y lo que un clip no puede mostrar; el resto va con tools/stock.py")
 if problemas:
     print("⛔ COMPUERTA: no mando nada. Reescribí los prompts:\n  · " + "\n  · ".join(problemas[:40]), flush=True); sys.exit(1)
 

@@ -5,18 +5,18 @@
 2. Busca fallas claras: cara o cuerpo deformes, glitch del avatar, marca de agua, cuadros rotos, la misma foto repetida.
    El texto legible en carteles, papeles o pantallas está BIEN: nunca se marca. No compara las fotos contra el guion.
 3. Lo que encuentra va a gates/correcciones.txt. Aplicalo y anotalo en gates/correcciones_hechas.txt.
-Si no hay clave o crédito, hace sólo lo que no usa IA y sigue. Máximo 2 revisiones con IA por video."""
-import base64, glob, io, json, math, os, re, subprocess, sys, time, urllib.request, urllib.error
+Si no hay clave o crédito, hace sólo lo que no usa IA y sigue. Una sola revisión con IA por video y una sola pasada de correcciones."""
+import atexit, base64, glob, io, json, math, os, re, subprocess, sys, time, urllib.request, urllib.error
 from concurrent.futures import ThreadPoolExecutor
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import _cfg
+import _cfg, etapas
 for _x in (sys.stdout, sys.stderr):
     if hasattr(_x, "reconfigure"): _x.reconfigure(encoding="utf-8", errors="replace")   # salida siempre UTF-8
 
 MODELO = os.environ.get("REVISOR_MODELO") or "deepseek-flash"   # el único de DeepSeek que ve imágenes (deepseek-v4-pro responde que no ve)
 _P = _cfg.leer().get("precio") or {"miss": 0.15, "out": 0.6}
 PRECIO = (_P["miss"] / 1e6, _P["out"] / 1e6)
-CADA_S, MAX_CUADROS, MAX_CORRIDAS = 30, 48, 2
+CADA_S, MAX_CUADROS, MAX_CORRIDAS = 30, 48, 1
 
 
 def jload(p, d=None):
@@ -155,6 +155,8 @@ def main(B):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2: print(__doc__); sys.exit(0)
+    _B = os.path.abspath(sys.argv[1]).replace("\\", "/").rstrip("/")
+    etapas.marca(_B, "revisor", "ini"); atexit.register(lambda: etapas.marca(_B, "revisor", "fin"))
     try: main(os.path.abspath(sys.argv[1]).replace("\\", "/").rstrip("/"))
     except Exception as e:                      # nada frena el video
         print(f"⚠ el revisor falló ({type(e).__name__}): anotalo en REPORTE.md y seguí."); sys.exit(0)
