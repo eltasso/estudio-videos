@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794185708.0738132,
+ "actualizado": 1794185775.485414,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -41,7 +41,7 @@
    "k": "armado",
    "n": "Armado",
    "st": "active",
-   "info": "37 segmentos"
+   "info": "65 segmentos"
   },
   {
    "k": "qc",
@@ -51,26 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0936,
+  "deepseek": 0.0949,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1446
+  "total": 0.1459
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/meta.json (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 17"
-  },
-  {
-   "k": "res",
-   "t": "✓ hay 17 archivos (400 s)"
-  },
   {
    "k": "tool",
    "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/fotos/p036.png\"}"
@@ -178,6 +166,18 @@
   {
    "k": "res",
    "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gates/fotos_auto.txt (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "echo \"=== RENDER ===\"; tail -3 render.log; ls segments/*.mp4 2>/dev/null | wc -l; echo \"=== AVATAR ===\"; tail -4 avatar/it.log; ls avatar/*.mp4 2>/dev/null | wc -l"
+  },
+  {
+   "k": "res",
+   "t": "=== RENDER ===\n40\n=== AVATAR ===\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n0"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
   }
  ],
  "maquinas": 1,
