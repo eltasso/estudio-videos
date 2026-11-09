@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794188495.7088716,
+ "actualizado": 1794188558.6228516,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,18 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1178,
+  "deepseek": 0.1192,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1688
+  "total": 0.1702
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
-  },
   {
    "k": "res",
    "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
@@ -178,6 +174,10 @@
   {
    "k": "res",
    "t": "3587 0:00 sudo -n -H\n3589 0:43 /opt/hostedtoolcache/node/20.20.2/x64/bin/claude -p --dangerously-skip-permissions\n4745 0:00 python /opt/estudio/repo/motor/tools/avatar_it.py .\n---\nMon Nov  9 01:32:35 UTC 2026\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
   }
  ],
  "maquinas": 1,
