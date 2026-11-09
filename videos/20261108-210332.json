@@ -1,0 +1,70 @@
+{
+ "vid": "20261108-210332",
+ "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
+ "canal": "don-genaro",
+ "estado": "trabajando",
+ "actualizado": 1794182687.7001996,
+ "creado": 1794182687.6942716,
+ "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
+ "pasos": [
+  {
+   "k": "guion",
+   "n": "Guion",
+   "st": "pending",
+   "info": ""
+  },
+  {
+   "k": "voz",
+   "n": "Voz",
+   "st": "pending",
+   "info": ""
+  },
+  {
+   "k": "tiempos",
+   "n": "Tiempos",
+   "st": "pending",
+   "info": ""
+  },
+  {
+   "k": "avatar",
+   "n": "Avatar",
+   "st": "pending",
+   "info": ""
+  },
+  {
+   "k": "fotos",
+   "n": "Fotos",
+   "st": "pending",
+   "info": ""
+  },
+  {
+   "k": "armado",
+   "n": "Armado",
+   "st": "pending",
+   "info": ""
+  },
+  {
+   "k": "qc",
+   "n": "QC",
+   "st": "pending",
+   "info": ""
+  }
+ ],
+ "costo": {
+  "deepseek": 0.0,
+  "gpt": 0.0,
+  "gpt_img": 0,
+  "whisper": 0.0,
+  "avatar": 0.0,
+  "total": 0.0
+ },
+ "eventos": [
+  {
+   "k": "user",
+   "t": "Hacé este video completo de punta a punta, solo, sin preguntar y sin frenar. Tus herramientas están en el KIT del system prompt. Este es el brief entero (también quedó en /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/BRIEF.md por si lo necesitás releer después de una compactación):\n\n# BRIEF — Mito o verdad: consejos de huerta que pueden arruinar tus tomates · Don Genaro\n\nHacé "
+  }
+ ],
+ "maquinas": 1,
+ "extrema": "1",
+ "ahorro": "1"
+}
