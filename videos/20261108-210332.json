@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794183416.7337716,
+ "actualizado": 1794183492.3953874,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -35,7 +35,7 @@
    "k": "fotos",
    "n": "Fotos",
    "st": "active",
-   "info": "4 fotos"
+   "info": "9 fotos"
   },
   {
    "k": "armado",
@@ -51,74 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0491,
-  "gpt": 0.0117,
-  "gpt_img": 4,
+  "deepseek": 0.0543,
+  "gpt": 0.0229,
+  "gpt_img": 9,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0608
+  "total": 0.0772
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "sed -n '1,120p' /opt/estudio/repo/motor/tools/fotos.py"
-  },
-  {
-   "k": "res",
-   "t": "# -*- coding: utf-8 -*-\n\"\"\"Fotos del b-roll. Motor (Configuración → Fotos): \"openai\" = gpt-image-2.5-sunburst SIEMPRE low + Batch; referencia SOLO en las fotos del presentador;\n\"manual\" = las hace el usuario con lo que quiera (gratis).\n   python <APP>/tools/fotos.py <carpeta_del_video> <pedidos.json> > <carpeta>/fotos/fotos.log 2>&1      (en segundo plano)\npedidos.json = [{\"id\":\"b01_gancho\", \"cara"
-  },
-  {
-   "k": "tool",
-   "t": "python3 -c \"\nimport sys; sys.path.insert(0,'/opt/estudio/repo/motor/tools'); import _cfg\nc=_cfg.leer(); print('fotos_motor=',c.get('fotos_motor')); print('imagen_size=',c.get('imagen_size')); print('avatar_repo=',c.get('avatar_repo'))\n\" ; echo '---STOCK---'; sed -n '1,70p' /opt/estudio/repo/motor/tools/stock.py"
-  },
-  {
-   "k": "res",
-   "t": "fotos_motor= ahorro\nimagen_size= 1088x608\navatar_repo= estudio-videos\n---STOCK---\n# -*- coding: utf-8 -*-\n\"\"\"Clips de stock del MODO AHORRO (Pexels, gratis). Uso:\n   python <APP>/tools/stock.py <carpeta> <pedidos.json> > <carpeta>/clips/stock.log 2>&1      (en segundo plano)\npedidos = [{\"id\":\"p003\", \"buscar\":[\"senior hands kneading dough\", \"kneading bread close up\"]}, …]\n  · id = el del plano de p"
-  },
-  {
-   "k": "tool",
-   "t": "mkdir -p clips gates qc; nohup python /opt/estudio/repo/motor/tools/avatar_it.py . > avatar/it.log 2>&1 & echo \"AVATAR_PID=$!\"; sleep 3; tail -3 avatar/it.log"
-  },
-  {
-   "k": "res",
-   "t": "AVATAR_PID=4745"
-  },
-  {
-   "k": "ai",
-   "t": "Escribo los pedidos de stock (95 planos, búsquedas en inglés, 2 por plano)."
-  },
-  {
-   "k": "tool",
-   "t": "[\n{\"id\":\"p002\",\"buscar\":[\"crushed eggshells garden soil\",\"eggshells hands close up\"]},\n{\"id\":\"p003\",\"buscar\":[\"grinding eggshells mortar\",\"mortar and pestle kitchen\"]},\n{\"id\":\"p004\",\"buscar\":[\"gardeners talking community garden\",\"people gardening together\"]},\n{\"id\":\"p007\",\"buscar\":[\"senior man repairing tools shed\",\"old man woodworking hands\"]},\n{\"id\":\"p008\",\"buscar\":[\"withered tomato plant garden"
-  },
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/stock_01.json (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/stock.py . stock_01.json > clips/stock.log 2>&1 & echo \"STOCK_PID=$!\"; sleep 8; tail -6 clips/stock.log"
-  },
-  {
-   "k": "res",
-   "t": "STOCK_PID=5827\n00:13:43 → 95 clips por buscar"
-  },
-  {
-   "k": "ai",
-   "t": "Ahora la primera tanda de fotos: 6 de prueba + 3 variantes del gancho."
-  },
-  {
-   "k": "tool",
-   "t": "[\n{\n \"id\": \"p001_a\",\n \"cara\": true,\n \"prompt\": {\n  \"type\": \"amateur phone photo, mild JPEG compression, real skin texture with pores, wrinkles, age spots, flyaway grey hairs, uneven ordinary indoor light, slightly crooked framing, everyday clutter, nothing blurred out, everything in focus, 16:9\",\n  \"moment\": \"In the middle of the shed, Don Genaro holds up the tomato with the rotten black bottom as"
-  },
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/pedidos_01.json (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/fotos.py . pedidos_01.json > fotos/fotos_01.log 2>&1 & echo \"FOTOS1_PID=$!\"; sleep 6; tail -12 fotos/fotos_01.log"
-  },
   {
    "k": "res",
    "t": "FOTOS1_PID=5941\n00:14:43 → batch batch_6af1107366d88190b710c0cc7c1df2b5 · 5 fotos · sin referencia · low 1088x608\n00:14:44 → batch batch_6af1107478ac8190aa5baebe546f6af7 · 4 fotos · con la cara del presentador · low 1088x608\n00:14:44 batch 7c1df2b5: validating 0/0\n00:14:44 batch 546f6af7: validating 0/0"
@@ -178,6 +118,66 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 9"
+  },
+  {
+   "k": "res",
+   "t": "✓ hay 9 archivos (95 s)"
+  },
+  {
+   "k": "ai",
+   "t": "Fotos de prueba listas. Armo la hoja y la miro."
+  },
+  {
+   "k": "tool",
+   "t": "ls fotos/*.png; echo '---LOG---'; tail -5 fotos/fotos_01.log; python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_fotos_test.jpg fotos/p001_a.png fotos/p001_b.png fotos/p001_c.png fotos/p005.png fotos/p006.png fotos/p011.png fotos/p024.png fotos/p036.png fotos/s01.png 2>&1 | tail -3; ls -la qc/hoja_fotos_test.jpg"
+  },
+  {
+   "k": "res",
+   "t": "fotos/p001_a.png\nfotos/p001_b.png\nfotos/p001_c.png\nfotos/p005.png\nfotos/p006.png\nfotos/p011.png\nfotos/p024.png\nfotos/p036.png\nfotos/s01.png\n---LOG---\n00:16:45 batch 546f6af7: completed 4/4\n00:16:47 ✓ batch 546f6af7: 4 fotos bajadas, 0 fallidas (US$0.012)\n00:17:17 batch 7c1df2b5: completed 5/5\n00:17:19 ✓ batch 7c1df2b5: 5 fotos bajadas, 0 fallidas (US$0.011)\n00:17:19 FIN: 9/9 fotos en fotos/ (3 min"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_fotos_test.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/refs/avatar.png\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/refs/cara.png\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "ai",
+   "t": "Reviso la hoja: buena calidad general. Marco para rehacer `p001_c` (cara más redonda que el avatar) y `p036` (el clavo no se ve). Lanzo la segunda tanda."
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/fotos.py . pedidos_02.json > fotos/fotos_02.log 2>&1 & echo \"FOTOS2_PID=$!\"; sleep 5; tail -8 fotos/fotos_02.log; echo \"=== STOCK ===\"; tail -3 clips/stock.log; ls clips/*.mp4 2>/dev/null | wc -l"
+  },
+  {
+   "k": "res",
+   "t": "FOTOS2_PID=9187\n00:18:03 → batch batch_6af1113aefd881909d64859f32ced0ad · 9 fotos · sin referencia · low 1088x608\n00:18:03 → batch batch_6af1113b9a3c8190bd9e716dc55b80ee · 1 fotos · con la cara del presentador · low 1088x608\n00:18:03 batch 32ced0ad: validating 0/0\n00:18:03 batch c55b80ee: validating 0/0\n=== STOCK ===\n00:13:43 → 95 clips por buscar\n00:16:20 bajados 95/95\n00:16:20 FIN: 95/95 clips e"
+  },
+  {
+   "k": "ai",
+   "t": "Stock completo (95/95 en 3 min). Armo hojas de control de los clips."
+  },
+  {
+   "k": "tool",
+   "t": "cd /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue\npython3 - <<'EOF'\nimport glob, subprocess, os\nclips=sorted(glob.glob('clips/*.mp4'))\nfor i in range(0,len(clips),12):\n    grupo=clips[i:i+12]\n    out=f'qc/hoja_clips_{i//12+1}.jpg'\n    subprocess.run(['python','/opt/estudio/repo/motor/tools/hoja.py',out]+grupo,check=True)\n    print(out, ' '.join(os.path.basename(c)[:-4] for c in"
   }
  ],
  "maquinas": 1,
