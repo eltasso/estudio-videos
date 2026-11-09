@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794191274.6084456,
+ "actualizado": 1794191338.2694917,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -41,44 +41,24 @@
    "k": "armado",
    "n": "Armado",
    "st": "done",
-   "info": "210 segmentos"
+   "info": "final.mp4 · 19.2 min"
   },
   {
    "k": "qc",
    "n": "QC",
-   "st": "active",
+   "st": "done",
    "info": "REPORTE.md"
   }
  ],
  "costo": {
-  "deepseek": 0.1431,
+  "deepseek": 0.1458,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.4441
+  "total": 0.4468
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/render.py . > render2.log 2>&1 & echo \"PID=$!\"; sleep 5; tail -4 render2.log"
-  },
-  {
-   "k": "res",
-   "t": "PID=28614"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --help 2>&1 | head -30"
-  },
-  {
-   "k": "res",
-   "t": "HERRAMIENTA DEL ESTUDIO: espera UNA sola vez hasta que pase algo (en vez de sleep + ls + tail una y otra vez).\n   python <APP>/tools/esperar.py --log <archivo.log> [--busca \"EXIT|FIN|✓|Traceback|Error\"]   termina cuando el log tiene esa palabra\n   python <APP>/tools/esperar.py --existe <archivo>                                          termina cuando el archivo existe (y dejó de crecer)\n   python "
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log render2.log --busca \"hechos 210\""
-  },
   {
    "k": "res",
    "t": "✓ el log tiene 'hechos 210' (185 s):\nclips=210 frames=34572 (1152.40s)\nhechos 210"
@@ -178,6 +158,26 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe final.mp4"
+  },
+  {
+   "k": "res",
+   "t": "✓ existe final.mp4 (730.8 MB, 75 s)"
+  },
+  {
+   "k": "ai",
+   "t": "Final ensamblado. Verifico duración y corro el revisor de calidad."
+  },
+  {
+   "k": "tool",
+   "t": "tail -8 assemble.log; echo '---'; ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_name,width,height,r_frame_rate,channels,sample_rate -of default=nw=1 final.mp4 2>&1 | head -25"
+  },
+  {
+   "k": "res",
+   "t": "tramo 3 listo\ntramo 4 listo\ntramo 5 listo\ntramo 6 listo\ntramo 7 listo\ntramo 8 listo\ntramo 9 listo\nfinal: ./final.mp4 1152.400000 s\n---\ncodec_name=h264\nwidth=1920\nheight=1080\nr_frame_rate=30/1\ncodec_name=aac\nsample_rate=48000\nchannels=2\nr_frame_rate=0/0\nduration=1152.400000\nsize=730787873"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/revisor.py . 2>&1 | tail -25"
   }
  ],
  "maquinas": 1,
