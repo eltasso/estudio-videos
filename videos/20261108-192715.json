@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794182739.2085838,
+ "actualizado": 1794182802.2834473,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -59,10 +59,6 @@
   "total": 0.3602
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "python -c \"\nimport json\nW=json.load(open('captions.json',encoding='utf8'))\nfor w in W[:22]: print(w['startMs'], w['endMs'], repr(w['text']))\n\""
-  },
   {
    "k": "res",
    "t": "0 280 ' ¡Hola'\n460 760 ' gente'\n760 960 ' de'\n960 1460 ' YouTube'\n1840 1960 ' ¿Cómo'\n1960 2480 ' andan'\n2780 2980 ' Hace'\n2980 3740 ' 23'\n3740 4120 ' años'\n4120 4440 ' saqué'\n4440 5220 ' 42'\n5220 5740 ' plantines'\n5740 6140 ' de'\n6140 6360 ' tomate'\n6360 6560 ' de'\n6560 6900 ' la'\n6900 7300 ' bandeja'\n7300 7620 ' y'\n7620 7860 ' los'\n7860 8140 ' pasé'\n8140 8340 ' al'\n8340 8880 ' cantero'"
@@ -178,6 +174,10 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --log avatar/it.log --busca \"clips cortados|⛔|FAILED|TIMED_OUT|CANCELLED\" --max 540"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · log: 23:17:53 estado: IN_PROGRESS → hacé otra cosa útil y volvé a llamar"
   }
  ],
  "maquinas": 1,
