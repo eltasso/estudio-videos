@@ -2,7 +2,8 @@
 
 ## Estado
 Video terminado: `final.mp4` 1920x1080, 30 fps, H.264 + AAC, duración 9:36 (576,6 s), igual a la voz.
-Guion de 1.570 palabras en español rioplatense, voz clonada del canal, 43 ventanas de avatar (294 s, 51 % del video) y 76 planos de b-roll con fotos distintas.
+Guion de 1.570 palabras en español rioplatense, voz clonada del canal, 43 ventanas de avatar (290 s, 50 % del video) y 76 planos de b-roll con fotos distintas.
+Validación final: **OK**, sin errores; el revisor automático revisó 20 cuadros y no encontró fallas.
 
 ## Qué se hizo
 - **Guion** (1.570 palabras): gancho con número y objeto (42 plantines, 37 caídos), credencial, cinco puntos con problema → anécdota con fecha y lugar → por qué pasa → medida concreta → algo para hacer hoy, prueba interactiva en el minuto 4, pedido de like/suscripción antes del último punto y cierre con pregunta y gancho al video de hojas amarillas.
@@ -26,10 +27,10 @@ Guion de 1.570 palabras en español rioplatense, voz clonada del canal, 43 venta
 - Avatar InfiniteTalk: US$0,25 (una sola llamada).
 - Whisper: US$0,058.
 - Revisor final: menos de US$0,01.
-- **Total estimado: ~US$0,51.**
+- **Total: ~US$0,51.**
 
 ## Problemas y cosas a mejorar
-- InfiniteTalk tardó en salir de la cola de RunPod (más de 35 minutos); mientras tanto se adelantó todo el resto del trabajo.
+- InfiniteTalk tardó en salir de la cola de RunPod (unos 40 minutos de cola y casi una hora de generación, en total ~1 h 30 min); mientras tanto se adelantó todo el resto del trabajo.
 - Las primeras fotos con `cara: true` no mantienen la identidad exacta del avatar: se decidió no usar fotos del presentador y dejar que la cara la dé el avatar. Para futuros videos conviene directamente no pedir `cara: true` si la identidad importa.
 - La primera ventana de avatar se armó originalmente de 14,4 s; se corrigió a 10,26 s y se pasó a pantalla partida con una foto propia.
 - La transcripción automática confundió algunas palabras del guion (por ejemplo "Berazategui" y "septiembre"), pero eso no afecta a la voz ni al montaje: las fotos se armaron desde el guion, no desde el texto transcripto.
