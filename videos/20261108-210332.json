@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794189316.2503328,
+ "actualizado": 1794189380.4045086,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -28,8 +28,8 @@
   {
    "k": "avatar",
    "n": "Avatar",
-   "st": "skip",
-   "info": ""
+   "st": "done",
+   "info": "103 clips"
   },
   {
    "k": "fotos",
@@ -51,46 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1205,
+  "deepseek": 0.1248,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.4215
+  "total": 0.4258
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "=== AVATAR ===\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n{\n \"estado\": \"corriendo\",\n \"t\": \"2026-11-09 00:13:32\",\n \"ventanas\": [\n  \"avatar/A0.mp4\",\n  \"avatar/A1.mp4\",\n  \"avatar/A2.mp4\",\n  \"avatar/A3.mp4\",\n\n=== RENDER ===\nclips=210 frames=34572 (1152.40s)\nhechos 210\n210"
-  },
-  {
-   "k": "tool",
-   "t": "grep -h \"US\\$\" fotos/fotos_0*.log 2>/dev/null; echo '---'; cat gasto.json 2>/dev/null; ls *gasto* 2>/dev/null; echo '---'; python3 -c \"\nimport json\nR=json.load(open('avatar_ranges.json',encoding='utf8'))\nprint('ventanas',len(R),'contenido',round(sum(r['endMs']-r['startMs'] for r in R)/1000,1),'s')\n\""
-  },
-  {
-   "k": "res",
-   "t": "---\ngasto.jsonl\n---\nventanas 103 contenido 548.9 s"
-  },
-  {
-   "k": "tool",
-   "t": "cat gasto.jsonl 2>/dev/null | tail -20; echo '---fotos03---'; tail -5 fotos/fotos_03.log"
-  },
-  {
-   "k": "res",
-   "t": "{\"t\": 1794183041.9094956, \"tag\": \"whisper\", \"usd\": 0.0, \"seg\": 1152}\n{\"t\": 1794183407.7853503, \"tag\": \"fotos_gpt\", \"usd\": 0.01174, \"n\": 4}\n{\"t\": 1794183439.098434, \"tag\": \"fotos_gpt\", \"usd\": 0.01115, \"n\": 5}\n{\"t\": 1794183545.6312764, \"tag\": \"fotos_gpt\", \"usd\": 0.00289, \"n\": 1}\n{\"t\": 1794184541.8396885, \"tag\": \"fotos_gpt\", \"usd\": 0.01992, \"n\": 9}\n{\"t\": 1794184689.3805969, \"tag\": \"fotos_gpt\", \"usd\":"
-  },
-  {
-   "k": "ai",
-   "t": "El render completo terminó (210 segmentos). El avatar sigue en RunPod; espero sus clips."
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
-  },
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa render --min 15 2>&1 | tail -30"
@@ -178,6 +146,38 @@
   {
    "k": "tool",
    "t": "date; tail -2 avatar/it.log; python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
+  },
+  {
+   "k": "res",
+   "t": "Mon Nov  9 01:50:42 UTC 2026\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n✓ existe avatar/A0.mp4 (1.4 MB, 315 s)"
+  },
+  {
+   "k": "ai",
+   "t": "El avatar terminó. Verifico los clips y relanzo el render para los tramos de avatar."
+  },
+  {
+   "k": "tool",
+   "t": "tail -8 avatar/it.log; echo '---'; ls avatar/*.mp4 | wc -l; ls -la avatar/A0.mp4 avatar/A102.mp4 2>/dev/null; for f in avatar/A0.mp4 avatar/A11.mp4 avatar/A102.mp4; do printf '%s ' $f; ffprobe -v error -show_entries format=duration -of csv=p=0 $f 2>/dev/null; done; echo '---'; tail -2 gasto.jsonl; python3 -c \"import json;d=json.load(open('avatar/it_llamada.json'));print(d.get('estado'),d.get('reel"
+  },
+  {
+   "k": "res",
+   "t": "00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n01:54:52 estado: COMPLETED\n✓ 103 clips cortados · desfase corregido (máx 395 ms)\n---\n103\n-rw-rw-rw-+ 1 sesion sesion 1410864 Nov  9 01:55 avatar/A0.mp4\n-rw-rw-rw-+ 1 sesion sesion 1475875 Nov  9 01:55 avatar/A102.mp4\navatar/A0.mp4 5.400000\navatar/A11.mp4 "
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/render.py . > render2.log 2>&1 & echo \"PID=$!\"; sleep 5; tail -4 render2.log"
+  },
+  {
+   "k": "res",
+   "t": "PID=28614"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --help 2>&1 | head -30"
+  },
+  {
+   "k": "res",
+   "t": "HERRAMIENTA DEL ESTUDIO: espera UNA sola vez hasta que pase algo (en vez de sleep + ls + tail una y otra vez).\n   python <APP>/tools/esperar.py --log <archivo.log> [--busca \"EXIT|FIN|✓|Traceback|Error\"]   termina cuando el log tiene esa palabra\n   python <APP>/tools/esperar.py --existe <archivo>                                          termina cuando el archivo existe (y dejó de crecer)\n   python "
   }
  ],
  "maquinas": 1,
