@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794183348.6283934,
+ "actualizado": 1794183416.7337716,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -22,20 +22,20 @@
   {
    "k": "tiempos",
    "n": "Tiempos",
-   "st": "active",
+   "st": "done",
    "info": "por palabra"
   },
   {
    "k": "avatar",
    "n": "Avatar",
-   "st": "pending",
+   "st": "skip",
    "info": ""
   },
   {
    "k": "fotos",
    "n": "Fotos",
-   "st": "pending",
-   "info": ""
+   "st": "active",
+   "info": "4 fotos"
   },
   {
    "k": "armado",
@@ -52,11 +52,11 @@
  ],
  "costo": {
   "deepseek": 0.0491,
-  "gpt": 0.0,
-  "gpt_img": 0,
+  "gpt": 0.0117,
+  "gpt_img": 4,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0491
+  "total": 0.0608
  },
  "eventos": [
   {
