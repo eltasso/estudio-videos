@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794187360.6105583,
+ "actualizado": 1794187423.6196294,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,30 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1099,
+  "deepseek": 0.1132,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1609
+  "total": 0.1642
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_fotos.jpg fotos/p001.png fotos/p005.png fotos/p006.png fotos/p011.png fotos/p024.png fotos/p030.png fotos/p036.png fotos/p050.png fotos/p077.png fotos/p098.png fotos/p099.png fotos/p103.png 2>&1 | tail -1; python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_fotos_split.jpg fotos/s01.png fotos/s02.png fotos/s03.png fotos/s04.png fotos/s05.png 2>"
-  },
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_fotos.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_fotos_split.jpg (5 cuadros, 4x2)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_fotos.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
   {
    "k": "tool",
    "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_fotos_split.jpg\"}"
@@ -174,6 +158,22 @@
   {
    "k": "res",
    "t": "Mon Nov  9 01:14:03 UTC 2026\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\ntotal 40\ndrwxrwxrwx+  4 runner runner 4096 Nov  9 00:53 .\ndrwxrwxrwx+ 11 runner runner 4096 Nov  9 00:54 ..\ndrwxrwxrwx+  2 sesion sesion 4096 Nov  9 00:53 espera\ndrwxrwxrwx+  2 sesion sesion 4096 Nov  9 00:13 it\n-rw-rw-rw-+  1"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "ls segments/xf.json && python3 -c \"\nimport json\nxf=json.load(open('segments/xf.json')); print('xf entries',len(xf))\n\" ; for f in sfx/agua.mp3 sfx/huevo_2.mp3 sfx/tijera.mp3 sfx/rocio.mp3; do printf '%s ' $f; ffprobe -v error -show_entries format=duration -of csv=p=0 $f; done; echo '---'; python3 -c \"\nimport json\nc=json.load(open('cues.json')); print('cues',len(c),c)\n\""
+  },
+  {
+   "k": "res",
+   "t": "segments/xf.json\nxf entries 210\nsfx/agua.mp3 4.600000\nsfx/huevo_2.mp3 3.500000\nsfx/tijera.mp3 2.939161\nsfx/rocio.mp3 2.500000\n---\ncues 4 [{'file': 'agua.mp3', 't': 202040, 'gain': 0.05, 'fade': 0.4}, {'file': 'huevo_2.mp3', 't': 234780, 'gain': 0.045, 'fade': 0.4}, {'file': 'tijera.mp3', 't': 615963, 'gain': 0.05, 'fade': 0.4}, {'file': 'rocio.mp3', 't': 1143705, 'gain': 0.045, 'fade': 0.4}]"
   },
   {
    "k": "tool",
