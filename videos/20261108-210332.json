@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794189564.6156619,
+ "actualizado": 1794189627.9367187,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,42 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1263,
+  "deepseek": 0.1303,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.4273
+  "total": 0.4313
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "VALIDAR /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue · etapa render\n  ✓ guion: 16161 caracteres, 3049 palabras (hacen falta 13500-17250 para 15 min: bien)\n  ✓ fotos: 17 · 0 sin su prompt al lado (no salieron de tools/fotos.py)\n  ✓ fotos: 0 con prompt incompleto\n  ✓ fotos: 6 imágenes creativas con detalle_narrativo (lo pedido: 4 a 6, KIT §4b)\n  ✓ render: movimiento al azar (pl"
-  },
-  {
-   "k": "tool",
-   "t": "python3 - <<'EOF'\nimport json\nP=json.load(open('plan.json',encoding='utf8'))\nprint(type(P), list(P)[:5] if isinstance(P,dict) else len(P))\nprint(json.dumps(P,ensure_ascii=False)[:600])\nEOF"
-  },
-  {
-   "k": "res",
-   "t": "<class 'dict'> ['voice_dur', 'segments']\n{\"voice_dur\": 1152.324, \"segments\": [{\"kind\": \"av\", \"t0\": 0.0, \"t1\": 5.08, \"file\": \"./avatar/espera/904497b045.jpg\"}, {\"kind\": \"foto\", \"t0\": 5.08, \"t1\": 10.94, \"file\": \"./fotos/p001.png\"}, {\"kind\": \"av\", \"t0\": 10.94, \"t1\": 16.1, \"file\": \"./avatar/espera/904497b045.jpg\"}, {\"kind\": \"clip\", \"t0\": 16.1, \"t1\": 22.08, \"file\": \"./clips/p002.mp4\"}, {\"kind\": \"av\", \""
-  },
-  {
-   "k": "tool",
-   "t": "python3 - <<'EOF'\nimport json\nP=json.load(open('plan.json',encoding='utf8'))['segments']\nfor s in P:\n    if 118 <= s['t0'] <= 132:\n        print(json.dumps(s,ensure_ascii=False))\nprint('---claves usadas---')\nks=set()\nfor s in P: ks.update(s.keys())\nprint(ks)\nprint('---split en avatar_ranges---')\nR=json.load(open('avatar_ranges.json',encoding='utf8'))\nfor r in R:\n    if 'foto' in r: print(json.dump"
-  },
-  {
-   "k": "res",
-   "t": "{\"kind\": \"av\", \"t0\": 120.62, \"t1\": 128.58, \"file\": \"./avatar/espera/904497b045.jpg\"}\n{\"kind\": \"clip\", \"t0\": 128.58, \"t1\": 132.3, \"file\": \"./clips/p012.mp4\"}\n---claves usadas---\n{'file', 't1', 'kind', 't0'}\n---split en avatar_ranges---\n{\"file\": \"avatar/A11.mp4\", \"frame\": \"refs/avatar.png\", \"startMs\": 120620, \"endMs\": 128580, \"foto\": \"s01\", \"lado\": \"izq\"}\n{\"file\": \"avatar/A27.mp4\", \"frame\": \"refs/av"
-  },
-  {
-   "k": "tool",
-   "t": "date; tail -3 avatar/it.log; ls -la avatar/ | head"
-  },
-  {
-   "k": "res",
-   "t": "Mon Nov  9 01:14:03 UTC 2026\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\ntotal 40\ndrwxrwxrwx+  4 runner runner 4096 Nov  9 00:53 .\ndrwxrwxrwx+ 11 runner runner 4096 Nov  9 00:54 ..\ndrwxrwxrwx+  2 sesion sesion 4096 Nov  9 00:53 espera\ndrwxrwxrwx+  2 sesion sesion 4096 Nov  9 00:13 it\n-rw-rw-rw-+  1"
-  },
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
@@ -178,6 +150,34 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --log render2.log --busca \"hechos 210\""
+  },
+  {
+   "k": "res",
+   "t": "✓ el log tiene 'hechos 210' (185 s):\nclips=210 frames=34572 (1152.40s)\nhechos 210"
+  },
+  {
+   "k": "tool",
+   "t": "python3 - <<'EOF'\nimport json\nP=json.load(open('plan.json',encoding='utf8'))['segments']\nfor s in P[:3]: print(s)\nfor s in P:\n    if 120<=s['t0']<=129: print('split seg:',s)\nEOF\ngrep -c \"espera\" plan.json; echo '---av---'; ls -la avatar/espera/ 2>/dev/null | head -3"
+  },
+  {
+   "k": "res",
+   "t": "{'kind': 'av', 't0': 0.0, 't1': 5.08, 'file': './avatar/A0.mp4'}\n{'kind': 'foto', 't0': 5.08, 't1': 10.94, 'file': './fotos/p001.png'}\n{'kind': 'av', 't0': 10.94, 't1': 16.1, 'file': './avatar/A1.mp4'}\nsplit seg: {'kind': 'av', 't0': 120.62, 't1': 128.58, 'file': './avatar/A11.mp4', 'split': True}\nsplit seg: {'kind': 'clip', 't0': 128.58, 't1': 132.3, 'file': './clips/p012.mp4'}\n0\n---av---\ntotal 4"
+  },
+  {
+   "k": "ai",
+   "t": "Render con avatar real listo (0 placeholders, split aplicado). Mando a ensamblar."
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/assemble.py . > assemble.log 2>&1 & echo \"PID=$!\"; sleep 5; tail -5 assemble.log"
+  },
+  {
+   "k": "res",
+   "t": "PID=34843"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe final.mp4"
   }
  ],
  "maquinas": 1,
