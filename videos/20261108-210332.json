@@ -3,21 +3,21 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794182773.7811487,
+ "actualizado": 1794182836.6528955,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
   {
    "k": "guion",
    "n": "Guion",
-   "st": "pending",
-   "info": ""
+   "st": "done",
+   "info": "3.064 palabras"
   },
   {
    "k": "voz",
    "n": "Voz",
-   "st": "pending",
-   "info": ""
+   "st": "active",
+   "info": "3 bloques"
   },
   {
    "k": "tiempos",
@@ -51,12 +51,12 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0097,
+  "deepseek": 0.0141,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0097
+  "total": 0.0141
  },
  "eventos": [
   {
@@ -86,6 +86,46 @@
   {
    "k": "ai",
    "t": "Ahora escribo el guion completo (~15.000 caracteres) en la voz de Don Genaro."
+  },
+  {
+   "k": "tool",
+   "t": "[excited] ¡Hola, gente de YouTube! ¿Cómo andan?\n\nMirá esto. Una planta de tomate con el culito negro: la base del fruto podrida, marrón, como quemada. Y al lado, un hombre convencido de que a la planta le falta calcio, tirándole cáscaras de huevo todos los días, como si fueran pastillas. Yo también lo hice. Durante años les decía a los vecinos que juntaran las cáscaras, que las secaran al sol, que"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/guion.txt (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python3 -c \"\nimport re\nt=open('/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/guion.txt',encoding='utf-8').read()\nprint('chars total',len(t))\nprint('chars sin tags',len(re.sub(r'\\[[^\\]]+\\]','',t)))\nfor w in ['milagro','cura','garantizado','infalible','resultados seguros','siempre funciona','sin riesgo','magia']:\n    if w in t.lower(): print('PROHIBIDA:',w)\n\""
+  },
+  {
+   "k": "res",
+   "t": "chars total 16240\nchars sin tags 16205"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa guion --min 15"
+  },
+  {
+   "k": "res",
+   "t": "VALIDAR /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue · etapa guion\n  ✓ guion: 16161 caracteres, 3049 palabras (hacen falta 13500-17250 para 15 min: bien)\nRESULTADO: OK"
+  },
+  {
+   "k": "ai",
+   "t": "Guion OK (16.161 caracteres). Lanzo la voz en segundo plano y sigo con el plan."
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/voz.py . > voz/voz.log 2>&1 & echo \"VOZ_PID=$!\""
+  },
+  {
+   "k": "res",
+   "t": "VOZ_PID=3894"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe voz/master.wav"
   }
  ],
  "maquinas": 1,
