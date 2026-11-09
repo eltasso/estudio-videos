@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794190641.557562,
+ "actualizado": 1794190704.8383658,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,30 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1375,
+  "deepseek": 0.1404,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.4385
+  "total": 0.4414
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "3587 0:00 sudo -n -H\n3589 0:43 /opt/hostedtoolcache/node/20.20.2/x64/bin/claude -p --dangerously-skip-permissions\n4745 0:00 python /opt/estudio/repo/motor/tools/avatar_it.py .\n---\nMon Nov  9 01:32:35 UTC 2026\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "date; tail -2 avatar/it.log; python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
-  },
   {
    "k": "res",
    "t": "Mon Nov  9 01:50:42 UTC 2026\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n✓ existe avatar/A0.mp4 (1.4 MB, 315 s)"
@@ -174,6 +158,22 @@
   {
    "k": "res",
    "t": "    PID COMMAND             ELAPSED %CPU\n  37320 ffmpeg                01:00  382\n  37690 python3               00:06  4.4\n   3589 claude             02:04:10  0.7\n   3584 python             02:04:10  0.3\n   2059 Runner.Worker      02:05:20  0.2\n    364 hv_kvp_daemon      02:05:32  0.1\n   2001 provjobd1863567    02:05:24  0.1\n   1106 containerd         02:05:27  0.0\n   1300 ExtHandler         02:0"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe final.mp4"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "wc -c assemble.log; ps -eo pid,comm,etime,pcpu --sort=-pcpu | head -6; echo '---tmp---'; ls -lah . | tail -8; echo '---segments count---'; ls segments/*.mp4 | wc -l"
+  },
+  {
+   "k": "res",
+   "t": "0 assemble.log\n    PID COMMAND             ELAPSED %CPU\n  38049 ffmpeg                08:29  381\n   3589 claude             02:13:18  0.7\n   3584 python             02:13:19  0.3\n   2059 Runner.Worker      02:14:28  0.2\n    364 hv_kvp_daemon      02:14:40  0.1\n---tmp---\n-rw-rw-rw-+  1 sesion sesion 7.4K Nov  9 00:13 stock_01.json\n-rw-rw-rw-+  1 sesion sesion 2.3K Nov  9 00:19 stock_02.json\n-rw-rw-"
   },
   {
    "k": "tool",
