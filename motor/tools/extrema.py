@@ -27,6 +27,8 @@ def _cargar_catalogo():
 CAT = _cargar_catalogo()   # una ficha por operación: qué es, cuándo va, cuántas fotos y qué datos pide
 try: ESTILOS = json.load(open(OPS_DIR + "/estilos.json", encoding="utf8"))
 except Exception: ESTILOS = {}
+try: PALETAS = json.load(open(OPS_DIR + "/paletas.json", encoding="utf8"))     # colores por nicho, con contraste ya probado
+except Exception: PALETAS = {}
 NUM = {w: str(i) for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split())}
 NUM.update({w: str(i) for i, w in enumerate("cero uno dos tres cuatro cinco seis siete ocho nueve diez once doce trece catorce quince dieciséis diecisiete dieciocho diecinueve veinte".split())})
 NUM.update({"una": "1", "thirty": "30", "forty": "40", "fifty": "50", "hundred": "100", "treinta": "30", "cuarenta": "40", "cincuenta": "50", "cien": "100"})
@@ -58,11 +60,12 @@ class Caja:
         with s.lk: s.reservado -= monto; s.gastado += real; s.n += 1
 
 
-def ia(caja, msgs, reserva, max_tokens=9000):
+def ia(caja, msgs, reserva, max_tokens=9000, pensar=True):
     if not caja.pedir(reserva): raise RuntimeError("tope")
     real = 0.0
     try:
         body = {"model": _cfg.leer().get("modelo") or "deepseek-flash", "max_tokens": max_tokens, "temperature": 0.9, "messages": msgs, "response_format": {"type": "json_object"}}
+        if not pensar: body["thinking"] = {"type": "disabled"}                   # obra: medido, 10 veces más barata y la idea sale igual
         if "flash" not in body["model"]: body["model"] = "deepseek-flash"        # edición extrema va siempre en flash
         try: k = _cfg.clave("deepseek")
         except SystemExit: k = ""
@@ -208,12 +211,17 @@ def _campo(spec, v, ruta, P, fichas, ds, err):
         except Exception: err.append("%s must be a word index" % ruta); return None
         if not 0 <= i < len(P): err.append("%s: word %d does not exist" % (ruta, i)); return None
         return P[i][1]
+    if tipo == "trazo":      # silueta propia: sólo números y M L C Q Z, dentro de una caja de 0 a 100
+        v = str(v).strip(); nums = re.findall(r"-?\d+(?:\.\d+)?", v)
+        if len(v) > 700 or not v.startswith("M") or not re.fullmatch(r"[MLCQZ0-9 .,\-]+", v) or len(nums) < 6 or any(not -5 <= float(x) <= 105 for x in nums):
+            err.append("%s must be one SVG path with only M L C Q Z and numbers from 0 to 100" % ruta); return None
+        return v
     if tipo == "foto":
         f = fichas.get(v)
         if not f: err.append("%s: photo %s does not exist" % (ruta, v)); return None
         return {"id": v, "foco": f["foco"], "zona": f["zona_calma"]}
     if tipo == "opcion":
-        if str(v) not in arg[0].split("|"): err.append("%s must be one of %s" % (ruta, arg[0]))
+        if str(v) not in arg[0].split("|"): err.append("%s '%s' does not exist. Must be one of %s%s" % (ruta, v, arg[0], " (for an object that is not listed, use forma libre and draw it in trazo)" if ruta.endswith(".forma") else ""))
         return str(v)
     err.append("ficha rota: %s" % spec); return None
 
@@ -235,8 +243,44 @@ def look_de(estilo, look):
     e = ESTILOS.get(estilo)
     if not e: return look
     L = {k: v for k, v in e.items() if k != "para"}
+    pal = PALETAS.get(look.get("_paleta") or "")
+    if pal and estilo != "alarma": L.update(pal["oscuro" if L.get("oscuro") else "claro"])      # el color del nicho; una alarma sigue siendo roja
     if look.get("_canal") and estilo not in ("neon", "alarma", "plano"): L["acento"] = look["acento"]
     return L
+
+
+def suavizar_obra(d):
+    """Lo decorativo mal escrito se corrige solo: entrada, gesto, material y color nunca tiran abajo una idea buena."""
+    lista = CAT["obra"]["datos"]["piezas"]["lista"]
+    if isinstance(d, dict) and d.get("plano") not in CAT["obra"]["datos"]["plano"].split(":", 1)[1].split("|"): d["plano"] = "heroe"
+    for p in (d.get("piezas") or []) if isinstance(d, dict) else []:
+        if not isinstance(p, dict): continue
+        for campo, porDefecto in (("entra", "profundo"), ("material", "papel"), ("color", "acento"), ("gesto", None)):
+            validos = lista[campo].rstrip("?").split(":", 1)[1].split("|")
+            if p.get(campo) and p[campo] not in validos:
+                if porDefecto is None: p.pop(campo, None)
+                else: p[campo] = porDefecto
+        if p.get("forma") == "libre" or p.get("trazo"): p["forma"] = "libre"
+    return d
+
+
+def revisar_obra(k, a):
+    """Lo que hace que un objeto inventado se lea como idea y no como un montón de formas."""
+    err, pz = [], [p for p in ((a.get("datos") or {}).get("piezas") or []) if p and p.get("en") is not None]
+    if not pz: return err
+    if len({p.get("en") for p in pz}) < 2: err.append("act %d (obra): pieces must arrive on different words, not all at once" % k)
+    if (a.get("datos") or {}).get("plano") == "corte" and len({round(p.get("nivel") or 0) for p in pz}) < 2: err.append("act %d (obra): corte needs pieces at two different nivel" % k)
+    gestos = [p for p in pz if p.get("gesto")]
+    golpe = next((l["w"][0][1] for l in a["lineas"] if l["rol"] == "golpe"), None)
+    if not gestos: pz[0]["gesto"] = "late"; gestos = [pz[0]]       # sin gesto, el protagonista late en la palabra
+    if len(gestos) > 2: err.append("act %d (obra): at most two pieces may have a gesto" % k)
+    for p in gestos:      # el cuadro del gesto lo pone el motor: sin razonamiento, flash no cuenta bien los índices
+        if golpe is not None: p["gesto_en"] = golpe
+        elif p.get("gesto_en") is None: err.append("act %d (obra): gesto needs gesto_en" % k)
+    for p in pz:
+        if p.get("forma") == "libre" and not p.get("trazo"): err.append("act %d (obra): forma libre needs trazo" % k)
+        if p.get("material") == "foto" and not p.get("foto"): err.append("act %d (obra): material foto needs foto" % k)
+    return err
 
 
 def armar(m, s, W, fichas, look):
@@ -263,6 +307,7 @@ def armar(m, s, W, fichas, look):
             if not (0 <= i <= j < n): err.append("act %d: line [%d,%d] outside words 0..%d" % (k, i, j, n - 1)); continue
             lin.append({"w": [[P[x][0], P[x][1]] for x in range(i, j + 1)], "rol": "golpe" if rol == "golpe" else "lead", "_i": i})
         ac = {"op": op, "d": d, "fotos": fotos, "lineas": lin, "var": str(a.get("var") or ""), "texto": str(a.get("texto") or "")}
+        if op == "obra": suavizar_obra(a.get("datos"))
         if card.get("datos"): ac["datos"] = _datos(card, a.get("datos"), "act %d datos" % k, P, fichas, ds, err)
         if a.get("estilo") in ESTILOS: ac["look"] = look_de(a["estilo"], look)
         actos.append(ac)
@@ -287,6 +332,7 @@ def armar(m, s, W, fichas, look):
             dichas |= {NUM[x] for x in dichas if x in NUM}
             if not t or t.lower() not in dichas or len(t) > 7: err.append("act %d: numeral 'texto' must be ONE spoken word (or its digits), max 7 letters" % k)
             a["texto"] = t
+        if a["op"] == "obra": err.extend(revisar_obra(k, a))
         for l in a["lineas"]: del l["_i"]
         del a["d"]
     return {"frames": fr, "look": look, "actos": actos}, err
@@ -364,7 +410,16 @@ def ficha_op(c):
 def sirve(c, estilo): return "*" in (c.get("estilos") or ["*"]) or estilo in c["estilos"]
 
 
-def dirigir(caja, momentos, B):
+def fotos_de(x):
+    """Todas las fotos de un acto: las del acto y las que van dentro de sus datos."""
+    if isinstance(x, dict):
+        if isinstance(x.get("id"), str) and "foco" in x: yield x["id"]
+        for v in x.values(): yield from fotos_de(v)
+    elif isinstance(x, list):
+        for v in x: yield from fotos_de(v)
+
+
+def dirigir(caja, momentos, B, look=None):
     """Una llamada barata: qué mundos visuales usa ESTE video y qué operaciones van en cada momento. Si falla, se reparte por reglas."""
     estilos = "\n".join("%s: %s" % (k, v.get("para", "")) for k, v in ESTILOS.items())
     ops = "\n".join(linea_op(c) for c in CAT.values() if c["op"] != "pleno")
@@ -373,11 +428,15 @@ def dirigir(caja, momentos, B):
         try: guion = open(B + "/" + f, encoding="utf8").read()[:700]; break
         except Exception: pass
     frases = "\n".join("%d: %s" % (i, m["texto"][:170]) for i, m in enumerate(momentos))
+    paletas = "\n".join("%s: %s" % (k, v.get("para", "")) for k, v in PALETAS.items())
+    extra_paleta = ("COLOR PALETTES BY NICHE (name: best for):\n%s\n\n" % paletas) if PALETAS else ""
+    regla_paleta = ("Pick the one color palette that belongs to this video's niche (a gardening video is green and brown, whatever the visual world); if none fits, use \"ninguna\". " if PALETAS else "")
+    regla_obra = ("The component obra is special: there you design a brand-new object for the sentence instead of using a ready one. Put it first on about a third of the moments (at least 2), on sentences with a concrete thing that no ready component shows. It is the only component that may be first on several moments. " if "obra" in CAT else "")
     ped = ("You are the art director of a whole YouTube video. Decide its visual language, then give each signature moment its own component.\n\n"
-           "VIDEO OPENING:\n%s\n\nSIGNATURE MOMENTS:\n%s\n\nVISUAL WORLDS (style: best for):\n%s\n\nCOMPONENTS (name | best for | styles):\n%s\n\n"
-           "Rules: pick 1 main style that fits the topic and 1 or 2 secondary styles for contrast. Most moments use the main style. For each moment list 3 components, best first, whose shape IS the idea of the sentence (a journey -> a map, a verdict -> a stamp, a countdown -> a clock). "
+           "VIDEO OPENING:\n%s\n\nSIGNATURE MOMENTS:\n%s\n\nVISUAL WORLDS (style: best for):\n%s\n\n" + extra_paleta + "COMPONENTS (name | best for | styles):\n%s\n\n"
+           "Rules: " + regla_paleta + regla_obra + "pick 1 main style that fits the topic and 1 or 2 secondary styles for contrast. Most moments use the main style. For each moment list 3 components, best first, whose shape IS the idea of the sentence (a journey -> a map, a verdict -> a stamp, a countdown -> a clock). "
            "Never put the same first component on two moments. Use many different families; a real variety is the goal. The components tiras, cortina, pliegue and forma are only a photo with words on it: never list them first if a real object component can carry the sentence. A component needs what the sentence offers: do not pick a map if no place is named, nor a number component if no number is said. Each component must allow the moment's style.\n"
-           'Return JSON only: {"estilo":"...","secundarios":["..."],"momentos":[{"i":0,"estilo":"...","ops":["a","b","c"]}]}') % (guion or "-", frases, estilos, ops)
+           'Return JSON only: {"estilo":"...","paleta":"...","secundarios":["..."],"momentos":[{"i":0,"estilo":"...","ops":["a","b","c"]}]}') % (guion or "-", frases, estilos, ops)
     plan = {}
     try:
         j = ia(caja, [{"role": "user", "content": ped}], 0.012, 14000)
@@ -389,19 +448,23 @@ def dirigir(caja, momentos, B):
             o = [y for y in (x.get("ops") or []) if y in CAT and y != "pleno" and sirve(CAT[y], e)]
             o = [y for y in o if y not in TRANSICIONES] + [y for y in o if y in TRANSICIONES]      # la foto con palabra encima es el último recurso
             if o: plan[i] = (e, o)
-        log("director:", j.get("estilo"), j.get("secundarios"))
+        if look is not None and j.get("paleta") in PALETAS and not look.get("_canal"): look["_paleta"] = j["paleta"]      # si el canal tiene colores propios, mandan esos
+        log("director:", j.get("estilo"), j.get("secundarios"), "paleta:", (look or {}).get("_paleta") or "-")
     except Exception as ex: log("director por reglas (", ex, ")")
     principal = next((v[0] for v in plan.values()), "papel" if "papel" in ESTILOS else None)
-    resto = [c["op"] for c in CAT.values() if c["op"] != "pleno" and c["op"] not in TRANSICIONES and sirve(c, principal or "")]
+    resto = [c["op"] for c in CAT.values() if c["op"] not in ("pleno", "obra") and c["op"] not in TRANSICIONES and sirve(c, principal or "")]
     fams = {}
     for x in resto: fams.setdefault(x.split("_")[0] if "_" in x else "base", []).append(x)
     resto = [x for tanda in itertools.zip_longest(*fams.values()) for x in tanda if x]       # sin director, igual varias familias
-    usados, out = set(), {}
-    for i in range(len(momentos)):           # el primero de cada momento no se repite en todo el video
+    usados, out, obras = set(), {}, 0
+    tope_obras = max(2, len(momentos) * 2 // 5)
+    for i in range(len(momentos)):           # el primero de cada momento no se repite en todo el video (obra sí, porque cada una es distinta)
         e, o = plan.get(i, (principal, []))
+        if obras >= tope_obras and o and o[0] == "obra": o = o[1:] + ["obra"]
         o = [x for x in o if x not in usados] + [x for x in o if x in usados]
         if not o or o[0] in usados: o = [x for x in resto if x not in usados][:2] + o
-        if o: usados.add(o[0])
+        if o and o[0] == "obra": obras += 1
+        elif o: usados.add(o[0])
         out[i] = (e, o[:3])
     return out
 
@@ -411,18 +474,18 @@ def componer_todo(B, X, W, AV, SH, FT, fichas, look, caja, total, nmax, tope):
     if not cands: log("no hay frases fuera del avatar"); return None, None
     momentos = elegir(caja, cands, nmax)
     log("%d momentos elegidos de %d candidatos" % (len(momentos), len(cands)))
-    plan = dirigir(caja, momentos, B)
+    plan = dirigir(caja, momentos, B, look)
 
     comp = open(PKG + "/compositor.md", encoding="utf8").read()
     lib = "\n".join("%s: %s | focus %s | calm zone %s | light %s" % (i, f.get("muestra") or "-", f["foco"], f["zona_calma"], f["luz"]) for i, f in sorted(fichas.items()))
     SIS = comp + "\n\nPHOTO LIBRARY OF THIS VIDEO (id: what it shows | focus | calm zone for text | brightness 0-255):\n" + lib
-    lk = threading.Lock(); usadas = set()
+    lk = threading.Lock(); usadas = set(); escenas = []
 
     def sugeridas(m):
         return [s["id"] for s in SH if s["endMs"] > m["startMs"] - 4000 and s["startMs"] < m["endMs"] + 4000 and s["id"] in fichas][:8]
 
     def componer(k, m):
-        with lk: us = set(usadas)
+        with lk: us = set(usadas); ya = list(escenas)
         P = palabras(m, W)
         estilo, elegidas = plan.get(k, (None, []))
         lk_m = look_de(estilo, look)
@@ -430,9 +493,11 @@ def componer_todo(B, X, W, AV, SH, FT, fichas, look, caja, total, nmax, tope):
         ped = "SENTENCE: %s\nWORDS (index:word@frame), %d frames total:\n%s\nPHOTOS SHOWN AROUND THESE SECONDS: %s\nUSED (do not use): %s\nCOMPONENTS FOR THIS MOMENT (the main act must use the first one unless the sentence cannot feed it; pleno is only a short setup act before another component):\n%s\n%s" % (
             m["texto"], round((m["endMs"] - m["startMs"]) * FPS / 1000), " ".join("%d:%s@%d" % (i, w, f) for i, (w, f) in enumerate(P)),
             ", ".join(sugeridas(m)) or "-", ", ".join(sorted(us)) or "-", "\n".join(ficha_op(CAT[o]) for o in elegidas), ficha_op(CAT["pleno"]))
+        if "obra" in elegidas and ya: ped += "\nobra scenes already used in this video: %s. Pick a different plano unless only that one fits." % ", ".join(ya)
         msgs = [{"role": "system", "content": SIS}, {"role": "user", "content": ped}]
-        for intento in range(3):
-            try: s = ia(caja, msgs, 0.012)
+        es_obra = elegidas[:1] == ["obra"]
+        for intento in range(4 if es_obra else 3):
+            try: s = ia(caja, msgs, 0.012, 6000 if es_obra else 9000, pensar=not es_obra)
             except RuntimeError as e:
                 if str(e) == "tope": return k, None, "tope"
                 return k, None, str(e)
@@ -440,7 +505,9 @@ def componer_todo(B, X, W, AV, SH, FT, fichas, look, caja, total, nmax, tope):
             errs = errs + ["op %s is not available for this moment" % a.get("op") for a in (s.get("actos") or []) if a.get("op") not in perm]
             if part and not errs:
                 with lk:
-                    for ac in part["actos"]: usadas.update(f["id"] for f in ac["fotos"])
+                    for ac in part["actos"]:
+                        usadas.update(f["id"] for f in ac["fotos"])
+                        if ac["op"] == "obra": escenas.append((ac.get("datos") or {}).get("plano") or "heroe")
                 return k, part, s.get("bisagra")
             msgs += [{"role": "assistant", "content": json.dumps(s)}, {"role": "user", "content": "Fix these problems and return the whole JSON again:\n- " + "\n- ".join(errs)}]
         return k, None, "partitura inválida: " + "; ".join(errs[:2])[:200]
@@ -473,13 +540,15 @@ def renderizar(B, X, fotos, partes, momentos, caja):
     for k, part in sorted(partes.items()):
         mid = "xm%02d" % (k + 1); ids.append(mid)
         for ac in part["actos"]:
-            for f in ac["fotos"]:
-                d = pub + "/fotos/" + f["id"] + ".jpg"
+            for fid in set(fotos_de(ac)):
+                d = pub + "/fotos/" + fid + ".jpg"
                 if not os.path.exists(d):
-                    im = Image.open(fotos[f["id"]]).convert("RGB"); im.thumbnail((1920, 1080)); im.save(d, quality=86)
+                    im = Image.open(fotos[fid]).convert("RGB"); im.thumbnail((1920, 1080)); im.save(d, quality=86)
         open(G + "/%s.tsx" % mid, "w", encoding="utf8").write("import React from 'react';\nimport {Pieza} from '../motor';\nconst S: any = %s;\nexport default function Component() { return <Pieza s={S} />; }\n" % json.dumps(part, ensure_ascii=False))
     open(G + "/manifest.ts", "w", encoding="utf8").write("".join("import c%d from './%s';\n" % (i, x) for i, x in enumerate(ids)) +
         "export const comps = [%s];\n" % ",".join("{id:'%s',C:c%d,frames:%d}" % (x, i, partes[int(x[2:]) - 1]["frames"]) for i, x in enumerate(ids)))
+    os.makedirs(X, exist_ok=True)      # el panel muestra cada pieza en su lugar apenas termina de renderizarse
+    json.dump([{"id": "xm%02d" % (k + 1), "startMs": momentos[k]["startMs"], "endMs": momentos[k]["endMs"], "texto": momentos[k]["texto"][:120]} for k in sorted(partes)], open(X + "/momentos.json", "w", encoding="utf8"), ensure_ascii=False)
     t0 = time.time()
     try:
         r = subprocess.run(["node", "render.mjs", pub, X, ",".join(ids)], cwd=T, capture_output=True, text=True, timeout=3600)
@@ -492,12 +561,23 @@ def renderizar(B, X, fotos, partes, momentos, caja):
         dur = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f], capture_output=True, text=True).stdout.strip()
         if not dur or abs(float(dur) * FPS - part["frames"]) > 6: log(mid, "duración rara (%s s): queda el b-roll" % dur); continue
         man.append({"mp4": "extrema/" + mid + ".mp4", "startMs": m["startMs"], "endMs": m["endMs"], "texto": m["texto"][:120]})
-    json.dump(man, open(X + "/manifest.json", "w", encoding="utf8"), ensure_ascii=False, indent=1)
+    json.dump(man, open(X + "/manifest.tmp", "w", encoding="utf8"), ensure_ascii=False, indent=1)
+    os.replace(X + "/manifest.tmp", X + "/manifest.json")      # render.py puede estar leyéndolo: nunca a medio escribir
     shutil.rmtree(pub, ignore_errors=True)
     log("%d piezas listas en %.0f s · edición extrema US$%.4f" % (len(man), time.time() - t0, caja.gastado))
 
 
 if __name__ == "__main__":
-    try: main()
+    # --fondo: corre mientras se espera el avatar. extrema/EN_CURSO le dice a render.py que espere (como mucho 10 min) en el armado final.
+    _arg = sys.argv[1:]; _B = os.path.abspath(_arg[0] if _arg and not _arg[0].startswith("--") else os.getcwd())
+    _marca = os.path.join(_B, "extrema", "EN_CURSO") if "--fondo" in _arg else None
+    try:
+        if _marca and os.path.exists(os.path.join(_B, "extrema", "manifest.json")): log("las piezas ya estaban hechas"); sys.exit(0)
+        if _marca: os.makedirs(os.path.dirname(_marca), exist_ok=True); open(_marca, "w").write(str(os.getpid()))
+        main()
     except Exception as e:      # nunca rompe el video: sin manifest, render.py usa el b-roll normal
         log("falló, queda el b-roll normal:", type(e).__name__, str(e)[:300])
+    finally:
+        if _marca:
+            try: os.remove(_marca)
+            except OSError: pass

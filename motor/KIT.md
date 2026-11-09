@@ -72,13 +72,15 @@ python {APP}/tools/fotos.py <carpeta> <carpeta>/pedidos_01.json > <carpeta>/foto
 - **Campos obligatorios:** `type, moment, subject, action, props, setting, light, camera, color, avoid` (+ `person`/`hands`, `clothing` si hay alguien).
   - `type` = `"amateur phone photo, mild JPEG compression, real skin texture with pores, uneven ordinary indoor light, slightly crooked framing, everyday clutter, nothing blurred out, everything in focus, 16:9"` (la frase **nothing blurred out** es obligatoria).
   - `moment`: QUÉ pasa en ese segundo y POR QUÉ importa (atado a la frase del guion que suena ahí), ≥ 70 caracteres.
+    ⭐ **LITERAL:** la foto muestra la acción y el objeto EXACTOS que nombra la frase, no "algo del tema". "Tiré los huevos a la basura" = una mano tirando huevos a un tacho de cocina, no una heladera. "Sembrás semillas de tomate cherry" = dedos poniendo semillas en una bandeja con tierra, no una huerta en general. Si la frase nombra una variedad, un número o un lugar, va en `subject`/`props`.
+    ⭐ **Primera persona = el presentador haciéndolo:** si la frase cuenta algo que hizo o hace el presentador ("tiré", "sembré", "le dije a don Aurelio"), esa foto va con `cara: true` haciéndolo. Usá ahí las fotos con cara (mismo tope: no se agregan fotos).
   - `action`: el gesto a medias (la mano entrando al agua, la taza a mitad de camino a la boca).
   - `props`: **6 a 10 objetos concretos con detalle** (material, color, desgaste): "a dented aluminium kettle", no "kettle".
   - `camera`: **variá en cada foto**: manos a 40 cm, plano medio, cenital de la mesa, por encima del hombro, desde la puerta. ≥30 % primeros planos, ≥60 % con persona o manos.
   - `avoid` = `"cinematic lighting, dramatic shadows, studio look, perfect plastic skin, empty clean background, depth-of-field blur, date stamp, watermark"`.
   - Prohibido en el resto del prompt: cinematic, photorealistic, 35mm, bokeh, 8k, golden hour, stock photo (dan look de IA).
 - **Imágenes creativas:** 4 a 6 por video, ver §4b.
-- **Vos SÍ podés ver imágenes** (Read sobre un .png). Después de cada tanda armá una hoja de 12 con `hoja.py` y mirala. Repedí las que tengan manos rotas, la cara cambiada o look de publicidad. **El texto legible en una foto (carteles, papeles, pantallas) está BIEN: nunca lo prohíbas ni la rechaces por eso.** Para repedir: borrá `fotos/<id>.png` y pedí el MISMO id en un pedido nuevo (fotos.py sólo pide las que faltan), todas las malas juntas en UNA ronda.
+- **Vos SÍ podés ver imágenes** (Read sobre un .png). Después de cada tanda armá una hoja de 12 con `hoja.py` y mirala. Repedí las que tengan manos rotas, la cara cambiada o look de publicidad: **sólo fallas graves y una sola vez por foto** (cada repetición se paga; nunca repidas porque "podría encajar mejor"). **El texto legible en una foto (carteles, papeles, pantallas) está BIEN: nunca lo prohíbas ni la rechaces por eso.** Para repedir: borrá `fotos/<id>.png` y pedí el MISMO id en un pedido nuevo (fotos.py sólo pide las que faltan), todas las malas juntas en UNA ronda.
 
 ## 4b. Imágenes creativas — ideas TUYAS, nunca sólo "foto del tema"
 gpt-image puede hacer cualquier cosa. **4 a 6 por video**, en los momentos clave: son 4-6 planos de `planos.json` (mismo id del plano). **Inventá ideas a partir del guion**: preguntate "¿qué objeto, gesto o papel de la vida real de este personaje mostraría esto mejor que una foto suelta?".
@@ -98,12 +100,14 @@ Clips reales de stock (gratis) en casi todo el video y pocas fotos, donde un cli
 ```
 python {APP}/tools/stock.py <carpeta> <carpeta>/stock_01.json > <carpeta>/clips/stock.log 2>&1 &
 ```
-- Antes creá la carpeta `clips/`. `stock_01.json = [{"id":"p003","buscar":["senior hands kneading dough","kneading bread close up"]}]` (`id` = el del plano). De 1 a 3 búsquedas por plano, de la más precisa a la más general.
+- Antes creá la carpeta `clips/`. `stock_01.json = [{"id":"p003","muestra":"hands pressing tomato seeds into a seed tray","buscar":["sowing tomato seeds tray","planting seeds seedling tray"]}]` (`id` = el del plano). De 1 a 3 búsquedas por plano, de la más precisa a la más general.
+- ⭐ **`muestra` en TODOS** (inglés, 3 a 30 palabras): lo que tiene que verse LITERAL en ese segundo, con el objeto que nombra la frase. stock.py junta hasta 10 candidatos y un juez con visión elige el que muestra eso (anota el puntaje en `clips/<id>.json` → `"juez"`). La 1ª búsqueda = acción + objeto exacto ("sowing tomato seeds", no "garden"); las otras, más generales.
+- **Primera persona → foto, no clip:** si la frase es algo que hizo el presentador ("tiré los huevos", "sembré", "le dije"), ese plano va con `fotos.py` y `cara: true`, dentro del tope de 20. Un clip de stock nunca puede mostrar al presentador.
 - **Máximo 20 fotos con `fotos.py` en todo el video** (la compuerta lo controla): las 3 del gancho, mínimo 3 con `cara: true`, 4 creativas (§4b), las de pantalla partida (siempre foto: usá pocas) y lo específico que un clip no puede mostrar (un objeto puntual, un papel con texto, este personaje haciendo algo). **Todo lo demás, clip.** Cada plano va con clip o con foto, nunca sin nada.
 - **Búsquedas en inglés, 2 a 5 palabras, sólo lo que se VE:** objeto + acción + lugar. "pouring tea into cup", "old man walking in park", "rain on window". Nunca ideas abstractas ("health", "success"), títulos, marcas ni frases del guion traducidas.
-- Si el video habla de alguien mayor, que la búsqueda lo diga ("senior", "elderly"). Preferí manos, objetos, naturaleza, lugares y gente de espaldas o a lo lejos: nadie debe parecer otro presentador hablando a cámara.
-- Armá hojas de 12 con `hoja.py` (acepta videos) y miralas. Cambiá sólo lo que no tenga NADA que ver con la frase o muestre una marca grande o un cartel en otro idioma: borrá `clips/<id>.mp4` y pedí ese id con otra búsqueda, todas juntas en UNA sola ronda. No busques el clip perfecto.
-- Los ids que Pexels no tenga quedan en `clips/_sin_stock.json`: probá otra búsqueda una vez; si tampoco, hacelos con `fotos.py` (no cuentan para el tope).
+- Si el video habla de alguien mayor, que la búsqueda lo diga ("senior", "elderly"). Preferí manos, objetos, naturaleza, lugares y gente de espaldas o a lo lejos: nadie debe parecer otro presentador hablando a cámara. En nichos de manos (huerta, cocina, arreglos, cuidado) la búsqueda lleva "hands" y no van caras de otras personas.
+- Armá hojas de 12 con `hoja.py` (acepta videos) y miralas, sobre todo los de `"juez"` ≤ 4. Cambiá los que no muestren lo que dice la frase, una marca grande o un cartel en otro idioma: borrá `clips/<id>.mp4` y pedí ese id con una búsqueda MÁS LITERAL, todas juntas en UNA sola ronda (los clips no cuestan; el juez, centavos).
+- Los ids que Pexels no tenga, o que el juez marcó "nada que ver" (máximo 4 por video), quedan en `clips/_sin_stock.json`: probá otra búsqueda una vez; si tampoco, hacelos con `fotos.py` (no cuentan para el tope).
 - Con clips y fotos listos, `planos.py <carpeta> --shots` toma cada plano de donde esté. El render recorta y funde los clips solo.
 
 ## 5. Armado (herramientas del Estudio: no las copies ni las edites)

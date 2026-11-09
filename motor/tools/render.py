@@ -9,7 +9,7 @@ Lee <carpeta>/shots_timed.json  = [{"id":"b01_gancho","startMs":0,"endMs":3200},
      <carpeta>/voz/master.wav (mide la duración sola).
 Si un clip de avatar todavía no existe usa su "frame" como foto fija con el cartel «Esperando avatar» (si falta una imagen, «Esperando imagen»); cuando el clip llega, volvé a correr: SOLO se rehacen los segmentos cuya fuente cambió.
 Escribe plan.json (para el panel y validar.py) + segments/NNNN.mp4 + segments/xf.json (fundidos avatar 0,6 s / foto 0,3 s). Después: python <APP>/tools/assemble.py <carpeta>."""
-import json, os, re, sys, subprocess, shutil
+import json, os, re, sys, subprocess, shutil, time
 from concurrent.futures import ThreadPoolExecutor
 
 B = (sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else os.getcwd()).replace("\\", "/").rstrip("/")
@@ -58,6 +58,15 @@ for s in shots:
 
 # EDICIÓN EXTREMA (opcional): extrema/manifest.json = [{"mp4":"extrema/xm03.mp4","startMs":..,"endMs":..}]
 # Cada pieza tapa la línea de fotos/clips en su tramo. Nunca pisa un tramo de avatar; si falta el mp4 queda el b-roll normal.
+# Las piezas se hacen en segundo plano mientras llega el avatar (extrema/EN_CURSO). En el armado final (todos los clips de
+# avatar ya están) se esperan como mucho 10 min; si no llegan, el video sale sin ellas: nunca se traba.
+def _xm_en_curso():
+    try: return time.time() - os.path.getmtime(B + "/extrema/EN_CURSO") < 100 * 60     # más viejo = quedó colgado: no se espera
+    except OSError: return False
+if "--limit" not in sys.argv and _xm_en_curso() and all(os.path.exists(B + "/" + r["file"]) for r in ranges if r.get("file")):
+    _t0 = time.time(); print("extrema: esperando las piezas (máx. 10 min)", flush=True)
+    while _xm_en_curso() and time.time() - _t0 < 600: time.sleep(10)
+    print("extrema: %s tras %d s" % ("llegaron" if not _xm_en_curso() else "no llegaron, va sin ellas", time.time() - _t0), flush=True)
 try:
     _xm = json.load(open(B + "/extrema/manifest.json", encoding="utf-8")) if os.path.exists(B + "/extrema/manifest.json") else []
 except Exception as e:
