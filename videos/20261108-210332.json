@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794185581.8501918,
+ "actualizado": 1794185644.8446846,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -34,14 +34,14 @@
   {
    "k": "fotos",
    "n": "Fotos",
-   "st": "active",
-   "info": "16 fotos"
+   "st": "done",
+   "info": "17 fotos"
   },
   {
    "k": "armado",
    "n": "Armado",
-   "st": "pending",
-   "info": ""
+   "st": "active",
+   "info": "10 segmentos"
   },
   {
    "k": "qc",
@@ -51,66 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.085,
-  "gpt": 0.0488,
-  "gpt_img": 20,
+  "deepseek": 0.0882,
+  "gpt": 0.051,
+  "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1338
+  "total": 0.1392
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_redo3.jpg clips/p023.mp4 clips/p038.mp4 clips/p041.mp4 clips/p056.mp4 clips/p059.mp4 clips/p060.mp4 clips/p064.mp4 clips/p069.mp4 clips/p078.mp4 clips/p089.mp4 clips/p097.mp4 2>&1 | tail -2"
-  },
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_redo3.jpg (11 cuadros, 4x3)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_redo3.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "python3 - <<'EOF'\nimport json,os\npeds=[\n{\"id\":\"p041\",\"buscar\":[\"hand shaking plant flowers\",\"bee pollinating flower close up\"]},\n{\"id\":\"p056\",\"buscar\":[\"spots on green leaf\",\"leaf disease close up\"]},\n{\"id\":\"p078\",\"buscar\":[\"thermometer close up\",\"garden tools close up\"]}\n]\njson.dump(peds,open('stock_04.json','w',encoding='utf8'),ensure_ascii=False,indent=1)\nfor p in peds:\n    f='clips/'+p['id']+'"
-  },
-  {
-   "k": "res",
-   "t": "ok\nPID=15854\n00:36:27 → 3 clips por buscar"
-  },
-  {
-   "k": "tool",
-   "t": "sleep 20; tail -6 fotos/fotos_03.log; ls -la fotos/p001_c.png fotos/p036.png 2>/dev/null; tail -2 clips/stock_redo4.log"
-  },
-  {
-   "k": "res",
-   "t": "00:36:05 → batch batch_6af1157597a48190ba7b2737992efbff · 1 fotos · sin referencia · low 1088x608\n00:36:06 → batch batch_6af115765510819092fd53a7a1a32397 · 1 fotos · con la cara del presentador · low 1088x608\n00:36:06 batch 992efbff: in_progress 0/1\n00:36:06 batch a1a32397: validating 0/0\n00:36:36 batch 992efbff: in_progress 0/1\n00:36:36 batch a1a32397: in_progress 0/1\n00:36:32 bajados 3/3\n00:36:3"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_redo4.jpg clips/p041.mp4 clips/p056.mp4 clips/p078.mp4 2>&1 | tail -1"
-  },
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_redo4.jpg (3 cuadros, 3x1)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_redo4.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "python3 - <<'EOF'\nimport json,os\npeds=[{\"id\":\"p078\",\"buscar\":[\"soil probe garden\",\"garden tools close up\"]}]\njson.dump(peds,open('stock_05.json','w',encoding='utf8'),ensure_ascii=False,indent=1)\nf='clips/p078.mp4'\nif os.path.exists(f): os.remove(f)\nEOF\npython /opt/estudio/repo/motor/tools/stock.py . stock_05.json 2>&1 | tail -3; python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_p078.jpg clips/p"
-  },
   {
    "k": "res",
    "t": "00:37:05 → 1 clips por buscar\n00:37:08 bajados 1/1\n00:37:08 FIN: 1/1 clips en clips/\nhoja: qc/hoja_p078.jpg (1 cuadros, 1x1)"
@@ -178,6 +126,58 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 17"
+  },
+  {
+   "k": "res",
+   "t": "✓ hay 17 archivos (400 s)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/fotos/p036.png\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "ai",
+   "t": "Todas las fotos listas (17, con 3 del presentador y 5 creativas). Genero `shots_timed.json`."
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/planos.py . --shots 2>&1 | tail -5; echo \"=== AVATAR ===\"; tail -3 avatar/it.log"
+  },
+  {
+   "k": "res",
+   "t": "✓ shots_timed.json: 107 planos, 107 fotos distintas (cero repetidas). Seguí con render.py.\n=== AVATAR ===\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS"
+  },
+  {
+   "k": "ai",
+   "t": "Ahora el render de prueba (10 segmentos) mientras el avatar sigue en RunPod."
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/render.py . --limit 10 > render_test.log 2>&1; tail -15 render_test.log; ls -la segments/ 2>/dev/null | head"
+  },
+  {
+   "k": "res",
+   "t": "AVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A90.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A91.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A92.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A93.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A94.mp4\nAVATAR PENDIENT"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_render.jpg segments/0000.mp4 segments/0001.mp4 segments/0002.mp4 segments/0003.mp4 segments/0004.mp4 segments/0005.mp4 segments/0006.mp4 segments/0007.mp4 segments/0008.mp4 segments/0009.mp4 2>&1 | tail -1; tail -2 avatar/it.log"
+  },
+  {
+   "k": "res",
+   "t": "hoja: qc/hoja_render.jpg (10 cuadros, 4x3)\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_render.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
   }
  ],
  "maquinas": 1,
