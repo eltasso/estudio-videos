@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794189001.132264,
+ "actualizado": 1794189064.2154117,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1192,
+  "deepseek": 0.1205,
   "gpt": 0.051,
   "gpt_img": 21,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1702
+  "total": 0.1715
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "echo \"=== AVATAR ===\"; tail -5 avatar/it.log; cat avatar/it_llamada.json 2>/dev/null | head -8; echo; echo \"=== RENDER ===\"; tail -2 render.log; ls segments/*.mp4 2>/dev/null | wc -l"
-  },
   {
    "k": "res",
    "t": "=== AVATAR ===\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n{\n \"estado\": \"corriendo\",\n \"t\": \"2026-11-09 00:13:32\",\n \"ventanas\": [\n  \"avatar/A0.mp4\",\n  \"avatar/A1.mp4\",\n  \"avatar/A2.mp4\",\n  \"avatar/A3.mp4\",\n\n=== RENDER ===\nclips=210 frames=34572 (1152.40s)\nhechos 210\n210"
@@ -178,6 +170,14 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "date; tail -2 avatar/it.log; python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4"
   }
  ],
  "maquinas": 1,
