@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794183159.640585,
+ "actualizado": 1794183222.6350617,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -51,50 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0274,
+  "deepseek": 0.0363,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0274
+  "total": 0.0363
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "# -*- coding: utf-8 -*-\r\n\"\"\"Avatar con InfiniteTalk (RunPod), UNA sola llamada por video (US$0,25 aprox.).\r\n   python <APP>/tools/avatar_it.py <carpeta_del_video> > <carpeta>/avatar/it.log 2>&1        (en segundo plano)\r\n\r\nLee <carpeta>/avatar_ranges.json (TODAS las ventanas donde se ve el avatar, plan CERRADO), voz/master.wav y la foto del\r\npresentador refs/avatar.png (máxima resolución, mirando "
-  },
-  {
-   "k": "ai",
-   "t": "Ahora armo el plan de ventanas del avatar (ritmo dinámico, ~50 %, cortes en pausas, con pantalla partida en tramos largos)."
-  },
-  {
-   "k": "tool",
-   "t": "# -*- coding: utf-8 -*-\nimport json, subprocess\n\nB = \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue\"\nW = [w for w in json.load(open(f\"{B}/captions.json\", encoding=\"utf8\")) if w.get(\"text\", \"\").strip()]\ndur = round(float(subprocess.run([\"ffprobe\",\"-v\",\"error\",\"-show_entries\",\"format=duration\",\"-of\",\"csv=p=0\",f\"{B}/voz/master.wav\"],capture_output=True,text=True).stdout.strip())*"
-  },
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gen_avatar.py (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "python3 gen_avatar.py"
-  },
-  {
-   "k": "res",
-   "t": "ventanas: 46 · contenido 565.9s · reel 579.7s (tope 590)\ncobertura 49.1% · huecos: min 4.2s max 52.8s · malos 11\nprimera: {'file': 'avatar/A0.mp4', 'frame': 'refs/avatar.png', 'startMs': 0, 'endMs': 19120}\nSPLIT s01 izq 268.8-284.2s ::  La  planta  manda  el  calcio  a  las  hojas  primero  y  cuando  el  fruto  se  queda  sin,  se  pudre  la  punta.  La  cáscara  de  huevo,  además,  tarda  meses"
-  },
-  {
-   "k": "tool",
-   "t": "python3 -c \"\nimport json\nW=[w for w in json.load(open('captions.json',encoding='utf8')) if w.get('text','').strip()]\ngaps=[W[i+1]['startMs']-W[i]['endMs'] for i in range(len(W)-1)]\nprint('n words',len(W))\nfor th in [40,60,80,100,130,180,250]: print(th, sum(1 for g in gaps if g>=th))\nprint('gap percentiles', sorted(gaps)[len(gaps)//10], sorted(gaps)[len(gaps)//4], sorted(gaps)[len(gaps)//2])\nprint("
-  },
-  {
-   "k": "res",
-   "t": "n words 3080\n40 175\n60 158\n80 140\n100 126\n130 108\n180 89\n250 72\ngap percentiles 0 0 0\nfirst words [(' Hola', 20, 260), (' gente', 260, 700), (' de', 700, 900), (' YouTube,', 900, 1660), (' ¿cómo', 1660, 1880), (' andan?', 1880, 2400), (' Mirá', 2700, 3080), (' esto,', 3080, 3820), (' una', 3820, 4040), (' planta', 4040, 4500), (' de', 4500, 4660), (' tomate', 4660, 5080), (' con', 5080, 5320), (' "
-  },
-  {
-   "k": "tool",
-   "t": "# -*- coding: utf-8 -*-\nimport json, subprocess\n\nB = \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue\"\nW = [w for w in json.load(open(f\"{B}/captions.json\", encoding=\"utf8\")) if w.get(\"text\", \"\").strip()]\ndur = round(float(subprocess.run([\"ffprobe\",\"-v\",\"error\",\"-show_entries\",\"format=duration\",\"-of\",\"csv=p=0\",f\"{B}/voz/master.wav\"],capture_output=True,text=True).stdout.strip())*"
-  },
   {
    "k": "res",
    "t": "The file /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gen_avatar.py has been updated successfully. (file state is current in your context — no need to Read it back)"
@@ -178,6 +142,42 @@
   {
    "k": "res",
    "t": "1\tp001 [5-11s] con el culito negro, la base del fruto podrida, marrón, como quemada. Y al\n2\tp002 [16-22s] de huevo todos los días, como si fueran pastillas. Yo también lo hice, durante años\n3\tp003 [27-33s] con el mortero y se las echaran al pie del tomate. Estaba repitiendo un consejo que no sirve\n4\tp004 [38-44s] Vamos a revisar 14 consejos de huerta que se repiten en todos los grupos, en todas\n5\t"
+  },
+  {
+   "k": "tool",
+   "t": "sed -n '1,120p' /opt/estudio/repo/motor/tools/fotos.py"
+  },
+  {
+   "k": "res",
+   "t": "# -*- coding: utf-8 -*-\n\"\"\"Fotos del b-roll. Motor (Configuración → Fotos): \"openai\" = gpt-image-2.5-sunburst SIEMPRE low + Batch; referencia SOLO en las fotos del presentador;\n\"manual\" = las hace el usuario con lo que quiera (gratis).\n   python <APP>/tools/fotos.py <carpeta_del_video> <pedidos.json> > <carpeta>/fotos/fotos.log 2>&1      (en segundo plano)\npedidos.json = [{\"id\":\"b01_gancho\", \"cara"
+  },
+  {
+   "k": "tool",
+   "t": "python3 -c \"\nimport sys; sys.path.insert(0,'/opt/estudio/repo/motor/tools'); import _cfg\nc=_cfg.leer(); print('fotos_motor=',c.get('fotos_motor')); print('imagen_size=',c.get('imagen_size')); print('avatar_repo=',c.get('avatar_repo'))\n\" ; echo '---STOCK---'; sed -n '1,70p' /opt/estudio/repo/motor/tools/stock.py"
+  },
+  {
+   "k": "res",
+   "t": "fotos_motor= ahorro\nimagen_size= 1088x608\navatar_repo= estudio-videos\n---STOCK---\n# -*- coding: utf-8 -*-\n\"\"\"Clips de stock del MODO AHORRO (Pexels, gratis). Uso:\n   python <APP>/tools/stock.py <carpeta> <pedidos.json> > <carpeta>/clips/stock.log 2>&1      (en segundo plano)\npedidos = [{\"id\":\"p003\", \"buscar\":[\"senior hands kneading dough\", \"kneading bread close up\"]}, …]\n  · id = el del plano de p"
+  },
+  {
+   "k": "tool",
+   "t": "mkdir -p clips gates qc; nohup python /opt/estudio/repo/motor/tools/avatar_it.py . > avatar/it.log 2>&1 & echo \"AVATAR_PID=$!\"; sleep 3; tail -3 avatar/it.log"
+  },
+  {
+   "k": "res",
+   "t": "AVATAR_PID=4745"
+  },
+  {
+   "k": "ai",
+   "t": "Escribo los pedidos de stock (95 planos, búsquedas en inglés, 2 por plano)."
+  },
+  {
+   "k": "tool",
+   "t": "[\n{\"id\":\"p002\",\"buscar\":[\"crushed eggshells garden soil\",\"eggshells hands close up\"]},\n{\"id\":\"p003\",\"buscar\":[\"grinding eggshells mortar\",\"mortar and pestle kitchen\"]},\n{\"id\":\"p004\",\"buscar\":[\"gardeners talking community garden\",\"people gardening together\"]},\n{\"id\":\"p007\",\"buscar\":[\"senior man repairing tools shed\",\"old man woodworking hands\"]},\n{\"id\":\"p008\",\"buscar\":[\"withered tomato plant garden"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/stock_01.json (file state is current in your context — no need to Read it back)"
   }
  ],
  "maquinas": 1,
