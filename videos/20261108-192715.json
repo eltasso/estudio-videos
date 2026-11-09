@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794182802.2834473,
+ "actualizado": 1794182865.2694244,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -28,8 +28,8 @@
   {
    "k": "avatar",
    "n": "Avatar",
-   "st": "skip",
-   "info": ""
+   "st": "done",
+   "info": "43 clips"
   },
   {
    "k": "fotos",
@@ -51,38 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1084,
+  "deepseek": 0.1105,
   "gpt": 0.1941,
   "gpt_img": 88,
   "whisper": 0.0577,
-  "avatar": 0.0,
-  "total": 0.3602
+  "avatar": 0.25,
+  "total": 0.6123
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "0 280 ' ¡Hola'\n460 760 ' gente'\n760 960 ' de'\n960 1460 ' YouTube'\n1840 1960 ' ¿Cómo'\n1960 2480 ' andan'\n2780 2980 ' Hace'\n2980 3740 ' 23'\n3740 4120 ' años'\n4120 4440 ' saqué'\n4440 5220 ' 42'\n5220 5740 ' plantines'\n5740 6140 ' de'\n6140 6360 ' tomate'\n6360 6560 ' de'\n6560 6900 ' la'\n6900 7300 ' bandeja'\n7300 7620 ' y'\n7620 7860 ' los'\n7860 8140 ' pasé'\n8140 8340 ' al'\n8340 8880 ' cantero'"
-  },
-  {
-   "k": "tool",
-   "t": "python -c \"\nimport json\nW=json.load(open('captions.json',encoding='utf8'))\nfor w in W[18:45]: print(w['startMs'], w['endMs'], repr(w['text']))\nprint('gaps:')\nfor i in range(1,45):\n    g=W[i]['startMs']-W[i-1]['endMs']\n    if g>=200: print(round(g), 'before', W[i]['text'].strip(), 'at', W[i]['startMs'])\n\""
-  },
-  {
-   "k": "res",
-   "t": "7620 7860 ' los'\n7860 8140 ' pasé'\n8140 8340 ' al'\n8340 8880 ' cantero'\n9240 9760 ' 42'\n10260 10440 ' ni'\n10440 10640 ' uno'\n10640 11100 ' menos'\n11440 11480 ' A'\n11460 11820 ' la'\n11820 11880 ' tarde'\n11880 12800 ' 37'\n12800 13220 ' tenían'\n13220 13580 ' las'\n13580 13740 ' hojas'\n13740 14100 ' para'\n14100 14380 ' abajo'\n14680 14880 ' como'\n14880 15100 ' si'\n15100 15340 ' les'\n15340 15620 ' hubier"
-  },
-  {
-   "k": "ai",
-   "t": "Detecté que la primera ventana quedó en 14,4 s. La convierto en pantalla partida de 10,26 s con una foto propia (una variante ya generada), sin tocar el resto del plan."
-  },
-  {
-   "k": "tool",
-   "t": "cp fotos/p001_c.png fotos/s18.png && python -c \"\nimport json\nd=json.load(open('fotos/p001_c.json',encoding='utf8')); d['id']='s18'\njson.dump(d,open('fotos/s18.json','w',encoding='utf8'),ensure_ascii=False,indent=1)\nR=json.load(open('avatar_ranges.json',encoding='utf8'))\nR[0]['endMs']=10260; R[0]['foto']='s18'; R[0]['lado']='izq'\njson.dump(R,open('avatar_ranges.json','w',encoding='utf8'),ensure_asc"
-  },
-  {
-   "k": "res",
-   "t": "{'file': 'avatar/A0.mp4', 'frame': 'refs/avatar.png', 'startMs': 0, 'endMs': 10260, 'foto': 's18', 'lado': 'izq'}"
-  },
   {
    "k": "tool",
    "t": "tail -4 avatar/it.log; date"
@@ -178,6 +154,30 @@
   {
    "k": "res",
    "t": "… sigue esperando tras 540 s · log: 23:17:53 estado: IN_PROGRESS → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log avatar/it.log --busca \"clips cortados|⛔|FAILED|TIMED_OUT|CANCELLED\" --max 540"
+  },
+  {
+   "k": "res",
+   "t": "✓ el log tiene 'clips cortados' (45 s):\n22:36:37 InfiniteTalk: 43 ventanas · reel 307.1 s · 1 llamada\n22:36:43 RUN 9e9c792b-24be-4cdb-b374-81694840f916-u2\n22:37:13 estado: IN_QUEUE\n23:17:53 estado: IN_PROGRESS\n00:07:02 estado: COMPLETED\n✓ 43 clips cortados · desfase corregido (máx 200 ms)"
+  },
+  {
+   "k": "ai",
+   "t": "¡Llegó el avatar! 43 clips cortados y desfase corregido. Re-renderizo los tramos del avatar y vuelvo a ensamblar."
+  },
+  {
+   "k": "tool",
+   "t": "ls avatar/*.mp4 | wc -l; du -sh avatar; tail -3 avatar/it.log; nohup python /opt/estudio/repo/motor/tools/render.py . > render.log 2>&1 & echo \"RENDER PID $!\""
+  },
+  {
+   "k": "res",
+   "t": "43\n151M\tavatar\n23:17:53 estado: IN_PROGRESS\n00:07:02 estado: COMPLETED\n✓ 43 clips cortados · desfase corregido (máx 200 ms)\nRENDER PID 20368"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --log render.log --busca \"hechos|Traceback|FALLO|ERR\" --max 540"
   }
  ],
  "maquinas": 1,
