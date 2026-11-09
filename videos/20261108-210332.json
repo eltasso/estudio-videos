@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794185141.0191584,
+ "actualizado": 1794185203.9633183,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -35,7 +35,7 @@
    "k": "fotos",
    "n": "Fotos",
    "st": "active",
-   "info": "18 fotos"
+   "info": "16 fotos"
   },
   {
    "k": "armado",
@@ -51,58 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0815,
+  "deepseek": 0.085,
   "gpt": 0.0488,
   "gpt_img": 20,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1303
+  "total": 0.1338
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 19"
-  },
-  {
-   "k": "res",
-   "t": "✓ hay 19 archivos (350 s)"
-  },
-  {
-   "k": "tool",
-   "t": "tail -4 fotos/fotos_02.log; python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_fotos_test2.jpg fotos/p030.png fotos/p050.png fotos/p077.png fotos/p098.png fotos/p099.png fotos/p103.png fotos/s02.png fotos/s03.png fotos/s04.png fotos/s05.png 2>&1 | tail -2; echo; tail -3 clips/stock_redo3.log"
-  },
-  {
-   "k": "res",
-   "t": "00:19:35 batch 32ced0ad: in_progress 0/9\n00:35:40 batch 32ced0ad: completed 9/9\n00:35:41 ✓ batch 32ced0ad: 9 fotos bajadas, 0 fallidas (US$0.020)\n00:35:41 FIN: 10/10 fotos en fotos/ (18 min)\nhoja: qc/hoja_fotos_test2.jpg (10 cuadros, 4x3)\n\n00:29:48 → 11 clips por buscar\n00:30:06 bajados 11/11\n00:30:06 FIN: 11/11 clips en clips/"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_fotos_test2.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "ai",
-   "t": "La segunda tanda salió muy bien. Solo quedan `p001_c` (cara) y `p036` (clavo). Los rehago con indicaciones precisas."
-  },
-  {
-   "k": "tool",
-   "t": "[\n{\n \"id\": \"p001_c\",\n \"cara\": true,\n \"prompt\": {\n  \"type\": \"amateur phone photo, mild JPEG compression, real skin texture with pores, wrinkles, age spots, flyaway grey hairs, uneven ordinary indoor light, slightly crooked framing, everyday clutter, nothing blurred out, everything in focus, 16:9\",\n  \"moment\": \"Don Genaro holds the damaged tomato just under his chin and looks straight into the phone"
-  },
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/pedidos_03.json (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "rm -f fotos/p001_c.png fotos/p001_c.json fotos/p036.png fotos/p036.json; nohup python /opt/estudio/repo/motor/tools/fotos.py . pedidos_03.json > fotos/fotos_03.log 2>&1 & echo \"PID=$!\"; sleep 5; tail -6 fotos/fotos_03.log; echo \"=== AVATAR ===\"; tail -4 avatar/it.log"
-  },
-  {
-   "k": "res",
-   "t": "PID=15239\n00:36:05 → batch batch_6af1157597a48190ba7b2737992efbff · 1 fotos · sin referencia · low 1088x608\n00:36:06 → batch batch_6af115765510819092fd53a7a1a32397 · 1 fotos · con la cara del presentador · low 1088x608\n00:36:06 batch 992efbff: in_progress 0/1\n00:36:06 batch a1a32397: validating 0/0\n=== AVATAR ===\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-"
-  },
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_redo3.jpg clips/p023.mp4 clips/p038.mp4 clips/p041.mp4 clips/p056.mp4 clips/p059.mp4 clips/p060.mp4 clips/p064.mp4 clips/p069.mp4 clips/p078.mp4 clips/p089.mp4 clips/p097.mp4 2>&1 | tail -2"
@@ -178,6 +134,50 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 19"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivos: 18/19 → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "ls fotos/p001_c.png fotos/p036.png 2>&1; echo \"=== AVATAR ===\"; tail -5 avatar/it.log; echo \"=== AVATAR FILES ===\"; ls avatar/*.mp4 2>/dev/null | wc -l"
+  },
+  {
+   "k": "res",
+   "t": "ls: cannot access 'fotos/p036.png': No such file or directory\nfotos/p001_c.png\n=== AVATAR ===\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n=== AVATAR FILES ===\n0"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/fotos/p001_c.png\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "ai",
+   "t": "El gancho rehecho quedó muy bien y coincide con el avatar. Lo fijo como `p001` y limpio las variantes."
+  },
+  {
+   "k": "tool",
+   "t": "cp fotos/p001_c.png fotos/p001.png && python3 - <<'EOF'\nimport json\nd=json.load(open('fotos/p001_c.json',encoding='utf8'))\nd['id']='p001'\njson.dump(d,open('fotos/p001.json','w',encoding='utf8'),ensure_ascii=False,indent=1)\nprint('p001 listo')\nEOF\nrm -f fotos/p001_a.png fotos/p001_a.json fotos/p001_b.png fotos/p001_b.json fotos/p001_c.png fotos/p001_c.json\nls fotos/*.png | wc -l; ls fotos/p036.png "
+  },
+  {
+   "k": "res",
+   "t": "p001 listo\n16\nls: cannot access 'fotos/p036.png': No such file or directory"
+  },
+  {
+   "k": "tool",
+   "t": "{\n \"title\": \"Mito o verdad: consejos de huerta que pueden arruinar tus tomates\",\n \"description\": \"Hay consejos de huerta que se repiten tanto que uno termina creyéndolos. Yo mismo recomendé varios de los que hoy te voy a desarmar, así que este video no es una clase: es una revisión honesta, con los pies en la tierra y las manos en el barro.\\n\\nVamos a revisar catorce consejos que circulan en feria"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/meta.json (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 17"
   }
  ],
  "maquinas": 1,
