@@ -3,7 +3,7 @@
  "titulo": "Mito o verdad: consejos de huerta que pueden arruinar tus tomates",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794183492.3953874,
+ "actualizado": 1794183556.1371484,
  "creado": 1794182687.6942716,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42538126760",
  "pasos": [
@@ -35,7 +35,7 @@
    "k": "fotos",
    "n": "Fotos",
    "st": "active",
-   "info": "9 fotos"
+   "info": "10 fotos"
   },
   {
    "k": "armado",
@@ -51,74 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0543,
-  "gpt": 0.0229,
-  "gpt_img": 9,
+  "deepseek": 0.06,
+  "gpt": 0.0258,
+  "gpt_img": 10,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0772
+  "total": 0.0858
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "FOTOS1_PID=5941\n00:14:43 → batch batch_6af1107366d88190b710c0cc7c1df2b5 · 5 fotos · sin referencia · low 1088x608\n00:14:44 → batch batch_6af1107478ac8190aa5baebe546f6af7 · 4 fotos · con la cara del presentador · low 1088x608\n00:14:44 batch 7c1df2b5: validating 0/0\n00:14:44 batch 546f6af7: validating 0/0"
-  },
-  {
-   "k": "tool",
-   "t": "[\n{\n \"id\": \"p030\",\n \"prompt\": {\n  \"type\": \"amateur phone photo of an open notebook on a kitchen table, mild JPEG compression, uneven ordinary indoor light, slightly crooked framing, everyday clutter, nothing blurred out, everything in focus, 16:9\",\n  \"moment\": \"Héctor's old notebook lies open with the sugar recipe written in careful block letters, the exact advice that turned his soil sticky and h"
-  },
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/pedidos_02.json (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "echo \"=== STOCK ===\"; tail -4 clips/stock.log; echo \"=== FOTOS ===\"; tail -4 fotos/fotos_01.log; echo \"=== AVATAR ===\"; tail -4 avatar/it.log; echo \"=== counts ===\"; ls clips/*.mp4 2>/dev/null | wc -l; ls fotos/*.png 2>/dev/null | wc -l"
-  },
-  {
-   "k": "res",
-   "t": "=== STOCK ===\n00:13:43 → 95 clips por buscar\n=== FOTOS ===\n00:14:44 batch 7c1df2b5: validating 0/0\n00:14:44 batch 546f6af7: validating 0/0\n00:15:14 batch 7c1df2b5: validating 0/0\n00:15:15 batch 546f6af7: in_progress 1/4\n=== AVATAR ===\n00:13:23 InfiniteTalk: 103 ventanas · reel 579.8 s · 1 llamada\n00:13:32 RUN cba8c37a-0d83-4668-b09c-28c22bca5f3b-u2\n00:14:02 estado: IN_PROGRESS\n=== counts ===\n0\n0"
-  },
-  {
-   "k": "ai",
-   "t": "Mientras corren las tandas, dejo el control de guion y los sonidos."
-  },
-  {
-   "k": "tool",
-   "t": "CONTROL GUION — mito o verdad: consejos de huerta\n- validar.py --etapa guion: OK (16.161 caracteres, 3.049 palabras, dentro de 13.500-17.250 para 15 min).\n- Revisado a mano: abre con «¡Hola, gente de YouTube! ¿Cómo andan?», gancho con número (3 de cada 4) y objeto concreto (tomate con el culito negro), credencial («más de sesenta años»), prueba interactiva del dedo al inicio y prueba de la flor (~"
-  },
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gates/guion_auto.txt (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "- Tags de emoción: 3 ([excited] al abrir, [whispering] en la confesión, [emphatically] en la despedida)."
-  },
-  {
-   "k": "res",
-   "t": "The file /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/gates/guion_auto.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "[\n{\"id\":\"agua\",\"tags\":[\"water\",\"pour\"],\"q\":\"water pour\",\"min\":0.8,\"max\":6},\n{\"id\":\"huevo\",\"tags\":[\"egg\",\"crack\"],\"q\":\"egg crack\",\"min\":0.3,\"max\":3},\n{\"id\":\"tijera\",\"tags\":[\"scissors\",\"cut\"],\"q\":\"scissors snip\",\"min\":0.3,\"max\":3},\n{\"id\":\"tierra\",\"tags\":[\"dirt\",\"soil\"],\"q\":\"digging soil\",\"min\":0.5,\"max\":4},\n{\"id\":\"rocio\",\"tags\":[\"spray\",\"water\"],\"q\":\"spray water\",\"min\":0.5,\"max\":4}\n]\n"
-  },
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/sfx_pedidos.json (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/sonidos.py . sfx_pedidos.json --tomas 3 > sonidos.log 2>&1 & echo \"SFX_PID=$!\"; sleep 4; tail -4 sonidos.log"
-  },
-  {
-   "k": "res",
-   "t": "SFX_PID=6103\nok agua: agua.mp3 (4 s, Pouring water to mug) · agua_2.mp3 (1 s, Pouring water) · agua_3.mp3 (1 s, Water bubble)"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 9"
-  },
   {
    "k": "res",
    "t": "✓ hay 9 archivos (95 s)"
@@ -178,6 +118,66 @@
   {
    "k": "tool",
    "t": "cd /opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue\npython3 - <<'EOF'\nimport glob, subprocess, os\nclips=sorted(glob.glob('clips/*.mp4'))\nfor i in range(0,len(clips),12):\n    grupo=clips[i:i+12]\n    out=f'qc/hoja_clips_{i//12+1}.jpg'\n    subprocess.run(['python','/opt/estudio/repo/motor/tools/hoja.py',out]+grupo,check=True)\n    print(out, ' '.join(os.path.basename(c)[:-4] for c in"
+  },
+  {
+   "k": "res",
+   "t": "hoja: qc/hoja_clips_1.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_clips_2.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_clips_3.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_clips_4.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_clips_5.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_clips_6.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_clips_7.jpg (12 cuadros, 4x3)\nhoja: qc/hoja_clips_8.jpg (11 cuadros, 4x3)\nqc/hoja_clips_1.jpg p002 p003 p004 p007 p008 p00"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_clips_1.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_clips_2.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_clips_3.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_clips_4.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_clips_5.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_clips_6.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/mito-o-verdad-consejos-de-huerta-que-pue/qc/hoja_clips_7.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
   }
  ],
  "maquinas": 1,
