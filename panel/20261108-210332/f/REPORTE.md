@@ -13,14 +13,19 @@
 ## Gasto
 - Fotos gpt-image (21 generaciones: 19 + 2 rehechas): **US$ 0,051**.
 - InfiniteTalk (1 llamada fija): **US$ 0,25**.
+- Revisor final (39 cuadros con visión): **US$ 0,0032**.
 - Voz, Pexels y Mixkit: gratis.
-- **Total estimado: US$ 0,30.**
+- **Total estimado: US$ 0,304.**
 
 ## Problemas y decisiones
 - El gancho p001 se generó en 3 variantes; la primera versión de la variante elegida salió con una cara más redonda que el avatar. Se rehizo con la descripción exacta del presentador de `refs/avatar.png` y quedó coincidente. El clavo de p036 tampoco se veía en el primer intento: se rehízo con el clavo en diagonal y más grande.
 - Las fotos p006 y p103 respetan el vestuario de la biblia del canal (gorra azul gastada y camisa de pana marrón), mientras que el avatar y p001 usan gorra verde y camisa gris verde. La cara es la misma; el cambio de ropa se lee como otro día en el galpón.
 - Algunos clips de Pexels son genéricos (calendario en inglés en p021, herramientas de suelo en p078). Se eligieron los que al menos ilustran el tema; no hay marcas grandes ni carteles en otro idioma que distraigan.
-- El validador de la etapa render marca «avatar a pantalla completa de más de 6 s» en los 5 tramos de pantalla partida porque todavía no estaban los clips reales; cuando llegan, render.py aplica la mitad de foto y el tramo deja de ser pantalla completa.
+- La etapa render marcaba «avatar a pantalla completa de más de 6 s» en los 5 tramos largos porque todavía no estaban los clips reales. Con los 103 clips de InfiniteTalk, render.py aplicó la pantalla partida (s01-s05) y el validador final dio ese punto por bueno.
+
+## Control de calidad
+- `validar.py --etapa final`: **OK**, sin ✗. Avatar real desde el segundo 0, 48 % de avatar, huecos ≤ 8,2 s, sin carteles de espera, sin fotos repetidas, 1920x1080 a 30 fps, audio AAC 48 kHz estéreo, duración 1152,4 s vs voz 1152,3 s.
+- `revisor.py`: 39 cuadros revisados (uno cada 30 s), **0 fallas**. No hubo correcciones que aplicar. Hojas de control visual en `qc/hoja_final_1.jpg` a `qc/hoja_final_4.jpg` y anotación en `gates/final_auto.txt`.
 
 ## Qué mejorar
 - Unificar desde el arranque la descripción del vestuario con la foto real del avatar (gorra verde / camisa gris) para que las fotos del presentador no cambien de ropa.
