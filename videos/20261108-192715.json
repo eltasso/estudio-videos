@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794183523.3280783,
+ "actualizado": 1794183586.7340004,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -51,26 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1148,
+  "deepseek": 0.1155,
   "gpt": 0.1941,
   "gpt_img": 88,
   "whisper": 0.0577,
   "avatar": 0.25,
-  "total": 0.6166
+  "total": 0.6173
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "for t in 120 240 330 420 500 560; do ffmpeg -v error -y -ss $t -i final.mp4 -frames:v 1 -vf scale=640:-2 qc/chk_$t.jpg; done; python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_chk.jpg qc/chk_120.jpg qc/chk_240.jpg qc/chk_330.jpg qc/chk_420.jpg qc/chk_500.jpg qc/chk_560.jpg"
-  },
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_chk.jpg (6 cuadros, 4x2)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_chk.jpg\"}"
-  },
   {
    "k": "res",
    "t": "[imagen]"
@@ -178,6 +166,18 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --log assemble.log --busca \"final:|FALLO|Traceback\" --max 420"
+  },
+  {
+   "k": "res",
+   "t": "✓ el log tiene 'final:' (60 s):\ntramo 1 listo\ntramo 2 listo\ntramo 3 listo\ntramo 4 listo\ntramo 5 listo\nfinal: ./final.mp4 576.600000 s"
+  },
+  {
+   "k": "ai",
+   "t": "Video final ensamblado (9:36). Corro el revisor y la validación final."
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/revisor.py . 2>&1 | tail -25"
   }
  ],
  "maquinas": 1,
