@@ -3,7 +3,7 @@
  "titulo": "Trasplante de tomate: por qué se caen los plantines al pasarlos",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794182865.2694244,
+ "actualizado": 1794182952.977643,
  "creado": 1794176895.347455,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/42530308437",
  "pasos": [
@@ -51,42 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1105,
+  "deepseek": 0.1126,
   "gpt": 0.1941,
   "gpt_img": 88,
   "whisper": 0.0577,
   "avatar": 0.25,
-  "total": 0.6123
+  "total": 0.6144
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "tail -4 avatar/it.log; date"
-  },
-  {
-   "k": "res",
-   "t": "22:36:37 InfiniteTalk: 43 ventanas · reel 307.1 s · 1 llamada\n22:36:43 RUN 9e9c792b-24be-4cdb-b374-81694840f916-u2\n22:37:13 estado: IN_QUEUE\nSun Nov  8 23:11:55 UTC 2026"
-  },
-  {
-   "k": "tool",
-   "t": "ffmpeg -hide_banner -ss 20 -t 6 -i final.mp4 -vn -af volumedetect -f null - 2>&1 | grep -E \"mean_volume|max_volume\"; echo \"--- sin sfx (33-39s) ---\"; ffmpeg -hide_banner -ss 33 -t 6 -i final.mp4 -vn -af volumedetect -f null - 2>&1 | grep -E \"mean_volume|max_volume\""
-  },
-  {
-   "k": "res",
-   "t": "[Parsed_volumedetect_0 @ 0x789c48002000] mean_volume: -17.0 dB\n[Parsed_volumedetect_0 @ 0x789c48002000] max_volume: -1.6 dB\n--- sin sfx (33-39s) ---\n[Parsed_volumedetect_0 @ 0x7b7aa8002000] mean_volume: -16.7 dB\n[Parsed_volumedetect_0 @ 0x7b7aa8002000] max_volume: -1.8 dB"
-  },
-  {
-   "k": "tool",
-   "t": "cat gasto.jsonl 2>/dev/null; echo \"---\"; ls -la final.mp4; du -sh fotos avatar segments 2>/dev/null"
-  },
-  {
-   "k": "res",
-   "t": "{\"t\": 1794177200.1065936, \"tag\": \"whisper\", \"usd\": 0.05766, \"seg\": 577}\n{\"t\": 1794177553.3422997, \"tag\": \"fotos_gpt\", \"usd\": 0.02037, \"n\": 9}\n{\"t\": 1794177791.7090046, \"tag\": \"fotos_gpt\", \"usd\": 0.15069, \"n\": 69}\n{\"t\": 1794178003.1410038, \"tag\": \"fotos_gpt\", \"usd\": 0.02306, \"n\": 10}\n---\n-rw-rw-rw-+ 1 sesion sesion 304181092 Nov  8 23:01 final.mp4\n98M\tfotos\n20M\tavatar\n158M\tsegments"
-  },
-  {
-   "k": "tool",
-   "t": "# Reporte — Trasplante de tomate: por qué se caen los plantines al pasarlos\n\n## Estado\nVideo terminado: `final.mp4` 1920x1080, 30 fps, H.264 + AAC, duración 9:36 (576,6 s), igual a la voz.\nGuion de 1.570 palabras en español rioplatense, voz clonada del canal, 43 ventanas de avatar (294 s, 51 % del video) y 76 planos de b-roll con fotos distintas.\n\n## Qué se hizo\n- **Guion** (1.570 palabras): ganch"
-  },
   {
    "k": "res",
    "t": "File created successfully at: /opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/REPORTE.md (file state is current in your context — no need to Read it back)"
@@ -178,6 +150,34 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --log render.log --busca \"hechos|Traceback|FALLO|ERR\" --max 540"
+  },
+  {
+   "k": "res",
+   "t": "✓ el log tiene 'hechos' (85 s):\nclips=102 frames=17298 (576.60s)\nhechos 102"
+  },
+  {
+   "k": "tool",
+   "t": "python -c \"\nimport json\nP=json.load(open('plan.json'))\ns=P['segments']\nprint('primeros 6:')\nfor x in s[:6]: print(x['kind'],x['t0'],x['t1'],x.get('split'),x['file'][-20:])\nprint('av split:',sum(1 for x in s if x['kind']=='av' and x.get('split')),'de',sum(1 for x in s if x['kind']=='av'))\n\"; nohup python /opt/estudio/repo/motor/tools/assemble.py . > assemble.log 2>&1 & echo \"ASSEMBLE PID $!\""
+  },
+  {
+   "k": "res",
+   "t": "primeros 6:\nav 0.0 10.26 True ./avatar/A0.mp4\nfoto 10.26 17.84 None ./fotos/p001.png\nav 17.84 22.4 None ./avatar/A1.mp4\nfoto 22.4 26.4 None ./fotos/p002.png\nav 26.4 31.64 None ./avatar/A2.mp4\nfoto 31.64 36.8 None ./fotos/p003.png\nav split: 18 de 43\nASSEMBLE PID 23215"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_avatar.jpg segments/0000.mp4 segments/0002.mp4 segments/0004.mp4 segments/0006.mp4 segments/0010.mp4 segments/0020.mp4"
+  },
+  {
+   "k": "res",
+   "t": "hoja: qc/hoja_avatar.jpg (6 cuadros, 4x2)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/trasplante-de-tomate-por-que-se-caen-los/qc/hoja_avatar.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
   }
  ],
  "maquinas": 1,
