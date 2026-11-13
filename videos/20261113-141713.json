@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794608072.5447412,
+ "actualizado": 1794608151.0563545,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2632,
+  "deepseek": 0.2641,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.5587
+  "total": 0.5596
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/assemble.py . > assemble.log 2>&1 & sleep 10; tail -3 assemble.log"
-  },
-  {
-   "k": "res",
-   "t": "segmentos: 203\ncapas de edición extrema: 5\ntramos: 33 de 33 por codificar · 4 a la vez"
-  },
   {
    "k": "tool",
    "t": "sleep 540; tail -3 assemble.log; tail -2 avatar/it2.log"
@@ -178,6 +170,14 @@
   {
    "k": "tool",
    "t": "nohup python /opt/estudio/repo/motor/tools/render.py . > render2.log 2>&1 & sleep 60; tail -3 render2.log"
+  },
+  {
+   "k": "res",
+   "t": "(Bash completed with no output)"
+  },
+  {
+   "k": "tool",
+   "t": "sleep 60; tail -5 render2.log; ls -la avatar/A0.mp4"
   }
  ],
  "maquinas": 1,
@@ -272,14 +272,14 @@
    {
     "k": "correcciones",
     "n": "Correcciones",
-    "seg": 4,
+    "seg": 83,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 17839,
+  "total_s": 17917,
   "avatar_s": 4649,
-  "sin_avatar_s": 13190,
+  "sin_avatar_s": 13269,
   "cerrado": false
  }
 }
