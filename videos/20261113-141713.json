@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794592065.3043735,
+ "actualizado": 1794592131.898392,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,114 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0848,
+  "deepseek": 0.0955,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0848
+  "total": 0.0955
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_stock7.jpg (12 cuadros, 4x3)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/qc/hoja_stock7.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "python /tmp/h.py qc/hoja_stock8.jpg p100 p102 p103 p104 p105 p106 p107 p108 p109 p110 p111 p112 2>&1|tail -1; tail -2 fotos/fotos_escenas.log"
-  },
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_stock8.jpg (12 cuadros, 4x3)\n17:31:02 batch 1553b625: validating 0/0\n17:32:32 batch 1553b625: in_progress 0/3"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/qc/hoja_stock8.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "python /tmp/h.py qc/hoja_stock9.jpg p113 p114 p115 p116 p117 p118 p119 p036 p038 p048 p053 p068 2>&1|tail -1"
-  },
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_stock9.jpg (10 cuadros, 4x3)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/qc/hoja_stock9.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "tail -4 fotos/fotos_escenas.log; date; ls fotos/*.png 2>/dev/null | wc -l"
-  },
-  {
-   "k": "res",
-   "t": "17:31:02 → batch batch_6af74955ed2c8190a32f5e2c1553b625 · 3 fotos · sin referencia · low 1088x608\n17:31:02 batch 1553b625: validating 0/0\n17:32:32 batch 1553b625: in_progress 0/3\nFri Nov 13 17:45:04 UTC 2026\n0"
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\nimport json\nreq=[\n {\"id\":\"p017\",\"muestra\":\"fingers turning a large green leaf over to inspect its underside\",\"buscar\":[\"turning over green leaf hand\",\"hands holding big green leaf\",\"leaf close up hands\"]},\n {\"id\":\"p021\",\"muestra\":\"a magnifying glass held close over a plant leaf showing tiny bugs\",\"buscar\":[\"magnifying glass inspecting plant\",\"lens over green leaf\",\"magnifier plant"
-  },
-  {
-   "k": "res",
-   "t": "37\nstarted"
-  },
-  {
-   "k": "tool",
-   "t": "sleep 90; tail -3 clips/stock2.log; tail -2 fotos/fotos_escenas.log; awk -F: '$1>=960 {print $0}' guion.txt | head"
-  },
-  {
-   "k": "res",
-   "t": "17:45:14 ✓ nada que pedir: 37 clips listos\n17:31:02 batch 1553b625: validating 0/0\n17:32:32 batch 1553b625: in_progress 0/3\n¡Hola, gente de YouTube! ¿Cómo andan? Soy Genaro, y como siempre, acá en el galpón, entre las macetas y los sobres de semillas. Hoy les voy a hablar de algo que me preguntaron un montón en los comentarios: los pulgones en la acelga. Y les voy a decir una cosa de entrada, ante"
-  },
-  {
-   "k": "tool",
-   "t": "python /tmp/h.py qc/hoja_stock10.jpg p017 p021 p023 p027 p038 p040 p043 p045 p048 p049 p053 p055 2>&1|tail -1"
-  },
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_stock10.jpg (12 cuadros, 4x3)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/qc/hoja_stock10.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "python /tmp/h.py qc/hoja_stock11.jpg p058 p059 p065 p068 p071 p076 p078 p084 p088 p090 p092 p093 p095 p097 p098 p103 p105 p106 p108 p109 p110 p114 p116 p117 p119 2>&1|tail -1"
-  },
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_stock11.jpg (12 cuadros, 4x3)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/qc/hoja_stock11.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
   {
    "k": "tool",
    "t": "python /tmp/h.py qc/hoja_stock12.jpg p095 p097 p098 p103 p105 p106 p108 p109 p110 p114 p116 p117 2>&1|tail -1"
@@ -178,6 +78,106 @@
   {
    "k": "tool",
    "t": "for i in p059 p071 p076 p078 p088 p090 p092 p093 p095 p098 p103 p105 p108 p109 p110 p117; do rm -f clips/$i.mp4; done\npython - <<'EOF'\nimport json\nreq=[\n {\"id\":\"p059\",\"muestra\":\"an older man talking and explaining in a garden shed, half figure\",\"buscar\":[\"man talking in garden shed\",\"older man speaking indoors tools\",\"senior man explaining greenhouse\"]},\n {\"id\":\"p071\",\"muestra\":\"green basil plants"
+  },
+  {
+   "k": "res",
+   "t": "17:47:38 juez: 16/16 planos juzgados con visión · US$0.0024\n17:47:48 bajados 16/16\n17:47:48 FIN: 16/16 clips en clips/\n17:31:02 batch 1553b625: validating 0/0\n17:32:32 batch 1553b625: in_progress 0/3"
+  },
+  {
+   "k": "tool",
+   "t": "python /tmp/h.py qc/hoja_stock13.jpg p059 p071 p076 p078 p088 p090 p092 p093 p095 p098 p103 p105 p108 p109 p110 p117 2>&1|tail -1"
+  },
+  {
+   "k": "res",
+   "t": "hoja: qc/hoja_stock13.jpg (12 cuadros, 4x3)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/qc/hoja_stock13.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\nimport json\nseen={}\nfor w in json.load(open('captions.json')):\n    k=w['text'].lower()\n    seen.setdefault(k,[]).append(w)\nfor s in ['del','al','los','de','con','muy','más','ya','van','vi','mi','eso','todo','va','hoy','son','tan','ven']:\n    print(s, len(seen.get(s,[])), [round(x['startMs']/1000,1) for x in seen.get(s,[])][:60])\nEOF"
+  },
+  {
+   "k": "res",
+   "t": "del 0 []\nal 0 []\nlos 0 []\nde 0 []\ncon 0 []\nmuy 0 []\nmás 0 []\nya 0 []\nvan 0 []\nvi 0 []\nmi 0 []\neso 0 []\ntodo 0 []\nva 0 []\nhoy 0 []\nson 0 []\ntan 0 []\nven 0 []"
+  },
+  {
+   "k": "tool",
+   "t": "python -c \"\nimport json\nc=json.load(open('captions.json'))\nprint([w['text'] for w in c[2800:2810]] if len(c)>2800 else 'short', len(c))\nprint(c[0].keys())\n\" 2>&1 | head -5"
+  },
+  {
+   "k": "res",
+   "t": "short 2687\ndict_keys(['text', 'startMs', 'endMs', 'timestampMs', 'confidence'])"
+  },
+  {
+   "k": "tool",
+   "t": "python -c \"\nimport json\nc=json.load(open('captions.json'))\nfrom collections import Counter\nprint(Counter(w['text'] for w in c).most_common(40))\nprint([w for w in c[:12] if w['text']=='de'])\n\""
+  },
+  {
+   "k": "res",
+   "t": "[(' la', 136), (' que', 110), (' y', 106), (' el', 95), (' de', 86), (' en', 60), (' es', 53), (' no', 47), (' a', 37), (' una', 36), (' con', 34), (' Y', 32), (' lo', 32), (' se', 31), (' me', 29), (' hoja', 29), (' los', 26), (' un', 26), (' por', 22), (' porque', 21), (' les', 20), (' del', 18), (' está', 18), (' las', 15), (' cuando', 15), (' si', 15), (' hay', 15), (' pulgón', 14), (' pulgone"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\"}"
+  },
+  {
+   "k": "res",
+   "t": "1\timport json\n2\t\n3\tcap = json.load(open('captions.json'))\n4\tTOTAL = cap[-1]['endMs']\n5\tS = [0] + [cap[i]['startMs'] for i in range(1, len(cap))\n6\t           if cap[i]['startMs'] - cap[i - 1]['endMs'] > 180]\n7\t\n8\t\n9\tdef last_start_before(x):\n10\t    lo, hi = 0, len(S) - 1\n11\t    while lo < hi:\n12\t        mid = (lo + hi + 1) // 2\n13\t        if S[mid] <= x:\n14\t            lo = mid\n15\t        else:\n16\t"
+  },
+  {
+   "k": "tool",
+   "t": "import json\n\ncap = json.load(open('captions.json'))\nTOTAL = cap[-1]['endMs']\nTXT = [w['text'].strip() for w in cap]\n\n# candidatos donde la ventana puede arrancar: inicio de frase o palabras cortas\nSHORT = {\"del\", \"al\", \"los\", \"de\", \"con\", \"muy\", \"más\", \"ya\", \"van\", \"vi\", \"mi\", \"eso\",\n         \"todo\", \"va\", \"hoy\", \"son\", \"tan\", \"ven\", \"ahí\", \"por\", \"un\", \"una\", \"se\", \"lo\"}\nC = sorted(set(\n    [0] +"
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python auto_plan.py 2>&1 | tail -6"
+  },
+  {
+   "k": "res",
+   "t": "GAP 9200.0 win 77 secs 406 maxgap 9.2 endgap 1.0"
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\nimport json\nout=[]\nfor i,w in enumerate(json.load(open('_plan_times.json'))):\n    out.append({\"file\":'avatar/A%d.mp4'%i,\"frame\":\"refs/avatar.png\",\"startMs\":w['t'],\"endMs\":w['t']+w['dur']})\njson.dump(out,open('avatar_ranges.json','w'),indent=1)\nprint(len(out))\nEOF\npython /opt/estudio/repo/motor/tools/planos.py . 2>&1 | tail -3; tail -2 fotos/fotos_escenas.log"
+  },
+  {
+   "k": "res",
+   "t": "77\n✓ planos.json: 126 planos de b-roll (9.3 min de b-roll, 13.6 por minuto) · 77 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\n⚠ 2 huecos de menos de 2.8 s entre ventanas: si podés, dejá ≥ 3 s (una foto tan corta casi no se ve).\n17:31:02 batch 1553b625: validating 0/0\n17:32:32 batch 1553b625: in_progress 0/3"
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\nimport json\nP=json.load(open('planos.json'))\nfor p in P:\n    print(p['id'], round(p['startMs']/1000,1), round(p['endMs']/1000,1), '|', p['texto'][:110])\nEOF"
+  },
+  {
+   "k": "res",
+   "t": "p001 6.0 9.1 | entre las macetas y los sobres de semillas.\np002 9.1 13.2 | Hoy les voy a hablar de algo que me preguntaron un montón en los comentarios,\np003 18.7 23.3 | el rociador. El año pasado conté, en una sola hoja del cantero\np004 28.3 31.5 | a las dos semanas la hoja estaba limpia.\np005 31.5 35.9 | Pero para poder hacer eso, primero tuve que aprender a mirar. Y eso es\np006 41.4 45.2 | bich"
+  },
+  {
+   "k": "tool",
+   "t": "# -*- coding: utf-8 -*-\n\"\"\"Arma pedidos_01.json (3 variantes del gancho + 6 de prueba) y pedidos_02.json (el resto).\"\"\"\nimport json\n\nTIPO = (\"amateur phone photo, mild JPEG compression, real skin texture with pores, uneven ordinary indoor light, \"\n        \"slightly crooked framing, everyday clutter, nothing blurred out, everything is in focus, 16:9\")\nTIPO_SIN = (\"amateur phone photo, mild JPEG com"
+  },
+  {
+   "k": "res",
+   "t": "<tool_use_error>File has been modified since read, either by the user or by a linter. Read it again before attempting to write it.</tool_use_error>"
+  },
+  {
+   "k": "tool",
+   "t": "rm make_pedidos.py && echo ok"
+  },
+  {
+   "k": "res",
+   "t": "ok"
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 816,
+    "seg": 883,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 1831,
+  "total_s": 1898,
   "avatar_s": 0,
-  "sin_avatar_s": 1831,
+  "sin_avatar_s": 1898,
   "cerrado": false
  }
 }
