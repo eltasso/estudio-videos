@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794611184.1025176,
+ "actualizado": 1794611247.7158074,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43520999957",
  "pasos": [
@@ -51,30 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.315,
+  "deepseek": 0.3169,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.6105
+  "total": 0.6124
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "3774\n3776\n201\nreusados de otra posición: 111\nhechos 201"
-  },
-  {
-   "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/assemble.py . > assemble2.log 2>&1 & sleep 30; tail -4 assemble2.log"
-  },
-  {
-   "k": "res",
-   "t": "segmentos: 201\ncapas de edición extrema: 5\ntramos: 33 de 33 por codificar · 4 a la vez"
-  },
-  {
-   "k": "tool",
-   "t": "sleep 560; tail -3 assemble2.log"
-  },
   {
    "k": "res",
    "t": "segmentos: 201\ncapas de edición extrema: 5\ntramos: 33 de 33 por codificar · 4 a la vez"
@@ -178,6 +162,22 @@
   {
    "k": "tool",
    "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --log assemble2.log --texto \"final:\" 2>&1 | tail -2"
+  },
+  {
+   "k": "res",
+   "t": "tramo 9 listo\nfinal: ./final.mp4 963.224000 s"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/validar.py /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y --etapa final --min 15 2>&1 | tail -20"
+  },
+  {
+   "k": "res",
+   "t": "  ✓ apertura: lo primero que se ve es el AVATAR hablando (clip real) desde el segundo 0 (nunca una foto antes)\n  ✓ apertura: tramos de avatar de ≤ 6 s en los primeros 30 s\n  ✓ dinámico: avatar a pantalla completa ≤ 6 s por vez\n  ✓ ritmo del avatar: avatar 432 s = 45 % del video (ideal ~50 %: más avatar = menos fotos)\n  ✓ ritmo del avatar: nunca más de 15 s sin avatar\n  ✓ sin carteles de espera\n  ✓"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/revisor.py /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y 2>&1 | tail -10; cat /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/gates/correcciones.txt"
   }
  ],
  "maquinas": 2,
@@ -272,14 +272,14 @@
    {
     "k": "correcciones",
     "n": "Correcciones",
-    "seg": 4134,
-    "pasadas": 3,
+    "seg": 4253,
+    "pasadas": 4,
     "fin": false
    }
   ],
-  "total_s": 20950,
+  "total_s": 21014,
   "avatar_s": 4649,
-  "sin_avatar_s": 16302,
+  "sin_avatar_s": 16365,
   "cerrado": false
  }
 }
