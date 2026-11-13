@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794606428.6226647,
+ "actualizado": 1794606491.5773637,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -41,7 +41,7 @@
    "k": "armado",
    "n": "Armado",
    "st": "active",
-   "info": "203 segmentos"
+   "info": "final.mp4 · 16.1 min"
   },
   {
    "k": "qc",
@@ -51,30 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.256,
+  "deepseek": 0.2577,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.3015
+  "total": 0.3032
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "started\navatar\n20:55:55 InfiniteTalk: 82 ventanas · reel 456.1 s · 1 llamada\n20:56:03 RUN 72ad04b9-7f38-445d-824b-6cd936c933a7-u1"
-  },
-  {
-   "k": "tool",
-   "t": "cat > /tmp/gasto.py <<'EOF'\nimport json, glob\ntot = 0\nfor f in glob.glob(\"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/**/*.json\", recursive=True):\n    try:\n        d = json.load(open(f))\n    except Exception:\n        continue\n# uso el registro del estudio si está\nimport os\nfor p in [\"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/gasto.json\"]:\n    if os.p"
-  },
-  {
-   "k": "res",
-   "t": "-rw-rw-rw-+ 1 sesion sesion 1191 Nov 13 20:55 gasto.jsonl\netapas.jsonl\nfotos_auto.txt\nrender_auto.txt"
-  },
-  {
-   "k": "tool",
-   "t": "cat gasto.jsonl"
-  },
   {
    "k": "res",
    "t": "{\"t\": 1794590320.0877175, \"tag\": \"escenas\", \"usd\": 0.00169, \"llamadas\": 1}\n{\"t\": 1794590519.397312, \"tag\": \"whisper\", \"usd\": 0.0, \"seg\": 963}\n{\"t\": 1794591054.171461, \"tag\": \"escenas\", \"usd\": 0.00371, \"llamadas\": 2}\n{\"t\": 1794591249.2663944, \"tag\": \"juez_stock\", \"usd\": 0.01538, \"llamadas\": 102}\n{\"t\": 1794592058.786429, \"tag\": \"juez_stock\", \"usd\": 0.00241, \"llamadas\": 16}\n{\"t\": 1794592207.8033767, "
@@ -178,6 +162,22 @@
   {
    "k": "tool",
    "t": "sleep 540; tail -4 assemble.log; tail -2 avatar/it2.log"
+  },
+  {
+   "k": "res",
+   "t": "tramo 7 listo\ntramo 8 listo\ntramo 9 listo\nfinal: ./final.mp4 963.224000 s\n21:01:17 RUN 530ab2f6-3da5-43c9-813e-d4eb1f81f8e5-u1\n21:01:47 estado: IN_PROGRESS"
+  },
+  {
+   "k": "tool",
+   "t": "tail -5 assemble.log; ls -la final.mp4"
+  },
+  {
+   "k": "res",
+   "t": "tramo 6 listo\ntramo 7 listo\ntramo 8 listo\ntramo 9 listo\nfinal: ./final.mp4 963.224000 s\n-rw-rw-rw-+ 1 sesion sesion 146360306 Nov 13 21:47 final.mp4"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/revisor.py . 2>&1 | tail -12"
   }
  ],
  "maquinas": 1,
@@ -223,7 +223,7 @@
    {
     "k": "avatar_gen",
     "n": "Avatar generando",
-    "seg": 3035,
+    "seg": 3098,
     "pasadas": 1,
     "fin": false
    },
@@ -258,14 +258,21 @@
    {
     "k": "armado",
     "n": "Armado",
-    "seg": 2146,
+    "seg": 2150,
+    "pasadas": 1,
+    "fin": true
+   },
+   {
+    "k": "revisor",
+    "n": "Revisor",
+    "seg": 12,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 16195,
+  "total_s": 16258,
   "avatar_s": 30,
-  "sin_avatar_s": 16164,
+  "sin_avatar_s": 16227,
   "cerrado": false
  }
 }
