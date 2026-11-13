@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794599071.6450188,
+ "actualizado": 1794599134.9343433,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,133 +51,133 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1762,
+  "deepseek": 0.1931,
   "gpt": 0.0284,
   "gpt_img": 11,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.2046
+  "total": 0.2215
  },
  "eventos": [
   {
    "k": "tool",
-   "t": "import json\nimport subprocess\n\nFLICKER = {\"p020\", \"p022\", \"p025\", \"p027\", \"p034\", \"p037\", \"p039\", \"p042\", \"p044\", \"p045\",\n           \"p049\", \"p053\", \"p059\", \"p063\", \"p064\", \"p071\", \"p079\", \"p085\", \"p090\", \"p091\",\n           \"p093\", \"p095\", \"p097\", \"p099\", \"p101\", \"p104\", \"p107\", \"p114\", \"p115\"}\nR = json.load(open('avatar_ranges.json'))\nP = {p['id']: p for p in json.load(open('planos.json'))}\nfor i"
+   "t": "cat > /tmp/c8.py <<'EOF'\nimport json\nP=json.load(open(\"planos.json\"))\nR=json.load(open(\"avatar_ranges.json\"))\nfor r in R[8:14]:\n    a,b=r[\"startMs\"],r[\"endMs\"]\n    cov=[(p[\"id\"],p[\"startMs\"],p[\"endMs\"]) for p in P if not (p[\"endMs\"]<=a or p[\"startMs\"]>=b)]\n    print(a,b,cov)\nEOF\npython /tmp/c8.py"
   },
   {
    "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/fix_plan.py (file state is current in your context — no need to Read it back)"
+   "t": "89180 94180 []\n102380 107880 []\n115500 120500 []\n124280 129780 []\n136500 141500 []\n149020 154520 []"
   },
   {
    "k": "tool",
-   "t": "python fix_plan.py 2>&1 | tail -4"
+   "t": "cat > /tmp/c9.py <<'EOF'\nimport json\nP=json.load(open(\"planos.json\"))\nprint([(p[\"id\"],p[\"startMs\"]) for p in P if 80000<p[\"startMs\"]<160000])\nEOF\npython /tmp/c9.py; cat > /tmp/c10.py <<'EOF'\nimport json\nP=json.load(open(\"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/planos.json\"))\nprint([(p[\"id\"],p[\"startMs\"]) for p in P if 80000<p[\"startMs\"]<160000])\nEOF\npython /tmp/c10.py"
   },
   {
    "k": "res",
-   "t": "✓ planos.json: 120 planos de b-roll (8.9 min de b-roll, 13.5 por minuto) · 82 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\nventanas 82 splits 0"
+   "t": "[('p010', 85780), ('p011', 94180), ('p012', 98280), ('p013', 107880), ('p014', 112020), ('p015', 120500), ('p016', 129780), ('p017', 141500), ('p018', 145740), ('p019', 154520), ('p020', 158340)]\n[('p010', 85780), ('p011', 94180), ('p012', 98280), ('p013', 107880), ('p014', 112020), ('p015', 120500), ('p016', 129780), ('p017', 141500), ('p018', 145740), ('p019', 154520), ('p020', 158340)]"
   },
   {
    "k": "tool",
-   "t": "python - <<'EOF'\nimport json\nout=[]\nfor i,w in enumerate(json.load(open('_plan_times.json'))):\n    out.append({\"file\":'avatar/A%d.mp4'%i,\"frame\":\"refs/avatar.png\",\"startMs\":w['t'],\"endMs\":w['t']+w['dur']})\njson.dump(out,open('avatar_ranges.json','w'),indent=1)\nEOF\npython fix_plan.py 2>&1 | tail -3"
+   "t": "cat > /tmp/c11.py <<'EOF'\nimport json\nP=json.load(open(\"planos.json\"))\nR=json.load(open(\"avatar_ranges.json\"))\nr=R[8]\na,b=r[\"startMs\"],r[\"endMs\"]\nprint(a,b)\nfor p in P[8:12]:\n    print(p[\"id\"],p[\"startMs\"],p[\"endMs\"],type(p[\"startMs\"]), p[\"endMs\"]<=a, p[\"startMs\"]>=b)\nEOF\npython /tmp/c11.py"
   },
   {
    "k": "res",
-   "t": "✓ planos.json: 120 planos de b-roll (8.9 min de b-roll, 13.5 por minuto) · 82 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\nventanas 82 splits 0"
+   "t": "89180 94180\np009 74660 80280 <class 'int'> True False\np010 85780 89180 <class 'int'> True False\np011 94180 98280 <class 'int'> False True\np012 98280 102380 <class 'int'> False True"
   },
   {
    "k": "tool",
-   "t": "grep -n \"if i in (3, 5)\" -A3 fix_plan.py; grep -n \"remove.add\" -B8 fix_plan.py | head -20"
+   "t": "cat > /tmp/c12.py <<'EOF'\nimport json\nP=json.load(open(\"planos.json\"))\nR=json.load(open(\"avatar_ranges.json\"))\nr=R[8]\na,b=r[\"startMs\"],r[\"endMs\"]\nout1=[];out2=[];out3=[]\nfor p in P:\n    if not (p[\"endMs\"]<=a or p[\"startMs\"]>=b): out1.append(p[\"id\"])\n    if p[\"startMs\"]<b and p[\"endMs\"]>a: out2.append(p[\"id\"])\n    if a<p[\"endMs\"] and b>p[\"startMs\"]: out3.append(p[\"id\"])\nprint(out1,out2,out3)\nEOF\npy"
   },
   {
    "k": "res",
-   "t": "10:    if i in (3, 5):\n11-        r.pop('foto', None)\n12-        r.pop('lado', None)\n13-\n21-\n22-remove = set()\n23-for i, r in enumerate(R):\n24-    if r.get('foto'):\n25-        continue\n26-    cover = [pid for pid, p in P.items() if not (p['endMs'] <= r['startMs'] or p['startMs'] >= r['endMs'])]\n27-    short = [c for c in cover if (P[c]['endMs'] - P[c]['startMs']) < 3100]\n28-    if short:\n29:      "
+   "t": "[] [] []"
   },
   {
    "k": "tool",
-   "t": "python -c \"\nimport json\nP={p['id']:p for p in json.load(open('planos.json'))}\nR=json.load(open('avatar_ranges.json'))\nprint(len([ (c) for c in P if P[c]['endMs']-P[c]['startMs']<3100]))\nfor r in R[:4]: print(r['startMs'],r['endMs'])\nprint([c for c,p in P.items() if not (p['endMs']<=R[1]['startMs'] or p['startMs']>=R[1]['endMs'])])\n\""
+   "t": "cat > /tmp/c13.py <<'EOF'\nimport json\nP=json.load(open(\"planos.json\"))\nR=json.load(open(\"avatar_ranges.json\"))\na,b=R[8][\"startMs\"],R[8][\"endMs\"]\nfor p in P:\n    if (p[\"endMs\"]<=a or p[\"startMs\"]>=b):\n        continue\n    else:\n        print(\"COV\", p[\"id\"])\nprint(\"---\")\nfor p in P:\n    x=(p[\"endMs\"]<=a or p[\"startMs\"]>=b)\n    if not x:\n        print(\"COV2\", p[\"id\"], p[\"startMs\"], p[\"endMs\"])\nEOF\npy"
   },
   {
    "k": "res",
-   "t": "0\n0 6000\n14100 19600\n23280 28280\n35920 41420\n[]"
+   "t": "---"
   },
   {
    "k": "tool",
-   "t": "python -c \"\nimport json\nP={p['id']:p for p in json.load(open('planos.json'))}\nks=list(P)[:5]\nfor k in ks: print(k, P[k]['startMs'], P[k]['endMs'], type(P[k]['endMs']))\n\""
+   "t": "cat > /tmp/c14.py <<'EOF'\nimport json\nP=json.load(open(\"planos.json\"))\nR=json.load(open(\"avatar_ranges.json\"))\na,b=R[8][\"startMs\"],R[8][\"endMs\"]\nprint(a,b,len(P))\nfor p in P:\n    if 80000< p[\"startMs\"] <100000:\n        print(p[\"id\"],p[\"startMs\"],p[\"endMs\"], p[\"endMs\"]<=a, p[\"startMs\"]>=b, (p[\"endMs\"]<=a or p[\"startMs\"]>=b))\nEOF\npython /tmp/c14.py"
   },
   {
    "k": "res",
-   "t": "p001 6000 10050 <class 'int'>\np002 10050 14100 <class 'int'>\np003 19600 23280 <class 'int'>\np004 28280 31520 <class 'int'>\np005 31520 35920 <class 'int'>"
+   "t": "89180 94180 120\np010 85780 89180 True False True\np011 94180 98280 False True True\np012 98280 102380 False True True"
   },
   {
    "k": "tool",
-   "t": "rm fix_plan.py; python - <<'EOF'\nimport json, subprocess\nR = json.load(open('avatar_ranges.json'))\nP = {p['id']: p for p in json.load(open('planos.json'))}\nremove = set()\nfor i, r in enumerate(R):\n    if r.get('foto'): continue\n    cover = [pid for pid, p in P.items() if not (p['endMs'] <= r['startMs'] or p['startMs'] >= r['endMs'])]\n    short = [c for c in cover if (P[c]['endMs'] - P[c]['startMs'"
+   "t": "python -c \"\nimport json; P=json.load(open('planos.json')); print(len(P)); print([p['id'] for p in P if 80000<p['startMs']<100000])\""
   },
   {
    "k": "res",
-   "t": "✓ planos.json: 120 planos de b-roll (8.9 min de b-roll, 13.5 por minuto) · 82 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\nremove 0 ok True\nventanas 82"
+   "t": "120\n['p010', 'p011', 'p012']"
   },
   {
    "k": "tool",
-   "t": "python -c \"\nimport json\nR=json.load(open('avatar_ranges.json'))\nP={p['id']:p for p in json.load(open('planos.json'))}\ncov=[pid for pid,p in P.items() if not (p['endMs']<=R[20]['startMs'] or p['startMs']>=R[20]['endMs'])]\nprint(R[20])\nprint([(c,P[c]['startMs'],P[c]['endMs']) for c in cov])\n\""
+   "t": "python -c \"\nimport json\nR=json.load(open('avatar_ranges.json'))\nP=json.load(open('planos.json'))\nrem=[]\nfor i,r in enumerate(R):\n    a,b=r['startMs'],r['endMs']\n    cov=[p for p in P if not (p['endMs']<=a or p['startMs']>=b)]\n    if any(p['endMs']-p['startMs']<3100 for p in cov): rem.append(i)\nprint(len(rem), rem[:10])\n\""
   },
   {
    "k": "res",
-   "t": "{'file': 'avatar/A20.mp4', 'frame': 'refs/avatar.png', 'startMs': 229880, 'endMs': 234880}\n[]"
+   "t": "0 []"
   },
   {
    "k": "tool",
-   "t": "python -c \"\nimport json\nP=json.load(open('planos.json'))\nfor p in P[15:26]: print(p['id'],p['startMs'],p['endMs'],repr(p['startMs']>0))\n\""
+   "t": "printf 'a\\nb\\n' > f.txt; printf 'x\\n' >> f.txt; cat f.txt; rm f.txt"
   },
   {
    "k": "res",
-   "t": "p016 129780 136500 True\np017 141500 145740 True\np018 145740 149020 True\np019 154520 158340 True\np020 158340 162160 True\np021 167160 170950 True\np022 170950 174740 True\np023 180240 184040 True\np024 184040 187620 True\np025 192620 196020 True\np026 201520 205330 True"
+   "t": "a\nb\nx"
   },
   {
    "k": "tool",
-   "t": "python -c \"\nimport json\nR=json.load(open('avatar_ranges.json'))\nprint([ (r['startMs'],r['endMs']) for r in R[6:10]])\nprint(json.load(open('_plan_times.json'))[6:10])\n\"; sed -n 1,40p /opt/estudio/repo/motor/tools/planos.py"
+   "t": "printf '%s\\n' 'import json' 'R=json.load(open(\"avatar_ranges.json\"))' 'P=json.load(open(\"planos.json\"))' 'rem=[]' 'for i,r in enumerate(R):' '    a,b=r[\"startMs\"],r[\"endMs\"]' '    cov=[p for p in P if not (p[\"endMs\"]<=a or p[\"startMs\"]>=b)]' '    if any(p[\"endMs\"]-p[\"startMs\"]<3100 for p in cov): rem.append(i)' 'print(len(cov), len(rem))' > /tmp/c15.py; python /tmp/c15.py; cat -n /tmp/c15.py | hea"
   },
   {
    "k": "res",
-   "t": "[(69660, 74660), (80280, 85780), (89180, 94180), (102380, 107880)]\n[{'t': 69660, 'dur': 5000}, {'t': 80280, 'dur': 5500}, {'t': 89180, 'dur': 5000}, {'t': 102380, 'dur': 5500}]\n# -*- coding: utf-8 -*-\n\"\"\"PLANOS — arma los planos del b-roll y shots_timed.json. NO escribas scripts propios para esto.\n  1) python <APP>/tools/planos.py <carpeta>\n       Necesita captions.json y avatar_ranges.json (el pl"
+   "t": "0 0\n     1\timport json\n     2\tR=json.load(open(\"avatar_ranges.json\"))\n     3\tP=json.load(open(\"planos.json\"))"
   },
   {
    "k": "tool",
-   "t": "python -c \"\nimport json\nP=json.load(open('planos.json'))\nR=json.load(open('avatar_ranges.json'))\nprint(P[0]); print(R[0])\nprint([ (p['id'],p['startMs']) for p in P if 'split' in p][:3])\np=P[0]\nr=R[0]\nprint(p['endMs']<=r['startMs'], p['startMs']>=r['endMs'])\n\""
+   "t": "printf '%s\\n' 'import planos as X' > /tmp/c16.py; python -c \"\nprint('check')\n\"; cat -n /tmp/c16.py"
   },
   {
    "k": "res",
-   "t": "{'id': 'p001', 'startMs': 6000, 'endMs': 10050, 'seg': 4.0, 'texto': 'entre las macetas y los sobres de semillas. Hoy les voy a hablar de'}\n{'file': 'avatar/A0.mp4', 'frame': 'refs/avatar.png', 'startMs': 0, 'endMs': 6000}\n[]\nFalse True"
+   "t": "check\n     1\timport planos as X"
   },
   {
    "k": "tool",
-   "t": "python - <<'EOF'\nimport json\nP=json.load(open('planos.json'))\nshort=[(p['id'],p['startMs'],p['endMs']) for p in P if p['endMs']-p['startMs']<3100]\nprint(len(short), short[:10])\nprint(len(P))\nEOF"
+   "t": "cat > /tmp/c17.py <<'EOF'\nimport json\nR = json.load(open(\"avatar_ranges.json\"))\nP = json.load(open(\"planos.json\"))\nrem = []\nfor i, r in enumerate(R):\n    a, b = r[\"startMs\"], r[\"endMs\"]\n    cov = [p for p in P if not (p[\"endMs\"] <= a or p[\"startMs\"] >= b)]\n    if any(p[\"endMs\"] - p[\"startMs\"] < 3100 for p in cov):\n        rem.append(i)\nprint(len(cov), len(rem))\nEOF\npython /tmp/c17.py"
   },
   {
    "k": "res",
-   "t": "0 []\n120"
+   "t": "0 0"
   },
   {
    "k": "tool",
-   "t": "python - <<'EOF'\nimport json\nP=json.load(open('planos.json'))\nshort=[(p['id'],p['startMs'],p['endMs'],p['endMs']-p['startMs']) for p in P if p['endMs']-p['startMs']<3100]\nprint(len(short))\nprint(len(P))\nprint(P[0])\nEOF\necho ---; python -c \"print(len(json.load(open('planos.json'))))\""
+   "t": "wc -l planos.json; md5sum planos.json; grep -c startMs planos.json; python -c \"\nimport json\nP=json.load(open('planos.json'))\nimport collections\nprint(len(P), P[8]['id'], P[8]['startMs'])\nprint(collections.Counter(p['startMs'] for p in P).most_common(3))\n\""
   },
   {
    "k": "res",
-   "t": "Exit code 1\n0\n120\n{'id': 'p001', 'startMs': 6000, 'endMs': 10050, 'seg': 4.0, 'texto': 'entre las macetas y los sobres de semillas. Hoy les voy a hablar de'}\n---\nTraceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'json' is not defined"
+   "t": "841 planos.json\n07bf8a8caed4e7ca7b6a28f163e2ac87  planos.json\n120\n120 p009 74660\n[(6000, 1), (10050, 1), (19600, 1)]"
   },
   {
    "k": "tool",
-   "t": "printf '%s\\n' 'import json' 'P=json.load(open(\"planos.json\"))' 'print(len(P), sum(1 for p in P if p[\"endMs\"]-p[\"startMs\"]<3100))' > /tmp/chk.py; python /tmp/chk.py; cp /tmp/chk.py ./chk.py; python chk.py; rm chk.py"
+   "t": "cat > /tmp/c18.py <<'EOF'\nimport json\nR = json.load(open(\"avatar_ranges.json\"))\nP = json.load(open(\"planos.json\"))\nprint(R[8])\na, b = R[8][\"startMs\"], R[8][\"endMs\"]\nprint(\"a,b\", a, b)\nc = [p[\"id\"] for p in P if not (p[\"endMs\"] <= a or p[\"startMs\"] >= b)]\nprint(\"cov\", c)\nd = [p[\"id\"] for p in P if p[\"startMs\"] < 100000 and p[\"endMs\"] > 80000]\nprint(\"near\", d)\nEOF\npython /tmp/c18.py; echo ==; od -c "
   },
   {
    "k": "res",
-   "t": "120 0\n120 0"
+   "t": "{'file': 'avatar/A8.mp4', 'frame': 'refs/avatar.png', 'startMs': 89180, 'endMs': 94180}\na,b 89180 94180\ncov []\nnear ['p009', 'p010', 'p011', 'p012']\n==\n0000000   [  \\n       {  \\n           \"   i   d   \"   :       \"   p   0\n0000020   0   1   \"   ,  \\n           \"   s   t   a   r   t   M   s   \"\n0000040   :       6   0   0   0   ,  \\n           \"   e   n   d   M   s\n0000060   \"   :       1   0   0 "
   },
   {
    "k": "tool",
-   "t": "printf '%s\\n' 'import json' 'P={p[\"id\"]:(p[\"startMs\"],p[\"endMs\"]) for p in json.load(open(\"planos.json\"))}' 'R=json.load(open(\"avatar_ranges.json\"))' 'r=R[1]' 'cov=[k for k,(a,b) in P.items() if not (b<=r[\"startMs\"] or a>=r[\"endMs\"])]' 'print(r, cov, [(c,P[c]) for c in cov])' > /tmp/c2.py; python /tmp/c2.py"
+   "t": "cat > /tmp/c19.py <<'EOF'\nimport json\nR = json.load(open(\"avatar_ranges.json\"))\nP = json.load(open(\"planos.json\"))\na, b = R[8][\"startMs\"], R[8][\"endMs\"]\nfor p in P:\n    if not (p[\"endMs\"] <= a or p[\"startMs\"] >= b):\n        print(\"covered\", p[\"id\"], p[\"startMs\"], p[\"endMs\"], type(p[\"endMs\"]), type(a))\nEOF\npython /tmp/c19.py; echo \"exit $?\""
   },
   {
    "k": "res",
-   "t": "{'file': 'avatar/A1.mp4', 'frame': 'refs/avatar.png', 'startMs': 14100, 'endMs': 19600} [] []"
+   "t": "exit 0"
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 7822,
+    "seg": 7886,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 8838,
+  "total_s": 8901,
   "avatar_s": 0,
-  "sin_avatar_s": 8838,
+  "sin_avatar_s": 8901,
   "cerrado": false
  }
 }
