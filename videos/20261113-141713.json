@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794604244.5452285,
+ "actualizado": 1794604308.4390728,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,38 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2491,
+  "deepseek": 0.2516,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.2946
+  "total": 0.2971
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "20:53:16 bajados 3/3\n20:53:16 FIN: 3/3 clips en clips/\n⛔ faltan 1 fotos o clips (p041). Esperalas con esperar.py o repedilas."
-  },
-  {
-   "k": "tool",
-   "t": "cat > /tmp/stockfix2.py <<'EOF'\nimport json\nreq=[{\"id\":\"p041\",\"muestra\":\"an older man speaking into a microphone in a workshop on camera\",\"buscar\":[\"man talking to camera indoors\",\"senior man speaking microphone\",\"man explaining at workbench\"]}]\njson.dump(req,open('stock_07.json','w'),indent=1,ensure_ascii=False)\nEOF\npython /tmp/stockfix2.py && python /opt/estudio/repo/motor/tools/stock.py . stock"
-  },
-  {
-   "k": "res",
-   "t": "20:53:24 FIN: 1/1 clips en clips/\n✓ shots_timed.json: 120 planos, 120 fotos distintas (cero repetidas). Seguí con render.py."
-  },
-  {
-   "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/render.py . --limit 10 > render_test.log 2>&1 & sleep 90; tail -5 render_test.log"
-  },
-  {
-   "k": "res",
-   "t": "AVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A79.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A80.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A81.mp4\nclips=203 frames=28897 (963.23s)\nhechos 10"
-  },
-  {
-   "k": "tool",
-   "t": "ls segments | head; python /tmp/h.py qc/hoja_render.jpg $(ls segments/*.mp4 | head -12 | sed 's|^|/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/|') 2>&1 | tail -1"
-  },
   {
    "k": "res",
    "t": "0000.mp4\n0000.mp4.src\n0001.mp4\n0001.mp4.src\n0002.mp4\n0002.mp4.src\n0003.mp4\n0003.mp4.src\n0004.mp4\n0004.mp4.src\nsubprocess.CalledProcessError: Command '['python', '/opt/estudio/repo/motor/tools/hoja.py', 'qc/hoja_render.jpg', 'fotos//opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/segments/0000.mp4.png', 'fotos//opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/segm"
@@ -178,6 +154,30 @@
   {
    "k": "tool",
    "t": "sleep 600; tail -3 avatar/it2.log; tail -2 render.log"
+  },
+  {
+   "k": "res",
+   "t": "Exit code 143\nCommand timed out after 10m 0s"
+  },
+  {
+   "k": "tool",
+   "t": "tail -3 avatar/it2.log; tail -2 render.log"
+  },
+  {
+   "k": "res",
+   "t": "21:01:05 InfiniteTalk: 82 ventanas · reel 456.1 s · 1 llamada\n21:01:17 RUN 530ab2f6-3da5-43c9-813e-d4eb1f81f8e5-u1\n21:01:47 estado: IN_PROGRESS\nclips=203 frames=28897 (963.23s)\nhechos 203"
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/assemble.py . > assemble.log 2>&1 & sleep 10; tail -3 assemble.log"
+  },
+  {
+   "k": "res",
+   "t": "segmentos: 203\ncapas de edición extrema: 5\ntramos: 33 de 33 por codificar · 4 a la vez"
+  },
+  {
+   "k": "tool",
+   "t": "sleep 540; tail -3 assemble.log; tail -2 avatar/it2.log"
   }
  ],
  "maquinas": 1,
@@ -223,7 +223,7 @@
    {
     "k": "avatar_gen",
     "n": "Avatar generando",
-    "seg": 851,
+    "seg": 914,
     "pasadas": 1,
     "fin": false
    },
@@ -254,11 +254,18 @@
     "seg": 845,
     "pasadas": 1,
     "fin": true
+   },
+   {
+    "k": "armado",
+    "n": "Armado",
+    "seg": 26,
+    "pasadas": 1,
+    "fin": false
    }
   ],
-  "total_s": 14011,
+  "total_s": 14074,
   "avatar_s": 30,
-  "sin_avatar_s": 13980,
+  "sin_avatar_s": 14044,
   "cerrado": false
  }
 }
