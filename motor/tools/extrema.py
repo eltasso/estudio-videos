@@ -66,25 +66,34 @@ def ia(caja, msgs, reserva, max_tokens=9000, pensar=True, js=True, timeout=400, 
     try:
         body = {"model": _cfg.leer().get("modelo") or "deepseek-flash", "max_tokens": max_tokens, "temperature": 0.9, "messages": msgs}
         if js: body["response_format"] = {"type": "json_object"}
-        if not js: body["thinking"] = {"type": "enabled"}
-        if not pensar: body["thinking"] = {"type": "disabled"}                   # obra: medido, 10 veces más barata y la idea sale igual
+        body["thinking"] = {"type": "disabled"}       # 10-nov: sin razonamiento. Pensando daba vueltas hasta llenar el cupo y no entregaba nada
         if "flash" not in body["model"]: body["model"] = "deepseek-flash"        # edición extrema va siempre en flash
         try: k = _cfg.clave("deepseek")
         except SystemExit: k = ""
-        rq = urllib.request.Request(_cfg.url("https://api.deepseek.com/chat/completions"), data=json.dumps(body).encode(),
-                                    headers={"Authorization": "Bearer " + k, "Content-Type": "application/json", "User-Agent": "estudio-videos/1.0"})
+        hd = {"Authorization": "Bearer " + k, "Content-Type": "application/json", "User-Agent": "estudio-videos/1.0"}
+        rq = urllib.request.Request(_cfg.url("https://api.deepseek.com/chat/completions"), data=json.dumps(body).encode(), headers=hd)
         for i in range(intentos):
             if caja.gastado + real >= caja.tope: raise RuntimeError("tope")     # el tope es duro también entre reintentos
             try:
                 r = json.load(urllib.request.urlopen(rq, timeout=timeout)); u = r.get("usage") or {}
                 hit = u.get("prompt_cache_hit_tokens", 0)
                 real += (hit * PRECIO["hit"] + (u.get("prompt_tokens", 0) - hit) * PRECIO["miss"] + u.get("completion_tokens", 0) * PRECIO["out"]) / 1e6
-                c = (r["choices"][0]["message"].get("content") or "").strip()
-                if c: return c if not js else json.loads(c[c.find("{"):c.rfind("}") + 1])
+                ch = r["choices"][0]; c = (ch["message"].get("content") or "").strip()
+                if os.environ.get("EXTREMA_VOLCAR"): open(os.environ["EXTREMA_VOLCAR"] + "/r_%d.txt" % int(time.time()*1000), "w", encoding="utf8").write("%s | %s tok\n%s\n=====\n%s" % (ch.get("finish_reason"), u.get("completion_tokens"), ch["message"].get("reasoning_content") or "", c))
+                if c:
+                    try: return c if not js else json.loads(c[c.find("{"):c.rfind("}") + 1])
+                    except ValueError: motivo = "json roto (%s, %d car.)" % (ch.get("finish_reason"), len(c))
+                else:
+                    motivo = "vacía (%s, razonó %d car., %d tok)" % (ch.get("finish_reason"), len(ch["message"].get("reasoning_content") or ""), u.get("completion_tokens", 0))
+                    if ch.get("finish_reason") == "length" and body.get("thinking", {}).get("type") != "disabled":
+                        body["thinking"] = {"type": "disabled"}; motivo += " -> reintento sin razonar"   # se le fue todo el cupo pensando
+                        rq = urllib.request.Request(rq.full_url, data=json.dumps(body).encode(), headers=hd)
             except urllib.error.HTTPError as e:
                 if e.code in (401, 402, 403): raise RuntimeError("DeepSeek %d" % e.code)
-            except (ValueError, KeyError): pass
-            except Exception: time.sleep(8 * (i + 1))
+                motivo = "HTTP %d %s" % (e.code, e.read()[:200]); time.sleep(8 * (i + 1))
+            except (ValueError, KeyError) as e: motivo = "respuesta rara: %s" % type(e).__name__
+            except Exception as e: motivo = "%s %s" % (type(e).__name__, str(e)[:60]); time.sleep(8 * (i + 1))
+            log("ia intento %d: %s" % (i + 1, motivo))
         raise RuntimeError("sin respuesta")
     finally: caja.cerrar(reserva, real)
 
@@ -481,6 +490,27 @@ def dirigir(caja, momentos, B, look=None):
     return out
 
 
+def ubicar(caja, B, foto, que):
+    """La lupa mira la foto: una llamada con visión devuelve dónde está el objeto (0 a 1). Si falla, None y la lupa usa el foco."""
+    try:
+        import base64, io
+        from PIL import Image, ImageDraw
+        f = (glob.glob(B + "/fotos/%s.*" % foto) or [None])[0]
+        if not f: return None
+        im = Image.open(f).convert("RGB"); im.thumbnail((960, 540)); w, h = im.size; d = ImageDraw.Draw(im)
+        for k in range(1, 10):
+            d.line([(w * k / 10, 0), (w * k / 10, h)], fill=(255, 230, 0), width=1); d.line([(0, h * k / 10), (w, h * k / 10)], fill=(255, 230, 0), width=1)
+            d.text((w * k / 10 + 2, 2), "%d" % (k * 10), fill=(255, 230, 0)); d.text((2, h * k / 10 + 2), "%d" % (k * 10), fill=(255, 230, 0))
+        bf = io.BytesIO(); im.save(bf, "JPEG", quality=80)
+        msgs = [{"role": "user", "content": [{"type": "image_url", "image_url": {"url": "data:image/jpeg;base64," + base64.b64encode(bf.getvalue()).decode()}},
+                {"type": "text", "text": "The yellow grid shows percent of width (top numbers) and height (left numbers). Where is the center of: %s? If it is not in the photo, use the thing in the photo closest in meaning. Return JSON only: {\"x\": <0-100>, \"y\": <0-100>, \"visto\": \"what you pointed at\"}" % que}]}]
+        j = ia(caja, msgs, 0.004, 1500, pensar=False, js=True, timeout=120, intentos=2)
+        x, y = float(j["x"]) / 100, float(j["y"]) / 100
+        if 0.03 <= x <= 0.97 and 0.03 <= y <= 0.97: log("lupa mira %s -> %.2f,%.2f (%s)" % (que, x, y, str(j.get("visto"))[:40])); return x, y
+    except Exception as e: log("lupa sin mirar:", e)
+    return None
+
+
 def componer_todo(B, X, W, AV, SH, FT, fichas, look, caja, total, nmax, tope):
     cands = candidatos(W, AV, total)
     if not cands: log("no hay frases fuera del avatar"); return None, None
@@ -502,7 +532,7 @@ def componer_todo(B, X, W, AV, SH, FT, fichas, look, caja, total, nmax, tope):
         estilo, elegidas = plan.get(k, (None, []))
         lk_m = look_de(estilo, look)
         perm = set(elegidas) | {"pleno"}
-        ped = "SENTENCE: %s\nWORDS (index:word@frame), %d frames total:\n%s\nPHOTOS SHOWN AROUND THESE SECONDS: %s\nUSED (do not use): %s\nCOMPONENTS FOR THIS MOMENT (the main act must use the first one unless the sentence cannot feed it; pleno is only a short setup act before another component):\n%s\n%s" % (
+        ped = "SENTENCE: %s\nWORDS (index:word@frame), %d frames total:\n%s\nPHOTOS SHOWN AROUND THESE SECONDS: %s\nUSED (do not use): %s\nCOMPONENTS FOR THIS MOMENT (use the first one; another one of the list only if the sentence gives nothing to the first):\n%s\n%s" % (
             m["texto"], round((m["endMs"] - m["startMs"]) * FPS / 1000), " ".join("%d:%s@%d" % (i, w, f) for i, (w, f) in enumerate(P)),
             ", ".join(sugeridas(m)) or "-", ", ".join(sorted(us)) or "-", "\n".join(ficha_op(CAT[o]) for o in elegidas), ficha_op(CAT["pleno"]))
         if "obra" in elegidas and ya: ped += "\nobra scenes already used in this video: %s. Pick a different plano unless only that one fits." % ", ".join(ya)
@@ -516,6 +546,10 @@ def componer_todo(B, X, W, AV, SH, FT, fichas, look, caja, total, nmax, tope):
             part, errs = armar(m, s, W, fichas, lk_m)
             errs = errs + ["op %s is not available for this moment" % a.get("op") for a in (s.get("actos") or []) if a.get("op") not in perm]
             if part and not errs:
+                for ac in part["actos"]:
+                    if ac["op"] == "fed_lupa" and ac["fotos"] and (ac.get("datos") or {}).get("etiqueta"):
+                        xy = ubicar(caja, B, ac["fotos"][0]["id"], ac["datos"]["etiqueta"])
+                        if xy: ac["datos"]["x"], ac["datos"]["y"] = xy
                 with lk:
                     for ac in part["actos"]:
                         usadas.update(f["id"] for f in ac["fotos"])
@@ -562,10 +596,13 @@ def renderizar(B, X, fotos, partes, momentos, caja):
     os.makedirs(X, exist_ok=True)      # el panel muestra cada pieza en su lugar apenas termina de renderizarse
     json.dump([{"id": "xm%02d" % (k + 1), "startMs": momentos[k]["startMs"], "endMs": momentos[k]["endMs"], "texto": momentos[k]["texto"][:120]} for k in sorted(partes)], open(X + "/momentos.json", "w", encoding="utf8"), ensure_ascii=False)
     t0 = time.time()
-    try:
-        r = subprocess.run(["node", "render.mjs", pub, X, ",".join(ids)], cwd=T, capture_output=True, text=True, timeout=3600)
-        print(r.stdout[-1500:], r.stderr[-800:])
-    except subprocess.TimeoutExpired: log("el render tardó demasiado: van las piezas que llegaron")
+    def _local(faltan):
+        try:
+            r = subprocess.run(["node", "render.mjs", pub, X, ",".join(faltan)], cwd=T, capture_output=True, text=True, timeout=3600)
+            print(r.stdout[-1500:], r.stderr[-800:])
+        except subprocess.TimeoutExpired: log("el render tardó demasiado: van las piezas que llegaron")
+    import granja
+    granja.render(T, pub, X, ids, log, _local)      # una máquina de GitHub por pieza; lo que no vuelva, acá
     res = jl(X + "/render.json", {}) or {}
     for k, part in sorted(partes.items()):
         mid = "xm%02d" % (k + 1); f = X + "/" + mid + ".mp4"; m = momentos[k]
@@ -573,6 +610,9 @@ def renderizar(B, X, fotos, partes, momentos, caja):
         dur = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f], capture_output=True, text=True).stdout.strip()
         if not dur or abs(float(dur) * FPS - part["frames"]) > 6: log(mid, "duración rara (%s s): queda el b-roll" % dur); continue
         man.append({"mp4": "extrema/" + mid + ".mp4", "startMs": m["startMs"], "endMs": m["endMs"], "texto": m["texto"][:120]})
+    # las escenas firma (escenas.py) ya están en el manifest: se conservan, y una pieza propia que caiga sobre una de ellas no entra
+    firma = [m for m in (jl(X + "/manifest.json", []) or []) if str(m.get("mp4", "")).startswith("extrema/es")]
+    man = sorted(firma + [m for m in man if not any(m["startMs"] < f["endMs"] and m["endMs"] > f["startMs"] for f in firma)], key=lambda m: m["startMs"])
     json.dump(man, open(X + "/manifest.tmp", "w", encoding="utf8"), ensure_ascii=False, indent=1)
     os.replace(X + "/manifest.tmp", X + "/manifest.json")      # render.py puede estar leyéndolo: nunca a medio escribir
     shutil.rmtree(pub, ignore_errors=True)
@@ -584,7 +624,9 @@ if __name__ == "__main__":
     _arg = sys.argv[1:]; _B = os.path.abspath(_arg[0] if _arg and not _arg[0].startswith("--") else os.getcwd())
     _marca = os.path.join(_B, "extrema", "EN_CURSO") if "--fondo" in _arg else None
     try:
-        if _marca and os.path.exists(os.path.join(_B, "extrema", "capas.json")): log("las piezas ya estaban hechas"); sys.exit(0)
+        _xd = os.path.join(_B, "extrema")       # ya hechas = hay al menos una pieza propia en la línea; si no entró ninguna, se vuelve a intentar (lo programado se reusa)
+        _n = len(jl(_xd + "/capas.json", []) or []) + sum(1 for m in (jl(_xd + "/manifest.json", []) or []) if str(m.get("mp4", "")).startswith("extrema/xm"))
+        if _marca and os.path.exists(_xd + "/capas.json") and _n: log("las piezas ya estaban hechas"); sys.exit(0)
         if _marca: os.makedirs(os.path.dirname(_marca), exist_ok=True); open(_marca, "w").write(str(os.getpid()))
         main()
     except Exception as e:      # nunca rompe el video: sin manifest, render.py usa el b-roll normal

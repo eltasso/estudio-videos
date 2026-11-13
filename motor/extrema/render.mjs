@@ -1,7 +1,7 @@
 // Edición extrema: renderiza a MP4 cada pieza de src/gen/manifest.ts. Corre en GitHub Actions (nunca en la PC del creador).
 // uso: node render.mjs <carpeta_public> <salida_dir> <ids,separados,por,coma>
 import fs from 'fs'; import os from 'os'; import path from 'path'; import {fileURLToPath} from 'url';
-import {bundle} from '@remotion/bundler'; import {renderMedia, selectComposition, openBrowser} from '@remotion/renderer';
+import {bundle} from '@remotion/bundler'; import {renderMedia, selectComposition, openBrowser, makeCancelSignal} from '@remotion/renderer';
 const [pub, outDir, ids] = process.argv.slice(2);
 const root = path.dirname(fileURLToPath(import.meta.url));
 fs.mkdirSync(outDir, {recursive: true});
@@ -17,8 +17,14 @@ try {
       const composition = await selectComposition({serveUrl, id, puppeteerInstance: browser});
       const salida = capas.has(id) ? {codec: 'prores', proResProfile: '4444', imageFormat: 'png', pixelFormat: 'yuva444p10le', outputLocation: path.join(outDir, id + '.mov')}
         : {codec: 'h264', crf: 18, pixelFormat: 'yuv420p', outputLocation: path.join(outDir, id + '.mp4')};
-      await renderMedia({composition, serveUrl, ...salida,
-                         puppeteerInstance: browser, concurrency: Number(process.env.EXTREMA_HILOS || os.cpus().length || 2), timeoutInMilliseconds: 120000});
+      // tope por pieza: si se cuelga o va a paso de tortuga se corta y siguen las demás (antes una sola frenaba toda la fila)
+      const {cancelSignal, cancel} = makeCancelSignal();
+      const tope = Math.max(600, composition.durationInFrames * 2) * 1000;
+      const reloj = setTimeout(() => cancel(), tope);
+      try {
+        await renderMedia({composition, serveUrl, ...salida, cancelSignal,
+                           puppeteerInstance: browser, concurrency: Number(process.env.EXTREMA_HILOS || os.cpus().length || 2), timeoutInMilliseconds: 120000});
+      } finally { clearTimeout(reloj); }
       res[id] = {ok: true, s: Math.round((Date.now() - t0) / 1000)};
     } catch (e) { res[id] = {ok: false, error: String(e.message || e).slice(0, 600)}; }
     console.log(id, JSON.stringify(res[id]));

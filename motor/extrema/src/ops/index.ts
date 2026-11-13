@@ -4,4 +4,5 @@ import {OPS as clinico} from './clinico';
 import {OPS as cocina} from './cocina';
 import {OPS as neon} from './neon';
 import {OPS as archivo} from './archivo';
-export const OPS_EXTRA: Record<string, any> = {...mapas, ...clinico, ...cocina, ...neon, ...archivo};
+import {OPS as federer} from './federer';
+export const OPS_EXTRA: Record<string, any> = {...mapas, ...clinico, ...cocina, ...neon, ...archivo, ...federer};

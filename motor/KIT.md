@@ -4,20 +4,22 @@ Herramientas del Estudio: `{APP}/tools/`. Trabajá SOLO en tu carpeta de video (
 Las claves ya están configuradas: las herramientas las leen solas. **Nunca las busques, leas ni imprimas.**
 
 ## 🚀 CAMINO RECTO (hacelo de primera: cada vuelta extra atrasa la entrega)
+0. **El mundo del canal** (§0b), antes de escribir una sola línea: `python {APP}/tools/mundo.py <carpeta> "<título>" "<idea>"` → `mundo.json`. Leelo UNA vez. De ahí salen el guion (frases con objetos de ESE lugar), cada foto y las escenas.
 1. **Guion** → `guion.txt` (largo del brief). Validá `--etapa guion`: si marca ✗ por el largo, alargalo o recortalo y volvé a validar hasta que pase. El largo lo pidió el usuario.
 2. **Voz** (§1) en segundo plano y, **en paralelo**, pensá el gancho y las 4-6 imágenes creativas (§4b).
 3. **Tiempos** (§2) → `captions.json`. Con eso escribí de UNA `avatar_ranges.json` (§3) y corré `python {APP}/tools/planos.py <carpeta>` → `planos.json` (un plano de b-roll cada ~5 s, con el texto de cada uno). **No escribas scripts propios de planos ni `shots_timed.json` a mano.**
-4. **Fotos**: UN prompt por plano (`id` = el del plano: p001, p002…). 6 de prueba → hoja → mirala → resto del lote en 1 o 2 pedidos grandes (§4; el Batch tarda: pedilo temprano). Mientras llegan, seguí. Cuando están todas: UNA sola ronda de rehechas con todas las malas juntas y `python {APP}/tools/planos.py <carpeta> --shots` → `shots_timed.json`.
+3b. **Escenas firma** (§4d), apenas existe `planos.json` y ANTES de escribir prompts: `python {APP}/tools/escenas.py <carpeta> ficha`. Decide con el video entero las 3 escenas fuertes y deja el pedido de SUS fotos ya escrito (`escenas/pedidos_escenas.json`). Mandalo tal cual con `fotos.py`, el primero de todos.
+4. **Fotos**: UN prompt por plano (`id` = el del plano: p001, p002…), **salvo los planos de las escenas firma, que ya están pedidos**. 6 de prueba → hoja → mirala → resto del lote en 1 o 2 pedidos grandes (§4; el Batch tarda: pedilo temprano). Mientras llegan, seguí. Cuando están todas: UNA sola ronda de rehechas con todas las malas juntas y `python {APP}/tools/planos.py <carpeta> --shots` → `shots_timed.json`.
    ⛔ **CERO FOTOS REPETIDAS:** un plano = una foto distinta. El validador lo frena con ✗.
-5. **Avatar**: con el plan cerrado, `avatar_it.py` en segundo plano (1 sola llamada, §3).
+5. **Avatar**: con el plan cerrado, `avatar_it.py` en segundo plano (1 sola llamada, §3). Apenas bajaron las fotos de las escenas firma: `python {APP}/tools/escenas.py <carpeta> construir --fondo > <carpeta>/escenas/escenas.log 2>&1 &` (§4d).
 6. **Sonido** (§5b) mientras llega el avatar: `sonidos.py` + `cues.json`.
-7. **Render de prueba** (`render.py --limit 10`) → hoja → mirala. El render completo y el armado **los hace el motor solo**: los planos sin avatar mientras se espera y, cuando llega el avatar, sus segmentos y `final.mp4`. Vos esperá con `esperar.py --existe final.mp4` y usá ese tiempo para `meta.json` y `REPORTE.md`. Sólo si `final.mp4` no aparece a los 40 min de haber llegado el avatar, corré vos `render.py` + `assemble.py`.
+7. **Render de prueba** (`render.py --limit 10`) → hoja → mirala. El render completo y el armado **los hace el motor solo**: los planos sin avatar mientras se espera y, cuando llega el avatar, sus segmentos y `final.mp4`. Vos esperá con `esperar.py --existe final.mp4` y usá ese tiempo para `meta.json` y `REPORTE.md`. Sólo si `final.mp4` no aparece a los 40 min de haber llegado el avatar, corré vos `fondo_avatar.py` + `render.py` + `assemble.py`. `fondo_avatar.py` repara gratis el fondo del avatar si se rompió en el reel (el resultado queda en `gates/fondo_avatar.json`; los clips originales, en `avatar/sin_fondo/`).
 8. **Final**: corré el **revisor** (`revisor.py`, §6) una vez y validá `--etapa final`. Si no marcó nada, terminaste: no hagas otra revisión ni otro armado. Si marcó algo, hacé **una sola pasada** con lo marcado y nada más. Listo: el usuario lo descarga desde el panel.
 
 Reglas anti-vueltas:
 - **Esperar = SÓLO `python {APP}/tools/esperar.py`** (hasta 9 min de una: `--log render.log`, `--cuenta "fotos/*.png" 120`, `--existe final.mp4`; llamala con timeout 600000). **Prohibido `sleep` en bucle** y mirar con `ls`/`tail` cada minuto.
 - Todo lo que tarde > 1 min (voz, fotos, avatar, render, assemble) va en segundo plano con log (`nohup … > x.log 2>&1 &`) y lo esperás con `esperar.py` mientras hacés otra cosa.
-- Antes de escribir un script propio, fijate si ya hay herramienta (voz, tiempos, planos, fotos, stock, avatar_it, sonidos, render, assemble, hoja, esperar, validar, revisor). No reinventes.
+- Antes de escribir un script propio, fijate si ya hay herramienta (voz, tiempos, planos, escenas, fotos, stock, avatar_it, sonidos, render, assemble, hoja, esperar, validar, revisor). No reinventes.
 - Leé cada archivo UNA vez. El validador: arreglá sólo los **✗**; los **!** son avisos (mejoralos si es rápido o anotalos en REPORTE.md y SEGUÍ). Máximo 2 corridas por etapa.
 
 ## ⛔ Reglas duras
@@ -29,6 +31,16 @@ Reglas anti-vueltas:
 - **Matar un proceso:** `kill <pid>` o `taskkill //F //PID <pid>` (el pid sale de `echo $!` al lanzarlo).
 - **Texto en ffmpeg prohibido** (`drawtext` puede no tener fuentes). Hojas de contacto: `python {APP}/tools/hoja.py <salida.jpg> <fotos o videos…>` (hasta 12).
 - **Nada frena el video.** Si una herramienta falla 3 veces, poné un reemplazo (otra foto, el cuadro del presentador en vez de avatar), anotalo en REPORTE.md y seguí.
+
+## 0b. El mundo del canal — así se piensa una edición que no parece plantilla
+Las ideas no salen de "qué gráficos lleva un video": salen de la PERSONA y de su lugar. `mundo.py` lo piensa en orden y lo deja en `mundo.json`:
+el cuarto donde pasa el día · **los objetos de ahí que YA llevan información** (una etiqueta, un libro de cuentas, una regla, un almanaque en un clavo) · cómo escribe y marca · el look (cada color es el color de algo de ese cuarto) · punto por punto si algo se MUESTRA o es un DATO · lo que sostiene el video entero · lo que nunca aparece.
+- **Guion:** escribilo con esos objetos en la boca del presentador (nombra SU banco, SU libreta, SU frasco). Cada frase, visual y concreta.
+- **Cada DATO del video** (un número, una hora, un precio, una regla, una lista, un recuerdo) va como **foto del objeto de su mundo que lo dice**, con el número o las palabras EXACTAS escritas en él como las escribiría esa persona (§5 de `mundo.json`). Se pide como imagen creativa (§4b): el texto entre comillas, corto, en el idioma del video. Nunca un cartel ni un gráfico encima.
+- **Lo que se MUESTRA** va con la foto literal de eso, sin agregar nada.
+- **Lo que sostiene el video** (§6 de `mundo.json`): pedí esa foto para el gancho (el índice), y volvé a ella al cierre.
+- **Todas las fotos** sobre la superficie y con los colores del §4 de `mundo.json`. Lo que está en "nunca" no aparece en ningún prompt.
+- Las dos pruebas antes de pedir una foto: ¿se vería igual en otro canal? ¿se pudo escribir sin conocer a esta persona? Si alguna es sí, pensala de nuevo.
 
 ## 1. Voz — el clon de la voz del canal (Fish)
 ```
@@ -109,6 +121,19 @@ python {APP}/tools/stock.py <carpeta> <carpeta>/stock_01.json > <carpeta>/clips/
 - Armá hojas de 12 con `hoja.py` (acepta videos) y miralas, sobre todo los de `"juez"` ≤ 4. Cambiá los que no muestren lo que dice la frase, una marca grande o un cartel en otro idioma: borrá `clips/<id>.mp4` y pedí ese id con una búsqueda MÁS LITERAL, todas juntas en UNA sola ronda (los clips no cuestan; el juez, centavos).
 - Los ids que Pexels no tenga, o que el juez marcó "nada que ver" (máximo 4 por video), quedan en `clips/_sin_stock.json`: probá otra búsqueda una vez; si tampoco, hacelos con `fotos.py` (no cuentan para el tope).
 - Con clips y fotos listos, `planos.py <carpeta> --shots` toma cada plano de donde esté. El render recorta y funde los clips solo.
+
+## 4d. Escenas firma — se deciden con el video ENTERO y su foto se encarga para ellas
+Una escena firma es un momento donde la foto no se muestra: **se usa**. Se corta por sus bordes reales en paneles que entran uno por palabra, una zona pierde el color y el resto no, el color vuelve sólo dentro de un espejo, la cámara viaja de lo limpio a lo sucio. Sale bien cuando la foto se pidió **pensando en la escena** (cenital, cosas en fila con espacio libre entre ellas, un objeto que pueda contener otra imagen), por eso va antes de las fotos y no al final.
+```
+python {APP}/tools/escenas.py <carpeta> ficha                 # después de planos.py → escenas/ficha.json + escenas/pedidos_escenas.json
+python {APP}/tools/fotos.py <carpeta> <carpeta>/escenas/pedidos_escenas.json > <carpeta>/fotos/fotos_escenas.log 2>&1 &
+python {APP}/tools/escenas.py <carpeta> construir --fondo > <carpeta>/escenas/escenas.log 2>&1 &     # cuando esas fotos ya bajaron
+```
+- `ficha` lee el guion entero y elige 3 escenas (`--n 2` a `4`), cada una sobre 1 o 2 planos seguidos, fuera del avatar. Te dice qué planos tomó: **para esos planos no escribas otro prompt** (si la escena tiene 2 planos, el segundo sí lleva su foto normal, como siempre).
+- Leé `escenas/ficha.json` una vez: trae la **tesis** del video y un **recurso** propio que puede volver en cada parte. Usalos al escribir los demás prompts para que el video se sienta pensado entero.
+- `construir` mira cada foto, ubica las cosas, describe la escena en capas y la deja en `extrema/manifest.json`: `render.py` la mete sola en la línea. **No programes nada ni toques esos archivos.**
+- Nada frena el video: si una escena no sale, ese plano queda con su foto (que ya está pedida). Si una foto de escena salió mal y la repedís, corré `construir` de nuevo.
+- Tope de gasto: US$0,10 por video (`--tope`). En una PC sin render: `construir --sin-render` (deja las escenas descritas en `escenas/es01.json`…).
 
 ## 5. Armado (herramientas del Estudio: no las copies ni las edites)
 ```

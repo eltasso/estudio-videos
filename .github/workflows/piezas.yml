@@ -1,0 +1,67 @@
+name: piezas
+run-name: "🧩 ${{ inputs.tag }}"
+
+# Render en paralelo de las piezas animadas de un video: una máquina por pieza.
+# Lo abre el motor (tools/granja.py) desde la máquina del video; nunca hace falta lanzarlo a mano.
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag: { description: "release temporal con el paquete", required: true }
+      ids: { description: "piezas, como lista JSON", required: true }
+
+permissions:
+  contents: write
+
+jobs:
+  pieza:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        id: ${{ fromJSON(inputs.ids) }}
+    steps:
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+
+      - name: Traer el paquete
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          case "$TAG" in piezas-*) ;; *) echo "tag inválido"; exit 1;; esac
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" -p "$TAG.tgz" -D .
+          tar xzf "$TAG.tgz" && rm "$TAG.tgz"
+          (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-inter > /dev/null) || true
+
+      - name: Dependencias guardadas
+        uses: actions/cache@v4
+        with:
+          path: pkg/node_modules
+          key: piezas-nm-${{ hashFiles('pkg/package.json') }}
+
+      - name: Renderizar
+        working-directory: pkg
+        env:
+          ID: ${{ matrix.id }}
+        run: |
+          case "$ID" in *[!A-Za-z0-9_]*) echo "id inválido"; exit 1;; esac
+          [ -d node_modules/remotion ] || npm i --no-audit --no-fund --loglevel=error
+          mkdir -p ../out
+          node render.mjs public ../out "$ID" || true
+          node -e 'const fs=require("fs");let r={};try{r=JSON.parse(fs.readFileSync("../out/render.json","utf8"))}catch(e){};const x=r[process.env.ID]||{ok:false,error:String(r._error||"no rindió")};fs.writeFileSync("../out/"+process.env.ID+".json",JSON.stringify(x))'
+          ls -la ../out
+
+      - name: Devolver la pieza
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+          ID: ${{ matrix.id }}
+        run: |
+          mkdir -p out; cd out
+          [ -f "$ID.json" ] || echo '{"ok":false,"error":"la máquina no llegó a renderizar"}' > "$ID.json"
+          for f in "$ID.mp4" "$ID.mov"; do if [ -f "$f" ]; then gh release upload "$TAG" "$f" --repo "$GITHUB_REPOSITORY" --clobber; fi; done
+          gh release upload "$TAG" "$ID.json" --repo "$GITHUB_REPOSITORY" --clobber

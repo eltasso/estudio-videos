@@ -162,11 +162,22 @@ class Proxy(http.server.BaseHTTPRequestHandler):
         main = False
         try: main = len(json.loads(data).get("tools") or []) > 3
         except Exception: pass
+        # SIN RAZONAMIENTO (Configuración → "pensar": true lo vuelve a prender). Medido: razonando tarda varias veces más, gasta más
+        # y no mejora el resultado; a veces se queda pensando hasta llenar el cupo y no entrega nada.
+        original = None
+        if data and self.command == "POST" and not _cfg.leer().get("pensar"):
+            try:
+                j = json.loads(data)
+                if isinstance(j, dict) and "messages" in j:
+                    j["thinking"] = {"type": "disabled"}; original, data = data, json.dumps(j).encode()
+            except Exception: pass
         t0 = time.time()
         while True:
             c = http.client.HTTPSConnection(UPSTREAM_HOST, timeout=900)
             c.request(self.command, UPSTREAM_PATH + rest, body=data, headers=hdr)
             r = c.getresponse()
+            if r.status == 400 and original is not None:      # si el modelo rechaza el pedido sin razonar, va tal como venía
+                r.read(); c.close(); data, original = original, None; continue
             if r.status != 402: break
             r.read(); c.close()   # DeepSeek sin saldo: avisar en el panel y esperar en vez de matar la sesión
             _cfg.alerta("DeepSeek", "DeepSeek sin saldo: cargá crédito en platform.deepseek.com. El video está en pausa y sigue solo.")

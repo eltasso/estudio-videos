@@ -186,11 +186,14 @@ def renderizar(B, X, T, G, fotos, clips, cara, AV, log):
     json.dump([{"id": g["id"], "startMs": g["startMs"], "endMs": g["endMs"], "texto": g["idea"][:120], "arch": "extrema/%s.%s" % (g["id"], ext(g))} for g in G], open(X + "/momentos.json", "w", encoding="utf8"), ensure_ascii=False)
     subprocess.run(["chmod", "a+rwx", X], check=False)
     t0 = time.time()
-    try:
-        r = subprocess.run(aislado(["node", T + "/render.mjs", pub, X, ",".join(g["id"] for g in G)]), cwd=T, capture_output=True, text=True, timeout=4200)
-        print(r.stdout[-1500:], r.stderr[-800:], flush=True)
-    except subprocess.TimeoutExpired: log("el render tardó demasiado: van las piezas que llegaron")
-    finally: parar_aislados()
+    def _local(ids):       # el camino de siempre: en esta máquina, una atrás de otra, como el usuario sin claves
+        try:
+            r = subprocess.run(aislado(["node", T + "/render.mjs", pub, X, ",".join(ids)]), cwd=T, capture_output=True, text=True, timeout=4200)
+            print(r.stdout[-1500:], r.stderr[-800:], flush=True)
+        except subprocess.TimeoutExpired: log("el render tardó demasiado: van las piezas que llegaron")
+        finally: parar_aislados()
+    import granja
+    granja.render(T, pub, X, [g["id"] for g in G], log, _local)      # una máquina de GitHub por pieza; lo que no vuelva, acá
     try: res = json.load(open(X + "/render.json", encoding="utf8"))
     except Exception: res = {}
     man, capas = [], []

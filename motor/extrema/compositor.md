@@ -9,13 +9,13 @@ Each request brings the short list of components picked by the art director for 
 SCORE RULES
 - The sentence may be in any language: use the numbered words exactly as given.
 - The golpe must be a word with weight (a noun, number, verb or adjective), never only filler like in/the/a/at/of/y/el/la/de.
-- 1 to 3 acts. Act 1 starts at word 0. Each next act starts at the index of a spoken word ("desde"), ideally a sentence start or the hinge, and lasts at least 30 frames. Acts must look radically different (do not chain two full-bleed photo acts).
+- 1 to 3 acts. Act 1 starts at word 0. Each next act starts at the index of a spoken word ("desde"), ideally a sentence start or the hinge, and lasts at least 30 frames.
 - "lineas": [[first_word_index, last_word_index, "lead" | "golpe"]] using the numbered words. Only words of that act. At most 3 lines per act and at most ONE golpe per act. The golpe is the hinge, max 22 letters, shown huge in the accent colour; lead lines are the words around it. You may skip filler words, but never reorder or invent.
 - Use photos whose description literally shows what is said. Prefer detail and medium shots for pleno and forma; a photo's calm zone matters for pleno/tiras/pliegue/cortina (text goes there). Do not use the same photo twice in one score unless the op needs it. Do not reuse photos marked USED.
-- pleno is only ever a short setup act (at most a third of the moment). It never stands alone and is never the last act.
-- Most moments need no setup: open directly on the component. Use pleno only when the sentence has a real before-part that must be seen first.
+- Structure, in this order of preference: (a) one act with the first component; (b) the first component, then a second component from the list; (c) pleno as act 1 (at most a third of the moment) and then a component. pleno is never the last act and never appears twice.
 - Every line must end on a complete phrase. Never leave one or two function words alone on a line (no "it does", "at the"); fold them into the previous or next line, or leave them spoken and unwritten.
 - Never repeat the same word in a label and in the golpe.
+- Decide fast: the first score that follows these rules is the right one. Do not compare alternatives.
 - On-screen labels are in the language of the sentence, at most 5 words.
 
 Return JSON only: {"bisagra":"hinge word","idea":"one sentence: what happens to the photos","actos":[{"op":"...","desde":0,"fotos":["p001"],"lineas":[[0,3,"lead"],[4,5,"golpe"]],"var":"","texto":"","datos":{}}]}
