@@ -3,9 +3,9 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794609518.7696521,
+ "actualizado": 1794609672.3359792,
  "creado": 1794590301.0969768,
- "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
+ "run": "https://github.com/eltasso/estudio-videos/actions/runs/43520999957",
  "pasos": [
   {
    "k": "guion",
@@ -59,10 +59,6 @@
   "total": 0.5648
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "tail -5 assemble.log; ls -la final.mp4"
-  },
   {
    "k": "res",
    "t": "tramo 6 listo\ntramo 7 listo\ntramo 8 listo\ntramo 9 listo\nfinal: ./final.mp4 963.224000 s\n-rw-rw-rw-+ 1 sesion sesion 146360306 Nov 13 21:47 final.mp4"
@@ -178,9 +174,13 @@
   {
    "k": "tool",
    "t": "sleep 560; tail -3 assemble2.log"
+  },
+  {
+   "k": "user",
+   "t": "La sesión siguió en otra máquina (GitHub corta cada 6 h). Todo lo tuyo está igual en tu carpeta: mirá qué hay, NO rehagas nada y seguí el CAMINO RECTO del KIT hasta el final."
   }
  ],
- "maquinas": 1,
+ "maquinas": 2,
  "extrema": "1",
  "ahorro": "1",
  "etapas": {
@@ -272,15 +272,14 @@
    {
     "k": "correcciones",
     "n": "Correcciones",
-    "seg": 981,
+    "seg": 1134,
     "pasadas": 2,
     "fin": false
    }
   ],
-  "total_s": 19285,
+  "total_s": 19438,
   "avatar_s": 4649,
-  "sin_avatar_s": 14636,
+  "sin_avatar_s": 14790,
   "cerrado": false
- },
- "nota": "sigue en otra máquina"
+ }
 }
