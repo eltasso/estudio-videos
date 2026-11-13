@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794603580.7394857,
+ "actualizado": 1794603658.0001004,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -41,7 +41,7 @@
    "k": "armado",
    "n": "Armado",
    "st": "active",
-   "info": "114 segmentos"
+   "info": "131 segmentos"
   },
   {
    "k": "qc",
@@ -51,38 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2456,
+  "deepseek": 0.2482,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.2911
+  "total": 0.2937
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivos: 9/10 → hacé otra cosa útil y volvé a llamar\n9"
-  },
-  {
-   "k": "tool",
-   "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 10 --carpeta . 2>&1 | tail -1; ls fotos/*.png"
-  },
-  {
-   "k": "res",
-   "t": "✓ hay 15 archivos (125 s)\nfotos/p001.png\nfotos/p001_c.png\nfotos/p002.png\nfotos/p008.png\nfotos/p018.png\nfotos/p033.png\nfotos/p046.png\nfotos/p052.png\nfotos/p058.png\nfotos/p070.png\nfotos/p074.png\nfotos/p090.png\nfotos/p106.png\nfotos/p113.png\nfotos/p122.png"
-  },
-  {
-   "k": "tool",
-   "t": "python /tmp/h.py qc/hoja_nuevas.jpg p018 p058 p070 p074 p090 p106 p122 2>&1|tail -1"
-  },
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_nuevas.jpg (7 cuadros, 4x2)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/qc/hoja_nuevas.jpg\"}"
-  },
   {
    "k": "res",
    "t": "[imagen]"
@@ -178,6 +154,30 @@
   {
    "k": "tool",
    "t": "sleep 240; tail -3 render.log; tail -2 avatar/it.log"
+  },
+  {
+   "k": "res",
+   "t": "20:59:04 estado: FAILED\n⛔ InfiniteTalk falló (un FAILED no cobra; podés volver a correr esta herramienta): FAILED: \"job timed out after 1 retries\""
+  },
+  {
+   "k": "tool",
+   "t": "cat avatar/it.log | tail -20; cat avatar/it_llamada.json"
+  },
+  {
+   "k": "res",
+   "t": "20:55:55 InfiniteTalk: 82 ventanas · reel 456.1 s · 1 llamada\n20:56:03 RUN 72ad04b9-7f38-445d-824b-6cd936c933a7-u1\n20:56:33 estado: IN_PROGRESS\n20:59:04 estado: FAILED\n⛔ InfiniteTalk falló (un FAILED no cobra; podés volver a correr esta herramienta): FAILED: \"job timed out after 1 retries\"\n{\n \"estado\": \"fallo\",\n \"t\": \"2026-11-13 20:56:03\",\n \"enviado\": 1794603363.7,\n \"ventanas\": [\n  \"avatar/A0.mp4\""
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/avatar_it.py . > avatar/it2.log 2>&1 & sleep 20; tail -3 avatar/it2.log; tail -2 render.log"
+  },
+  {
+   "k": "res",
+   "t": "(Bash completed with no output)"
+  },
+  {
+   "k": "tool",
+   "t": "sleep 20; tail -5 avatar/it2.log; tail -2 render.log"
   }
  ],
  "maquinas": 1,
@@ -223,7 +223,7 @@
    {
     "k": "avatar_gen",
     "n": "Avatar generando",
-    "seg": 187,
+    "seg": 264,
     "pasadas": 1,
     "fin": false
    },
@@ -237,28 +237,28 @@
    {
     "k": "extrema",
     "n": "Edición extrema",
-    "seg": 328,
+    "seg": 405,
     "pasadas": 1,
     "fin": false
    },
    {
     "k": "previo",
     "n": "Render sin avatar",
-    "seg": 328,
+    "seg": 369,
     "pasadas": 1,
-    "fin": false
+    "fin": true
    },
    {
     "k": "render",
     "n": "Render",
-    "seg": 244,
+    "seg": 321,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 13347,
+  "total_s": 13424,
   "avatar_s": 30,
-  "sin_avatar_s": 13316,
+  "sin_avatar_s": 13394,
   "cerrado": false
  }
 }
