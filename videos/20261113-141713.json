@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794599008.2545302,
+ "actualizado": 1794599071.6450188,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,133 +51,133 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1616,
+  "deepseek": 0.1762,
   "gpt": 0.0284,
   "gpt_img": 11,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.19
+  "total": 0.2046
  },
  "eventos": [
   {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivos: 7/10 → hacé otra cosa útil y volvé a llamar\n19:03:12 ya hay otro fotos.py en este video (pid 19281): espero que termine\n19:03:42 ya hay otro fotos.py en este video (pid 19281): espero que termine"
-  },
-  {
    "k": "tool",
-   "t": "timeout 570 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 12 --carpeta . 2>&1 | tail -2; ls fotos/*.png | wc -l"
+   "t": "import json\nimport subprocess\n\nFLICKER = {\"p020\", \"p022\", \"p025\", \"p027\", \"p034\", \"p037\", \"p039\", \"p042\", \"p044\", \"p045\",\n           \"p049\", \"p053\", \"p059\", \"p063\", \"p064\", \"p071\", \"p079\", \"p085\", \"p090\", \"p091\",\n           \"p093\", \"p095\", \"p097\", \"p099\", \"p101\", \"p104\", \"p107\", \"p114\", \"p115\"}\nR = json.load(open('avatar_ranges.json'))\nP = {p['id']: p for p in json.load(open('planos.json'))}\nfor i"
   },
   {
    "k": "res",
-   "t": "… sigue esperando tras 540 s · archivos: 7/12 → hacé otra cosa útil y volvé a llamar\n7"
+   "t": "File created successfully at: /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/fix_plan.py (file state is current in your context — no need to Read it back)"
   },
   {
    "k": "tool",
-   "t": "ls fotos/*.png; python /tmp/h.py qc/hoja_fotos_parcial.jpg p001_a p001_b p001_c p002 p008 p033 p042 2>&1|tail -1"
+   "t": "python fix_plan.py 2>&1 | tail -4"
   },
   {
    "k": "res",
-   "t": "fotos/p001_a.png\nfotos/p001_b.png\nfotos/p002.png\nfotos/p008.png\nfotos/p033.png\nfotos/p052.png\nfotos/p113.png\nhoja: qc/hoja_fotos_parcial.jpg (6 cuadros, 4x2)"
+   "t": "✓ planos.json: 120 planos de b-roll (8.9 min de b-roll, 13.5 por minuto) · 82 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\nventanas 82 splits 0"
   },
   {
    "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/qc/hoja_fotos_parcial.jpg\"}"
+   "t": "python - <<'EOF'\nimport json\nout=[]\nfor i,w in enumerate(json.load(open('_plan_times.json'))):\n    out.append({\"file\":'avatar/A%d.mp4'%i,\"frame\":\"refs/avatar.png\",\"startMs\":w['t'],\"endMs\":w['t']+w['dur']})\njson.dump(out,open('avatar_ranges.json','w'),indent=1)\nEOF\npython fix_plan.py 2>&1 | tail -3"
   },
   {
    "k": "res",
-   "t": "[imagen]"
+   "t": "✓ planos.json: 120 planos de b-roll (8.9 min de b-roll, 13.5 por minuto) · 82 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\nventanas 82 splits 0"
   },
   {
    "k": "tool",
-   "t": "timeout 500 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 11 --carpeta . 2>&1 | tail -2; ls fotos/*.png; tail -3 fotos/fotos_01.log"
+   "t": "grep -n \"if i in (3, 5)\" -A3 fix_plan.py; grep -n \"remove.add\" -B8 fix_plan.py | head -20"
   },
   {
    "k": "res",
-   "t": "Terminated                 timeout 500 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 11 --carpeta . 2>&1 | tail -2\nfotos/p001_a.png\nfotos/p001_b.png\nfotos/p002.png\nfotos/p008.png\nfotos/p033.png\nfotos/p052.png\nfotos/p113.png\n19:02:42 ya hay otro fotos.py en este video (pid 19281): espero que termine\n19:03:12 ya hay otro fotos.py en este video (pid 19281): espero que termine"
+   "t": "10:    if i in (3, 5):\n11-        r.pop('foto', None)\n12-        r.pop('lado', None)\n13-\n21-\n22-remove = set()\n23-for i, r in enumerate(R):\n24-    if r.get('foto'):\n25-        continue\n26-    cover = [pid for pid, p in P.items() if not (p['endMs'] <= r['startMs'] or p['startMs'] >= r['endMs'])]\n27-    short = [c for c in cover if (P[c]['endMs'] - P[c]['startMs']) < 3100]\n28-    if short:\n29:      "
   },
   {
    "k": "tool",
-   "t": "timeout 570 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 11 --carpeta . 2>&1 | tail -1; ls fotos/*.png | wc -l"
+   "t": "python -c \"\nimport json\nP={p['id']:p for p in json.load(open('planos.json'))}\nR=json.load(open('avatar_ranges.json'))\nprint(len([ (c) for c in P if P[c]['endMs']-P[c]['startMs']<3100]))\nfor r in R[:4]: print(r['startMs'],r['endMs'])\nprint([c for c,p in P.items() if not (p['endMs']<=R[1]['startMs'] or p['startMs']>=R[1]['endMs'])])\n\""
   },
   {
    "k": "res",
-   "t": "… sigue esperando tras 540 s · archivos: 7/11 → hacé otra cosa útil y volvé a llamar\n7"
+   "t": "0\n0 6000\n14100 19600\n23280 28280\n35920 41420\n[]"
   },
   {
    "k": "tool",
-   "t": "rm fotos/p001_a.png fotos/p001_b.png; ps aux | grep fotos.py | grep -v grep | awk '{print $2}' | grep -v 377; "
+   "t": "python -c \"\nimport json\nP={p['id']:p for p in json.load(open('planos.json'))}\nks=list(P)[:5]\nfor k in ks: print(k, P[k]['startMs'], P[k]['endMs'], type(P[k]['endMs']))\n\""
   },
   {
    "k": "res",
-   "t": "19281"
+   "t": "p001 6000 10050 <class 'int'>\np002 10050 14100 <class 'int'>\np003 19600 23280 <class 'int'>\np004 28280 31520 <class 'int'>\np005 31520 35920 <class 'int'>"
   },
   {
    "k": "tool",
-   "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 9 --carpeta . 2>&1 | tail -1; ls fotos/*.png"
+   "t": "rm fix_plan.py; python - <<'EOF'\nimport json, subprocess\nR = json.load(open('avatar_ranges.json'))\nP = {p['id']: p for p in json.load(open('planos.json'))}\nremove = set()\nfor i, r in enumerate(R):\n    if r.get('foto'): continue\n    cover = [pid for pid, p in P.items() if not (p['endMs'] <= r['startMs'] or p['startMs'] >= r['endMs'])]\n    short = [c for c in cover if (P[c]['endMs'] - P[c]['startMs'"
   },
   {
    "k": "res",
-   "t": "✓ hay 9 archivos (50 s)\nfotos/p001_c.png\nfotos/p002.png\nfotos/p008.png\nfotos/p033.png\nfotos/p042.png\nfotos/p046.png\nfotos/p052.png\nfotos/p093.png\nfotos/p113.png"
+   "t": "✓ planos.json: 120 planos de b-roll (8.9 min de b-roll, 13.5 por minuto) · 82 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\nremove 0 ok True\nventanas 82"
   },
   {
    "k": "tool",
-   "t": "cp fotos/p001_c.png fotos/p001.png; python -c \"\nimport json;d=json.load(open('fotos/p001_c.json'));d['id']='p001';json.dump(d,open('fotos/p001.json','w'),ensure_ascii=False,indent=1)\"; ls fotos/p001*; python /tmp/h.py qc/hoja_fotos.jpg p001 p002 p008 p033 p042 p046 p052 p093 p113 2>&1|tail -1"
+   "t": "python -c \"\nimport json\nR=json.load(open('avatar_ranges.json'))\nP={p['id']:p for p in json.load(open('planos.json'))}\ncov=[pid for pid,p in P.items() if not (p['endMs']<=R[20]['startMs'] or p['startMs']>=R[20]['endMs'])]\nprint(R[20])\nprint([(c,P[c]['startMs'],P[c]['endMs']) for c in cov])\n\""
   },
   {
    "k": "res",
-   "t": "fotos/p001.json\nfotos/p001.png\nfotos/p001_a.json\nfotos/p001_b.json\nfotos/p001_c.json\nfotos/p001_c.png\nhoja: qc/hoja_fotos.jpg (9 cuadros, 4x3)"
+   "t": "{'file': 'avatar/A20.mp4', 'frame': 'refs/avatar.png', 'startMs': 229880, 'endMs': 234880}\n[]"
   },
   {
    "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/qc/hoja_fotos.jpg\"}"
+   "t": "python -c \"\nimport json\nP=json.load(open('planos.json'))\nfor p in P[15:26]: print(p['id'],p['startMs'],p['endMs'],repr(p['startMs']>0))\n\""
   },
   {
    "k": "res",
-   "t": "[imagen]"
+   "t": "p016 129780 136500 True\np017 141500 145740 True\np018 145740 149020 True\np019 154520 158340 True\np020 158340 162160 True\np021 167160 170950 True\np022 170950 174740 True\np023 180240 184040 True\np024 184040 187620 True\np025 192620 196020 True\np026 201520 205330 True"
   },
   {
    "k": "tool",
-   "t": "mkdir -p gates; cat > gates/fotos_auto.txt <<'EOF'\nControl de fotos (prueba) — 2026-11-13\nMiré qc/hoja_fotos.jpg (9 fotos) y qc/hoja_escenas.jpg (fotos de escenas firma).\n\nGancho: pedí 3 variantes (p001_a, p001_b, p001_c).\n- p001_a (manos dando vuelta la hoja): salió una toma abierta del presentador, poco impacto.\n- p001_b (plano medio con hoja infestada): linda pero la colonia no se lee.\n- p001_c"
+   "t": "python -c \"\nimport json\nR=json.load(open('avatar_ranges.json'))\nprint([ (r['startMs'],r['endMs']) for r in R[6:10]])\nprint(json.load(open('_plan_times.json'))[6:10])\n\"; sed -n 1,40p /opt/estudio/repo/motor/tools/planos.py"
   },
   {
    "k": "res",
-   "t": "ok\n19:03:12 ya hay otro fotos.py en este video (pid 19281): espero que termine\n19:03:42 ya hay otro fotos.py en este video (pid 19281): espero que termine"
+   "t": "[(69660, 74660), (80280, 85780), (89180, 94180), (102380, 107880)]\n[{'t': 69660, 'dur': 5000}, {'t': 80280, 'dur': 5500}, {'t': 89180, 'dur': 5000}, {'t': 102380, 'dur': 5500}]\n# -*- coding: utf-8 -*-\n\"\"\"PLANOS — arma los planos del b-roll y shots_timed.json. NO escribas scripts propios para esto.\n  1) python <APP>/tools/planos.py <carpeta>\n       Necesita captions.json y avatar_ranges.json (el pl"
   },
   {
    "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/escenas.py . construir --fondo > escenas/escenas.log 2>&1 & sleep 30; tail -5 /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/escenas/escenas.log"
+   "t": "python -c \"\nimport json\nP=json.load(open('planos.json'))\nR=json.load(open('avatar_ranges.json'))\nprint(P[0]); print(R[0])\nprint([ (p['id'],p['startMs']) for p in P if 'split' in p][:3])\np=P[0]\nr=R[0]\nprint(p['endMs']<=r['startMs'], p['startMs']>=r['endMs'])\n\""
   },
   {
    "k": "res",
-   "t": "19:42:34 escenas: es01 lista · 0 capas · cámara 4 viajes\n19:42:34 escenas: es02 ahora pisa una ventana del avatar: queda la foto normal\n19:42:34 escenas: es03 ahora pisa una ventana del avatar: queda la foto normal"
+   "t": "{'id': 'p001', 'startMs': 6000, 'endMs': 10050, 'seg': 4.0, 'texto': 'entre las macetas y los sobres de semillas. Hoy les voy a hablar de'}\n{'file': 'avatar/A0.mp4', 'frame': 'refs/avatar.png', 'startMs': 0, 'endMs': 6000}\n[]\nFalse True"
   },
   {
    "k": "tool",
-   "t": "cat escenas/escenas.log; ls extrema/ 2>/dev/null; cat extrema/manifest.json 2>/dev/null | head -20"
+   "t": "python - <<'EOF'\nimport json\nP=json.load(open('planos.json'))\nshort=[(p['id'],p['startMs'],p['endMs']) for p in P if p['endMs']-p['startMs']<3100]\nprint(len(short), short[:10])\nprint(len(P))\nEOF"
   },
   {
    "k": "res",
-   "t": "19:42:34 escenas: es01 lista · 0 capas · cámara 4 viajes\n19:42:34 escenas: es02 ahora pisa una ventana del avatar: queda la foto normal\n19:42:34 escenas: es03 ahora pisa una ventana del avatar: queda la foto normal\nEN_CURSO"
+   "t": "0 []\n120"
   },
   {
    "k": "tool",
-   "t": "python - <<'EOF'\nimport json\nout=[]\nfor i,r in enumerate(json.load(open('avatar_ranges.json'))):\n    if i in (3,5):\n        r=dict(r)\n        r['foto']={'3':'p012','5':'p016'}[i]\n        r['lado']='der' if i==3 else 'izq'\n    out.append(r)\njson.dump(out,open('avatar_ranges.json','w'),indent=1)\nprint(sum(1 for r in out if 'foto' in r))\nEOF\nls fotos/p012* fotos/p016* 2>/dev/null; python /opt/estudio"
+   "t": "python - <<'EOF'\nimport json\nP=json.load(open('planos.json'))\nshort=[(p['id'],p['startMs'],p['endMs'],p['endMs']-p['startMs']) for p in P if p['endMs']-p['startMs']<3100]\nprint(len(short))\nprint(len(P))\nprint(P[0])\nEOF\necho ---; python -c \"print(len(json.load(open('planos.json'))))\""
   },
   {
    "k": "res",
-   "t": "Traceback (most recent call last):\n  File \"<stdin>\", line 6, in <module>\nKeyError: 3\n✓ planos.json: 120 planos de b-roll (8.9 min de b-roll, 13.5 por minuto) · 82 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite."
+   "t": "Exit code 1\n0\n120\n{'id': 'p001', 'startMs': 6000, 'endMs': 10050, 'seg': 4.0, 'texto': 'entre las macetas y los sobres de semillas. Hoy les voy a hablar de'}\n---\nTraceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'json' is not defined"
   },
   {
    "k": "tool",
-   "t": "python - <<'EOF'\np='make_pedidos.py'\ns=open(p).read()\ns=s.replace('''add(\"p042\",\n    \"La mariquita en el envés: la colonia apretada en una nervadura y una mariquita roja acercándose, que es la que limpia la hoja.\",''','''add(\"p042\",\n    \"La mariquita en el envés: la larva gris y naranja que parece un ciempiés gordito y una mariquita roja en la misma hoja, las dos que limpian la acelga sin que les "
+   "t": "printf '%s\\n' 'import json' 'P=json.load(open(\"planos.json\"))' 'print(len(P), sum(1 for p in P if p[\"endMs\"]-p[\"startMs\"]<3100))' > /tmp/chk.py; python /tmp/chk.py; cp /tmp/chk.py ./chk.py; python chk.py; rm chk.py"
   },
   {
    "k": "res",
-   "t": "test 9 rest 7"
+   "t": "120 0\n120 0"
   },
   {
    "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/fotos.py . pedidos_03.json > fotos/fotos_03.log 2>&1 & \nnohup python /opt/estudio/repo/motor/tools/fotos.py . pedidos_02.json > fotos/fotos_02.log 2>&1 &\nsleep 40; grep -v \"^ *$\" fotos/fotos_02.log | tail -2; grep -v \"^ *$\" fotos/fotos_03.log | tail -2; python -c \"\nimport json;d=json.load(open('fotos/_batches.json'));print([(b['id'][-8:],len(b['names'])) "
+   "t": "printf '%s\\n' 'import json' 'P={p[\"id\"]:(p[\"startMs\"],p[\"endMs\"]) for p in json.load(open(\"planos.json\"))}' 'R=json.load(open(\"avatar_ranges.json\"))' 'r=R[1]' 'cov=[k for k,(a,b) in P.items() if not (b<=r[\"startMs\"] or a>=r[\"endMs\"])]' 'print(r, cov, [(c,P[c]) for c in cov])' > /tmp/c2.py; python /tmp/c2.py"
+  },
+  {
+   "k": "res",
+   "t": "{'file': 'avatar/A1.mp4', 'frame': 'refs/avatar.png', 'startMs': 14100, 'endMs': 19600} [] []"
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 7759,
+    "seg": 7822,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 8774,
+  "total_s": 8838,
   "avatar_s": 0,
-  "sin_avatar_s": 8774,
+  "sin_avatar_s": 8838,
   "cerrado": false
  }
 }
