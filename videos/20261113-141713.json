@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794603319.337905,
+ "actualizado": 1794603383.4252656,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -41,7 +41,7 @@
    "k": "armado",
    "n": "Armado",
    "st": "active",
-   "info": "26 segmentos"
+   "info": "49 segmentos"
   },
   {
    "k": "qc",
@@ -51,66 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2391,
+  "deepseek": 0.2456,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.2846
+  "total": 0.2911
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 13 --carpeta . 2>&1 | tail -1; python -c \"\nimport json;d=json.load(open('fotos/_batches.json'));print([(b['id'][-8:],b.get('ok'),b.get('fail')) for b in d['batches']])\""
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivos: 8/13 → hacé otra cosa útil y volvé a llamar\n[('1553b625', 3, 0), ('308cebac', 4, 0), ('69639146', 4, 0), ('db1a0bfd', None, None), ('86a356bf', None, None)]"
-  },
-  {
-   "k": "tool",
-   "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 13 --carpeta . 2>&1 | tail -1; python -c \"\nimport json;d=json.load(open('fotos/_batches.json'));print([(b['id'][-8:],b.get('ok'),b.get('fail')) for b in d['batches']])\""
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivos: 8/13 → hacé otra cosa útil y volvé a llamar\n[('1553b625', 3, 0), ('308cebac', 4, 0), ('69639146', 4, 0), ('db1a0bfd', None, None), ('86a356bf', None, None)]"
-  },
-  {
-   "k": "tool",
-   "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 11 --carpeta . 2>&1 | tail -1; ls fotos/*.png | wc -l"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivos: 8/11 → hacé otra cosa útil y volvé a llamar\n8"
-  },
-  {
-   "k": "tool",
-   "t": "ls fotos/*.png; tail -3 fotos/fotos_02.log; date"
-  },
-  {
-   "k": "res",
-   "t": "fotos/p001.png\nfotos/p001_c.png\nfotos/p002.png\nfotos/p008.png\nfotos/p033.png\nfotos/p046.png\nfotos/p052.png\nfotos/p113.png\n20:22:44 batch 86a356bf: in_progress 0/1\n20:23:14 batch db1a0bfd: in_progress 3/6\n20:23:14 batch 86a356bf: in_progress 0/1\nFri Nov 13 20:23:42 UTC 2026"
-  },
-  {
-   "k": "tool",
-   "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 14 --carpeta . 2>&1 | tail -1"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivos: 8/14 → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 14 --carpeta . 2>&1 | tail -1; tail -2 fotos/fotos_02.log"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivos: 9/14 → hacé otra cosa útil y volvé a llamar\n20:35:21 ✓ batch 86a356bf: 1 fotos bajadas, 0 fallidas (US$0.003)\n20:35:51 batch db1a0bfd: in_progress 3/6"
-  },
-  {
-   "k": "tool",
-   "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 10 --carpeta . 2>&1 | tail -1; ls fotos/*.png | wc -l"
-  },
   {
    "k": "res",
    "t": "… sigue esperando tras 540 s · archivos: 9/10 → hacé otra cosa útil y volvé a llamar\n9"
@@ -178,6 +126,58 @@
   {
    "k": "res",
    "t": "hoja: qc/hoja_render.jpg (12 cuadros, 4x3)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/qc/hoja_render.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa render --min 15 2>&1 | tail -8; cat render_test.log | head -30"
+  },
+  {
+   "k": "res",
+   "t": "  ✓ apertura: tramos de avatar de ≤ 6 s en los primeros 30 s\n  ✓ dinámico: avatar a pantalla completa ≤ 6 s por vez\n  ✓ ritmo del avatar: avatar 432 s = 45 % del video (ideal ~50 %: más avatar = menos fotos)\n  ✓ ritmo del avatar: nunca más de 15 s sin avatar\n  ✓ clips de stock sin negro ni roturas\n  !  falta tu revisión visual de los 10 segmentos de prueba: mirá qc/hoja_render.jpg con Read y escri"
+  },
+  {
+   "k": "tool",
+   "t": "head -20 render_test.log | grep -v PENDIENTE; grep -i \"extrema\\|es0\" render_test.log | head; cat > gates/render_auto.txt <<'EOF'\nControl de render (prueba, --limit 10) — 2026-11-13\nMiré qc/hoja_render.jpg: 12 cuadros del segmento de prueba.\n- La apertura ya está: cuadro del presentador desde el segundo 0 (clip de avatar todavía pendiente → por ahora va su cuadro fijo con «Esperando avatar», que el"
+  },
+  {
+   "k": "res",
+   "t": "extrema: 1 piezas en la línea\nextrema: 1 piezas en la línea\nok"
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/render.py . > render.log 2>&1 & echo started; nohup python /opt/estudio/repo/motor/tools/avatar_it.py . > avatar/it.log 2>&1 & echo avatar; sleep 30; tail -3 avatar/it.log"
+  },
+  {
+   "k": "res",
+   "t": "started\navatar\n20:55:55 InfiniteTalk: 82 ventanas · reel 456.1 s · 1 llamada\n20:56:03 RUN 72ad04b9-7f38-445d-824b-6cd936c933a7-u1"
+  },
+  {
+   "k": "tool",
+   "t": "cat > /tmp/gasto.py <<'EOF'\nimport json, glob\ntot = 0\nfor f in glob.glob(\"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/**/*.json\", recursive=True):\n    try:\n        d = json.load(open(f))\n    except Exception:\n        continue\n# uso el registro del estudio si está\nimport os\nfor p in [\"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/gasto.json\"]:\n    if os.p"
+  },
+  {
+   "k": "res",
+   "t": "-rw-rw-rw-+ 1 sesion sesion 1191 Nov 13 20:55 gasto.jsonl\netapas.jsonl\nfotos_auto.txt\nrender_auto.txt"
+  },
+  {
+   "k": "tool",
+   "t": "cat gasto.jsonl"
+  },
+  {
+   "k": "res",
+   "t": "{\"t\": 1794590320.0877175, \"tag\": \"escenas\", \"usd\": 0.00169, \"llamadas\": 1}\n{\"t\": 1794590519.397312, \"tag\": \"whisper\", \"usd\": 0.0, \"seg\": 963}\n{\"t\": 1794591054.171461, \"tag\": \"escenas\", \"usd\": 0.00371, \"llamadas\": 2}\n{\"t\": 1794591249.2663944, \"tag\": \"juez_stock\", \"usd\": 0.01538, \"llamadas\": 102}\n{\"t\": 1794592058.786429, \"tag\": \"juez_stock\", \"usd\": 0.00241, \"llamadas\": 16}\n{\"t\": 1794592207.8033767, "
+  },
+  {
+   "k": "tool",
+   "t": "sleep 240; tail -3 render.log; tail -2 avatar/it.log"
   }
  ],
  "maquinas": 1,
@@ -214,6 +214,13 @@
     "fin": true
    },
    {
+    "k": "avatar_cola",
+    "n": "Avatar en cola",
+    "seg": 20,
+    "pasadas": 1,
+    "fin": false
+   },
+   {
     "k": "fotos",
     "n": "Fotos y stock",
     "seg": 12003,
@@ -223,21 +230,28 @@
    {
     "k": "extrema",
     "n": "Edición extrema",
-    "seg": 67,
+    "seg": 131,
     "pasadas": 1,
     "fin": false
    },
    {
     "k": "previo",
     "n": "Render sin avatar",
-    "seg": 67,
+    "seg": 131,
+    "pasadas": 1,
+    "fin": false
+   },
+   {
+    "k": "render",
+    "n": "Render",
+    "seg": 47,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 13085,
-  "avatar_s": 0,
-  "sin_avatar_s": 13085,
+  "total_s": 13149,
+  "avatar_s": 20,
+  "sin_avatar_s": 13130,
   "cerrado": false
  }
 }
