@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794603252.7183917,
+ "actualizado": 1794603319.337905,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -41,7 +41,7 @@
    "k": "armado",
    "n": "Armado",
    "st": "active",
-   "info": "10 segmentos"
+   "info": "26 segmentos"
   },
   {
    "k": "qc",
@@ -51,34 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2373,
+  "deepseek": 0.2391,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.2828
+  "total": 0.2846
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "19:46:57 batch db1a0bfd: in_progress 0/6\n19:46:58 batch 86a356bf: in_progress 0/1\n[('1553b625', 3, 0, 3), ('308cebac', 4, 0, 4), ('69639146', 4, 0, 4), ('db1a0bfd', None, None, 6), ('86a356bf', None, None, 1)]"
-  },
-  {
-   "k": "tool",
-   "t": "cat > /tmp/c51.py <<'EOF'\nimport json\nR = json.load(open(\"avatar_ranges.json\"))\nP = json.load(open(\"planos.json\"))\nfor r in R:\n    a, b = r[\"startMs\"], r[\"endMs\"]\n    inw = [p[\"id\"] for p in P if a <= p[\"startMs\"] < b]\n    if not inw:\n        print(\"->\", r[\"file\"], a, b)\nEOF\npython /tmp/c51.py"
-  },
-  {
-   "k": "res",
-   "t": "-> avatar/A0.mp4 0 6000\n-> avatar/A1.mp4 14100 19600\n-> avatar/A2.mp4 23280 28280\n-> avatar/A3.mp4 35920 41420\n-> avatar/A4.mp4 45500 50500\n-> avatar/A5.mp4 57600 63100\n-> avatar/A6.mp4 69660 74660\n-> avatar/A7.mp4 80280 85780\n-> avatar/A8.mp4 89180 94180\n-> avatar/A9.mp4 102380 107880\n-> avatar/A10.mp4 115500 120500\n-> avatar/A11.mp4 124280 129780\n-> avatar/A12.mp4 136500 141500\n-> avatar/A13.mp4"
-  },
-  {
-   "k": "tool",
-   "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 9 --carpeta . 2>&1 | tail -1; python -c \"\nimport json;d=json.load(open('fotos/_batches.json'));print([(b['id'][-8:],b.get('ok'),b.get('fail')) for b in d['batches']])\""
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivos: 8/9 → hacé otra cosa útil y volvé a llamar\n[('1553b625', 3, 0), ('308cebac', 4, 0), ('69639146', 4, 0), ('db1a0bfd', None, None), ('86a356bf', None, None)]"
-  },
   {
    "k": "tool",
    "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 13 --carpeta . 2>&1 | tail -1; python -c \"\nimport json;d=json.load(open('fotos/_batches.json'));print([(b['id'][-8:],b.get('ok'),b.get('fail')) for b in d['batches']])\""
@@ -178,6 +158,26 @@
   {
    "k": "tool",
    "t": "nohup python /opt/estudio/repo/motor/tools/render.py . --limit 10 > render_test.log 2>&1 & sleep 90; tail -5 render_test.log"
+  },
+  {
+   "k": "res",
+   "t": "AVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A79.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A80.mp4\nAVATAR PENDIENTE (va su cuadro fijo con el cartel de espera): avatar/A81.mp4\nclips=203 frames=28897 (963.23s)\nhechos 10"
+  },
+  {
+   "k": "tool",
+   "t": "ls segments | head; python /tmp/h.py qc/hoja_render.jpg $(ls segments/*.mp4 | head -12 | sed 's|^|/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/|') 2>&1 | tail -1"
+  },
+  {
+   "k": "res",
+   "t": "0000.mp4\n0000.mp4.src\n0001.mp4\n0001.mp4.src\n0002.mp4\n0002.mp4.src\n0003.mp4\n0003.mp4.src\n0004.mp4\n0004.mp4.src\nsubprocess.CalledProcessError: Command '['python', '/opt/estudio/repo/motor/tools/hoja.py', 'qc/hoja_render.jpg', 'fotos//opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/segments/0000.mp4.png', 'fotos//opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/segm"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/hoja.py qc/hoja_render.jpg segments/0000.mp4 segments/0001.mp4 segments/0002.mp4 segments/0003.mp4 segments/0004.mp4 segments/0005.mp4 segments/0006.mp4 segments/0007.mp4 segments/0008.mp4 segments/0009.mp4 segments/0011.mp4 segments/0013.mp4 2>&1 | tail -1"
+  },
+  {
+   "k": "res",
+   "t": "hoja: qc/hoja_render.jpg (12 cuadros, 4x3)"
   }
  ],
  "maquinas": 1,
@@ -223,14 +223,21 @@
    {
     "k": "extrema",
     "n": "Edición extrema",
-    "seg": 0,
+    "seg": 67,
+    "pasadas": 1,
+    "fin": false
+   },
+   {
+    "k": "previo",
+    "n": "Render sin avatar",
+    "seg": 67,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 13019,
+  "total_s": 13085,
   "avatar_s": 0,
-  "sin_avatar_s": 13019,
+  "sin_avatar_s": 13085,
   "cerrado": false
  }
 }
