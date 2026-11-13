@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794609696.6813989,
+ "actualizado": 1794609760.46841,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43520999957",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.3105,
+  "deepseek": 0.3114,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.606
+  "total": 0.6069
  },
  "eventos": [
-  {
-   "k": "ai",
-   "t": "Avatar clips are in. Re-rendering with the avatar."
-  },
-  {
-   "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/render.py . > render2.log 2>&1 & sleep 60; tail -3 render2.log"
-  },
   {
    "k": "res",
    "t": "(Bash completed with no output)"
@@ -178,6 +170,14 @@
   {
    "k": "tool",
    "t": "nohup python /opt/estudio/repo/motor/tools/assemble.py . > assemble2.log 2>&1 & sleep 45; tail -5 /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/assemble2.log"
+  },
+  {
+   "k": "res",
+   "t": "segmentos: 201\ncapas de edición extrema: 5\ntramos: 17 de 33 por codificar · 4 a la vez"
+  },
+  {
+   "k": "tool",
+   "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --log assemble2.log --texto \"final:\" 2>&1 | tail -2"
   }
  ],
  "maquinas": 2,
@@ -272,14 +272,14 @@
    {
     "k": "correcciones",
     "n": "Correcciones",
-    "seg": 1159,
+    "seg": 1287,
     "pasadas": 3,
     "fin": false
    }
   ],
-  "total_s": 19463,
+  "total_s": 19526,
   "avatar_s": 4649,
-  "sin_avatar_s": 14814,
+  "sin_avatar_s": 14878,
   "cerrado": false
  }
 }
