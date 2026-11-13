@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794599134.9343433,
+ "actualizado": 1794599198.07474,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,133 +51,133 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1931,
+  "deepseek": 0.2112,
   "gpt": 0.0284,
   "gpt_img": 11,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.2215
+  "total": 0.2396
  },
  "eventos": [
   {
    "k": "tool",
-   "t": "cat > /tmp/c8.py <<'EOF'\nimport json\nP=json.load(open(\"planos.json\"))\nR=json.load(open(\"avatar_ranges.json\"))\nfor r in R[8:14]:\n    a,b=r[\"startMs\"],r[\"endMs\"]\n    cov=[(p[\"id\"],p[\"startMs\"],p[\"endMs\"]) for p in P if not (p[\"endMs\"]<=a or p[\"startMs\"]>=b)]\n    print(a,b,cov)\nEOF\npython /tmp/c8.py"
+   "t": "cat > /tmp/c26.py <<'EOF'\nimport json\nR = json.load(open(\"avatar_ranges.json\"))\nP = json.load(open(\"planos.json\"))\nW = [(\"avatar/A%d.mp4\" % i, r[\"startMs\"], r[\"endMs\"]) for i, r in enumerate(R)]\nn = 0\nfor i, (f, a, b) in enumerate(W):\n    cov = [q[\"id\"] for q in P if not (q.get(\"endMs\", 0) <= a or q.get(\"startMs\", 0) >= b)]\n    if cov:\n        n += 1\nprint(\"covered windows\", n, len(W))\nEOF\npython "
   },
   {
    "k": "res",
-   "t": "89180 94180 []\n102380 107880 []\n115500 120500 []\n124280 129780 []\n136500 141500 []\n149020 154520 []"
+   "t": "covered windows 0 82"
   },
   {
    "k": "tool",
-   "t": "cat > /tmp/c9.py <<'EOF'\nimport json\nP=json.load(open(\"planos.json\"))\nprint([(p[\"id\"],p[\"startMs\"]) for p in P if 80000<p[\"startMs\"]<160000])\nEOF\npython /tmp/c9.py; cat > /tmp/c10.py <<'EOF'\nimport json\nP=json.load(open(\"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/planos.json\"))\nprint([(p[\"id\"],p[\"startMs\"]) for p in P if 80000<p[\"startMs\"]<160000])\nEOF\npython /tmp/c10.py"
+   "t": "cat > /tmp/c27.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\nfor p in P:\n    a, b = p[\"startMs\"], p[\"endMs\"]\n    if not (b <= 6000 or a >= 10050):\n        print(p[\"id\"], a, b)\n    if p[\"id\"] == \"p002\":\n        print(\"p002 check\", a, b, b <= 6000, a >= 10050)\n        break\nEOF\npython /tmp/c27.py"
   },
   {
    "k": "res",
-   "t": "[('p010', 85780), ('p011', 94180), ('p012', 98280), ('p013', 107880), ('p014', 112020), ('p015', 120500), ('p016', 129780), ('p017', 141500), ('p018', 145740), ('p019', 154520), ('p020', 158340)]\n[('p010', 85780), ('p011', 94180), ('p012', 98280), ('p013', 107880), ('p014', 112020), ('p015', 120500), ('p016', 129780), ('p017', 141500), ('p018', 145740), ('p019', 154520), ('p020', 158340)]"
+   "t": "p001 6000 10050\np002 check 10050 14100 False True"
   },
   {
    "k": "tool",
-   "t": "cat > /tmp/c11.py <<'EOF'\nimport json\nP=json.load(open(\"planos.json\"))\nR=json.load(open(\"avatar_ranges.json\"))\nr=R[8]\na,b=r[\"startMs\"],r[\"endMs\"]\nprint(a,b)\nfor p in P[8:12]:\n    print(p[\"id\"],p[\"startMs\"],p[\"endMs\"],type(p[\"startMs\"]), p[\"endMs\"]<=a, p[\"startMs\"]>=b)\nEOF\npython /tmp/c11.py"
+   "t": "cat > /tmp/c28.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\nfor i, p in enumerate(P[2:4]):\n    a, b = p[\"startMs\"], p[\"endMs\"]\n    print(\"start test\", a < 6000 or b > 10050, a, b)\n# manual intersection formula\nfor p in P[:4]:\n    a, b = p[\"startMs\"], p[\"endMs\"]\n    inter = min(b, 6000) - max(a, 0)\n    print(p[\"id\"], \"inter\", inter)\nEOF\npython /tmp/c28.py"
   },
   {
    "k": "res",
-   "t": "89180 94180\np009 74660 80280 <class 'int'> True False\np010 85780 89180 <class 'int'> True False\np011 94180 98280 <class 'int'> False True\np012 98280 102380 <class 'int'> False True"
+   "t": "start test True 19600 23280\nstart test True 28280 31520\np001 inter 0\np002 inter -4050\np003 inter -13600\np004 inter -22280"
   },
   {
    "k": "tool",
-   "t": "cat > /tmp/c12.py <<'EOF'\nimport json\nP=json.load(open(\"planos.json\"))\nR=json.load(open(\"avatar_ranges.json\"))\nr=R[8]\na,b=r[\"startMs\"],r[\"endMs\"]\nout1=[];out2=[];out3=[]\nfor p in P:\n    if not (p[\"endMs\"]<=a or p[\"startMs\"]>=b): out1.append(p[\"id\"])\n    if p[\"startMs\"]<b and p[\"endMs\"]>a: out2.append(p[\"id\"])\n    if a<p[\"endMs\"] and b>p[\"startMs\"]: out3.append(p[\"id\"])\nprint(out1,out2,out3)\nEOF\npy"
+   "t": "cat > /tmp/c29.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\na, b = P[1][\"startMs\"], P[1][\"endMs\"]\nprint(a, b, a < 6000)\nfor p in P[1:3]:\n    print(p[\"id\"], p[\"startMs\"] < 6000)\nEOF\npython /tmp/c29.py; echo ---; cat /tmp/c29.py"
   },
   {
    "k": "res",
-   "t": "[] [] []"
+   "t": "10050 14100 False\np002 False\np003 False\n---\nimport json\nP = json.load(open(\"planos.json\"))\na, b = P[1][\"startMs\"], P[1][\"endMs\"]\nprint(a, b, a < 6000)\nfor p in P[1:3]:\n    print(p[\"id\"], p[\"startMs\"] < 6000)"
   },
   {
    "k": "tool",
-   "t": "cat > /tmp/c13.py <<'EOF'\nimport json\nP=json.load(open(\"planos.json\"))\nR=json.load(open(\"avatar_ranges.json\"))\na,b=R[8][\"startMs\"],R[8][\"endMs\"]\nfor p in P:\n    if (p[\"endMs\"]<=a or p[\"startMs\"]>=b):\n        continue\n    else:\n        print(\"COV\", p[\"id\"])\nprint(\"---\")\nfor p in P:\n    x=(p[\"endMs\"]<=a or p[\"startMs\"]>=b)\n    if not x:\n        print(\"COV2\", p[\"id\"], p[\"startMs\"], p[\"endMs\"])\nEOF\npy"
+   "t": "cat > /tmp/c30.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\nfor p in P:\n    a, b = p[\"startMs\"], p[\"endMs\"]\n    if min(b, 6000) - max(a, 0) > 0:\n        print(\"COV\", p[\"id\"], a, b)\nprint(\"done\")\nfor p in P:\n    a, b = p[\"startMs\"], p[\"endMs\"]\n    if min(b, 10050) - max(a, 6000) > 0:\n        print(\"COV0\", p[\"id\"])\nprint(\"done2\")\nEOF\npython /tmp/c30.py"
   },
   {
    "k": "res",
-   "t": "---"
+   "t": "done\nCOV0 p001\ndone2"
   },
   {
    "k": "tool",
-   "t": "cat > /tmp/c14.py <<'EOF'\nimport json\nP=json.load(open(\"planos.json\"))\nR=json.load(open(\"avatar_ranges.json\"))\na,b=R[8][\"startMs\"],R[8][\"endMs\"]\nprint(a,b,len(P))\nfor p in P:\n    if 80000< p[\"startMs\"] <100000:\n        print(p[\"id\"],p[\"startMs\"],p[\"endMs\"], p[\"endMs\"]<=a, p[\"startMs\"]>=b, (p[\"endMs\"]<=a or p[\"startMs\"]>=b))\nEOF\npython /tmp/c14.py"
+   "t": "cat > /tmp/c31.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\nfor p in P[:5]:\n    a, b = p[\"startMs\"], p[\"endMs\"]\n    lo, hi = max(a, 0), min(b, 10050)\n    r1, r2 = lo - hi, hi - lo\n    print(p[\"id\"], a, b, r1, r2, r1 > 0, r2 > 0)\nEOF\npython /tmp/c31.py"
   },
   {
    "k": "res",
-   "t": "89180 94180 120\np010 85780 89180 True False True\np011 94180 98280 False True True\np012 98280 102380 False True True"
+   "t": "p001 6000 10050 -4050 4050 False True\np002 10050 14100 0 0 False False\np003 19600 23280 9550 -9550 True False\np004 28280 31520 18230 -18230 True False\np005 31520 35920 21470 -21470 True False"
   },
   {
    "k": "tool",
-   "t": "python -c \"\nimport json; P=json.load(open('planos.json')); print(len(P)); print([p['id'] for p in P if 80000<p['startMs']<100000])\""
+   "t": "cat > /tmp/c32.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\nR = json.load(open(\"avatar_ranges.json\"))\nflag = 0\nws = [r[\"startMs\"] for r in R]\nprint(sum(p[\"startMs\"] > r[\"startMs\"] for p in P for r in R))\nfor p in P:\n    for r in R:\n        if min(p[\"endMs\"], r[\"endMs\"]) - max(p[\"startMs\"], r[\"startMs\"]) > 0:\n            flag += 1\n            if flag < 4:\n                print(p[\"id\"],"
   },
   {
    "k": "res",
-   "t": "120\n['p010', 'p011', 'p012']"
+   "t": "4953\nflag 0"
   },
   {
    "k": "tool",
-   "t": "python -c \"\nimport json\nR=json.load(open('avatar_ranges.json'))\nP=json.load(open('planos.json'))\nrem=[]\nfor i,r in enumerate(R):\n    a,b=r['startMs'],r['endMs']\n    cov=[p for p in P if not (p['endMs']<=a or p['startMs']>=b)]\n    if any(p['endMs']-p['startMs']<3100 for p in cov): rem.append(i)\nprint(len(rem), rem[:10])\n\""
+   "t": "python -c \"\nP=[(6000,10050)]\nR=[(0,6000)]\nprint([1 for p in P for r in R if min(p[1],r[1])-max(p[0],r[0])>0])\nprint(min(10050,6000), max(6000,0))\n\"; cat > /tmp/c33.py <<'EOF'\nP=[(6000,10050)]\nR=[(0,6000)]\nprint([1 for p in P for r in R if min(p[1],r[1])-max(p[0],r[0])>0])\nprint(min(10050,6000), max(6000,0))\nEOF\npython /tmp/c33.py"
   },
   {
    "k": "res",
-   "t": "0 []"
+   "t": "[]\n6000 6000\n[]\n6000 6000"
   },
   {
    "k": "tool",
-   "t": "printf 'a\\nb\\n' > f.txt; printf 'x\\n' >> f.txt; cat f.txt; rm f.txt"
+   "t": "cat > /tmp/c34.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\nprint(min(P[0][\"endMs\"], 6000), max(P[0][\"startMs\"], 0))\nprint(min(P[0][\"endMs\"], 6000) - max(P[0][\"startMs\"], 0))\nEOF\npython /tmp/c34.py"
   },
   {
    "k": "res",
-   "t": "a\nb\nx"
+   "t": "6000 6000\n0"
   },
   {
    "k": "tool",
-   "t": "printf '%s\\n' 'import json' 'R=json.load(open(\"avatar_ranges.json\"))' 'P=json.load(open(\"planos.json\"))' 'rem=[]' 'for i,r in enumerate(R):' '    a,b=r[\"startMs\"],r[\"endMs\"]' '    cov=[p for p in P if not (p[\"endMs\"]<=a or p[\"startMs\"]>=b)]' '    if any(p[\"endMs\"]-p[\"startMs\"]<3100 for p in cov): rem.append(i)' 'print(len(cov), len(rem))' > /tmp/c15.py; python /tmp/c15.py; cat -n /tmp/c15.py | hea"
+   "t": "cat > /tmp/c35.py <<'EOF'\nimport json\nR = json.load(open(\"avatar_ranges.json\"))\nP = json.load(open(\"planos.json\"))\nN = len(R)\nisstart = [False] * N\nfor i, r in enumerate(R):\n    a = r[\"startMs\"]\n    for p in P:\n        ps = p[\"startMs\"]\n        pe = p[\"endMs\"]\n        if not ((pe <= a) or (ps >= r[\"endMs\"])):\n            isstart[i] = True\n            break\nprint(\"covered\", sum(isstart), \"total\", N"
   },
   {
    "k": "res",
-   "t": "0 0\n     1\timport json\n     2\tR=json.load(open(\"avatar_ranges.json\"))\n     3\tP=json.load(open(\"planos.json\"))"
+   "t": "covered 0 total 82 first false [0, 1, 2, 3, 4]"
   },
   {
    "k": "tool",
-   "t": "printf '%s\\n' 'import planos as X' > /tmp/c16.py; python -c \"\nprint('check')\n\"; cat -n /tmp/c16.py"
+   "t": "cat > /tmp/c36.py <<'EOF'\nimport json\nR = json.load(open(\"avatar_ranges.json\"))\nP = json.load(open(\"planos.json\"))\nc = 0\nfor i, r in enumerate(R):\n    for j, p in enumerate(P):\n        if p[\"startMs\"] < r[\"endMs\"] and p[\"endMs\"] > r[\"startMs\"]:\n            print(\"COV\", i, p[\"id\"], p[\"startMs\"], p[\"endMs\"], r[\"startMs\"], r[\"endMs\"])\n            c += 1\nprint(c)\nEOF\npython /tmp/c36.py; echo exit=$?"
   },
   {
    "k": "res",
-   "t": "check\n     1\timport planos as X"
+   "t": "0\nexit=0"
   },
   {
    "k": "tool",
-   "t": "cat > /tmp/c17.py <<'EOF'\nimport json\nR = json.load(open(\"avatar_ranges.json\"))\nP = json.load(open(\"planos.json\"))\nrem = []\nfor i, r in enumerate(R):\n    a, b = r[\"startMs\"], r[\"endMs\"]\n    cov = [p for p in P if not (p[\"endMs\"] <= a or p[\"startMs\"] >= b)]\n    if any(p[\"endMs\"] - p[\"startMs\"] < 3100 for p in cov):\n        rem.append(i)\nprint(len(cov), len(rem))\nEOF\npython /tmp/c17.py"
+   "t": "cat > /tmp/c37.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\np = P[0]\na, b = p[\"startMs\"], p[\"endMs\"]\nprint(b <= 0, b <= 10000, b <= 6000, b <= 0 or a >= 6000, a >= 6000)\nprint(\"cond\", (b <= 6000 or a >= 6000))\nEOF\npython /tmp/c37.py"
   },
   {
    "k": "res",
-   "t": "0 0"
+   "t": "False False False True True\ncond True"
   },
   {
    "k": "tool",
-   "t": "wc -l planos.json; md5sum planos.json; grep -c startMs planos.json; python -c \"\nimport json\nP=json.load(open('planos.json'))\nimport collections\nprint(len(P), P[8]['id'], P[8]['startMs'])\nprint(collections.Counter(p['startMs'] for p in P).most_common(3))\n\""
+   "t": "cat > /tmp/c38.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\nfor p in P:\n    sm = p[\"startMs\"]\n    if isinstance(sm, bool):\n        continue\n    pass\ns = set()\nfor p in P:\n    s.add(p[\"startMs\"])\nprint(len(s), len(P))\n# check if any attribute access inside a comprehension works:\nr = {\"startMs\": 0, \"endMs\": 6000}\nprint([p[\"id\"] for p in P if p[\"endMs\"] > r[\"startMs\"]][:3])\nEOF\npython /t"
   },
   {
    "k": "res",
-   "t": "841 planos.json\n07bf8a8caed4e7ca7b6a28f163e2ac87  planos.json\n120\n120 p009 74660\n[(6000, 1), (10050, 1), (19600, 1)]"
+   "t": "120 120\n['p001', 'p002', 'p003']"
   },
   {
    "k": "tool",
-   "t": "cat > /tmp/c18.py <<'EOF'\nimport json\nR = json.load(open(\"avatar_ranges.json\"))\nP = json.load(open(\"planos.json\"))\nprint(R[8])\na, b = R[8][\"startMs\"], R[8][\"endMs\"]\nprint(\"a,b\", a, b)\nc = [p[\"id\"] for p in P if not (p[\"endMs\"] <= a or p[\"startMs\"] >= b)]\nprint(\"cov\", c)\nd = [p[\"id\"] for p in P if p[\"startMs\"] < 100000 and p[\"endMs\"] > 80000]\nprint(\"near\", d)\nEOF\npython /tmp/c18.py; echo ==; od -c "
+   "t": "cat > /tmp/c39.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\nR = json.load(open(\"avatar_ranges.json\"))\nr = R[0]\nprint([p[\"id\"] for p in P if p[\"endMs\"] > r[\"startMs\"] and p[\"startMs\"] < r[\"endMs\"]])\nprint([p[\"id\"] for p in P if p[\"startMs\"] < r[\"endMs\"] and p[\"endMs\"] > r[\"startMs\"]])\nprint([p[\"id\"] for p in P if (p[\"endMs\"] > r[\"startMs\"]) & (p[\"startMs\"] < r[\"endMs\"])])\nEOF\npython /t"
   },
   {
    "k": "res",
-   "t": "{'file': 'avatar/A8.mp4', 'frame': 'refs/avatar.png', 'startMs': 89180, 'endMs': 94180}\na,b 89180 94180\ncov []\nnear ['p009', 'p010', 'p011', 'p012']\n==\n0000000   [  \\n       {  \\n           \"   i   d   \"   :       \"   p   0\n0000020   0   1   \"   ,  \\n           \"   s   t   a   r   t   M   s   \"\n0000040   :       6   0   0   0   ,  \\n           \"   e   n   d   M   s\n0000060   \"   :       1   0   0 "
+   "t": "[]\n[]\n[]"
   },
   {
    "k": "tool",
-   "t": "cat > /tmp/c19.py <<'EOF'\nimport json\nR = json.load(open(\"avatar_ranges.json\"))\nP = json.load(open(\"planos.json\"))\na, b = R[8][\"startMs\"], R[8][\"endMs\"]\nfor p in P:\n    if not (p[\"endMs\"] <= a or p[\"startMs\"] >= b):\n        print(\"covered\", p[\"id\"], p[\"startMs\"], p[\"endMs\"], type(p[\"endMs\"]), type(a))\nEOF\npython /tmp/c19.py; echo \"exit $?\""
+   "t": "cat > /tmp/c40.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\nR = json.load(open(\"avatar_ranges.json\"))\nr = R[0]\nout = []\nflag = True\nfor p in P:\n    if p[\"startMs\"] < r[\"endMs\"] and p[\"endMs\"] > r[\"startMs\"]:\n        out.append(p[\"id\"])\nprint(out, flag, len(P))\nEOF\npython /tmp/c40.py"
   },
   {
    "k": "res",
-   "t": "exit 0"
+   "t": "[] True 120"
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 7886,
+    "seg": 7949,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 8901,
+  "total_s": 8964,
   "avatar_s": 0,
-  "sin_avatar_s": 8901,
+  "sin_avatar_s": 8964,
   "cerrado": false
  }
 }
