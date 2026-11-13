@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794601920.3799024,
+ "actualizado": 1794601983.3158932,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2302,
+  "deepseek": 0.2311,
   "gpt": 0.0284,
   "gpt_img": 11,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.2586
+  "total": 0.2595
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "True True\n0 6000 False True False\nFalse True"
-  },
-  {
-   "k": "tool",
-   "t": "cat > /tmp/c45.py <<'EOF'\nimport json\nR = json.load(open(\"avatar_ranges.json\"))\nP = json.load(open(\"planos.json\"))\ncover = {}\nfor p in P:\n    for r in R:\n        a, b = r[\"startMs\"], r[\"endMs\"]\n        if min(p[\"endMs\"], b) - max(p[\"startMs\"], a) > 0:\n            cover.setdefault(r[\"file\"], []).append(p[\"id\"])\nprint(len(cover), list(cover.items())[:3])\nun = [r[\"file\"] for r in R if r[\"file\"] not i"
-  },
   {
    "k": "res",
    "t": "0 []\n82"
@@ -178,6 +170,14 @@
   {
    "k": "tool",
    "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 14 --carpeta . 2>&1 | tail -1"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivos: 8/14 → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 14 --carpeta . 2>&1 | tail -1; tail -2 fotos/fotos_02.log"
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 10671,
+    "seg": 10734,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 11686,
+  "total_s": 11749,
   "avatar_s": 0,
-  "sin_avatar_s": 11686,
+  "sin_avatar_s": 11749,
   "cerrado": false
  }
 }
