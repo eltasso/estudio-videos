@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794596283.5357223,
+ "actualizado": 1794596346.6946971,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -22,20 +22,20 @@
   {
    "k": "tiempos",
    "n": "Tiempos",
-   "st": "active",
+   "st": "done",
    "info": "por palabra"
   },
   {
    "k": "avatar",
    "n": "Avatar",
-   "st": "pending",
+   "st": "skip",
    "info": ""
   },
   {
    "k": "fotos",
    "n": "Fotos",
-   "st": "pending",
-   "info": ""
+   "st": "active",
+   "info": "3 fotos"
   },
   {
    "k": "armado",
@@ -51,62 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1379,
-  "gpt": 0.0,
-  "gpt_img": 0,
+  "deepseek": 0.1441,
+  "gpt": 0.0077,
+  "gpt_img": 3,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1379
+  "total": 0.1518
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "import json\n\ntitle = \"Pulgones en la acelga: cómo detectarlos y cuándo no intervenir\"\ndesc = (\n    \"Hola, gente de YouTube. Hoy abrimos el cuaderno en el galpón para hablar de los pulgones en la acelga, \"\n    \"que es uno de los temas que más me preguntaron en los comentarios. Antes de que agarren el rociador, \"\n    \"les voy a mostrar cómo mirar el envés de la hoja, cómo distinguir un pulgón de una"
-  },
-  {
-   "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/make_meta.py (file state is current in your context — no need to Read it back)"
-  },
-  {
-   "k": "tool",
-   "t": "python make_meta.py; tail -2 fotos/fotos_escenas.log"
-  },
-  {
-   "k": "res",
-   "t": "1334\n17:31:02 batch 1553b625: validating 0/0\n17:32:32 batch 1553b625: in_progress 0/3"
-  },
-  {
-   "k": "tool",
-   "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 3 --carpeta . 2>&1 | tail -2; tail -2 fotos/fotos_escenas.log"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivos: 0/3 → hacé otra cosa útil y volvé a llamar\n17:31:02 batch 1553b625: validating 0/0\n17:32:32 batch 1553b625: in_progress 0/3"
-  },
-  {
-   "k": "tool",
-   "t": "grep -n \"sonido\\|assemble\\|cues\" auto_plan.py | head -3; ls render.py assemble.py 2>/dev/null; python /opt/estudio/repo/motor/tools/validar.py . --etapa fotos --min 15 2>&1 | tail -15"
-  },
-  {
-   "k": "res",
-   "t": "VALIDAR /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y · etapa fotos\n  ✓ guion: 13897 caracteres, 2709 palabras (hacen falta 13500-17250 para 15 min: bien)\n  !  no hay fotos en fotos/\n  !  falta tu revisión visual de las fotos de prueba: mirá qc/hoja_fotos.jpg con Read y escribí gates/fotos_auto.txt (después SEGUÍ, no esperes).\nRESULTADO: OK"
-  },
-  {
-   "k": "tool",
-   "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 3 --carpeta . 2>&1 | tail -2; tail -2 fotos/fotos_escenas.log"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivos: 0/3 → hacé otra cosa útil y volvé a llamar\n17:32:32 batch 1553b625: in_progress 0/3\n18:15:43 batch 1553b625: in_progress 2/3"
-  },
-  {
-   "k": "tool",
-   "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 3 --carpeta . 2>&1 | tail -2; tail -2 fotos/fotos_escenas.log; ls fotos/*.png"
-  },
-  {
-   "k": "res",
-   "t": "Exit code 2\n… sigue esperando tras 540 s · archivos: 0/3 → hacé otra cosa útil y volvé a llamar\n17:32:32 batch 1553b625: in_progress 0/3\n18:15:43 batch 1553b625: in_progress 2/3\nls: cannot access 'fotos/*.png': No such file or directory"
-  },
   {
    "k": "tool",
    "t": "tail -5 fotos/fotos_escenas.log; tail -3 fotos/fotos_01.log; date"
@@ -178,6 +130,54 @@
   {
    "k": "res",
    "t": "… sigue esperando tras 540 s · archivos: 0/3 → hacé otra cosa útil y volvé a llamar\n17:32:32 batch 1553b625: in_progress 0/3\n18:15:43 batch 1553b625: in_progress 2/3"
+  },
+  {
+   "k": "tool",
+   "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 3 --carpeta . 2>&1 | tail -2; tail -2 fotos/fotos_escenas.log; ls fotos/*.png 2>/dev/null"
+  },
+  {
+   "k": "res",
+   "t": "✓ hay 3 archivos (0 s)\n18:58:04 ✓ batch 1553b625: 3 fotos bajadas, 0 fallidas (US$0.008)\n18:58:04 FIN: 3/3 fotos en fotos/ (87 min)\nfotos/p033.png\nfotos/p052.png\nfotos/p113.png"
+  },
+  {
+   "k": "ai",
+   "t": "Scene photos arrived. Now launching the main photo batches (test + rest)."
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/fotos.py . pedidos_01.json > fotos/fotos_01.log 2>&1 & sleep 5; tail -2 fotos/fotos_01.log; python /tmp/h.py qc/hoja_escenas.jpg p033 p052 p113 2>&1|tail -1"
+  },
+  {
+   "k": "res",
+   "t": "18:58:07 ya hay otro fotos.py en este video (pid 19281): espero que termine\n\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/qc/hoja_escenas.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "cat fotos/p052.json | head -50"
+  },
+  {
+   "k": "res",
+   "t": "{\n \"id\": \"p052\",\n \"cara\": false,\n \"prompt\": {\n  \"type\": \"amateur phone photo, mild JPEG compression, uneven ordinary indoor light, slightly crooked framing, nothing blurred out, everything in focus, 16:9\",\n  \"moment\": \"El instante en que la frase «No tocar hasta los 7 días» acaba de ser escrita y el lápiz todavía está apoyado sobre el papel.\",\n  \"subject\": \"Cuaderno abierto en la mesa de trabajo, "
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/fotos/p033.png\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "sleep 60; tail -3 fotos/fotos_01.log; ps aux | grep \"escenas.py\" | grep -v grep | wc -l"
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 5034,
+    "seg": 5097,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 6050,
+  "total_s": 6113,
   "avatar_s": 0,
-  "sin_avatar_s": 6050,
+  "sin_avatar_s": 6113,
   "cerrado": false
  }
 }
