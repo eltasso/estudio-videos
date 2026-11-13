@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794610794.0207539,
+ "actualizado": 1794610858.5039744,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43520999957",
  "pasos": [
@@ -51,30 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.3132,
+  "deepseek": 0.315,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.6087
+  "total": 0.6105
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "3774\n3776\n62251\ntotal 648464\ndrwxrwxrwx+  2 sesion sesion    20480 Nov 13 22:17 .\ndrwxrwxrwx+ 16 runner runner     4096 Nov 13 22:14 ..\n-rw-rw-rw-+  1 sesion sesion        0 Nov 13 20:54 .lock\n-rw-rw-rw-+  1 sesion sesion  4013362 Nov 13 22:14 0000.mp4"
-  },
-  {
-   "k": "tool",
-   "t": "sleep 500; ls -la segments/*.mp4 | wc -l; ps aux | grep render.py | grep -v grep | awk '{print $2}' | tail -1"
-  },
-  {
-   "k": "res",
-   "t": "201\n3776"
-  },
-  {
-   "k": "tool",
-   "t": "ps aux | grep \"render.py\" | grep -v grep | awk '{print $2}' | tail -2; ls -la segments/*.mp4 | wc -l; tail -2 render2.log"
-  },
   {
    "k": "res",
    "t": "3774\n3776\n201\nreusados de otra posición: 111\nhechos 201"
@@ -178,6 +162,22 @@
   {
    "k": "tool",
    "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --log assemble2.log --texto \"final:\" 2>&1 | tail -2"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · log: el armado por tramos falló (tramo 28 no salió): va el armado completo → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "tail -5 /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/assemble2.log"
+  },
+  {
+   "k": "res",
+   "t": "capas de edición extrema: 5\ntramos: 17 de 33 por codificar · 4 a la vez\ntramo 28: falló · \ntramo 31: falló · \nel armado por tramos falló (tramo 28 no salió): va el armado completo"
+  },
+  {
+   "k": "tool",
+   "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --log assemble2.log --texto \"final:\" 2>&1 | tail -2"
   }
  ],
  "maquinas": 2,
@@ -272,14 +272,14 @@
    {
     "k": "correcciones",
     "n": "Correcciones",
-    "seg": 3354,
+    "seg": 3483,
     "pasadas": 3,
     "fin": false
    }
   ],
-  "total_s": 20560,
+  "total_s": 20625,
   "avatar_s": 4649,
-  "sin_avatar_s": 15911,
+  "sin_avatar_s": 15976,
   "cerrado": false
  }
 }
