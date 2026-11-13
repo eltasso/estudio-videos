@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794597235.2637591,
+ "actualizado": 1794597298.0320137,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.149,
+  "deepseek": 0.1497,
   "gpt": 0.0194,
   "gpt_img": 7,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1684
+  "total": 0.1691
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "13:import glob, json, os, re, sys, time, base64, uuid, urllib.request, urllib.error, urllib.parse\n110:def api(path, data=None, headers=None, raw=False, timeout=600):\n115:            r = urllib.request.urlopen(q, timeout=timeout)\n118:        except urllib.error.HTTPError as e:\n127:        except (urllib.error.URLError, TimeoutError, ConnectionError) as e:\n210:COLA_LLENA = r\"token_limit|enqueued|rat"
-  },
-  {
-   "k": "tool",
-   "t": "sed -n 200,260p /opt/estudio/repo/motor/tools/fotos.py"
-  },
   {
    "k": "res",
    "t": "if not pend(): log(f\"✓ nada que pedir: {sum(hecha(p['id']) for p in peds)}/{len(peds)} fotos listas\"); sys.exit(0)\nif NO_WAIT: log(f\"--no-wait: {len(pend())} batch(es) en vuelo. Volvé a correr el mismo comando para bajarlos.\"); sys.exit(0)\n\nPRECIO = {\"/v1/images/edits\": 0.00207, \"/v1/images/generations\": 0.00169}   # Batch low 1088x608 (medido)\ndef costo(u, ep):\n    if not u or not u.get(\"output_t"
@@ -178,6 +170,14 @@
   {
    "k": "tool",
    "t": "timeout 570 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 10 --carpeta . 2>&1 | tail -2; tail -2 fotos/fotos_01.log"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivos: 7/10 → hacé otra cosa útil y volvé a llamar\n19:03:12 ya hay otro fotos.py en este video (pid 19281): espero que termine\n19:03:42 ya hay otro fotos.py en este video (pid 19281): espero que termine"
+  },
+  {
+   "k": "tool",
+   "t": "timeout 570 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 12 --carpeta . 2>&1 | tail -2; ls fotos/*.png | wc -l"
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 5986,
+    "seg": 6049,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 7001,
+  "total_s": 7064,
   "avatar_s": 0,
-  "sin_avatar_s": 7001,
+  "sin_avatar_s": 7064,
   "cerrado": false
  }
 }
