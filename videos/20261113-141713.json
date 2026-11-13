@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794608009.045822,
+ "actualizado": 1794608072.5447412,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -28,8 +28,8 @@
   {
    "k": "avatar",
    "n": "Avatar",
-   "st": "skip",
-   "info": ""
+   "st": "done",
+   "info": "82 clips"
   },
   {
    "k": "fotos",
@@ -51,26 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2623,
+  "deepseek": 0.2632,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
-  "avatar": 0.0,
-  "total": 0.3078
+  "avatar": 0.25,
+  "total": 0.5587
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "Exit code 143\nCommand timed out after 10m 0s"
-  },
-  {
-   "k": "tool",
-   "t": "tail -3 avatar/it2.log; tail -2 render.log"
-  },
-  {
-   "k": "res",
-   "t": "21:01:05 InfiniteTalk: 82 ventanas · reel 456.1 s · 1 llamada\n21:01:17 RUN 530ab2f6-3da5-43c9-813e-d4eb1f81f8e5-u1\n21:01:47 estado: IN_PROGRESS\nclips=203 frames=28897 (963.23s)\nhechos 203"
-  },
   {
    "k": "tool",
    "t": "nohup python /opt/estudio/repo/motor/tools/assemble.py . > assemble.log 2>&1 & sleep 10; tail -3 assemble.log"
@@ -178,6 +166,18 @@
   {
    "k": "tool",
    "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4 2>&1 | tail -1; tail -3 avatar/it2.log"
+  },
+  {
+   "k": "res",
+   "t": "✓ existe avatar/A0.mp4 (1.5 MB, 460 s)\n21:01:47 estado: IN_PROGRESS\n22:13:26 estado: COMPLETED\n✓ 82 clips cortados · desfase corregido (máx 300 ms)"
+  },
+  {
+   "k": "ai",
+   "t": "Avatar clips are in. Re-rendering with the avatar."
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/render.py . > render2.log 2>&1 & sleep 60; tail -3 render2.log"
   }
  ],
  "maquinas": 1,
@@ -223,9 +223,9 @@
    {
     "k": "avatar_gen",
     "n": "Avatar generando",
-    "seg": 4615,
+    "seg": 4618,
     "pasadas": 1,
-    "fin": false
+    "fin": true
    },
    {
     "k": "fotos",
@@ -268,11 +268,18 @@
     "seg": 30,
     "pasadas": 1,
     "fin": true
+   },
+   {
+    "k": "correcciones",
+    "n": "Correcciones",
+    "seg": 4,
+    "pasadas": 1,
+    "fin": false
    }
   ],
-  "total_s": 17775,
-  "avatar_s": 30,
-  "sin_avatar_s": 17745,
+  "total_s": 17839,
+  "avatar_s": 4649,
+  "sin_avatar_s": 13190,
   "cerrado": false
  }
 }
