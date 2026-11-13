@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794602999.6372836,
+ "actualizado": 1794603062.5503972,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.232,
+  "deepseek": 0.2328,
   "gpt": 0.0315,
   "gpt_img": 12,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.2635
+  "total": 0.2643
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "False 6000 6000\ngt pairs 0\n0"
-  },
-  {
-   "k": "tool",
-   "t": "cat > /tmp/c47.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\nr0 = {\"startMs\": 0, \"endMs\": 6000}\nfor p in P[:6]:\n    a, b = p[\"startMs\"], p[\"endMs\"]\n    x = b > r0[\"startMs\"]\n    y = a < r0[\"endMs\"]\n    print(p[\"id\"], a, b, x, y, (a < r0[\"endMs\"]))\nEOF\npython /tmp/c47.py"
-  },
   {
    "k": "res",
    "t": "p001 6000 10050 True False False\np002 10050 14100 True False False\np003 19600 23280 True False False\np004 28280 31520 True False False\np005 31520 35920 True False False\np006 41420 45500 True False False"
@@ -178,6 +170,14 @@
   {
    "k": "tool",
    "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 10 --carpeta . 2>&1 | tail -1; ls fotos/*.png | wc -l"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivos: 9/10 → hacé otra cosa útil y volvé a llamar\n9"
+  },
+  {
+   "k": "tool",
+   "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 10 --carpeta . 2>&1 | tail -1; ls fotos/*.png"
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 11750,
+    "seg": 11813,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 12766,
+  "total_s": 12829,
   "avatar_s": 0,
-  "sin_avatar_s": 12766,
+  "sin_avatar_s": 12829,
   "cerrado": false
  }
 }
