@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794605342.007972,
+ "actualizado": 1794605405.412568,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2525,
+  "deepseek": 0.2534,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.298
+  "total": 0.2989
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "hoja: qc/hoja_render.jpg (12 cuadros, 4x3)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/qc/hoja_render.jpg\"}"
-  },
   {
    "k": "res",
    "t": "[imagen]"
@@ -178,6 +170,14 @@
   {
    "k": "tool",
    "t": "sleep 540; tail -3 assemble.log; tail -2 avatar/it2.log"
+  },
+  {
+   "k": "res",
+   "t": "segmentos: 203\ncapas de edición extrema: 5\ntramos: 33 de 33 por codificar · 4 a la vez\n21:01:17 RUN 530ab2f6-3da5-43c9-813e-d4eb1f81f8e5-u1\n21:01:47 estado: IN_PROGRESS"
+  },
+  {
+   "k": "tool",
+   "t": "sleep 540; tail -2 assemble.log; tail -2 avatar/it2.log; ls -la assemble.log"
   }
  ],
  "maquinas": 1,
@@ -223,7 +223,7 @@
    {
     "k": "avatar_gen",
     "n": "Avatar generando",
-    "seg": 1948,
+    "seg": 2011,
     "pasadas": 1,
     "fin": false
    },
@@ -258,14 +258,14 @@
    {
     "k": "armado",
     "n": "Armado",
-    "seg": 1059,
+    "seg": 1123,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 15108,
+  "total_s": 15171,
   "avatar_s": 30,
-  "sin_avatar_s": 15078,
+  "sin_avatar_s": 15141,
   "cerrado": false
  }
 }
