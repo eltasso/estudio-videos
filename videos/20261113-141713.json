@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794598880.5208335,
+ "actualizado": 1794598944.202347,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -35,7 +35,7 @@
    "k": "fotos",
    "n": "Fotos",
    "st": "active",
-   "info": "5 fotos"
+   "info": "10 fotos"
   },
   {
    "k": "armado",
@@ -51,46 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1543,
-  "gpt": 0.0194,
-  "gpt_img": 7,
+  "deepseek": 0.1578,
+  "gpt": 0.0284,
+  "gpt_img": 11,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1737
+  "total": 0.1862
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/fotos/p033.png\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "sleep 60; tail -3 fotos/fotos_01.log; ps aux | grep \"escenas.py\" | grep -v grep | wc -l"
-  },
-  {
-   "k": "res",
-   "t": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
-  },
-  {
-   "k": "tool",
-   "t": "ps aux | grep -E \"escenas.py|fotos.py\" | grep -v grep | awk '{print $2,$12,$13,$14}'; tail -3 escenas/escenas.log 2>/dev/null; cat gates/fondo_avatar.json 2>/dev/null | head"
-  },
-  {
-   "k": "res",
-   "t": "3774 -n -H -u\n3776 -p --dangerously-skip-permissions --disallowedTools\n7502 /opt/estudio/repo/motor/tools/fotos.py . pedidos_01.json\n19281 /opt/estudio/repo/motor/tools/fotos.py . pedidos_01.json\n26261 /opt/estudio/repo/motor/tools/fotos.py . pedidos_01.json"
-  },
-  {
-   "k": "tool",
-   "t": "kill 26261; sleep 1; timeout 300 python /opt/estudio/repo/motor/tools/esperar.py --log fotos/fotos_01.log --texto \"batch\" 2>&1 | tail -3; tail -2 fotos/fotos_01.log"
-  },
-  {
-   "k": "res",
-   "t": "19:02:12 ya hay otro fotos.py en este video (pid 19281): espero que termine\n19:02:42 ya hay otro fotos.py en este video (pid 19281): espero que termine\n19:03:12 ya hay otro fotos.py en este video (pid 19281): espero que termine\n19:02:42 ya hay otro fotos.py en este video (pid 19281): espero que termine\n19:03:12 ya hay otro fotos.py en este video (pid 19281): espero que termine"
-  },
   {
    "k": "tool",
    "t": "kill 7502; sleep 3; ps aux | grep fotos.py | grep -v grep | awk '{print $2}'; sleep 45; tail -2 fotos/fotos_01.log"
@@ -178,6 +146,38 @@
   {
    "k": "tool",
    "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 9 --carpeta . 2>&1 | tail -1; ls fotos/*.png"
+  },
+  {
+   "k": "res",
+   "t": "✓ hay 9 archivos (50 s)\nfotos/p001_c.png\nfotos/p002.png\nfotos/p008.png\nfotos/p033.png\nfotos/p042.png\nfotos/p046.png\nfotos/p052.png\nfotos/p093.png\nfotos/p113.png"
+  },
+  {
+   "k": "tool",
+   "t": "cp fotos/p001_c.png fotos/p001.png; python -c \"\nimport json;d=json.load(open('fotos/p001_c.json'));d['id']='p001';json.dump(d,open('fotos/p001.json','w'),ensure_ascii=False,indent=1)\"; ls fotos/p001*; python /tmp/h.py qc/hoja_fotos.jpg p001 p002 p008 p033 p042 p046 p052 p093 p113 2>&1|tail -1"
+  },
+  {
+   "k": "res",
+   "t": "fotos/p001.json\nfotos/p001.png\nfotos/p001_a.json\nfotos/p001_b.json\nfotos/p001_c.json\nfotos/p001_c.png\nhoja: qc/hoja_fotos.jpg (9 cuadros, 4x3)"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/qc/hoja_fotos.jpg\"}"
+  },
+  {
+   "k": "res",
+   "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "mkdir -p gates; cat > gates/fotos_auto.txt <<'EOF'\nControl de fotos (prueba) — 2026-11-13\nMiré qc/hoja_fotos.jpg (9 fotos) y qc/hoja_escenas.jpg (fotos de escenas firma).\n\nGancho: pedí 3 variantes (p001_a, p001_b, p001_c).\n- p001_a (manos dando vuelta la hoja): salió una toma abierta del presentador, poco impacto.\n- p001_b (plano medio con hoja infestada): linda pero la colonia no se lee.\n- p001_c"
+  },
+  {
+   "k": "res",
+   "t": "ok\n19:03:12 ya hay otro fotos.py en este video (pid 19281): espero que termine\n19:03:42 ya hay otro fotos.py en este video (pid 19281): espero que termine"
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/escenas.py . construir --fondo > escenas/escenas.log 2>&1 & sleep 30; tail -5 /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/escenas/escenas.log"
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 7631,
+    "seg": 7695,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 8647,
+  "total_s": 8710,
   "avatar_s": 0,
-  "sin_avatar_s": 8647,
+  "sin_avatar_s": 8710,
   "cerrado": false
  }
 }
