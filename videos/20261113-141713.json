@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794603658.0001004,
+ "actualizado": 1794603723.750438,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -41,7 +41,7 @@
    "k": "armado",
    "n": "Armado",
    "st": "active",
-   "info": "131 segmentos"
+   "info": "140 segmentos"
   },
   {
    "k": "qc",
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2482,
+  "deepseek": 0.2491,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.2937
+  "total": 0.2946
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "for i in p018 p058 p090; do rm -f fotos/$i.png clips/$i.mp4; done\ncat > /tmp/stockfix.py <<'EOF'\nimport json\nreq=[\n {\"id\":\"p018\",\"muestra\":\"hands turning a big green leaf over to look at its underside\",\"buscar\":[\"turning over green leaf\",\"hands holding green leaf\",\"leaf close up hands\"]},\n {\"id\":\"p058\",\"muestra\":\"a hand with a pencil writing in a notebook on a wooden table\",\"buscar\":[\"writing note"
-  },
   {
    "k": "res",
    "t": "20:53:16 bajados 3/3\n20:53:16 FIN: 3/3 clips en clips/\n⛔ faltan 1 fotos o clips (p041). Esperalas con esperar.py o repedilas."
@@ -178,6 +170,14 @@
   {
    "k": "tool",
    "t": "sleep 20; tail -5 avatar/it2.log; tail -2 render.log"
+  },
+  {
+   "k": "res",
+   "t": "21:01:05 InfiniteTalk: 82 ventanas · reel 456.1 s · 1 llamada"
+  },
+  {
+   "k": "tool",
+   "t": "sleep 600; tail -3 avatar/it2.log; tail -2 render.log"
   }
  ],
  "maquinas": 1,
@@ -223,7 +223,7 @@
    {
     "k": "avatar_gen",
     "n": "Avatar generando",
-    "seg": 264,
+    "seg": 330,
     "pasadas": 1,
     "fin": false
    },
@@ -237,7 +237,7 @@
    {
     "k": "extrema",
     "n": "Edición extrema",
-    "seg": 405,
+    "seg": 471,
     "pasadas": 1,
     "fin": false
    },
@@ -251,14 +251,14 @@
    {
     "k": "render",
     "n": "Render",
-    "seg": 321,
+    "seg": 387,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 13424,
+  "total_s": 13490,
   "avatar_s": 30,
-  "sin_avatar_s": 13394,
+  "sin_avatar_s": 13459,
   "cerrado": false
  }
 }
