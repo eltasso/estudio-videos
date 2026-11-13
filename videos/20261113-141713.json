@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794590455.6171558,
+ "actualizado": 1794590518.8117013,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -17,7 +17,7 @@
    "k": "voz",
    "n": "Voz",
    "st": "active",
-   "info": "6 bloques"
+   "info": "16:03 min"
   },
   {
    "k": "tiempos",
@@ -51,18 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.01,
+  "deepseek": 0.0102,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.01
+  "total": 0.0102
  },
  "eventos": [
-  {
-   "k": "user",
-   "t": "Hacé este video completo de punta a punta, solo, sin preguntar y sin frenar. Tus herramientas están en el KIT del system prompt. Este es el brief entero (también quedó en /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/BRIEF.md por si lo necesitás releer después de una compactación):\n\n# BRIEF — Pulgones en la acelga: cómo detectarlos y cuándo no intervenir · Don Genaro\n\nHacé un "
-  },
   {
    "k": "ai",
    "t": "I'll start by exploring the workspace and the world of the channel."
@@ -174,6 +170,14 @@
   {
    "k": "tool",
    "t": "timeout 300 python /opt/estudio/repo/motor/tools/esperar.py --existe voz/master.wav 2>&1 | tail -3; ls voz/"
+  },
+  {
+   "k": "res",
+   "t": "✓ existe voz/master.wav (85.0 MB, 75 s)\nblk_000.wav\nblk_001.wav\nblk_002.wav\nblk_003.wav\nblk_004.wav\nblk_005.wav\nlista.txt\nmanifest.json\nmaster.wav\nvoz.log"
+  },
+  {
+   "k": "tool",
+   "t": "cat voz/manifest.json; python /opt/estudio/repo/motor/tools/tiempos.py . es 2>&1 | tail -10"
   }
  ],
  "maquinas": 1,
@@ -198,14 +202,21 @@
    {
     "k": "voz",
     "n": "Voz",
-    "seg": 103,
+    "seg": 149,
+    "pasadas": 1,
+    "fin": true
+   },
+   {
+    "k": "tiempos",
+    "n": "Tiempos",
+    "seg": 18,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 222,
+  "total_s": 285,
   "avatar_s": 0,
-  "sin_avatar_s": 222,
+  "sin_avatar_s": 285,
   "cerrado": false
  }
 }
