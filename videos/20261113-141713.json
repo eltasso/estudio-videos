@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794609300.2903764,
+ "actualizado": 1794609364.9666646,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2684,
+  "deepseek": 0.2693,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.5639
+  "total": 0.5648
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "sleep 540; tail -4 assemble.log; tail -2 avatar/it2.log"
-  },
-  {
-   "k": "res",
-   "t": "tramo 7 listo\ntramo 8 listo\ntramo 9 listo\nfinal: ./final.mp4 963.224000 s\n21:01:17 RUN 530ab2f6-3da5-43c9-813e-d4eb1f81f8e5-u1\n21:01:47 estado: IN_PROGRESS"
-  },
   {
    "k": "tool",
    "t": "tail -5 assemble.log; ls -la final.mp4"
@@ -178,6 +170,14 @@
   {
    "k": "tool",
    "t": "sleep 560; tail -3 assemble2.log"
+  },
+  {
+   "k": "res",
+   "t": "segmentos: 201\ncapas de edición extrema: 5\ntramos: 33 de 33 por codificar · 4 a la vez"
+  },
+  {
+   "k": "tool",
+   "t": "sleep 560; tail -3 assemble2.log"
   }
  ],
  "maquinas": 1,
@@ -272,14 +272,14 @@
    {
     "k": "correcciones",
     "n": "Correcciones",
-    "seg": 762,
+    "seg": 827,
     "pasadas": 2,
     "fin": false
    }
   ],
-  "total_s": 19066,
+  "total_s": 19131,
   "avatar_s": 4649,
-  "sin_avatar_s": 14418,
+  "sin_avatar_s": 14482,
   "cerrado": false
  }
 }
