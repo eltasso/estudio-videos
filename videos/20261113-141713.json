@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794590518.8117013,
+ "actualizado": 1794590590.129142,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -16,14 +16,14 @@
   {
    "k": "voz",
    "n": "Voz",
-   "st": "active",
+   "st": "done",
    "info": "16:03 min"
   },
   {
    "k": "tiempos",
    "n": "Tiempos",
-   "st": "pending",
-   "info": ""
+   "st": "active",
+   "info": "por palabra"
   },
   {
    "k": "avatar",
@@ -51,133 +51,133 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0102,
+  "deepseek": 0.0228,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0102
+  "total": 0.0228
  },
  "eventos": [
   {
-   "k": "ai",
-   "t": "I'll start by exploring the workspace and the world of the channel."
-  },
-  {
    "k": "tool",
-   "t": "ls -la /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/ && ls -la /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/refs/ 2>/dev/null"
-  },
-  {
-   "k": "tool",
-   "t": "ls /opt/estudio/repo/motor/tools/"
+   "t": "python plan_avatar.py"
   },
   {
    "k": "res",
-   "t": "_cfg.py\nassemble.py\navatar_it.py\nescenas.py\nespera.py\nesperar.py\netapas.py\nextrema.py\nextrema_libre.py\nfiltro_log.py\nfondo_avatar.py\nfotos.py\ngranja.py\nguard.py\nhoja.py\nmundo.py\nplanos.py\nrender.py\nrevisor.py\nsonidos.py\nstock.py\ntiempos.py\ntramos.py\nvalidar.py\nvoz.py"
-  },
-  {
-   "k": "res",
-   "t": "total 60\ndrwxrwxrwx+ 6 runner runner 4096 Nov 13 17:18 .\ndrwxrwxrwx+ 3 runner runner 4096 Nov 13 17:18 ..\n-rw-rw-rw-+ 1 runner runner 8935 Nov 13 17:18 BRIEF.md\ndrwxrwxrwx+ 2 runner runner 4096 Nov 13 17:18 avatar\ndrwxrwxrwx+ 2 runner runner 4096 Nov 13 17:18 fotos\ndrwxrwxrwx+ 2 runner runner 4096 Nov 13 17:18 refs\ndrwxrwxrwx+ 2 runner runner 4096 Nov 13 17:18 voz\ntotal 3976\ndrwxrwxrwx+ 2 runner r"
+   "t": "NOT FOUND: gracias no es cuidar 1\nNOT FOUND: entonces el cambio concreto 1\nNOT FOUND: cada huerta tiene su tiempo 1\nNOT FOUND: confieso 0\nNOT FOUND: contá cuántos hay 0\nfound 27 of 32\nGAP 19.7s at 0 before 25700\nGAP 75.2s at 25700 before 105880\nGAP 107.6s at 105880 before 218500\nGAP 76.6s at 218500 before 301146\nGAP 45.3s at 269846 before 320626\nGAP 27.7s at 329166 before 362406\nGAP 66.2s at 36240"
   },
   {
    "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/mundo.py . \"Pulgones en la acelga: cómo detectarlos y cuándo no intervenir\" \"Antes de rociar cualquier cosa, Don Genaro muestra cómo mirar el envés de las hojas y distinguir pulgones de otros bichos. Explica por qué no siempre conviene intervenir y qué labores de huerta ayudan a que no se propaguen. Cuenta que él también fumigaba de más y qué aprendió después.\""
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/refs/canal.json\"}"
+   "t": "import json, re\n\ncap = json.load(open('captions.json'))\nnorm = [re.sub(r'[^\\wáéíóúñü]', '', c['text'].lower()) for c in cap]\nfor i, w in enumerate(cap):\n    if w['text'].strip() == '47':\n        norm[i] = '47'\n\n\ndef find(seq, nth=0):\n    seq = [re.sub(r'[^\\wáéíóúñü]', '', w.lower()) for w in seq.split()]\n    hits = 0\n    n = len(seq)\n    for i in range(0, len(norm) - n + 1):\n        if norm[i:i + "
   },
   {
    "k": "res",
-   "t": "✓ mundo.json\nEL CUARTO: El galpón de Don Genaro huele a tierra y a madera. Al fondo, la mesa de trabajo con macetas de barro, sobres de semillas, una libreta de tapas duras y un lápiz gastado. En la pared, un calendario de pared con las estaciones marcadas a mano y una foto de Elena en un portarretrato. Cuelgan del techo herramientas de mano: pala, rastrillo, tijeras de podar. Sobre la mesa, un fr"
-  },
-  {
-   "k": "res",
-   "t": "1\t{\n2\t \"nombre\": \"Don Genaro\",\n3\t \"idioma\": \"es\",\n4\t \"presentador\": \"Don Genaro, a heavyset Argentine man in his late sixties, round weathered face, thick grey beard and short grey hair, warm dark eyes with deep crow's feet, bushy grey eyebrows, wearing a faded navy flat cap, a worn brown corduroy shirt under a canvas work apron, a small folding knife on a leather cord and soil under his fingernai"
+   "t": "The file /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/plan_avatar.py has been updated successfully. (file state is current in your context — no need to Read it back)"
   },
   {
    "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/mundo.json\"}"
+   "t": "python plan_avatar.py"
   },
   {
    "k": "res",
-   "t": "1\t{\n2\t \"1_la_habitacion\": \"El galpón de Don Genaro huele a tierra y a madera. Al fondo, la mesa de trabajo con macetas de barro, sobres de semillas, una libreta de tapas duras y un lápiz gastado. En la pared, un calendario de pared con las estaciones marcadas a mano y una foto de Elena en un portarretrato. Cuelgan del techo herramientas de mano: pala, rastrillo, tijeras de podar. Sobre la mesa, un"
-  },
-  {
-   "k": "ai",
-   "t": "Now I'll write the script (~15,000 characters) using the world's objects."
+   "t": "NOT FOUND: este es de vidrio 0\nNOT FOUND: eso es una receta 0\nNOT FOUND: sólo dos veces 0\nNOT FOUND: quedate hasta el final 0\nfound 30 of 34\nGAP 19.7s at 0 before 25700\nGAP 75.2s at 25700 before 105880\nGAP 107.6s at 105880 before 218500\nGAP 76.6s at 218500 before 301146\nGAP 45.3s at 269846 before 320626\nGAP 27.7s at 329166 before 362406\nGAP 24.3s at 362406 before 392746\nGAP 16.0s at 392746 before "
   },
   {
    "k": "tool",
-   "t": "¡Hola, gente de YouTube! ¿Cómo andan? Soy Genaro, y como siempre, acá en el galpón, entre las macetas y los sobres de semillas. Hoy les voy a hablar de algo que me preguntaron un montón en los comentarios: los pulgones en la acelga. Y les voy a decir una cosa de entrada, antes de que agarren el rociador: el año pasado conté, en una sola hoja del cantero de atrás, cuarenta y siete pulgones. Cuarent"
+   "t": "python - <<'EOF' 2>/dev/null || true\nEOF\npython -c \"\nimport json,re\nc=json.load(open('/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/captions.json'))\nt=[x['text'].strip() for x in c]\n# find phrase starts\nimport sys\ntargets=['Este','este','Es','es','Lunes','lunes','quédate','Quédate','texto']\nfor i,w in enumerate(t):\n    pass\nprint(' '.join(f'{i}:{w}' for i,w in enumerate(t[470:"
   },
   {
    "k": "res",
-   "t": "File created successfully at: /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/guion.txt (file state is current in your context — no need to Read it back)"
+   "t": "0:tamaño 1:de 2:un 3:grano 4:de 5:arena, 6:redondito, 7:y 8:sale 9:de 10:un 11:color 12:verde 13:clarito, 14:o 15:casi 16:negro, 17:o 18:a 19:veces 20:rosado 21:y 22:peludo. 23:Se 24:mueven 25:lento, 26:pero 27:se 28:mueven. 29:Viven 30:en 31:colonia, 32:uno 33:al 34:lado 35:del 36:otro, 37:apretados 38:como 39:una 40:familia 41:esperando 42:el 43:colectivo 44:en 45:la 46:parada. 47:Y 48:acá 49:vi"
   },
   {
    "k": "tool",
-   "t": "wc -m guion.txt && python /opt/estudio/repo/motor/tools/validar.py . --etapa guion --min 15 2>&1 | tail -30"
+   "t": "python -c \"\nimport json,re\nc=json.load(open('/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/captions.json'))\nnorm=[re.sub(r'[^\\wáéíóúñü]','',x['text'].lower()) for x in c]\nfor target in ['receta','veces','cuatro','cuantos','vidrio','surcos']:\n  print(target,[ (i,c[i]['startMs']) for i,w in enumerate(norm) if w.startswith(target)][:10])\n\""
   },
   {
    "k": "res",
-   "t": "13934 guion.txt\nVALIDAR /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y · etapa guion\n  ✓ guion: 13897 caracteres, 2709 palabras (hacen falta 13500-17250 para 15 min: bien)\nRESULTADO: OK"
-  },
-  {
-   "k": "ai",
-   "t": "Script passes. Now voice in background, and I'll plan the hook + creative images in parallel."
+   "t": "receta [(1726, 620052)]\nveces [(489, 171980), (964, 342446), (1909, 682112), (1923, 687592), (1934, 690712)]\ncuatro [(1076, 380906), (1304, 463606), (2540, 910038), (2565, 919238)]\ncuantos []\nvidrio [(628, 223320)]\nsurcos [(2686, 962438)]"
   },
   {
    "k": "tool",
-   "t": "nohup python /opt/estudio/repo/motor/tools/voz.py . > voz/voz.log 2>&1 & echo \"PID $!\""
+   "t": "python - <<'EOF'\nimport re\np='plan_avatar.py'\ns=open(p).read()\ns=s.replace('(\"este es de vidrio\", 0, 5000, None, None),','(\"de mermelada\", 0, 5000, None, None),')\ns=s.replace('(\"pero no se engañen\", 0, 6000, None, None),','(\"no se engañen\", 0, 6000, None, None),')\ns=s.replace('(\"eso es una receta\", 0, 5500, None, None),','(\"una receta\", 0, 5500, None, None),')\ns=s.replace('(\"sólo dos veces\", 0, 60"
   },
   {
    "k": "res",
-   "t": "PID 4052"
+   "t": "NOT FOUND: todos los del mundo 0\nfound 33 of 34\nGAP 19.7s at 0 before 25700\nGAP 75.2s at 25700 before 105880\nGAP 107.6s at 105880 before 218500\nGAP 71.8s at 224380 before 301146\nGAP 45.3s at 269846 before 320626\nGAP 27.7s at 329166 before 362406\nGAP 24.3s at 362406 before 392746\nGAP 16.0s at 392746 before 414206\nGAP 29.4s at 434626 before 470046\nGAP 142.9s at 470046 before 618412\nGAP 17.0s at 6198"
   },
   {
    "k": "tool",
-   "t": "sleep 45; tail -5 voz/voz.log; ls -la voz/"
+   "t": "python - <<'EOF'\nimport re\np='plan_avatar.py'\ns=open(p).read()\ns=s.replace('(\"todos los del mundo\", 0, 6000, None, None),','(\"especie de rociador\", 0, 6000, None, None),')\n# remove the mid-sentence windows, keep first window maybe. We'll see which lines needed\nopen(p,'w').write(s)\nEOF\npython plan_avatar.py"
   },
   {
    "k": "res",
-   "t": "voz: uso el clon guardado en Fish\nvoz: 6 bloques · 13933 caracteres\ntotal 25696\ndrwxrwxrwx+ 2 runner runner    4096 Nov 13 17:19 .\ndrwxrwxrwx+ 7 runner runner    4096 Nov 13 17:19 ..\n-rw-rw-rw-+ 1 sesion sesion 7879605 Nov 13 17:20 blk_000.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 9190359 Nov 13 17:20 blk_001.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 9214516 Nov 13 17:20 blk_002.wav.tmp.wav\n-rw-rw-rw-"
+   "t": "NOT FOUND: especie de rociador 0\nfound 33 of 34\nGAP 19.7s at 0 before 25700\nGAP 75.2s at 25700 before 105880\nGAP 107.6s at 105880 before 218500\nGAP 71.8s at 224380 before 301146\nGAP 45.3s at 269846 before 320626\nGAP 27.7s at 329166 before 362406\nGAP 24.3s at 362406 before 392746\nGAP 16.0s at 392746 before 414206\nGAP 29.4s at 434626 before 470046\nGAP 142.9s at 470046 before 618412\nGAP 17.0s at 6198"
   },
   {
    "k": "tool",
-   "t": "ls -la voz/; tail -3 voz/voz.log"
+   "t": "python - <<'EOF'\nimport json\nc=json.load(open('captions.json'))\n# find starts of sentences after a long pause (gap > 250ms)\nstarts=[]\nfor i in range(1,len(c)):\n    if c[i]['startMs']-c[i-1]['endMs']>250:\n        starts.append((i,c[i]['startMs'],' '.join(x['text'] for x in c[i:i+6])))\nfor s in starts:\n    print(s)\nEOF"
   },
   {
    "k": "res",
-   "t": "total 26408\ndrwxrwxrwx+ 2 runner runner    4096 Nov 13 17:19 .\ndrwxrwxrwx+ 7 runner runner    4096 Nov 13 17:19 ..\n-rw-rw-rw-+ 1 sesion sesion 8147164 Nov 13 17:20 blk_000.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 9384788 Nov 13 17:20 blk_001.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 9476660 Nov 13 17:20 blk_002.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion     200 Nov 13 17:19 manifest.json\n-rw-rw-rw-+ 1 s"
+   "t": "(6, 2680, ' Soy  Genaro  y  como  siempre,  acá')\n(23, 9120, ' Hoy  les  voy  a  hablar  de')\n(38, 13240, ' los  pulgones  en  la  selga.  Y')\n(43, 15420, ' Y  les  voy  a  decir  una')\n(86, 31520, ' Pero  para  poder  hacer  eso,  primero')\n(127, 45160, ' Y  les  cuento  también,  che,  porque')\n(157, 56400, ' Antes  de  arrancar,  abran  el  cuaderno')\n(212, 78600, ' Cada  punto  que  les  expli"
   },
   {
    "k": "tool",
-   "t": "ls -la voz/ | grep -c wav"
+   "t": "import json\n\ncap = json.load(open('captions.json'))\n\n# (índice de palabra, dur_ms, foto, lado) — arrancando en pausas, cada ~11-14 s\nKEY = [\n    (0, 6000, None, None),\n    (23, 5500, None, None),\n    (43, 5000, \"p002\", \"der\"),\n    (127, 5000, None, None),\n    (157, 6000, None, None),\n    (320, 5000, \"p005\", \"izq\"),\n    (383, 5000, None, None),\n    (455, 6000, None, None),\n    (611, 6000, \"p008\", \""
   },
   {
    "k": "res",
-   "t": "3"
+   "t": "<tool_use_error>File has been modified since read, either by the user or by a linter. Read it again before attempting to write it.</tool_use_error>"
   },
   {
    "k": "tool",
-   "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"voz/blk_*.wav\" 6 --carpeta /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y 2>&1 | tail -5"
+   "t": "rm plan_avatar.py && echo removed"
   },
   {
    "k": "res",
-   "t": "✓ hay 6 archivos (25 s)"
+   "t": "removed"
   },
   {
    "k": "tool",
-   "t": "timeout 300 python /opt/estudio/repo/motor/tools/esperar.py --existe voz/master.wav 2>&1 | tail -3; ls voz/"
+   "t": "import json\n\ncap = json.load(open('captions.json'))\n\n# (índice de palabra, dur_ms, foto, lado) — arrancando en pausas, cada ~11-14 s\nKEY = [\n    (0, 6000, None, None),\n    (23, 5500, None, None),\n    (43, 5000, \"p002\", \"der\"),\n    (127, 5000, None, None),\n    (157, 6000, None, None),\n    (320, 5000, \"p005\", \"izq\"),\n    (383, 5000, None, None),\n    (455, 6000, None, None),\n    (611, 6000, \"p008\", \""
   },
   {
    "k": "res",
-   "t": "✓ existe voz/master.wav (85.0 MB, 75 s)\nblk_000.wav\nblk_001.wav\nblk_002.wav\nblk_003.wav\nblk_004.wav\nblk_005.wav\nlista.txt\nmanifest.json\nmaster.wav\nvoz.log"
+   "t": "File created successfully at: /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/plan_avatar.py (file state is current in your context — no need to Read it back)"
   },
   {
    "k": "tool",
-   "t": "cat voz/manifest.json; python /opt/estudio/repo/motor/tools/tiempos.py . es 2>&1 | tail -10"
+   "t": "python plan_avatar.py"
+  },
+  {
+   "k": "res",
+   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/plan_avatar.py\", line 50, in <module>\n    for i, dur, foto, lado in KEY:\n        ^^^^^^^^^^^^^^^^^^\nValueError: too many values to unpack (expected 4)"
+  },
+  {
+   "k": "tool",
+   "t": "    (1088, 5000, \"p013\", \"der\"),"
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/plan_avatar.py has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "    (1088, 5000, \"p013\", \"der\"),\n    (1173, 5500, None, None),\n    # a partir de acá se completa abajo"
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/plan_avatar.py has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python plan_avatar.py"
+  },
+  {
+   "k": "res",
+   "t": "GAP 24.7s at 15420 before 45160\nGAP 49.6s at 56400 before 112020\nGAP 18.5s at 112020 before 135500\nGAP 19.5s at 135500 before 160020\nGAP 51.1s at 160020 before 217140\nGAP 48.9s at 217140 before 272006\nGAP 23.1s at 272006 before 300606\nGAP 36.2s at 300606 before 341846\nGAP 15.1s at 341846 before 362406\nGAP 17.3s at 362406 before 385686\nGAP 23.5s at 385686 before 414206\nGAP 17.4s at 414206 before 43"
   }
  ],
  "maquinas": 1,
@@ -211,12 +211,12 @@
     "n": "Tiempos",
     "seg": 18,
     "pasadas": 1,
-    "fin": false
+    "fin": true
    }
   ],
-  "total_s": 285,
+  "total_s": 356,
   "avatar_s": 0,
-  "sin_avatar_s": 285,
+  "sin_avatar_s": 356,
   "cerrado": false
  }
 }
