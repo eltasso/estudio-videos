@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794590391.0806043,
+ "actualizado": 1794590455.6171558,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -17,7 +17,7 @@
    "k": "voz",
    "n": "Voz",
    "st": "active",
-   "info": "3 bloques"
+   "info": "6 bloques"
   },
   {
    "k": "tiempos",
@@ -51,12 +51,12 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0092,
+  "deepseek": 0.01,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0092
+  "total": 0.01
  },
  "eventos": [
   {
@@ -142,6 +142,38 @@
   {
    "k": "tool",
    "t": "sleep 45; tail -5 voz/voz.log; ls -la voz/"
+  },
+  {
+   "k": "res",
+   "t": "voz: uso el clon guardado en Fish\nvoz: 6 bloques · 13933 caracteres\ntotal 25696\ndrwxrwxrwx+ 2 runner runner    4096 Nov 13 17:19 .\ndrwxrwxrwx+ 7 runner runner    4096 Nov 13 17:19 ..\n-rw-rw-rw-+ 1 sesion sesion 7879605 Nov 13 17:20 blk_000.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 9190359 Nov 13 17:20 blk_001.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 9214516 Nov 13 17:20 blk_002.wav.tmp.wav\n-rw-rw-rw-"
+  },
+  {
+   "k": "tool",
+   "t": "ls -la voz/; tail -3 voz/voz.log"
+  },
+  {
+   "k": "res",
+   "t": "total 26408\ndrwxrwxrwx+ 2 runner runner    4096 Nov 13 17:19 .\ndrwxrwxrwx+ 7 runner runner    4096 Nov 13 17:19 ..\n-rw-rw-rw-+ 1 sesion sesion 8147164 Nov 13 17:20 blk_000.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 9384788 Nov 13 17:20 blk_001.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion 9476660 Nov 13 17:20 blk_002.wav.tmp.wav\n-rw-rw-rw-+ 1 sesion sesion     200 Nov 13 17:19 manifest.json\n-rw-rw-rw-+ 1 s"
+  },
+  {
+   "k": "tool",
+   "t": "ls -la voz/ | grep -c wav"
+  },
+  {
+   "k": "res",
+   "t": "3"
+  },
+  {
+   "k": "tool",
+   "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"voz/blk_*.wav\" 6 --carpeta /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y 2>&1 | tail -5"
+  },
+  {
+   "k": "res",
+   "t": "✓ hay 6 archivos (25 s)"
+  },
+  {
+   "k": "tool",
+   "t": "timeout 300 python /opt/estudio/repo/motor/tools/esperar.py --existe voz/master.wav 2>&1 | tail -3; ls voz/"
   }
  ],
  "maquinas": 1,
@@ -166,14 +198,14 @@
    {
     "k": "voz",
     "n": "Voz",
-    "seg": 38,
+    "seg": 103,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 157,
+  "total_s": 222,
   "avatar_s": 0,
-  "sin_avatar_s": 157,
+  "sin_avatar_s": 222,
   "cerrado": false
  }
 }
