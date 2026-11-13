@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794590301.3663194,
+ "actualizado": 1794590325.6409671,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,17 +51,65 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0,
+  "deepseek": 0.0054,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0
+  "total": 0.0054
  },
  "eventos": [
   {
    "k": "user",
    "t": "Hacé este video completo de punta a punta, solo, sin preguntar y sin frenar. Tus herramientas están en el KIT del system prompt. Este es el brief entero (también quedó en /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/BRIEF.md por si lo necesitás releer después de una compactación):\n\n# BRIEF — Pulgones en la acelga: cómo detectarlos y cuándo no intervenir · Don Genaro\n\nHacé un "
+  },
+  {
+   "k": "ai",
+   "t": "I'll start by exploring the workspace and the world of the channel."
+  },
+  {
+   "k": "tool",
+   "t": "ls -la /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/ && ls -la /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/refs/ 2>/dev/null"
+  },
+  {
+   "k": "tool",
+   "t": "ls /opt/estudio/repo/motor/tools/"
+  },
+  {
+   "k": "res",
+   "t": "_cfg.py\nassemble.py\navatar_it.py\nescenas.py\nespera.py\nesperar.py\netapas.py\nextrema.py\nextrema_libre.py\nfiltro_log.py\nfondo_avatar.py\nfotos.py\ngranja.py\nguard.py\nhoja.py\nmundo.py\nplanos.py\nrender.py\nrevisor.py\nsonidos.py\nstock.py\ntiempos.py\ntramos.py\nvalidar.py\nvoz.py"
+  },
+  {
+   "k": "res",
+   "t": "total 60\ndrwxrwxrwx+ 6 runner runner 4096 Nov 13 17:18 .\ndrwxrwxrwx+ 3 runner runner 4096 Nov 13 17:18 ..\n-rw-rw-rw-+ 1 runner runner 8935 Nov 13 17:18 BRIEF.md\ndrwxrwxrwx+ 2 runner runner 4096 Nov 13 17:18 avatar\ndrwxrwxrwx+ 2 runner runner 4096 Nov 13 17:18 fotos\ndrwxrwxrwx+ 2 runner runner 4096 Nov 13 17:18 refs\ndrwxrwxrwx+ 2 runner runner 4096 Nov 13 17:18 voz\ntotal 3976\ndrwxrwxrwx+ 2 runner r"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/mundo.py . \"Pulgones en la acelga: cómo detectarlos y cuándo no intervenir\" \"Antes de rociar cualquier cosa, Don Genaro muestra cómo mirar el envés de las hojas y distinguir pulgones de otros bichos. Explica por qué no siempre conviene intervenir y qué labores de huerta ayudan a que no se propaguen. Cuenta que él también fumigaba de más y qué aprendió después.\""
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/refs/canal.json\"}"
+  },
+  {
+   "k": "res",
+   "t": "✓ mundo.json\nEL CUARTO: El galpón de Don Genaro huele a tierra y a madera. Al fondo, la mesa de trabajo con macetas de barro, sobres de semillas, una libreta de tapas duras y un lápiz gastado. En la pared, un calendario de pared con las estaciones marcadas a mano y una foto de Elena en un portarretrato. Cuelgan del techo herramientas de mano: pala, rastrillo, tijeras de podar. Sobre la mesa, un fr"
+  },
+  {
+   "k": "res",
+   "t": "1\t{\n2\t \"nombre\": \"Don Genaro\",\n3\t \"idioma\": \"es\",\n4\t \"presentador\": \"Don Genaro, a heavyset Argentine man in his late sixties, round weathered face, thick grey beard and short grey hair, warm dark eyes with deep crow's feet, bushy grey eyebrows, wearing a faded navy flat cap, a worn brown corduroy shirt under a canvas work apron, a small folding knife on a leather cord and soil under his fingernai"
+  },
+  {
+   "k": "tool",
+   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/mundo.json\"}"
+  },
+  {
+   "k": "res",
+   "t": "1\t{\n2\t \"1_la_habitacion\": \"El galpón de Don Genaro huele a tierra y a madera. Al fondo, la mesa de trabajo con macetas de barro, sobres de semillas, una libreta de tapas duras y un lápiz gastado. En la pared, un calendario de pared con las estaciones marcadas a mano y una foto de Elena en un portarretrato. Cuelgan del techo herramientas de mano: pala, rastrillo, tijeras de podar. Sobre la mesa, un"
+  },
+  {
+   "k": "ai",
+   "t": "Now I'll write the script (~15,000 characters) using the world's objects."
   }
  ],
  "maquinas": 1,
@@ -79,14 +127,14 @@
    {
     "k": "guion",
     "n": "Guion",
-    "seg": 0,
+    "seg": 25,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 67,
+  "total_s": 92,
   "avatar_s": 0,
-  "sin_avatar_s": 67,
+  "sin_avatar_s": 92,
   "cerrado": false
  }
 }
