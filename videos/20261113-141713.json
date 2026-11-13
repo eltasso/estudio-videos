@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794598817.4988463,
+ "actualizado": 1794598880.5208335,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -35,7 +35,7 @@
    "k": "fotos",
    "n": "Fotos",
    "st": "active",
-   "info": "7 fotos"
+   "info": "5 fotos"
   },
   {
    "k": "armado",
@@ -51,30 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1528,
+  "deepseek": 0.1543,
   "gpt": 0.0194,
   "gpt_img": 7,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1722
+  "total": 0.1737
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/qc/hoja_escenas.jpg\"}"
-  },
-  {
-   "k": "res",
-   "t": "[imagen]"
-  },
-  {
-   "k": "tool",
-   "t": "cat fotos/p052.json | head -50"
-  },
-  {
-   "k": "res",
-   "t": "{\n \"id\": \"p052\",\n \"cara\": false,\n \"prompt\": {\n  \"type\": \"amateur phone photo, mild JPEG compression, uneven ordinary indoor light, slightly crooked framing, nothing blurred out, everything in focus, 16:9\",\n  \"moment\": \"El instante en que la frase «No tocar hasta los 7 días» acaba de ser escrita y el lápiz todavía está apoyado sobre el papel.\",\n  \"subject\": \"Cuaderno abierto en la mesa de trabajo, "
-  },
   {
    "k": "tool",
    "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/fotos/p033.png\"}"
@@ -178,6 +162,22 @@
   {
    "k": "tool",
    "t": "timeout 570 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 11 --carpeta . 2>&1 | tail -1; ls fotos/*.png | wc -l"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivos: 7/11 → hacé otra cosa útil y volvé a llamar\n7"
+  },
+  {
+   "k": "tool",
+   "t": "rm fotos/p001_a.png fotos/p001_b.png; ps aux | grep fotos.py | grep -v grep | awk '{print $2}' | grep -v 377; "
+  },
+  {
+   "k": "res",
+   "t": "19281"
+  },
+  {
+   "k": "tool",
+   "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 9 --carpeta . 2>&1 | tail -1; ls fotos/*.png"
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 7568,
+    "seg": 7631,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 8584,
+  "total_s": 8647,
   "avatar_s": 0,
-  "sin_avatar_s": 8584,
+  "sin_avatar_s": 8647,
   "cerrado": false
  }
 }
