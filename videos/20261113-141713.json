@@ -3,21 +3,21 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794590325.6409671,
+ "actualizado": 1794590391.0806043,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
   {
    "k": "guion",
    "n": "Guion",
-   "st": "pending",
-   "info": ""
+   "st": "done",
+   "info": "2.713 palabras"
   },
   {
    "k": "voz",
    "n": "Voz",
-   "st": "pending",
-   "info": ""
+   "st": "active",
+   "info": "3 bloques"
   },
   {
    "k": "tiempos",
@@ -51,12 +51,12 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0054,
+  "deepseek": 0.0092,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0054
+  "total": 0.0092
  },
  "eventos": [
   {
@@ -110,6 +110,38 @@
   {
    "k": "ai",
    "t": "Now I'll write the script (~15,000 characters) using the world's objects."
+  },
+  {
+   "k": "tool",
+   "t": "¡Hola, gente de YouTube! ¿Cómo andan? Soy Genaro, y como siempre, acá en el galpón, entre las macetas y los sobres de semillas. Hoy les voy a hablar de algo que me preguntaron un montón en los comentarios: los pulgones en la acelga. Y les voy a decir una cosa de entrada, antes de que agarren el rociador: el año pasado conté, en una sola hoja del cantero de atrás, cuarenta y siete pulgones. Cuarent"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/guion.txt (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "wc -m guion.txt && python /opt/estudio/repo/motor/tools/validar.py . --etapa guion --min 15 2>&1 | tail -30"
+  },
+  {
+   "k": "res",
+   "t": "13934 guion.txt\nVALIDAR /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y · etapa guion\n  ✓ guion: 13897 caracteres, 2709 palabras (hacen falta 13500-17250 para 15 min: bien)\nRESULTADO: OK"
+  },
+  {
+   "k": "ai",
+   "t": "Script passes. Now voice in background, and I'll plan the hook + creative images in parallel."
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/voz.py . > voz/voz.log 2>&1 & echo \"PID $!\""
+  },
+  {
+   "k": "res",
+   "t": "PID 4052"
+  },
+  {
+   "k": "tool",
+   "t": "sleep 45; tail -5 voz/voz.log; ls -la voz/"
   }
  ],
  "maquinas": 1,
@@ -127,14 +159,21 @@
    {
     "k": "guion",
     "n": "Guion",
-    "seg": 25,
+    "seg": 52,
+    "pasadas": 1,
+    "fin": true
+   },
+   {
+    "k": "voz",
+    "n": "Voz",
+    "seg": 38,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 92,
+  "total_s": 157,
   "avatar_s": 0,
-  "sin_avatar_s": 92,
+  "sin_avatar_s": 157,
   "cerrado": false
  }
 }
