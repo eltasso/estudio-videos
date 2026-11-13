@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794599766.873729,
+ "actualizado": 1794599829.524228,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2259,
+  "deepseek": 0.2268,
   "gpt": 0.0284,
   "gpt_img": 11,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.2543
+  "total": 0.2552
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "False\nTrue\n6000 <class 'int'> False 0"
-  },
-  {
-   "k": "tool",
-   "t": "cat > /tmp/c41.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\nr = {\"startMs\": 0, \"endMs\": 6000}\nfor p in P[:3]:\n    e = p[\"endMs\"]\n    s = p[\"startMs\"]\n    c1 = e > r[\"startMs\"]\n    c2 = s < r[\"endMs\"]\n    print(p[\"id\"], s, e, c1, c2, c1 and c2)\nEOF\npython /tmp/c41.py"
-  },
   {
    "k": "res",
    "t": "p001 6000 10050 True False False\np002 10050 14100 True False False\np003 19600 23280 True False False"
@@ -178,6 +170,14 @@
   {
    "k": "tool",
    "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 9 --carpeta . 2>&1 | tail -1; python -c \"\nimport json;d=json.load(open('fotos/_batches.json'));print([(b['id'][-8:],b.get('ok'),b.get('fail')) for b in d['batches']])\""
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivos: 8/9 → hacé otra cosa útil y volvé a llamar\n[('1553b625', 3, 0), ('308cebac', 4, 0), ('69639146', 4, 0), ('db1a0bfd', None, None), ('86a356bf', None, None)]"
+  },
+  {
+   "k": "tool",
+   "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 13 --carpeta . 2>&1 | tail -1; python -c \"\nimport json;d=json.load(open('fotos/_batches.json'));print([(b['id'][-8:],b.get('ok'),b.get('fail')) for b in d['batches']])\""
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 8517,
+    "seg": 8580,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 9533,
+  "total_s": 9596,
   "avatar_s": 0,
-  "sin_avatar_s": 9533,
+  "sin_avatar_s": 9596,
   "cerrado": false
  }
 }
