@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794590843.8703017,
+ "actualizado": 1794590907.012103,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -214,9 +214,9 @@
     "fin": true
    }
   ],
-  "total_s": 610,
+  "total_s": 673,
   "avatar_s": 0,
-  "sin_avatar_s": 610,
+  "sin_avatar_s": 673,
   "cerrado": false
  }
 }
