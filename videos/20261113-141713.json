@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794591099.4670806,
+ "actualizado": 1794591163.4828484,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,66 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.058,
+  "deepseek": 0.0637,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.058
+  "total": 0.0637
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"    times = []\\n    qe = 0.0\",\"    times = [(0, 6000)]\\n    qe = 6000.0\")\ns=s.replace(\"        if st < qe + 2400:\",\"        if st < qe + 3800:\")\ns=s.replace(\"GAP = 11700.0\",\"GAP = 10600.0\")\nopen(p,'w').write(s)\nEOF\npython auto_plan.py 2>&1|tail -4"
-  },
-  {
-   "k": "res",
-   "t": "GAP 10600.0 win 88 secs 464.5 maxgap 10.6 endgap 1.0"
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\nimport json\nplan=json.load(open('_plan_times.json'))\nout=[]\nfor i,w in enumerate(plan):\n    d={\"file\":'avatar/A%d.mp4'%i,\"frame\":\"refs/avatar.png\",\"startMs\":w['t'],\"endMs\":w['t']+w['dur']}\n    if i%3==1:\n        d['foto']='pX%02d'%i\n        d['lado']='der' if (i//3)%2 else 'izq'\n    out.append(d)\njson.dump(out,open('avatar_ranges.json','w'),indent=1)\nprint(len(out),'splits',sum(1 "
-  },
-  {
-   "k": "res",
-   "t": "88 splits 29 total 464.5\n✓ planos.json: 121 planos de b-roll (8.3 min de b-roll, 14.6 por minuto) + 29 fotos de pantalla partida · 88 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\n⚠ 34 huecos de menos de 2.8 s entre ventanas: si podés, dejá ≥ 3 s (una foto tan corta casi no se ve)."
-  },
-  {
-   "k": "tool",
-   "t": "sed -i 's/GAP = 10600.0/GAP = 11000.0/' auto_plan.py && python auto_plan.py 2>&1|tail -3 && python - <<'EOF'\nimport json\nplan=json.load(open('_plan_times.json'))\nout=[]\nfor i,w in enumerate(plan):\n    d={\"file\":'avatar/A%d.mp4'%i,\"frame\":\"refs/avatar.png\",\"startMs\":w['t'],\"endMs\":w['t']+w['dur']}\n    if i%3==1:\n        d['foto']='pX%02d'%i\n        d['lado']='der' if (i//3)%2 else 'izq'\n    out.app"
-  },
-  {
-   "k": "res",
-   "t": "GAP 11000.0 win 88 secs 464.5 maxgap 10.6 endgap 1.0\n✓ planos.json: 121 planos de b-roll (8.3 min de b-roll, 14.6 por minuto) + 29 fotos de pantalla partida · 88 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\n⚠ 34 huecos de menos de 2.8 s entre ventanas: si podés, dejá ≥ 3 s (una foto tan corta casi no se ve)."
-  },
-  {
-   "k": "tool",
-   "t": "sed -i 's/GAP = 11000.0/GAP = 8200.0/' auto_plan.py && python auto_plan.py 2>&1|tail -3 && python - <<'EOF'\nimport json\nplan=json.load(open('_plan_times.json'))\nout=[]\nfor i,w in enumerate(plan):\n    d={\"file\":'avatar/A%d.mp4'%i,\"frame\":\"refs/avatar.png\",\"startMs\":w['t'],\"endMs\":w['t']+w['dur']}\n    if i%3==1:\n        d['foto']='pX%02d'%i\n        d['lado']='der' if (i//3)%2 else 'izq'\n    out.appe"
-  },
-  {
-   "k": "res",
-   "t": "GAP 8200.0 win 105 secs 553.0 maxgap 8.0 endgap 1.18\n✓ planos.json: 119 planos de b-roll (6.8 min de b-roll, 17.4 por minuto) + 35 fotos de pantalla partida · 105 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\n⚠ 63 huecos de menos de 2.8 s entre ventanas: si podés, dejá ≥ 3 s (una foto tan corta casi no se ve)."
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\nimport json\nR=json.load(open('avatar_ranges.json'))\nout=[]\nfor i,r in enumerate(R):\n    r=dict(r); r.pop('foto',None); r.pop('lado',None); r['file']='avatar/A%d.mp4'%i\n    out.append(r)\njson.dump(out,open('avatar_ranges.json','w'),indent=1)\nprint(len(out), sum(r['endMs']-r['startMs'] for r in out)/1000)\nEOF\npython /opt/estudio/repo/motor/tools/planos.py . 2>&1 | tail -4"
-  },
-  {
-   "k": "res",
-   "t": "105 553.0\n✓ planos.json: 119 planos de b-roll (6.8 min de b-roll, 17.4 por minuto) · 105 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\n⚠ 63 huecos de menos de 2.8 s entre ventanas: si podés, dejá ≥ 3 s (una foto tan corta casi no se ve)."
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\nimport json\nR=json.load(open('avatar_ranges.json'))\nout=[]\nfor i,w in enumerate(json.load(open('_plan_times.json'))):\n    d={\"file\":'avatar/A%d.mp4'%i,\"frame\":\"refs/avatar.png\",\"startMs\":w['t'],\"endMs\":w['t']+w['dur']}\n    out.append(d)\njson.dump(out,open('avatar_ranges.json','w'),indent=1)\nEOF\npython /opt/estudio/repo/motor/tools/planos.py . 2>&1 | tail -3\npython - <<'EOF'\nimport"
-  },
-  {
-   "k": "res",
-   "t": "✓ planos.json: 119 planos de b-roll (6.8 min de b-roll, 17.4 por minuto) · 105 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\n⚠ 63 huecos de menos de 2.8 s entre ventanas: si podés, dejá ≥ 3 s (una foto tan corta casi no se ve).\n<class 'list'> 119"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/escenas.py . ficha 2>&1 | tail -25"
-  },
   {
    "k": "res",
    "t": "✓ escenas/ficha.json: 3 escenas firma · tesis: Los pulgones en la acelga no se combaten rociando por miedo, sino observando el envés, contando y esperando una semana.\n  es01 · planos p052 · 5.2s · d) La cámara se acerca lentamente al cuaderno abierto y se detiene en la frase recién escrita; f) un pool de l\n  es02 · planos p113+p114 · 7.2s · c) La foto se corta en cuatro paneles verticales siguiend"
@@ -178,6 +126,58 @@
   {
    "k": "res",
    "t": "Exit code 1\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/make_pedidos.py\", line 45\n    \"El gancho: Don Genaro mira a cámara con cara de \"yo ya hice eso\", sosteniendo una hoja de acelga llena de pulgones a la altura del pecho.\",\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?"
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\np='make_pedidos.py'\ns=open(p).read()\ns=s.replace('con cara de \"yo ya hice eso\"','con cara de «yo ya hice eso»')\ns=s.replace('levan atado','levantado').replace('levanatado','levantado')\nopen(p,'w').write(s)\nEOF\npython make_pedidos.py"
+  },
+  {
+   "k": "res",
+   "t": "test 9 rest 7"
+  },
+  {
+   "k": "tool",
+   "t": "sed -n '1,120p' /opt/estudio/repo/motor/tools/fotos.py | sed -n '60,120p'"
+  },
+  {
+   "k": "res",
+   "t": "    hit = [w for w in PROHIBIDOS if w in sin_avoid.replace(\"nothing blurred out\", \"\")]\n    if hit: problemas.append(f\"{i}: palabras prohibidas {hit} (dan look de IA/stock)\")\n    if not creativa:\n        if len(str(j.get(\"moment\", \"\"))) < 70: problemas.append(f\"{i}: 'moment' muy corto (≥70 caracteres: QUÉ pasa en ese segundo y POR QUÉ importa)\")\n        props = j.get(\"props\") or []\n        if isins"
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\np='make_pedidos.py'\ns=open(p).read()\ns=s.replace('add(\"p041\",\\n    \"La anécdota del año 86: la mochila rociadora de espalda olvidada en el rincón del galpón, oxidada, con la lanza torcida.\",','add(\"p041\",\\n    \"La anécdota del año 86: la mochila rociadora de espalda olvidada en el rincón del galpón, con el cuero de las correas roto y la lanza torcida, un rastro seco de años.\",')\ns"
+  },
+  {
+   "k": "res",
+   "t": "test 9 rest 7\n7"
+  },
+  {
+   "k": "tool",
+   "t": "head -40 clips/stock.log 2>/dev/null; ls clips 2>/dev/null; python -c \"\nimport json;print(len(json.load(open('/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/fotos/_batches.json'))))\" 2>/dev/null; tail -3 fotos/fotos_escenas.log"
+  },
+  {
+   "k": "res",
+   "t": "1\n17:31:02 → batch batch_6af74955ed2c8190a32f5e2c1553b625 · 3 fotos · sin referencia · low 1088x608\n17:31:02 batch 1553b625: validating 0/0"
+  },
+  {
+   "k": "tool",
+   "t": "mkdir -p clips && python - <<'EOF'\nimport json\nP={p['id']:p for p in json.load(open('planos.json'))}\nphotos={'p001','p002','p008','p016','p030','p033','p037','p041','p052','p054','p066','p070','p085','p089','p101','p113','p115'}\nreq=[]\ndef add(pid, muestra, *buscar):\n    req.append({\"id\":pid,\"muestra\":muestra,\"buscar\":list(buscar)})\nadd(\"p003\",\"a close view of a big green chard leaf with tiny aphi"
+  },
+  {
+   "k": "res",
+   "t": "102"
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/stock.py . stock_01.json > clips/stock.log 2>&1 & echo started; sleep 20; tail -5 fotos/fotos_escenas.log"
+  },
+  {
+   "k": "res",
+   "t": "started\n17:31:02 → batch batch_6af74955ed2c8190a32f5e2c1553b625 · 3 fotos · sin referencia · low 1088x608\n17:31:02 batch 1553b625: validating 0/0"
+  },
+  {
+   "k": "tool",
+   "t": "sleep 60; tail -4 fotos/fotos_escenas.log; tail -3 clips/stock.log"
   }
  ],
  "maquinas": 1,
@@ -214,9 +214,9 @@
     "fin": true
    }
   ],
-  "total_s": 865,
+  "total_s": 929,
   "avatar_s": 0,
-  "sin_avatar_s": 865,
+  "sin_avatar_s": 929,
   "cerrado": false
  }
 }
