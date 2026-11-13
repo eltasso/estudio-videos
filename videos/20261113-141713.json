@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794601413.199213,
+ "actualizado": 1794601476.6780999,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,30 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2286,
+  "deepseek": 0.2302,
   "gpt": 0.0284,
   "gpt_img": 11,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.257
+  "total": 0.2586
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "p001 6000 4050 True False True\np002 10050 4050 True True False\np003 19600 3680 True True False"
-  },
-  {
-   "k": "tool",
-   "t": "python -c \"\nimport json\nR=json.load(open('/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/avatar_ranges.json'))\nprint(len(R), sum(r['endMs']-r['startMs'] for r in R)/1000, R[0]['startMs'], R[-1]['endMs'])\n\"; tail -2 fotos/fotos_02.log"
-  },
-  {
-   "k": "res",
-   "t": "82 431.5 0 959958\n19:46:27 batch db1a0bfd: in_progress 0/6\n19:46:27 batch 86a356bf: in_progress 0/1"
-  },
-  {
-   "k": "tool",
-   "t": "cat > /tmp/c44.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\np = P[0]\ne = p[\"endMs\"]\nt = 6000\nprint(e > t, e >= t)\nW = [(0, 6000)]\na, b = W[0]\nprint(a, b, b < 1000, b <= t, a > t)\nprint(6000 > 6000, 10050 > 6000)\nEOF\npython /tmp/c44.py"
-  },
   {
    "k": "res",
    "t": "True True\n0 6000 False True False\nFalse True"
@@ -178,6 +162,22 @@
   {
    "k": "tool",
    "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 11 --carpeta . 2>&1 | tail -1; ls fotos/*.png | wc -l"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivos: 8/11 → hacé otra cosa útil y volvé a llamar\n8"
+  },
+  {
+   "k": "tool",
+   "t": "ls fotos/*.png; tail -3 fotos/fotos_02.log; date"
+  },
+  {
+   "k": "res",
+   "t": "fotos/p001.png\nfotos/p001_c.png\nfotos/p002.png\nfotos/p008.png\nfotos/p033.png\nfotos/p046.png\nfotos/p052.png\nfotos/p113.png\n20:22:44 batch 86a356bf: in_progress 0/1\n20:23:14 batch db1a0bfd: in_progress 3/6\n20:23:14 batch 86a356bf: in_progress 0/1\nFri Nov 13 20:23:42 UTC 2026"
+  },
+  {
+   "k": "tool",
+   "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 14 --carpeta . 2>&1 | tail -1"
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 10164,
+    "seg": 10227,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 11179,
+  "total_s": 11243,
   "avatar_s": 0,
-  "sin_avatar_s": 11179,
+  "sin_avatar_s": 11243,
   "cerrado": false
  }
 }
