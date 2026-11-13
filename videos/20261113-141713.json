@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794603188.7636461,
+ "actualizado": 1794603252.7183917,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -34,14 +34,14 @@
   {
    "k": "fotos",
    "n": "Fotos",
-   "st": "active",
-   "info": "15 fotos"
+   "st": "done",
+   "info": "12 fotos"
   },
   {
    "k": "armado",
    "n": "Armado",
-   "st": "pending",
-   "info": ""
+   "st": "active",
+   "info": "10 segmentos"
   },
   {
    "k": "qc",
@@ -51,34 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2345,
+  "deepseek": 0.2373,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.28
+  "total": 0.2828
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "cat > /tmp/c50.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\nR = json.load(open(\"avatar_ranges.json\"))\nprint(P[0][\"startMs\"], P[0][\"endMs\"])\nr = R[0]\nprint(r[\"endMs\"])\na, b = P[0][\"startMs\"], P[0][\"endMs\"]\ne = r[\"endMs\"]\nif a < e:\n    print(\"less\")\nelse:\n    print(\"not less\")\nnb = 6000 - b\nprint(\"as written but swapped:\", nb, nb < 0)\nEOF\npython /tmp/c50.py"
-  },
-  {
-   "k": "res",
-   "t": "6000 10050\n6000\nnot less\nas written but swapped: -4050 True"
-  },
-  {
-   "k": "tool",
-   "t": "mkdir -p render_test && python /opt/estudio/repo/motor/tools/planos.py . --shots 2>&1 | tail -5"
-  },
-  {
-   "k": "res",
-   "t": "⛔ faltan 2 fotos o clips (p041, p070). Esperalas con esperar.py o repedilas."
-  },
-  {
-   "k": "tool",
-   "t": "tail -2 fotos/fotos_02.log; grep -v \"^\\s*$\" fotos/fotos_01.log | tail -1; python -c \"\nimport json;d=json.load(open('fotos/_batches.json'));print([(b['id'][-8:],b.get('ok'),b.get('fail'),len(b['names'])) for b in d['batches']])\""
-  },
   {
    "k": "res",
    "t": "19:46:57 batch db1a0bfd: in_progress 0/6\n19:46:58 batch 86a356bf: in_progress 0/1\n[('1553b625', 3, 0, 3), ('308cebac', 4, 0, 4), ('69639146', 4, 0, 4), ('db1a0bfd', None, None, 6), ('86a356bf', None, None, 1)]"
@@ -178,6 +158,26 @@
   {
    "k": "res",
    "t": "[imagen]"
+  },
+  {
+   "k": "tool",
+   "t": "for i in p018 p058 p090; do rm -f fotos/$i.png clips/$i.mp4; done\ncat > /tmp/stockfix.py <<'EOF'\nimport json\nreq=[\n {\"id\":\"p018\",\"muestra\":\"hands turning a big green leaf over to look at its underside\",\"buscar\":[\"turning over green leaf\",\"hands holding green leaf\",\"leaf close up hands\"]},\n {\"id\":\"p058\",\"muestra\":\"a hand with a pencil writing in a notebook on a wooden table\",\"buscar\":[\"writing note"
+  },
+  {
+   "k": "res",
+   "t": "20:53:16 bajados 3/3\n20:53:16 FIN: 3/3 clips en clips/\n⛔ faltan 1 fotos o clips (p041). Esperalas con esperar.py o repedilas."
+  },
+  {
+   "k": "tool",
+   "t": "cat > /tmp/stockfix2.py <<'EOF'\nimport json\nreq=[{\"id\":\"p041\",\"muestra\":\"an older man speaking into a microphone in a workshop on camera\",\"buscar\":[\"man talking to camera indoors\",\"senior man speaking microphone\",\"man explaining at workbench\"]}]\njson.dump(req,open('stock_07.json','w'),indent=1,ensure_ascii=False)\nEOF\npython /tmp/stockfix2.py && python /opt/estudio/repo/motor/tools/stock.py . stock"
+  },
+  {
+   "k": "res",
+   "t": "20:53:24 FIN: 1/1 clips en clips/\n✓ shots_timed.json: 120 planos, 120 fotos distintas (cero repetidas). Seguí con render.py."
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/render.py . --limit 10 > render_test.log 2>&1 & sleep 90; tail -5 render_test.log"
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,21 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 11939,
+    "seg": 12003,
+    "pasadas": 1,
+    "fin": true
+   },
+   {
+    "k": "extrema",
+    "n": "Edición extrema",
+    "seg": 0,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 12955,
+  "total_s": 13019,
   "avatar_s": 0,
-  "sin_avatar_s": 12955,
+  "sin_avatar_s": 13019,
   "cerrado": false
  }
 }
