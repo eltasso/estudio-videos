@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794602489.205501,
+ "actualizado": 1794602555.7351317,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2311,
+  "deepseek": 0.232,
   "gpt": 0.0315,
   "gpt_img": 12,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.2626
+  "total": 0.2635
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "0 []\n82"
-  },
-  {
-   "k": "tool",
-   "t": "cat > /tmp/c46.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\nR = json.load(open(\"avatar_ranges.json\"))\ndef lt(x, y):\n    return bool(x) if x < y else False\nprint(lt(R[0][\"endMs\"], P[0][\"startMs\"]), R[0][\"endMs\"], P[0][\"startMs\"])\ns = 0\nfor p in P:\n    for r in R:\n        m = min(p[\"endMs\"], r[\"endMs\"])\n        M = max(p[\"startMs\"], r[\"startMs\"])\n        if m > M:\n            s += 1\npri"
-  },
   {
    "k": "res",
    "t": "False 6000 6000\ngt pairs 0\n0"
@@ -178,6 +170,14 @@
   {
    "k": "tool",
    "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 14 --carpeta . 2>&1 | tail -1; tail -2 fotos/fotos_02.log"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivos: 9/14 → hacé otra cosa útil y volvé a llamar\n20:35:21 ✓ batch 86a356bf: 1 fotos bajadas, 0 fallidas (US$0.003)\n20:35:51 batch db1a0bfd: in_progress 3/6"
+  },
+  {
+   "k": "tool",
+   "t": "timeout 590 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 10 --carpeta . 2>&1 | tail -1; ls fotos/*.png | wc -l"
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 11240,
+    "seg": 11306,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 12255,
+  "total_s": 12322,
   "avatar_s": 0,
-  "sin_avatar_s": 12255,
+  "sin_avatar_s": 12322,
   "cerrado": false
  }
 }
