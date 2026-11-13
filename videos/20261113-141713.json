@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794607058.7026258,
+ "actualizado": 1794607121.6343486,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2605,
+  "deepseek": 0.2614,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.306
+  "total": 0.3069
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "(Bash completed with no output)"
-  },
-  {
-   "k": "tool",
-   "t": "sleep 20; tail -5 avatar/it2.log; tail -2 render.log"
-  },
   {
    "k": "res",
    "t": "21:01:05 InfiniteTalk: 82 ventanas · reel 456.1 s · 1 llamada"
@@ -178,6 +170,14 @@
   {
    "k": "tool",
    "t": "python -c \"\nimport json\nP=json.load(open('planos.json'))\nprint([(p['id'],p['startMs']/1000) for p in P if 55<p['startMs']/1000<190])\n\"; python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4 2>&1 | tail -1"
+  },
+  {
+   "k": "res",
+   "t": "[('p008', 63.1), ('p009', 74.66), ('p010', 85.78), ('p011', 94.18), ('p012', 98.28), ('p013', 107.88), ('p014', 112.02), ('p015', 120.5), ('p016', 129.78), ('p017', 141.5), ('p018', 145.74), ('p019', 154.52), ('p020', 158.34), ('p021', 167.16), ('p022', 170.95), ('p023', 180.24), ('p024', 184.04)]\n… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
+  },
+  {
+   "k": "tool",
+   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4 2>&1 | tail -1; tail -2 avatar/it2.log"
   }
  ],
  "maquinas": 1,
@@ -223,7 +223,7 @@
    {
     "k": "avatar_gen",
     "n": "Avatar generando",
-    "seg": 3665,
+    "seg": 3728,
     "pasadas": 1,
     "fin": false
    },
@@ -270,9 +270,9 @@
     "fin": true
    }
   ],
-  "total_s": 16825,
+  "total_s": 16888,
   "avatar_s": 30,
-  "sin_avatar_s": 16794,
+  "sin_avatar_s": 16857,
   "cerrado": false
  }
 }
