@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794608723.6092713,
+ "actualizado": 1794608786.492795,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,38 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2658,
+  "deepseek": 0.2684,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.5613
+  "total": 0.5639
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "sleep 540; tail -2 assemble.log; tail -2 avatar/it2.log; ls -la assemble.log"
-  },
-  {
-   "k": "res",
-   "t": "tramo 31: falló · \nel armado por tramos falló (tramo 28 no salió): va el armado completo\n21:01:17 RUN 530ab2f6-3da5-43c9-813e-d4eb1f81f8e5-u1\n21:01:47 estado: IN_PROGRESS\n-rw-rw-rw-+ 1 sesion sesion 203 Nov 13 21:32 assemble.log"
-  },
-  {
-   "k": "tool",
-   "t": "cat > /tmp/d.py <<'EOF'\nimport json\nP = json.load(open(\"planos.json\"))\nR = json.load(open(\"avatar_ranges.json\"))\nshy = [(p[\"id\"], p[\"startMs\"]) for p in P if p[\"startMs\"] < 6000]\nshown = [(r[\"file\"], r[\"startMs\"]) for r in R if r[\"startMs\"] < 6000]\nprint(shy, shown if \"shown\" in dir() else shown)\nEOF\npython /tmp/d.py"
-  },
-  {
-   "k": "res",
-   "t": "[] [('avatar/A0.mp4', 0)]"
-  },
-  {
-   "k": "tool",
-   "t": "tail -5 assemble.log; ps aux | grep -E \"assemble|ffmpeg\" | grep -v grep | wc -l"
-  },
-  {
-   "k": "res",
-   "t": "capas de edición extrema: 5\ntramos: 33 de 33 por codificar · 4 a la vez\ntramo 28: falló · \ntramo 31: falló · \nel armado por tramos falló (tramo 28 no salió): va el armado completo\n4"
-  },
   {
    "k": "tool",
    "t": "sleep 540; tail -4 assemble.log; tail -2 avatar/it2.log"
@@ -178,6 +154,30 @@
   {
    "k": "tool",
    "t": "sleep 500; ls -la segments/*.mp4 | wc -l; ps aux | grep render.py | grep -v grep | awk '{print $2}' | tail -1"
+  },
+  {
+   "k": "res",
+   "t": "201\n3776"
+  },
+  {
+   "k": "tool",
+   "t": "ps aux | grep \"render.py\" | grep -v grep | awk '{print $2}' | tail -2; ls -la segments/*.mp4 | wc -l; tail -2 render2.log"
+  },
+  {
+   "k": "res",
+   "t": "3774\n3776\n201\nreusados de otra posición: 111\nhechos 201"
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/assemble.py . > assemble2.log 2>&1 & sleep 30; tail -4 assemble2.log"
+  },
+  {
+   "k": "res",
+   "t": "segmentos: 201\ncapas de edición extrema: 5\ntramos: 33 de 33 por codificar · 4 a la vez"
+  },
+  {
+   "k": "tool",
+   "t": "sleep 560; tail -3 assemble2.log"
   }
  ],
  "maquinas": 1,
@@ -272,14 +272,14 @@
    {
     "k": "correcciones",
     "n": "Correcciones",
-    "seg": 204,
-    "pasadas": 1,
-    "fin": true
+    "seg": 248,
+    "pasadas": 2,
+    "fin": false
    }
   ],
-  "total_s": 18490,
+  "total_s": 18553,
   "avatar_s": 4649,
-  "sin_avatar_s": 13841,
+  "sin_avatar_s": 13904,
   "cerrado": false
  }
 }
