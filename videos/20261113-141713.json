@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794598944.202347,
+ "actualizado": 1794599008.2545302,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -35,7 +35,7 @@
    "k": "fotos",
    "n": "Fotos",
    "st": "active",
-   "info": "10 fotos"
+   "info": "8 fotos"
   },
   {
    "k": "armado",
@@ -51,46 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.1578,
+  "deepseek": 0.1616,
   "gpt": 0.0284,
   "gpt_img": 11,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.1862
+  "total": 0.19
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "kill 7502; sleep 3; ps aux | grep fotos.py | grep -v grep | awk '{print $2}'; sleep 45; tail -2 fotos/fotos_01.log"
-  },
-  {
-   "k": "res",
-   "t": "3774\n3776\n19281\n19:03:12 ya hay otro fotos.py en este video (pid 19281): espero que termine\n19:03:42 ya hay otro fotos.py en este video (pid 19281): espero que termine"
-  },
-  {
-   "k": "tool",
-   "t": "cat fotos/_fotos.lock; ps aux | grep -E \"fotos.py|escenas.py\" | grep -v grep"
-  },
-  {
-   "k": "res",
-   "t": "<persisted-output>\nOutput too large (52.1KB). Full output saved to: /opt/estudio/datos/brain/projects/-opt-estudio-datos-videos-pulgones-en-la-acelga-como-detectarlos-y/2f35f5af-9568-4ef6-97d6-aa0cdfafaffc/tool-results/bfyqavqa8.txt\n\nPreview (first 2KB):\n19281root        3774  0.0  0.0  12688  5948 ?        Ss   17:18   0:00 sudo -n -H -u sesion -- env -i ESTUDIO_DATA=/opt/estudio/datos LANG=C.UTF"
-  },
-  {
-   "k": "tool",
-   "t": "sleep 40; tail -2 fotos/fotos_01.log; python -c \"\nimport json;d=json.load(open('fotos/_batches.json'));print([(b['id'][-8:],b['names'][:3]) for b in d['batches']])\""
-  },
-  {
-   "k": "res",
-   "t": "19:03:12 ya hay otro fotos.py en este video (pid 19281): espero que termine\n19:03:42 ya hay otro fotos.py en este video (pid 19281): espero que termine\n[('1553b625', ['p052', 'p113', 'p033']), ('308cebac', ['p001_c', 'p042', 'p046']), ('69639146', ['p001_a', 'p001_b', 'p002'])]"
-  },
-  {
-   "k": "ai",
-   "t": "Both test batches are in flight. Waiting."
-  },
-  {
-   "k": "tool",
-   "t": "timeout 570 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 10 --carpeta . 2>&1 | tail -2; tail -2 fotos/fotos_01.log"
-  },
   {
    "k": "res",
    "t": "… sigue esperando tras 540 s · archivos: 7/10 → hacé otra cosa útil y volvé a llamar\n19:03:12 ya hay otro fotos.py en este video (pid 19281): espero que termine\n19:03:42 ya hay otro fotos.py en este video (pid 19281): espero que termine"
@@ -178,6 +146,38 @@
   {
    "k": "tool",
    "t": "nohup python /opt/estudio/repo/motor/tools/escenas.py . construir --fondo > escenas/escenas.log 2>&1 & sleep 30; tail -5 /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/escenas/escenas.log"
+  },
+  {
+   "k": "res",
+   "t": "19:42:34 escenas: es01 lista · 0 capas · cámara 4 viajes\n19:42:34 escenas: es02 ahora pisa una ventana del avatar: queda la foto normal\n19:42:34 escenas: es03 ahora pisa una ventana del avatar: queda la foto normal"
+  },
+  {
+   "k": "tool",
+   "t": "cat escenas/escenas.log; ls extrema/ 2>/dev/null; cat extrema/manifest.json 2>/dev/null | head -20"
+  },
+  {
+   "k": "res",
+   "t": "19:42:34 escenas: es01 lista · 0 capas · cámara 4 viajes\n19:42:34 escenas: es02 ahora pisa una ventana del avatar: queda la foto normal\n19:42:34 escenas: es03 ahora pisa una ventana del avatar: queda la foto normal\nEN_CURSO"
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\nimport json\nout=[]\nfor i,r in enumerate(json.load(open('avatar_ranges.json'))):\n    if i in (3,5):\n        r=dict(r)\n        r['foto']={'3':'p012','5':'p016'}[i]\n        r['lado']='der' if i==3 else 'izq'\n    out.append(r)\njson.dump(out,open('avatar_ranges.json','w'),indent=1)\nprint(sum(1 for r in out if 'foto' in r))\nEOF\nls fotos/p012* fotos/p016* 2>/dev/null; python /opt/estudio"
+  },
+  {
+   "k": "res",
+   "t": "Traceback (most recent call last):\n  File \"<stdin>\", line 6, in <module>\nKeyError: 3\n✓ planos.json: 120 planos de b-roll (8.9 min de b-roll, 13.5 por minuto) · 82 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite."
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\np='make_pedidos.py'\ns=open(p).read()\ns=s.replace('''add(\"p042\",\n    \"La mariquita en el envés: la colonia apretada en una nervadura y una mariquita roja acercándose, que es la que limpia la hoja.\",''','''add(\"p042\",\n    \"La mariquita en el envés: la larva gris y naranja que parece un ciempiés gordito y una mariquita roja en la misma hoja, las dos que limpian la acelga sin que les "
+  },
+  {
+   "k": "res",
+   "t": "test 9 rest 7"
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/fotos.py . pedidos_03.json > fotos/fotos_03.log 2>&1 & \nnohup python /opt/estudio/repo/motor/tools/fotos.py . pedidos_02.json > fotos/fotos_02.log 2>&1 &\nsleep 40; grep -v \"^ *$\" fotos/fotos_02.log | tail -2; grep -v \"^ *$\" fotos/fotos_03.log | tail -2; python -c \"\nimport json;d=json.load(open('fotos/_batches.json'));print([(b['id'][-8:],len(b['names'])) "
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 7695,
+    "seg": 7759,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 8710,
+  "total_s": 8774,
   "avatar_s": 0,
-  "sin_avatar_s": 8710,
+  "sin_avatar_s": 8774,
   "cerrado": false
  }
 }
