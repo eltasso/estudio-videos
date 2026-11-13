@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794608151.0563545,
+ "actualizado": 1794608216.0701506,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,22 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2641,
+  "deepseek": 0.2649,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.5596
+  "total": 0.5604
  },
  "eventos": [
-  {
-   "k": "tool",
-   "t": "sleep 540; tail -3 assemble.log; tail -2 avatar/it2.log"
-  },
-  {
-   "k": "res",
-   "t": "segmentos: 203\ncapas de edición extrema: 5\ntramos: 33 de 33 por codificar · 4 a la vez\n21:01:17 RUN 530ab2f6-3da5-43c9-813e-d4eb1f81f8e5-u1\n21:01:47 estado: IN_PROGRESS"
-  },
   {
    "k": "tool",
    "t": "sleep 540; tail -3 assemble.log; tail -2 avatar/it2.log"
@@ -178,6 +170,14 @@
   {
    "k": "tool",
    "t": "sleep 60; tail -5 render2.log; ls -la avatar/A0.mp4"
+  },
+  {
+   "k": "res",
+   "t": "-rw-rw-rw-+ 1 sesion sesion 1483736 Nov 13 22:13 avatar/A0.mp4"
+  },
+  {
+   "k": "tool",
+   "t": "ps aux | grep render.py | grep -v grep | awk '{print $2}'; sleep 30; cat render2.log | head; ls -la segments | head -5"
   }
  ],
  "maquinas": 1,
@@ -272,14 +272,14 @@
    {
     "k": "correcciones",
     "n": "Correcciones",
-    "seg": 83,
+    "seg": 148,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 17917,
+  "total_s": 17982,
   "avatar_s": 4649,
-  "sin_avatar_s": 13269,
+  "sin_avatar_s": 13334,
   "cerrado": false
  }
 }
