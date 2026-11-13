@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794609672.3359792,
+ "actualizado": 1794609696.6813989,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43520999957",
  "pasos": [
@@ -51,66 +51,14 @@
   }
  ],
  "costo": {
-  "deepseek": 0.2693,
+  "deepseek": 0.3105,
   "gpt": 0.0455,
   "gpt_img": 18,
   "whisper": 0.0,
   "avatar": 0.25,
-  "total": 0.5648
+  "total": 0.606
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "tramo 6 listo\ntramo 7 listo\ntramo 8 listo\ntramo 9 listo\nfinal: ./final.mp4 963.224000 s\n-rw-rw-rw-+ 1 sesion sesion 146360306 Nov 13 21:47 final.mp4"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/revisor.py . 2>&1 | tail -12"
-  },
-  {
-   "k": "res",
-   "t": "⚠ 5 cosas para arreglar en gates/correcciones.txt:\n  · FINAL ~1:00: Misma foto del presentador repetida → mirá en plan.json qué hay en ese segundo. Si es una foto: borrá fotos/<id>.png, pedí ese id de nuevo con fotos.py y volvé a correr render.py + assemble.py. Si es el avatar: NUNCA otra llamada; sacá esa ventana de avatar_ranges.json (queda la foto de abajo), salvo la primera, que no se toca.\n  "
-  },
-  {
-   "k": "tool",
-   "t": "tail -3 avatar/it2.log"
-  },
-  {
-   "k": "res",
-   "t": "21:01:05 InfiniteTalk: 82 ventanas · reel 456.1 s · 1 llamada\n21:01:17 RUN 530ab2f6-3da5-43c9-813e-d4eb1f81f8e5-u1\n21:01:47 estado: IN_PROGRESS"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/validar.py . --etapa final --min 15 2>&1 | tail -20"
-  },
-  {
-   "k": "res",
-   "t": "  ✓ apertura: tramos de avatar de ≤ 6 s en los primeros 30 s\n  ✓ dinámico: avatar a pantalla completa ≤ 6 s por vez\n  ✓ ritmo del avatar: avatar 432 s = 45 % del video (ideal ~50 %: más avatar = menos fotos)\n  ✓ ritmo del avatar: nunca más de 15 s sin avatar\n  ✓ clips de stock sin negro ni roturas\n  ✓ final: 1920x1080\n  ✓ final: fps 30/1\n  ✓ final 963.22 s vs voz 963.22 s\n  ✓ duración real: 16.1 m"
-  },
-  {
-   "k": "tool",
-   "t": "python -c \"\nimport json\nP=json.load(open('planos.json'))\nprint([(p['id'],p['startMs']/1000) for p in P if 55<p['startMs']/1000<190])\n\"; python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4 2>&1 | tail -1"
-  },
-  {
-   "k": "res",
-   "t": "[('p008', 63.1), ('p009', 74.66), ('p010', 85.78), ('p011', 94.18), ('p012', 98.28), ('p013', 107.88), ('p014', 112.02), ('p015', 120.5), ('p016', 129.78), ('p017', 141.5), ('p018', 145.74), ('p019', 154.52), ('p020', 158.34), ('p021', 167.16), ('p022', 170.95), ('p023', 180.24), ('p024', 184.04)]\n… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4 2>&1 | tail -1; tail -2 avatar/it2.log"
-  },
-  {
-   "k": "res",
-   "t": "… sigue esperando tras 540 s · archivo: todavía no existe → hacé otra cosa útil y volvé a llamar\n21:01:17 RUN 530ab2f6-3da5-43c9-813e-d4eb1f81f8e5-u1\n21:01:47 estado: IN_PROGRESS"
-  },
-  {
-   "k": "tool",
-   "t": "python /opt/estudio/repo/motor/tools/esperar.py --existe avatar/A0.mp4 2>&1 | tail -1; tail -3 avatar/it2.log"
-  },
-  {
-   "k": "res",
-   "t": "✓ existe avatar/A0.mp4 (1.5 MB, 460 s)\n21:01:47 estado: IN_PROGRESS\n22:13:26 estado: COMPLETED\n✓ 82 clips cortados · desfase corregido (máx 300 ms)"
-  },
   {
    "k": "ai",
    "t": "Avatar clips are in. Re-rendering with the avatar."
@@ -178,6 +126,58 @@
   {
    "k": "user",
    "t": "La sesión siguió en otra máquina (GitHub corta cada 6 h). Todo lo tuyo está igual en tu carpeta: mirá qué hay, NO rehagas nada y seguí el CAMINO RECTO del KIT hasta el final."
+  },
+  {
+   "k": "tool",
+   "t": "tail -5 assemble2.log; ls -la final.mp4; ls avatar/*.mp4 | wc -l; ls gates/"
+  },
+  {
+   "k": "res",
+   "t": "segmentos: 201\ncapas de edición extrema: 5\ntramos: 33 de 33 por codificar · 4 a la vez\n-rw-rwxrw-+ 1 runner runner 146360306 Nov 13 21:47 final.mp4\n82\narmado.json\ncorrecciones.txt\netapas.jsonl\nfotos_auto.txt\nrender_auto.txt\nrevisor_final.json"
+  },
+  {
+   "k": "tool",
+   "t": "ps aux | grep -E \"assemble.py|ffmpeg\" | grep -v grep | wc -l; ls -la assemble2.log; cat gates/armado.json | head -20"
+  },
+  {
+   "k": "res",
+   "t": "2\n-rw-rwxrw-+ 1 runner runner 89 Nov 13 22:25 assemble2.log\n{\"firma\": \"1d0078283e61baa246b854310e9d106816dd5d6d\"}"
+  },
+  {
+   "k": "tool",
+   "t": "ps aux | grep -E \"assemble|ffmpeg\" | grep -v grep | head -5"
+  },
+  {
+   "k": "res",
+   "t": "<persisted-output>\nOutput too large (52KB). Full output saved to: /opt/estudio/datos/brain/projects/-opt-estudio-datos-videos-pulgones-en-la-acelga-como-detectarlos-y/2f35f5af-9568-4ef6-97d6-aa0cdfafaffc/tool-results/bpi2622cl.txt\n\nPreview (first 2KB):\nroot        3866  0.0  0.0  12684  5912 ?        Ss   22:41   0:00 sudo -n -H -u sesion -- env -i ESTUDIO_DATA=/opt/estudio/datos LANG=C.UTF-8 GITH"
+  },
+  {
+   "k": "tool",
+   "t": "pgrep -af \"assemble.py\" | head; pgrep -af \"ffmpeg\" | head -3"
+  },
+  {
+   "k": "res",
+   "t": "<persisted-output>\nOutput too large (104.3KB). Full output saved to: /opt/estudio/datos/brain/projects/-opt-estudio-datos-videos-pulgones-en-la-acelga-como-detectarlos-y/2f35f5af-9568-4ef6-97d6-aa0cdfafaffc/tool-results/bx4jsm4l6.txt\n\nPreview (first 2KB):\n3866 sudo -n -H -u sesion -- env -i ESTUDIO_DATA=/opt/estudio/datos LANG=C.UTF-8 GITHUB_SERVER_URL=https://github.com GITHUB_REPOSITORY=eltasso/"
+  },
+  {
+   "k": "tool",
+   "t": "ls -la /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/*.log; date; ls -la /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/segments | head -4"
+  },
+  {
+   "k": "res",
+   "t": "-rw-rwxrw-+ 1 runner runner  361 Nov 13 21:47 /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/assemble.log\n-rw-rwxrw-+ 1 runner runner   89 Nov 13 22:25 /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/assemble2.log\n-rw-rwxrw-+ 1 runner runner 6379 Nov 13 21:09 /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/render.log\n-rw-rwxrw-+ 1 runner ru"
+  },
+  {
+   "k": "tool",
+   "t": "ls -la /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/segments/ | head -10; ls /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/segments/*.mp4 | wc -l; cat /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/render2.log"
+  },
+  {
+   "k": "res",
+   "t": "total 685140\ndrwxrwxrwx+  2 runner runner    16384 Nov 13 22:17 .\ndrwxrwxrwx+ 16 runner runner     4096 Nov 13 22:25 ..\n-rw-rwxrw-+  1 runner runner        0 Nov 13 20:54 .lock\n-rw-rwxrw-+  1 runner runner  4013362 Nov 13 22:14 0000.mp4\n-rw-rwxrw-+  1 runner runner       48 Nov 13 22:14 0000.mp4.src\n-rw-rwxrw-+  1 runner runner  1204258 Nov 13 22:14 0001.mp4\n-rw-rwxrw-+  1 runner runner      217 N"
+  },
+  {
+   "k": "tool",
+   "t": "nohup python /opt/estudio/repo/motor/tools/assemble.py . > assemble2.log 2>&1 & sleep 45; tail -5 /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/assemble2.log"
   }
  ],
  "maquinas": 2,
@@ -272,14 +272,14 @@
    {
     "k": "correcciones",
     "n": "Correcciones",
-    "seg": 1134,
-    "pasadas": 2,
+    "seg": 1159,
+    "pasadas": 3,
     "fin": false
    }
   ],
-  "total_s": 19438,
+  "total_s": 19463,
   "avatar_s": 4649,
-  "sin_avatar_s": 14790,
+  "sin_avatar_s": 14814,
   "cerrado": false
  }
 }
