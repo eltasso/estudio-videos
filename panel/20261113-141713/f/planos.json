@@ -1,0 +1,835 @@
+[
+ {
+  "id": "p001",
+  "startMs": 6000,
+  "endMs": 9120,
+  "seg": 3.1,
+  "texto": "entre las macetas y los sobres de semillas."
+ },
+ {
+  "id": "p002",
+  "startMs": 9120,
+  "endMs": 13240,
+  "seg": 4.1,
+  "texto": "Hoy les voy a hablar de algo que me preguntaron un montón en los comentarios,"
+ },
+ {
+  "id": "p003",
+  "startMs": 19240,
+  "endMs": 21640,
+  "seg": 2.4,
+  "texto": "El año pasado conté,"
+ },
+ {
+  "id": "p004",
+  "startMs": 27140,
+  "endMs": 31520,
+  "seg": 4.4,
+  "texto": "no rocié nada y a las dos semanas la hoja estaba limpia."
+ },
+ {
+  "id": "p005",
+  "startMs": 36520,
+  "endMs": 38920,
+  "seg": 2.4,
+  "texto": "mostrar hoy. Cómo mirar el embés de la"
+ },
+ {
+  "id": "p006",
+  "startMs": 44420,
+  "endMs": 48330,
+  "seg": 3.9,
+  "texto": "Y les cuento también, che, porque me parece justo que"
+ },
+ {
+  "id": "p007",
+  "startMs": 48330,
+  "endMs": 52240,
+  "seg": 3.9,
+  "texto": "yo fui el primero que fumigaba todo lo que se movía."
+ },
+ {
+  "id": "p008",
+  "startMs": 57240,
+  "endMs": 59640,
+  "seg": 2.4,
+  "texto": "de arrancar, abran el cuaderno conmigo."
+ },
+ {
+  "id": "p009",
+  "startMs": 65140,
+  "endMs": 68970,
+  "seg": 3.8,
+  "texto": "a lápiz. Dice, Genaro, y en la primera página,"
+ },
+ {
+  "id": "p010",
+  "startMs": 68970,
+  "endMs": 72800,
+  "seg": 3.8,
+  "texto": "con la letra que me sale, que es fea pero es mía."
+ },
+ {
+  "id": "p011",
+  "startMs": 77800,
+  "endMs": 84280,
+  "seg": 6.5,
+  "texto": "ver hoy. Cada punto que les explique lo van a ver dibujado acá, en estas hojas cuadriculadas."
+ },
+ {
+  "id": "p012",
+  "startMs": 89780,
+  "endMs": 92180,
+  "seg": 2.4,
+  "texto": "estén en la huerta y quédate hasta el"
+ },
+ {
+  "id": "p013",
+  "startMs": 97180,
+  "endMs": 99580,
+  "seg": 2.4,
+  "texto": "a Elena hace 40 años y todavía"
+ },
+ {
+  "id": "p014",
+  "startMs": 105080,
+  "endMs": 112020,
+  "seg": 6.9,
+  "texto": "hace, dar vuelta la hoja los pulgones no se pegan del lado de arriba, en la cara verde que da el sol"
+ },
+ {
+  "id": "p015",
+  "startMs": 117020,
+  "endMs": 119420,
+  "seg": 2.4,
+  "texto": "ahí. Por eso, cuando alguien"
+ },
+ {
+  "id": "p016",
+  "startMs": 124920,
+  "endMs": 131820,
+  "seg": 6.9,
+  "texto": "casi siempre me dicen que no. Es como buscar el auto perdido mirando solo el techo del garaje."
+ },
+ {
+  "id": "p017",
+  "startMs": 136820,
+  "endMs": 139220,
+  "seg": 2.4,
+  "texto": "la que sea, y den la vuelta"
+ },
+ {
+  "id": "p018",
+  "startMs": 144720,
+  "endMs": 147120,
+  "seg": 2.4,
+  "texto": "más. Y háganlo en una hoja del"
+ },
+ {
+  "id": "p019",
+  "startMs": 152120,
+  "endMs": 156070,
+  "seg": 4.0,
+  "texto": "Ahora, cuando ya dan vuelta la hoja y ven algo, la pregunta"
+ },
+ {
+  "id": "p020",
+  "startMs": 156070,
+  "endMs": 160020,
+  "seg": 4.0,
+  "texto": "del millón, ¿es pulgón o es otra cosa?"
+ },
+ {
+  "id": "p021",
+  "startMs": 165520,
+  "endMs": 167920,
+  "seg": 2.4,
+  "texto": "de un grano de arena, redondito,"
+ },
+ {
+  "id": "p022",
+  "startMs": 172920,
+  "endMs": 175320,
+  "seg": 2.4,
+  "texto": "peludo. Se mueven lento,"
+ },
+ {
+  "id": "p023",
+  "startMs": 180820,
+  "endMs": 183220,
+  "seg": 2.4,
+  "texto": "una familia esperando el colectivo en la parada."
+ },
+ {
+  "id": "p024",
+  "startMs": 188220,
+  "endMs": 190620,
+  "seg": 2.4,
+  "texto": "pegajosa en la hoja que se llama"
+ },
+ {
+  "id": "p025",
+  "startMs": 196120,
+  "endMs": 199880,
+  "seg": 3.8,
+  "texto": "Si la hoja está pegajosa y medio ennegrecida abajo y"
+ },
+ {
+  "id": "p026",
+  "startMs": 199880,
+  "endMs": 203640,
+  "seg": 3.8,
+  "texto": "arriba está todavía verde, eso es pulgón."
+ },
+ {
+  "id": "p027",
+  "startMs": 208640,
+  "endMs": 211040,
+  "seg": 2.4,
+  "texto": "Y si ven un bicho rojo con puntitos y"
+ },
+ {
+  "id": "p028",
+  "startMs": 216540,
+  "endMs": 218940,
+  "seg": 2.4,
+  "texto": "Y por acá les hago un paréntesis"
+ },
+ {
+  "id": "p029",
+  "startMs": 223940,
+  "endMs": 226340,
+  "seg": 2.4,
+  "texto": "los de mermelada, y adentro hay pulgones,"
+ },
+ {
+  "id": "p030",
+  "startMs": 231840,
+  "endMs": 234240,
+  "seg": 2.4,
+  "texto": "a mano, pulgones menos acelga 12"
+ },
+ {
+  "id": "p031",
+  "startMs": 239240,
+  "endMs": 241640,
+  "seg": 2.4,
+  "texto": "y al frasco lo tengo ahí y"
+ },
+ {
+  "id": "p032",
+  "startMs": 247140,
+  "endMs": 249540,
+  "seg": 2.4,
+  "texto": "frasco está la lupa de mano, la del"
+ },
+ {
+  "id": "p033",
+  "startMs": 254540,
+  "endMs": 261706,
+  "seg": 7.2,
+  "texto": "acá viene la prueba que les pido que hagan hoy. Es una prueba de mirar con la planta sin tocar nada más."
+ },
+ {
+  "id": "p034",
+  "startMs": 267206,
+  "endMs": 272006,
+  "seg": 4.8,
+  "texto": "Den vuelta una hoja de abajo, cuenten los pulgones que ven."
+ },
+ {
+  "id": "p035",
+  "startMs": 277006,
+  "endMs": 280986,
+  "seg": 4.0,
+  "texto": "subiendo y bajando por el tallo, eso no es casualidad."
+ },
+ {
+  "id": "p036",
+  "startMs": 286486,
+  "endMs": 288886,
+  "seg": 2.4,
+  "texto": "Si ven hormigas, hay un problema"
+ },
+ {
+  "id": "p037",
+  "startMs": 293886,
+  "endMs": 300606,
+  "seg": 6.7,
+  "texto": "larva gris con manchas naranjas que parece un cien pies gordito, o una mariquita abajo de la hoja."
+ },
+ {
+  "id": "p038",
+  "startMs": 306106,
+  "endMs": 308506,
+  "seg": 2.4,
+  "texto": "se come hasta 50 pulgones"
+ },
+ {
+  "id": "p039",
+  "startMs": 313506,
+  "endMs": 315906,
+  "seg": 2.4,
+  "texto": "Listo, hagan esa cuenta"
+ },
+ {
+  "id": "p040",
+  "startMs": 321406,
+  "endMs": 323806,
+  "seg": 2.4,
+  "texto": "el punto grande, el del título,"
+ },
+ {
+  "id": "p041",
+  "startMs": 328806,
+  "endMs": 332576,
+  "seg": 3.8,
+  "texto": "Corría marzo del año 86, 87 y"
+ },
+ {
+  "id": "p042",
+  "startMs": 332576,
+  "endMs": 336346,
+  "seg": 3.8,
+  "texto": "yo tenía acelga en todo el cantero de atrás."
+ },
+ {
+  "id": "p043",
+  "startMs": 341846,
+  "endMs": 344246,
+  "seg": 2.4,
+  "texto": "Rocé dos veces en tres días y la"
+ },
+ {
+  "id": "p044",
+  "startMs": 349246,
+  "endMs": 351646,
+  "seg": 2.4,
+  "texto": "y las mariquitas no volvieron,"
+ },
+ {
+  "id": "p045",
+  "startMs": 357146,
+  "endMs": 362406,
+  "seg": 5.3,
+  "texto": "la hoja sin que le pagues. Ahí, el que aprende algo aprende de a golpes."
+ },
+ {
+  "id": "p046",
+  "startMs": 367406,
+  "endMs": 371406,
+  "seg": 4.0,
+  "texto": "no siempre conviene intervenir? Porque el pulgón tiene enemigos naturales"
+ },
+ {
+  "id": "p047",
+  "startMs": 371406,
+  "endMs": 375406,
+  "seg": 4.0,
+  "texto": "y esos enemigos no aparecen la primera semana."
+ },
+ {
+  "id": "p048",
+  "startMs": 380906,
+  "endMs": 385686,
+  "seg": 4.8,
+  "texto": "cuatro matando la despensa de la mariquita antes de que llegue"
+ },
+ {
+  "id": "p049",
+  "startMs": 390686,
+  "endMs": 393086,
+  "seg": 2.4,
+  "texto": "la parte que me cuesta decir y la digo igual yo"
+ },
+ {
+  "id": "p050",
+  "startMs": 398586,
+  "endMs": 400986,
+  "seg": 2.4,
+  "texto": "me daba la sensación de que estaba haciendo algo"
+ },
+ {
+  "id": "p051",
+  "startMs": 405986,
+  "endMs": 408386,
+  "seg": 2.4,
+  "texto": "o una mancha de agua y yo rociaba"
+ },
+ {
+  "id": "p052",
+  "startMs": 413886,
+  "endMs": 419126,
+  "seg": 5.2,
+  "texto": "Entonces el cambio concreto es este y lo voy a escribir en el cuaderno."
+ },
+ {
+  "id": "p053",
+  "startMs": 424126,
+  "endMs": 426526,
+  "seg": 2.4,
+  "texto": "y esperen. Si son pocos, poquitos,"
+ },
+ {
+  "id": "p054",
+  "startMs": 432026,
+  "endMs": 437106,
+  "seg": 5.1,
+  "texto": "que uso desde entonces es esta. No tocar hasta los siete días."
+ },
+ {
+  "id": "p055",
+  "startMs": 442106,
+  "endMs": 444506,
+  "seg": 2.4,
+  "texto": "que los come. Den vuelta la hoja cada"
+ },
+ {
+  "id": "p056",
+  "startMs": 450006,
+  "endMs": 455666,
+  "seg": 5.7,
+  "texto": "el número bajó, felicitaciones, ya saben que su huerta se sabe defender."
+ },
+ {
+  "id": "p057",
+  "startMs": 460666,
+  "endMs": 463066,
+  "seg": 2.4,
+  "texto": "un plantín, una selga recién nacida"
+ },
+ {
+  "id": "p058",
+  "startMs": 468566,
+  "endMs": 470966,
+  "seg": 2.4,
+  "texto": "es la regla, esperar en la grande,"
+ },
+ {
+  "id": "p059",
+  "startMs": 475966,
+  "endMs": 478366,
+  "seg": 2.4,
+  "texto": "hago un punto aparte, porque"
+ },
+ {
+  "id": "p060",
+  "startMs": 483866,
+  "endMs": 486266,
+  "seg": 2.4,
+  "texto": "es decir, con demasiado nitrógeno."
+ },
+ {
+  "id": "p061",
+  "startMs": 491266,
+  "endMs": 493666,
+  "seg": 2.4,
+  "texto": "gallinaza, la acelga crece rápido,"
+ },
+ {
+  "id": "p062",
+  "startMs": 499166,
+  "endMs": 501566,
+  "seg": 2.4,
+  "texto": "porque quería que creciera rápido."
+ },
+ {
+  "id": "p063",
+  "startMs": 506566,
+  "endMs": 508966,
+  "seg": 2.4,
+  "texto": "y no más de una palada por metro cuadrado"
+ },
+ {
+  "id": "p064",
+  "startMs": 514466,
+  "endMs": 521492,
+  "seg": 7.0,
+  "texto": "a la mañana para que la hoja no quede húmeda de noche. A mí me sirvió más eso que cualquier frasco."
+ },
+ {
+  "id": "p065",
+  "startMs": 526492,
+  "endMs": 528892,
+  "seg": 2.4,
+  "texto": "galpón y está marcado con cruzalápiz."
+ },
+ {
+  "id": "p066",
+  "startMs": 534392,
+  "endMs": 536792,
+  "seg": 2.4,
+  "texto": "No rocié. Día 18,"
+ },
+ {
+  "id": "p067",
+  "startMs": 541792,
+  "endMs": 544192,
+  "seg": 2.4,
+  "texto": "que evitan la propagación no se hacen"
+ },
+ {
+  "id": "p068",
+  "startMs": 549692,
+  "endMs": 552092,
+  "seg": 2.4,
+  "texto": "la acelga que está bien sembrada,"
+ },
+ {
+  "id": "p069",
+  "startMs": 557092,
+  "endMs": 559492,
+  "seg": 2.4,
+  "texto": "tiene menos pulgón. Y entre las"
+ },
+ {
+  "id": "p070",
+  "startMs": 564992,
+  "endMs": 567392,
+  "seg": 2.4,
+  "texto": "sino porque la albahaca atrae"
+ },
+ {
+  "id": "p071",
+  "startMs": 572392,
+  "endMs": 574792,
+  "seg": 2.4,
+  "texto": "pulgón es una cosa que no le gusta."
+ },
+ {
+  "id": "p072",
+  "startMs": 580292,
+  "endMs": 582692,
+  "seg": 2.4,
+  "texto": "cuando aprieta el sol y la planta no"
+ },
+ {
+  "id": "p073",
+  "startMs": 587692,
+  "endMs": 592212,
+  "seg": 4.5,
+  "texto": "Las malezas cerca de la selga son el hotel del pulgón."
+ },
+ {
+  "id": "p074",
+  "startMs": 597712,
+  "endMs": 600112,
+  "seg": 2.4,
+  "texto": "Así que si están mirando la selga y al"
+ },
+ {
+  "id": "p075",
+  "startMs": 605112,
+  "endMs": 607512,
+  "seg": 2.4,
+  "texto": "Yo lo que hago es pasar el rastrillo"
+ },
+ {
+  "id": "p076",
+  "startMs": 613012,
+  "endMs": 615412,
+  "seg": 2.4,
+  "texto": "martes mirar en vez,"
+ },
+ {
+  "id": "p077",
+  "startMs": 620412,
+  "endMs": 622812,
+  "seg": 2.4,
+  "texto": "cada huerta tiene su tiempo y su"
+ },
+ {
+  "id": "p078",
+  "startMs": 628312,
+  "endMs": 632292,
+  "seg": 4.0,
+  "texto": "en la terraza o en el patio y me lo cuentan"
+ },
+ {
+  "id": "p079",
+  "startMs": 637292,
+  "endMs": 641592,
+  "seg": 4.3,
+  "texto": "hoja curvada y el pulgón por todos lados, ¿qué hago yo?"
+ },
+ {
+  "id": "p080",
+  "startMs": 647092,
+  "endMs": 649492,
+  "seg": 2.4,
+  "texto": "los dedos y saco la hoja más afectada"
+ },
+ {
+  "id": "p081",
+  "startMs": 654492,
+  "endMs": 658202,
+  "seg": 3.7,
+  "texto": "en un litro, nada más, y la dejo ahí un rato antes de tirarla,"
+ },
+ {
+  "id": "p082",
+  "startMs": 658202,
+  "endMs": 661912,
+  "seg": 3.7,
+  "texto": "así no se lleva los bichos a la pila."
+ },
+ {
+  "id": "p083",
+  "startMs": 667412,
+  "endMs": 669812,
+  "seg": 2.4,
+  "texto": "El agua sola saca a la mayoría,"
+ },
+ {
+  "id": "p084",
+  "startMs": 674812,
+  "endMs": 681732,
+  "seg": 6.9,
+  "texto": "y la planta es fuerte, le doy una semana más antes de pasar al jabón de cocina pulverizado."
+ },
+ {
+  "id": "p085",
+  "startMs": 687232,
+  "endMs": 689632,
+  "seg": 2.4,
+  "texto": "dos veces tuve que hacer el jabón. y"
+ },
+ {
+  "id": "p086",
+  "startMs": 694632,
+  "endMs": 697032,
+  "seg": 2.4,
+  "texto": "el jabón no hacía falta."
+ },
+ {
+  "id": "p087",
+  "startMs": 702532,
+  "endMs": 705852,
+  "seg": 3.3,
+  "texto": "¿Buranán in chomprivo que huracqueva yadaro molpi?"
+ },
+ {
+  "id": "p088",
+  "startMs": 705852,
+  "endMs": 710112,
+  "seg": 4.3,
+  "texto": "¿Bona chenta y siete? No me lo dijeron y me lo tuve que aprender."
+ },
+ {
+  "id": "p089",
+  "startMs": 715112,
+  "endMs": 717512,
+  "seg": 2.4,
+  "texto": "la planta deja de sacar hojas nuevas"
+ },
+ {
+  "id": "p090",
+  "startMs": 723012,
+  "endMs": 729758,
+  "seg": 6.7,
+  "texto": "La acelga no es tomate, es una planta de hoja y la hoja que se quema no vuelve."
+ },
+ {
+  "id": "p091",
+  "startMs": 734758,
+  "endMs": 738658,
+  "seg": 3.9,
+  "texto": "rara, yo le pregunto, ¿y antes la hoja estaba rara?"
+ },
+ {
+  "id": "p092",
+  "startMs": 744158,
+  "endMs": 747898,
+  "seg": 3.7,
+  "texto": "video quiere evitarles. Y llegó la hora del pedido,"
+ },
+ {
+  "id": "p093",
+  "startMs": 747898,
+  "endMs": 751638,
+  "seg": 3.7,
+  "texto": "la que siempre hago y sé que molesta un poquito."
+ },
+ {
+  "id": "p094",
+  "startMs": 756638,
+  "endMs": 759038,
+  "seg": 2.4,
+  "texto": "del plato o con Elena en"
+ },
+ {
+  "id": "p095",
+  "startMs": 764538,
+  "endMs": 766938,
+  "seg": 2.4,
+  "texto": "que esto es la huerta de todos los días."
+ },
+ {
+  "id": "p096",
+  "startMs": 771938,
+  "endMs": 775538,
+  "seg": 3.6,
+  "texto": "les va a servir. Se los prometo, contalo abajo en los"
+ },
+ {
+  "id": "p097",
+  "startMs": 775538,
+  "endMs": 779138,
+  "seg": 3.6,
+  "texto": "comentarios y de dónde sos, las leo todas."
+ },
+ {
+  "id": "p098",
+  "startMs": 784638,
+  "endMs": 788508,
+  "seg": 3.9,
+  "texto": "no de arriba, que ya les enseñé por qué. Ahora, el"
+ },
+ {
+  "id": "p099",
+  "startMs": 788508,
+  "endMs": 792378,
+  "seg": 3.9,
+  "texto": "último punto, el que me costó 40 años."
+ },
+ {
+  "id": "p100",
+  "startMs": 797378,
+  "endMs": 799778,
+  "seg": 2.4,
+  "texto": "la de madera. La saqué en el"
+ },
+ {
+  "id": "p101",
+  "startMs": 805278,
+  "endMs": 808958,
+  "seg": 3.7,
+  "texto": "lápiz, está escrito, Elena, 1985,"
+ },
+ {
+  "id": "p102",
+  "startMs": 808958,
+  "endMs": 812638,
+  "seg": 3.7,
+  "texto": "dejá de fumigar Genaro."
+ },
+ {
+  "id": "p103",
+  "startMs": 817638,
+  "endMs": 820038,
+  "seg": 2.4,
+  "texto": "la letra sigue ahí, en el dorso,"
+ },
+ {
+  "id": "p104",
+  "startMs": 825538,
+  "endMs": 827938,
+  "seg": 2.4,
+  "texto": "lo que aprendí en la huerta, No"
+ },
+ {
+  "id": "p105",
+  "startMs": 832938,
+  "endMs": 837758,
+  "seg": 4.8,
+  "texto": "hay que saber por qué se rocía, si es por la planta o es por el miedo."
+ },
+ {
+  "id": "p106",
+  "startMs": 843258,
+  "endMs": 848818,
+  "seg": 5.6,
+  "texto": "cuento, anoto, espero una semana, y recién ahí decido."
+ },
+ {
+  "id": "p107",
+  "startMs": 853818,
+  "endMs": 859238,
+  "seg": 5.4,
+  "texto": "contaste cuántos hay, ¿viste si hay mariquita? ¿viste si hay hormiga?"
+ },
+ {
+  "id": "p108",
+  "startMs": 864738,
+  "endMs": 867138,
+  "seg": 2.4,
+  "texto": "está sana, que se cuida todos los días con"
+ },
+ {
+  "id": "p109",
+  "startMs": 872138,
+  "endMs": 876718,
+  "seg": 4.6,
+  "texto": "madura les va a pedir menos manos que la selga abandonada"
+ },
+ {
+  "id": "p110",
+  "startMs": 882218,
+  "endMs": 887298,
+  "seg": 5.1,
+  "texto": "no pide rociador pide que la miren"
+ },
+ {
+  "id": "p111",
+  "startMs": 892298,
+  "endMs": 894698,
+  "seg": 2.4,
+  "texto": "Miren acá,"
+ },
+ {
+  "id": "p112",
+  "startMs": 900198,
+  "endMs": 902598,
+  "seg": 2.4,
+  "texto": "con el lápiz de grafito como para firmar."
+ },
+ {
+  "id": "p113",
+  "startMs": 907598,
+  "endMs": 911218,
+  "seg": 3.6,
+  "texto": "si la chica actuar. Cuatro palabras,"
+ },
+ {
+  "id": "p114",
+  "startMs": 911218,
+  "endMs": 914838,
+  "seg": 3.6,
+  "texto": "40 años. Ese es todo el video, gente."
+ },
+ {
+  "id": "p115",
+  "startMs": 920338,
+  "endMs": 926318,
+  "seg": 6.0,
+  "texto": "el dibujito de la hoja, que es mi firma, y la pongo en todas las notas importantes."
+ },
+ {
+  "id": "p116",
+  "startMs": 931318,
+  "endMs": 937798,
+  "seg": 6.5,
+  "texto": "el compós en dos cajones, el de las moscas, y por qué no hay que tirar restos cocidos."
+ },
+ {
+  "id": "p117",
+  "startMs": 943298,
+  "endMs": 945698,
+  "seg": 2.4,
+  "texto": "Genaro, vos a qué le tenés"
+ },
+ {
+  "id": "p118",
+  "startMs": 950698,
+  "endMs": 956238,
+  "seg": 5.5,
+  "texto": "ahora les pregunto a ustedes, ¿cuántos pulgones hay en el embés de su acelga hoy?"
+ },
+ {
+  "id": "p119",
+  "startMs": 961738,
+  "endMs": 963318,
+  "seg": 1.6,
+  "texto": "entre los surcos"
+ }
+]
