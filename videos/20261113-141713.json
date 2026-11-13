@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794596220.5479565,
+ "actualizado": 1794596283.5357223,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -59,10 +59,6 @@
   "total": 0.1379
  },
  "eventos": [
-  {
-   "k": "res",
-   "t": "PreToolUse:Bash hook error: [\"/opt/hostedtoolcache/Python/3.11.18/x64/bin/python\" \"/opt/estudio/repo/motor/tools/guard.py\"]: BLOQUEADO (regla dura del Estudio): nada se publica desde un video: el video final se descarga desde el panel.\n"
-  },
   {
    "k": "tool",
    "t": "import json\n\ntitle = \"Pulgones en la acelga: cómo detectarlos y cuándo no intervenir\"\ndesc = (\n    \"Hola, gente de YouTube. Hoy abrimos el cuaderno en el galpón para hablar de los pulgones en la acelga, \"\n    \"que es uno de los temas que más me preguntaron en los comentarios. Antes de que agarren el rociador, \"\n    \"les voy a mostrar cómo mirar el envés de la hoja, cómo distinguir un pulgón de una"
@@ -178,6 +174,10 @@
   {
    "k": "tool",
    "t": "timeout 580 python /opt/estudio/repo/motor/tools/esperar.py --cuenta \"fotos/*.png\" 3 --carpeta . 2>&1 | tail -2; tail -2 fotos/fotos_escenas.log"
+  },
+  {
+   "k": "res",
+   "t": "… sigue esperando tras 540 s · archivos: 0/3 → hacé otra cosa útil y volvé a llamar\n17:32:32 batch 1553b625: in_progress 0/3\n18:15:43 batch 1553b625: in_progress 2/3"
   }
  ],
  "maquinas": 1,
@@ -216,14 +216,14 @@
    {
     "k": "fotos",
     "n": "Fotos y stock",
-    "seg": 4971,
+    "seg": 5034,
     "pasadas": 1,
     "fin": false
    }
   ],
-  "total_s": 5987,
+  "total_s": 6050,
   "avatar_s": 0,
-  "sin_avatar_s": 5987,
+  "sin_avatar_s": 6050,
   "cerrado": false
  }
 }
