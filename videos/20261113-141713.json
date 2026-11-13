@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794590654.471306,
+ "actualizado": 1794590717.1802187,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,77 +51,57 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0347,
+  "deepseek": 0.0427,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0347
+  "total": 0.0427
  },
  "eventos": [
   {
-   "k": "tool",
-   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"p = 0\\nwhile last + MAXGAP\",\"p = 1\\nwhile last + MAXGAP\")\ns=s.replace(\"MAXGAP = 14500\",\"MAXGAP = 14200\")\nopen(p,'w').write(s)\nEOF\npython auto_plan.py && python -c \"\nimport json;d=json.load(open('_plan_times.json'));print(len(d), [(round(x['t']/1000,1),x['dur']) for x in d[:6]])\""
-  },
-  {
    "k": "res",
-   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\", line 34, in <module>\n    assert st - prev <= MAXGAP, (st - prev, st)\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: (22240, 112020)"
+   "t": "windows 11 total 58.5 endgap 873.638 bad 0"
   },
   {
    "k": "tool",
-   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']\nMAXGAP=14200; AVG=5200\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ntimes=[];last=0;p=1\nwhile last+MAXGAP<duration:\n    while p<len(sent) and cap[sent[p]]['startMs']<=last+AVG:\n        p+=1\n    if p>=len(sent): break\n    times.append((sent[p], cap[sent[p]]['startMs']));"
+   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']; MAXGAP=14500; LIM=560000\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\ntimes=[];spent=0;qe=0\nfor i in sent:\n    st_i=cap[i]['startMs']; d=win_time(len(times))\n    if st_i<qe+2400: continue\n    if st_i<qe:"
   },
   {
    "k": "res",
-   "t": "[(23, 9120), (43, 15420), (86, 31520), (127, 45160), (148, 52240), (164, 60480), (175, 66420), (194, 72800), (212, 78600), (227, 84280), (320, 112020), (336, 118040), (373, 131820), (413, 145740)]"
+   "t": "windows 2 total 11.5 endgap 944.178 bad 0"
   },
   {
    "k": "tool",
-   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"\"\"while last + MAXGAP < duration:\n    # siguiente inicio de frase con st > last + AVG\n    while p < len(sent) and cap[sent[p]]['startMs'] <= last + AVG:\"\"\",\"\"\"while last + MAXGAP < duration:\n    # siguiente inicio de frase con st > last + MAXGAP - AVG\n    while p < len(sent) and cap[sent[p]]['startMs'] <= last + MAXGAP - AVG:\"\"\")\nopen"
+   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\na=s.index('def win_time')\nb=s.index('out = []')\nnew='''def win_time(n):\n    return 6000 if n == 0 else (5500 if n % 2 else 5000)\n\nLIM = 560000\nspent = 0\nqe = 0\ntimes = []\nfor i in sent:\n    st_i = cap[i]['startMs']\n    d = win_time(len(times))\n    if st_i < qe or st_i > qe + MAXGAP - 2000:\n        continue\n    if spent + d > LIM:\n        break\n   "
   },
   {
    "k": "res",
-   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\", line 34, in <module>\n    assert st - prev <= MAXGAP, (st - prev, st)\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: (16400, 31520)"
+   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\", line 39, in <module>\n    assert st - prev <= MAXGAP, (st - prev, st)\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: (866138, 955418)"
   },
   {
    "k": "tool",
-   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"MAXGAP - AVG\",\"MAXGAP - AVG - 1200\")\ns=s.replace(\"MAXGAP = 14200\",\"MAXGAP = 14500\")\nopen(p,'w').write(s)\nEOF\npython auto_plan.py && python -c \"\nimport json;d=json.load(open('_plan_times.json'));print(len(d), [(round(x['t']/1000,1),x['dur']) for x in d[:8]])\""
+   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']; MAXGAP=14500; LIM=560000\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\ntimes=[];spent=0;qe=0\nfor i in sent:\n    st_i=cap[i]['startMs']; d=win_time(len(times))\n    if spent+d>LIM: break\n    if st_i<qe or s"
   },
   {
    "k": "res",
-   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\", line 34, in <module>\n    assert st - prev <= MAXGAP, (st - prev, st)\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: (16400, 31520)"
+   "t": "windows 11 total 58.5 endgap 873.638 bad 0"
   },
   {
    "k": "tool",
-   "t": "grep -n \"MAXGAP\\|AVG\" auto_plan.py"
+   "t": "python -c \"\nimport json\ncap=json.load(open('captions.json'))\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\nprint([cap[i]['startMs'] for i in sent[:20]])\""
   },
   {
    "k": "res",
-   "t": "5:MAXGAP = 14500\n6:AVG = 5200\n13:while last + MAXGAP < duration:\n14:    # siguiente inicio de frase con st > last + MAXGAP - AVG - 1200\n15:    while p < len(sent) and cap[sent[p]]['startMs'] <= last + MAXGAP - AVG - 1200:\n29:if duration - (out[-1][0] + out[-1][1]) > MAXGAP:\n34:    assert st - prev <= MAXGAP, (st - prev, st)\n36:assert duration - prev <= MAXGAP, duration - prev"
+   "t": "[0, 2680, 9120, 13240, 15420, 31520, 45160, 52240, 56400, 60480, 66420, 72800, 74980, 78600, 84280, 112020, 118040, 131820, 135500, 145740]"
   },
   {
    "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\"}"
+   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"    if st_i < qe or st_i > qe + MAXGAP - 2000:\\n        continue\\n    if spent + d > LIM:\",\"    if spent + d > LIM:\")\ns=s.replace(\"    times.append(i)\\n    spent += d\\n    qe = st_i + d\",\"    if st_i < qe or st_i > qe + MAXGAP - 2000:\\n        continue\\n    times.append(i)\\n    spent += d\\n    qe = st_i + d\")\nopen(p,'w').write(s)\nEOF\n"
   },
   {
    "k": "res",
-   "t": "1\timport json\n2\t\n3\tcap = json.load(open('captions.json'))\n4\tduration = cap[-1]['endMs']\n5\tMAXGAP = 14500\n6\tAVG = 5200\n7\t\n8\tsent = [0] + [i for i in range(1, len(cap)) if cap[i]['startMs'] - cap[i - 1]['endMs'] > 180]\n9\t\n10\ttimes = []\n11\tlast = 0\n12\tp = 1\n13\twhile last + MAXGAP < duration:\n14\t    # siguiente inicio de frase con st > last + MAXGAP - AVG - 1200\n15\t    while p < len(sent) and cap[sent"
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"\"\"times = []\nlast = 0\np = 1\nwhile last + MAXGAP < duration:\n    # siguiente inicio de frase con st > last + MAXGAP - AVG - 1200\n    while p < len(sent) and cap[sent[p]]['startMs'] <= last + MAXGAP - AVG - 1200:\n        p += 1\n    if p >= len(sent):\n        break\n    times.append(sent[p])\n    last = cap[sent[p]]['startMs']\n    p += 1\"\""
-  },
-  {
-   "k": "res",
-   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\", line 36, in <module>\n    assert st - prev <= MAXGAP, (st - prev, st)\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: (22240, 112020)"
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"    nxt = cap[i]['startMs'] + win_time(len(times) - 1) + MAXGAP\",\"    nxt = last + MAXGAP - 800\\n    last = cap[i]['startMs']\")\ns=s.replace(\"times = []\\nnxt = MAXGAP\",\"times = []\\nnxt = MAXGAP\\nlast = 0\")\nopen(p,'w').write(s)\nEOF\npython auto_plan.py && python -c \"\nimport json;d=json.load(open('_plan_times.json'));print(len(d), [(round"
-  },
-  {
-   "k": "res",
-   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\", line 38, in <module>\n    assert st - prev <= MAXGAP, (st - prev, st)\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: (22240, 112020)"
+   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\", line 39, in <module>\n    assert st - prev <= MAXGAP, (st - prev, st)\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: (866138, 955418)"
   },
   {
    "k": "tool",
@@ -129,55 +109,75 @@
   },
   {
    "k": "res",
-   "t": "1\timport json\n2\t\n3\tcap = json.load(open('captions.json'))\n4\tduration = cap[-1]['endMs']\n5\tMAXGAP = 14500\n6\tAVG = 5200\n7\t\n8\tsent = [0] + [i for i in range(1, len(cap)) if cap[i]['startMs'] - cap[i - 1]['endMs'] > 180]\n9\t\n10\tdef win_time(n):\n11\t    return 6000 if n == 0 else (5500 if n % 2 else 5000)\n12\t\n13\t\n14\ttimes = []\n15\tnxt = MAXGAP\n16\tlast = 0\n17\tp = 1\n18\twhile nxt < duration + 1:\n19\t    if p "
+   "t": "1\timport json\n2\t\n3\tcap = json.load(open('captions.json'))\n4\tduration = cap[-1]['endMs']\n5\tMAXGAP = 14500\n6\tAVG = 5200\n7\t\n8\tsent = [0] + [i for i in range(1, len(cap)) if cap[i]['startMs'] - cap[i - 1]['endMs'] > 180]\n9\t\n10\tdef win_time(n):\n11\t    return 6000 if n == 0 else (5500 if n % 2 else 5000)\n12\t\n13\tLIM = 560000\n14\tspent = 0\n15\tqe = 0\n16\ttimes = []\n17\tfor i in sent:\n18\t    st_i = cap[i]['sta"
   },
   {
    "k": "tool",
-   "t": "    last = cap[i]['startMs']\n    nxt = last + MAXGAP - 800"
+   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"    if st_i < qe or st_i > qe + MAXGAP - 2000:\\n        continue\",\"    if st_i > qe + MAXGAP - 2000:\\n        continue\\n    if st_i < qe + 2400:\\n        continue\")\nopen(p,'w').write(s)\nEOF\npython auto_plan.py && python -c \"\nimport json;d=json.load(open('_plan_times.json'));print(len(d), [(round(x['t']/1000,1),x['dur']) for x in d[:5]"
   },
   {
    "k": "res",
-   "t": "The file /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py has been updated successfully. (file state is current in your context — no need to Read it back)"
+   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\", line 41, in <module>\n    assert st - prev <= MAXGAP, (st - prev, st)\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: (936678, 955418)"
   },
   {
    "k": "tool",
-   "t": "python auto_plan.py && python -c \"\nimport json;d=json.load(open('_plan_times.json'));print(len(d), [(round(x['t']/1000,1),x['dur']) for x in d[:8]])\""
+   "t": "python -c \"\nimport json\ncap=json.load(open('captions.json'))\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\nprint([ (i,cap[i]['startMs']) for i in sent[-10:]])\""
   },
   {
    "k": "res",
-   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\", line 38, in <module>\n    assert st - prev <= MAXGAP, (st - prev, st)\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: (22240, 112020)"
+   "t": "[(2378, 848818), (2405, 859238), (2458, 876718), (2484, 887298), (2504, 893758), (2550, 914838), (2585, 926318), (2622, 937798), (2673, 956238), (2682, 961258)]"
   },
   {
    "k": "tool",
-   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"\"\"    last = cap[i]['startMs']\n    nxt = last + MAXGAP - 800\"\"\",\"\"\"    last = cap[i]['startMs'] + win_time(len(times) - 1)\n    nxt = last + MAXGAP - 900\"\"\")\nopen(p,'w').write(s)\nEOF\npython auto_plan.py && python -c \"\nimport json;d=json.load(open('_plan_times.json'));print(len(d), [(round(x['t']/1000,1),x['dur']) for x in d[:8]])\""
+   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']; MAXGAP=14500; LIM=560000\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\ntimes=[];spent=0;qe=0\nfor i in sent:\n    st_i=cap[i]['startMs']; d=win_time(len(times))\n    if spent+d>LIM: break\n    if st_i>qe+MAXG"
   },
   {
    "k": "res",
-   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\", line 38, in <module>\n    assert st - prev <= MAXGAP, (st - prev, st)\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: (22240, 112020)"
+   "t": "miss 18740 31520\nmiss 18740 45160\nmiss 18740 52240\nmiss 18740 56400\nmiss 18740 60480\nmiss 18740 66420\nmiss 18740 72800\nmiss 18740 74980\nmiss 18740 78600\nmiss 18740 84280\nmiss 18740 112020\nmiss 18740 118040\nmiss 18740 131820\nmiss 18740 135500\nmiss 18740 145740\nmiss 18740 160020\nmiss 18740 174100\nmiss 18740 184040\nmiss 18740 203640\nmiss 18740 208660\nmiss 18740 217140\nmiss 18740 261706\nmiss 18740 272"
   },
   {
    "k": "tool",
-   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']; MAXGAP=14500\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\nprint('sent count',len(sent))\ntimes=[];nxt=MAXGAP;last=0;p=1\nwhile nxt<duration+1:\n    if p>=len(sent): print('BREAK p');break\n    i=sent[p]; tim"
+   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"    d = win_time(len(times))\\n    if spent + d > LIM:\",\"    d = win_time(len(times))\\n    if spent + d > LIM:\")\ns=s.replace(\"\"\"# última ventana cerca del cierre si queda hueco\nif duration - (out[-1][0] + out[-1][1]) > MAXGAP:\n    out.append((duration - 7500, 6000))\n\"\"\",\"\"\"# última ventana cerca del cierre si queda hueco\nif duration - "
   },
   {
    "k": "res",
-   "t": "sent count 81\n[(6, 2680), (23, 9120), (38, 13240), (43, 15420), (86, 31520), (127, 45160)]"
+   "t": "13:LIM = 560000\n15:qe = 0\n20:    if spent + d > LIM:\n22:    if st_i > qe + MAXGAP - 2000:\n24:    if st_i < qe + 2400:\n28:    qe = st_i + d"
   },
   {
    "k": "tool",
-   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"\"\"while nxt < duration + 1:\n    if p >= len(sent):\n        break\n    i = sent[p]\n    times.append(i)\"\"\",\"\"\"LIM = 560000\nspent = 0\nwhile nxt < duration + 1:\n    if p >= len(sent):\n        break\n    i = sent[p]\n    d_i = win_time(len(times))\n    if cap[i]['startMs'] - (prev_end_of(times)) < 3000 if times else False:\n        p += 1\n     "
+   "t": "python -c \"\nexec(open('auto_plan.py').read().split('out = []')[0])\nprint(len(times), spent)\n\""
   },
   {
    "k": "res",
-   "t": "Traceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\", line 52, in <module>\n    assert st - prev <= MAXGAP, (st - prev, st)\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: (22240, 112020)"
+   "t": "2 11500"
   },
   {
    "k": "tool",
-   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']; MAXGAP=14500; LIM=560000\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\ntimes=[];spent=0;last=0;p=1;nxt=MAXGAP\nwhile nxt<duration+1 and p<len(sent):\n    i=sent[p]; d=win_time(len(times))\n    if spent+d>LIM"
+   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']; MAXGAP=14500; LIM=560000\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\nwhile True:\n    times=[];spent=0;qe=0\n    for i in sent:\n        st_i=cap[i]['startMs']; d=win_time(len(times))\n        if st_i>qe+MA"
   },
   {
    "k": "res",
-   "t": "gap 16400 31520\ngap 22740 112020\ngap 14600 203640\ngap 39566 261706\ngap 16320 336346\nwindows 58 total 305.5 endgap 1.18 bad 15"
+   "t": "MAXGAP 14500 windows 2 total 11.5 endgap 944.178 bad 0"
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nstarts=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\ntimes=[];qe=0;k=0\nfor i in starts:\n    st=cap[i]['startMs']\n    e=qe+13000\n    if st>e: continue\n    if st<qe+2400: continue\n    times.append(st); qe=st+win_time(len(times)); \n    # j"
+  },
+  {
+   "k": "res",
+   "t": "2 18240\n2"
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']; MAXGAP=14000; LIM=560000\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\nwhile True:\n    times=[];spent=0;we=0\n    for i in sent:\n        st=cap[i]['startMs']; d=win_time(len(times))\n        if st-we<3000: "
+  },
+  {
+   "k": "res",
+   "t": "MAXGAP 14000 windows 1 total 6.0 endgap 947.798 bad 0"
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']; MAXGAP=14000\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\nsent=[i for i in sent if cap[i]['startMs']>=20000]\nprint(len(s"
   }
  ],
  "maquinas": 1,
@@ -214,9 +214,9 @@
     "fin": true
    }
   ],
-  "total_s": 420,
+  "total_s": 483,
   "avatar_s": 0,
-  "sin_avatar_s": 420,
+  "sin_avatar_s": 483,
   "cerrado": false
  }
 }
