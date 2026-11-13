@@ -3,7 +3,7 @@
  "titulo": "Pulgones en la acelga: cómo detectarlos y cuándo no intervenir",
  "canal": "don-genaro",
  "estado": "trabajando",
- "actualizado": 1794590971.6307578,
+ "actualizado": 1794591035.1596847,
  "creado": 1794590301.0969768,
  "run": "https://github.com/eltasso/estudio-videos/actions/runs/43471283441",
  "pasos": [
@@ -51,133 +51,133 @@
   }
  ],
  "costo": {
-  "deepseek": 0.0427,
+  "deepseek": 0.0497,
   "gpt": 0.0,
   "gpt_img": 0,
   "whisper": 0.0,
   "avatar": 0.0,
-  "total": 0.0427
+  "total": 0.0497
  },
  "eventos": [
   {
-   "k": "res",
-   "t": "windows 11 total 58.5 endgap 873.638 bad 0"
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']; MAXGAP=14500; LIM=560000\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\ntimes=[];spent=0;qe=0\nfor i in sent:\n    st_i=cap[i]['startMs']; d=win_time(len(times))\n    if st_i<qe+2400: continue\n    if st_i<qe:"
-  },
-  {
-   "k": "res",
-   "t": "windows 2 total 11.5 endgap 944.178 bad 0"
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\na=s.index('def win_time')\nb=s.index('out = []')\nnew='''def win_time(n):\n    return 6000 if n == 0 else (5500 if n % 2 else 5000)\n\nLIM = 560000\nspent = 0\nqe = 0\ntimes = []\nfor i in sent:\n    st_i = cap[i]['startMs']\n    d = win_time(len(times))\n    if st_i < qe or st_i > qe + MAXGAP - 2000:\n        continue\n    if spent + d > LIM:\n        break\n   "
-  },
-  {
-   "k": "res",
-   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\", line 39, in <module>\n    assert st - prev <= MAXGAP, (st - prev, st)\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: (866138, 955418)"
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']; MAXGAP=14500; LIM=560000\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\ntimes=[];spent=0;qe=0\nfor i in sent:\n    st_i=cap[i]['startMs']; d=win_time(len(times))\n    if spent+d>LIM: break\n    if st_i<qe or s"
-  },
-  {
-   "k": "res",
-   "t": "windows 11 total 58.5 endgap 873.638 bad 0"
-  },
-  {
-   "k": "tool",
-   "t": "python -c \"\nimport json\ncap=json.load(open('captions.json'))\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\nprint([cap[i]['startMs'] for i in sent[:20]])\""
-  },
-  {
-   "k": "res",
-   "t": "[0, 2680, 9120, 13240, 15420, 31520, 45160, 52240, 56400, 60480, 66420, 72800, 74980, 78600, 84280, 112020, 118040, 131820, 135500, 145740]"
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"    if st_i < qe or st_i > qe + MAXGAP - 2000:\\n        continue\\n    if spent + d > LIM:\",\"    if spent + d > LIM:\")\ns=s.replace(\"    times.append(i)\\n    spent += d\\n    qe = st_i + d\",\"    if st_i < qe or st_i > qe + MAXGAP - 2000:\\n        continue\\n    times.append(i)\\n    spent += d\\n    qe = st_i + d\")\nopen(p,'w').write(s)\nEOF\n"
-  },
-  {
-   "k": "res",
-   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\", line 39, in <module>\n    assert st - prev <= MAXGAP, (st - prev, st)\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: (866138, 955418)"
-  },
-  {
-   "k": "tool",
-   "t": "{\"file_path\": \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\"}"
-  },
-  {
-   "k": "res",
-   "t": "1\timport json\n2\t\n3\tcap = json.load(open('captions.json'))\n4\tduration = cap[-1]['endMs']\n5\tMAXGAP = 14500\n6\tAVG = 5200\n7\t\n8\tsent = [0] + [i for i in range(1, len(cap)) if cap[i]['startMs'] - cap[i - 1]['endMs'] > 180]\n9\t\n10\tdef win_time(n):\n11\t    return 6000 if n == 0 else (5500 if n % 2 else 5000)\n12\t\n13\tLIM = 560000\n14\tspent = 0\n15\tqe = 0\n16\ttimes = []\n17\tfor i in sent:\n18\t    st_i = cap[i]['sta"
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"    if st_i < qe or st_i > qe + MAXGAP - 2000:\\n        continue\",\"    if st_i > qe + MAXGAP - 2000:\\n        continue\\n    if st_i < qe + 2400:\\n        continue\")\nopen(p,'w').write(s)\nEOF\npython auto_plan.py && python -c \"\nimport json;d=json.load(open('_plan_times.json'));print(len(d), [(round(x['t']/1000,1),x['dur']) for x in d[:5]"
-  },
-  {
-   "k": "res",
-   "t": "Exit code 1\nTraceback (most recent call last):\n  File \"/opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py\", line 41, in <module>\n    assert st - prev <= MAXGAP, (st - prev, st)\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: (936678, 955418)"
-  },
-  {
-   "k": "tool",
-   "t": "python -c \"\nimport json\ncap=json.load(open('captions.json'))\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\nprint([ (i,cap[i]['startMs']) for i in sent[-10:]])\""
-  },
-  {
-   "k": "res",
-   "t": "[(2378, 848818), (2405, 859238), (2458, 876718), (2484, 887298), (2504, 893758), (2550, 914838), (2585, 926318), (2622, 937798), (2673, 956238), (2682, 961258)]"
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']; MAXGAP=14500; LIM=560000\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\ntimes=[];spent=0;qe=0\nfor i in sent:\n    st_i=cap[i]['startMs']; d=win_time(len(times))\n    if spent+d>LIM: break\n    if st_i>qe+MAXG"
-  },
-  {
-   "k": "res",
-   "t": "miss 18740 31520\nmiss 18740 45160\nmiss 18740 52240\nmiss 18740 56400\nmiss 18740 60480\nmiss 18740 66420\nmiss 18740 72800\nmiss 18740 74980\nmiss 18740 78600\nmiss 18740 84280\nmiss 18740 112020\nmiss 18740 118040\nmiss 18740 131820\nmiss 18740 135500\nmiss 18740 145740\nmiss 18740 160020\nmiss 18740 174100\nmiss 18740 184040\nmiss 18740 203640\nmiss 18740 208660\nmiss 18740 217140\nmiss 18740 261706\nmiss 18740 272"
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"    d = win_time(len(times))\\n    if spent + d > LIM:\",\"    d = win_time(len(times))\\n    if spent + d > LIM:\")\ns=s.replace(\"\"\"# última ventana cerca del cierre si queda hueco\nif duration - (out[-1][0] + out[-1][1]) > MAXGAP:\n    out.append((duration - 7500, 6000))\n\"\"\",\"\"\"# última ventana cerca del cierre si queda hueco\nif duration - "
-  },
-  {
-   "k": "res",
-   "t": "13:LIM = 560000\n15:qe = 0\n20:    if spent + d > LIM:\n22:    if st_i > qe + MAXGAP - 2000:\n24:    if st_i < qe + 2400:\n28:    qe = st_i + d"
-  },
-  {
-   "k": "tool",
-   "t": "python -c \"\nexec(open('auto_plan.py').read().split('out = []')[0])\nprint(len(times), spent)\n\""
-  },
-  {
-   "k": "res",
-   "t": "2 11500"
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']; MAXGAP=14500; LIM=560000\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\nwhile True:\n    times=[];spent=0;qe=0\n    for i in sent:\n        st_i=cap[i]['startMs']; d=win_time(len(times))\n        if st_i>qe+MA"
-  },
-  {
-   "k": "res",
-   "t": "MAXGAP 14500 windows 2 total 11.5 endgap 944.178 bad 0"
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nstarts=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\ntimes=[];qe=0;k=0\nfor i in starts:\n    st=cap[i]['startMs']\n    e=qe+13000\n    if st>e: continue\n    if st<qe+2400: continue\n    times.append(st); qe=st+win_time(len(times)); \n    # j"
-  },
-  {
-   "k": "res",
-   "t": "2 18240\n2"
-  },
-  {
-   "k": "tool",
-   "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']; MAXGAP=14000; LIM=560000\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\nwhile True:\n    times=[];spent=0;we=0\n    for i in sent:\n        st=cap[i]['startMs']; d=win_time(len(times))\n        if st-we<3000: "
-  },
-  {
-   "k": "res",
-   "t": "MAXGAP 14000 windows 1 total 6.0 endgap 947.798 bad 0"
-  },
-  {
    "k": "tool",
    "t": "python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nduration=cap[-1]['endMs']; MAXGAP=14000\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\nsent=[i for i in sent if cap[i]['startMs']>=20000]\nprint(len(s"
+  },
+  {
+   "k": "res",
+   "t": "Command running in background with ID: bfb7v43ey. Output is being written to: /tmp/claude-1002/-opt-estudio-datos-videos-pulgones-en-la-acelga-como-detectarlos-y/2f35f5af-9568-4ef6-97d6-aa0cdfafaffc/tasks/bfb7v43ey.output. You will be notified when it completes. To check interim output, use Read on that file path."
+  },
+  {
+   "k": "tool",
+   "t": "{\"task_id\": \"bfb7v43ey\"}"
+  },
+  {
+   "k": "res",
+   "t": "{\"message\":\"Successfully stopped task: bfb7v43ey (python - <<'EOF'\\nimport json\\ncap=json.load(open('captions.json'))\\nduration=cap[-1]['endMs']; MAXGAP=14000\\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\\ndef win_time(n): return 6000 if n==0 else (5500 if n%2 else 5000)\\nsent=[0]+[i for i in range(1,len(cap)) if cap[i]['startMs']-cap[i-1]['endMs']>180]\\nsent="
+  },
+  {
+   "k": "tool",
+   "t": "rm -f auto_plan.py _plan_times.json; python - <<'EOF'\nimport json\ncap=json.load(open('captions.json'))\nprint(cap[-1]['endMs'], cap[-1]['startMs'])\nprint(len(cap))\nEOF"
+  },
+  {
+   "k": "res",
+   "t": "962918 962438\n2687"
+  },
+  {
+   "k": "tool",
+   "t": "import json\n\ncap = json.load(open('captions.json'))\nTOTAL = cap[-1]['endMs']\n\n# Inicios de frase: palabra que sigue a una pausa de mas de 180 ms.\n# Busco st_i <= X escaneando hacia atras desde la ultima palabra que ya empezo antes de X.\nstarts = [0] + [i for i in range(1, len(cap)) if cap[i]['startMs'] - cap[i - 1]['endMs'] > 180]\nS = [cap[i]['startMs'] for i in starts]\n\n\ndef last_start_before(x):"
+  },
+  {
+   "k": "res",
+   "t": "File created successfully at: /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "import json\n\ncap = json.load(open('captions.json'))\nTOTAL = cap[-1]['endMs']\nS = [0] + [cap[i]['startMs'] for i in range(1, len(cap))\n           if cap[i]['startMs'] - cap[i - 1]['endMs'] > 180]\n\n\ndef last_start_before(x):\n    lo, hi = 0, len(S) - 1\n    while lo < hi:\n        mid = (lo + hi + 1) // 2\n        if S[mid] <= x:\n            lo = mid\n        else:\n            hi = mid - 1\n    return S[l"
+  },
+  {
+   "k": "res",
+   "t": "The file /opt/estudio/datos/videos/pulgones-en-la-acelga-como-detectarlos-y/auto_plan.py has been updated successfully. (file state is current in your context — no need to Read it back)"
+  },
+  {
+   "k": "tool",
+   "t": "python auto_plan.py 2>&1 | tail -12"
+  },
+  {
+   "k": "res",
+   "t": "GAP 11700.0 win 87 secs 458.5 maxgap 11.1 endgap 1.0"
+  },
+  {
+   "k": "tool",
+   "t": "sed -n '1,80p' /opt/estudio/repo/motor/tools/avatar_it.py"
+  },
+  {
+   "k": "res",
+   "t": "# -*- coding: utf-8 -*-\r\n\"\"\"Avatar con InfiniteTalk (RunPod), UNA sola llamada por video (US$0,25 aprox.).\r\n   python <APP>/tools/avatar_it.py <carpeta_del_video> > <carpeta>/avatar/it.log 2>&1        (en segundo plano)\r\n\r\nLee <carpeta>/avatar_ranges.json (TODAS las ventanas donde se ve el avatar, plan CERRADO), voz/master.wav y la foto del\r\npresentador refs/avatar.png (máxima resolución, mirando "
+  },
+  {
+   "k": "tool",
+   "t": "grep -n \"lado\\|\\\"foto\\\"\\|startMs\" /opt/estudio/repo/motor/tools/planos.py /opt/estudio/repo/motor/tools/render.py | head -40"
+  },
+  {
+   "k": "res",
+   "t": "/opt/estudio/repo/motor/tools/planos.py:7:         Las fotos de la pantalla partida (\"foto\" en una ventana) también entran en la lista, con su propio id.\n/opt/estudio/repo/motor/tools/planos.py:42:    R = sorted(R, key=lambda r: r[\"startMs\"])\n/opt/estudio/repo/motor/tools/planos.py:43:    V = [(r[\"startMs\"], r[\"endMs\"]) for r in R]\n/opt/estudio/repo/motor/tools/planos.py:44:    if V[0][0] > 300: p"
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\nimport json\nimport ast\ncap=json.load(open('captions.json'))\nplan=json.load(open('_plan_times.json'))\nout=[]\nfor i,w in enumerate(plan):\n    st=w['t']; en=st+w['dur']\n    f='avatar/A%d.mp4'%i\n    d={\"file\":f,\"frame\":\"refs/avatar.png\",\"startMs\":st,\"endMs\":en}\n    if i%3==1:\n        d['foto']='pX%02d'%i\n        d['lado']='der' if (i//3)%2 else 'izq'\n    out.append(d)\njson.dump(out,op"
+  },
+  {
+   "k": "res",
+   "t": "87 splits 29\n⚠ la primera ventana del avatar no arranca en 0: el video TIENE que abrir con el avatar hablando (startMs: 0)\n✓ planos.json: 123 planos de b-roll (8.4 min de b-roll, 14.6 por minuto) + 29 fotos de pantalla partida · 87 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\n⚠ 32 huecos de menos de 2.8 s entre ventanas: si"
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\np='auto_plan.py'\ns=open(p).read()\ns=s.replace(\"    times = []\\n    qe = 0.0\",\"    times = [(0, 6000)]\\n    qe = 6000.0\")\ns=s.replace(\"        if st < qe + 2400:\",\"        if st < qe + 3800:\")\ns=s.replace(\"GAP = 11700.0\",\"GAP = 10600.0\")\nopen(p,'w').write(s)\nEOF\npython auto_plan.py 2>&1|tail -4"
+  },
+  {
+   "k": "res",
+   "t": "GAP 10600.0 win 88 secs 464.5 maxgap 10.6 endgap 1.0"
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\nimport json\nplan=json.load(open('_plan_times.json'))\nout=[]\nfor i,w in enumerate(plan):\n    d={\"file\":'avatar/A%d.mp4'%i,\"frame\":\"refs/avatar.png\",\"startMs\":w['t'],\"endMs\":w['t']+w['dur']}\n    if i%3==1:\n        d['foto']='pX%02d'%i\n        d['lado']='der' if (i//3)%2 else 'izq'\n    out.append(d)\njson.dump(out,open('avatar_ranges.json','w'),indent=1)\nprint(len(out),'splits',sum(1 "
+  },
+  {
+   "k": "res",
+   "t": "88 splits 29 total 464.5\n✓ planos.json: 121 planos de b-roll (8.3 min de b-roll, 14.6 por minuto) + 29 fotos de pantalla partida · 88 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\n⚠ 34 huecos de menos de 2.8 s entre ventanas: si podés, dejá ≥ 3 s (una foto tan corta casi no se ve)."
+  },
+  {
+   "k": "tool",
+   "t": "sed -i 's/GAP = 10600.0/GAP = 11000.0/' auto_plan.py && python auto_plan.py 2>&1|tail -3 && python - <<'EOF'\nimport json\nplan=json.load(open('_plan_times.json'))\nout=[]\nfor i,w in enumerate(plan):\n    d={\"file\":'avatar/A%d.mp4'%i,\"frame\":\"refs/avatar.png\",\"startMs\":w['t'],\"endMs\":w['t']+w['dur']}\n    if i%3==1:\n        d['foto']='pX%02d'%i\n        d['lado']='der' if (i//3)%2 else 'izq'\n    out.app"
+  },
+  {
+   "k": "res",
+   "t": "GAP 11000.0 win 88 secs 464.5 maxgap 10.6 endgap 1.0\n✓ planos.json: 121 planos de b-roll (8.3 min de b-roll, 14.6 por minuto) + 29 fotos de pantalla partida · 88 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\n⚠ 34 huecos de menos de 2.8 s entre ventanas: si podés, dejá ≥ 3 s (una foto tan corta casi no se ve)."
+  },
+  {
+   "k": "tool",
+   "t": "sed -i 's/GAP = 11000.0/GAP = 8200.0/' auto_plan.py && python auto_plan.py 2>&1|tail -3 && python - <<'EOF'\nimport json\nplan=json.load(open('_plan_times.json'))\nout=[]\nfor i,w in enumerate(plan):\n    d={\"file\":'avatar/A%d.mp4'%i,\"frame\":\"refs/avatar.png\",\"startMs\":w['t'],\"endMs\":w['t']+w['dur']}\n    if i%3==1:\n        d['foto']='pX%02d'%i\n        d['lado']='der' if (i//3)%2 else 'izq'\n    out.appe"
+  },
+  {
+   "k": "res",
+   "t": "GAP 8200.0 win 105 secs 553.0 maxgap 8.0 endgap 1.18\n✓ planos.json: 119 planos de b-roll (6.8 min de b-roll, 17.4 por minuto) + 35 fotos de pantalla partida · 105 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\n⚠ 63 huecos de menos de 2.8 s entre ventanas: si podés, dejá ≥ 3 s (una foto tan corta casi no se ve)."
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\nimport json\nR=json.load(open('avatar_ranges.json'))\nout=[]\nfor i,r in enumerate(R):\n    r=dict(r); r.pop('foto',None); r.pop('lado',None); r['file']='avatar/A%d.mp4'%i\n    out.append(r)\njson.dump(out,open('avatar_ranges.json','w'),indent=1)\nprint(len(out), sum(r['endMs']-r['startMs'] for r in out)/1000)\nEOF\npython /opt/estudio/repo/motor/tools/planos.py . 2>&1 | tail -4"
+  },
+  {
+   "k": "res",
+   "t": "105 553.0\n✓ planos.json: 119 planos de b-roll (6.8 min de b-roll, 17.4 por minuto) · 105 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\n⚠ 63 huecos de menos de 2.8 s entre ventanas: si podés, dejá ≥ 3 s (una foto tan corta casi no se ve)."
+  },
+  {
+   "k": "tool",
+   "t": "python - <<'EOF'\nimport json\nR=json.load(open('avatar_ranges.json'))\nout=[]\nfor i,w in enumerate(json.load(open('_plan_times.json'))):\n    d={\"file\":'avatar/A%d.mp4'%i,\"frame\":\"refs/avatar.png\",\"startMs\":w['t'],\"endMs\":w['t']+w['dur']}\n    out.append(d)\njson.dump(out,open('avatar_ranges.json','w'),indent=1)\nEOF\npython /opt/estudio/repo/motor/tools/planos.py . 2>&1 | tail -3\npython - <<'EOF'\nimport"
+  },
+  {
+   "k": "res",
+   "t": "✓ planos.json: 119 planos de b-roll (6.8 min de b-roll, 17.4 por minuto) · 105 ventanas de avatar.\n  Ahora: UN prompt por plano (id = el del plano, p001…) con tools/fotos.py. Ninguna foto se repite.\n⚠ 63 huecos de menos de 2.8 s entre ventanas: si podés, dejá ≥ 3 s (una foto tan corta casi no se ve).\n<class 'list'> 119"
   }
  ],
  "maquinas": 1,
@@ -214,9 +214,9 @@
     "fin": true
    }
   ],
-  "total_s": 738,
+  "total_s": 801,
   "avatar_s": 0,
-  "sin_avatar_s": 738,
+  "sin_avatar_s": 801,
   "cerrado": false
  }
 }
