@@ -5,6 +5,7 @@ import {C} from '../marca';
 import {Bloque, Centro, Cierre, duracion, Escena, Etiqueta, FotoCard, FotoFondo, Palabras, Sfx} from '../kit';
 import {Mate, useDibujo} from '../ilus';
 import {Reel} from './comun';
+import {Voz, vf} from '../voz';
 
 const COMPAS = (120 / 92) * 30;          // 2 pulsos de negra con puntillo = 39.13 frames
 const P = (k: number) => Math.round(k * COMPAS);
@@ -65,8 +66,19 @@ const Kits: React.FC<{dur: number}> = ({dur}) => {
   );
 };
 
-const CIERRE = 170;
-const T = {gancho: tramo(0, 2), bomb: tramo(2, 1), torp: tramo(3, 1), imp: tramo(4, 2), termo: tramo(6, 1), matera: tramo(7, 1), combo: tramo(8, 1), kits: tramo(9, 3)};
+// cada sección dura compases enteros (los cortes caen siempre sobre el pulso) y se estira si la voz lo necesita
+const R = 'reel4-catalogo';
+const VOZ_EN = 3;
+const SECC = [
+  {k: 'gancho', base: 2, voz: 'g'}, {k: 'bomb', base: 1, voz: 'bomb'}, {k: 'torp', base: 1, voz: 'torp'}, {k: 'imp', base: 2, voz: 'imp'},
+  {k: 'termo', base: 1, voz: 'termo'}, {k: 'matera', base: 1, voz: 'matera'}, {k: 'combo', base: 1, voz: 'combo'}, {k: 'kits', base: 3, voz: 'kits'},
+].reduce((acc, x) => {
+  const n = Math.max(x.base, Math.ceil((VOZ_EN + vf(R, x.voz) + 3) / COMPAS));
+  const desde = acc.length ? acc[acc.length - 1].desde + acc[acc.length - 1].n : 0;
+  return [...acc, {...x, n, desde}];
+}, [] as {k: string; base: number; voz: string; n: number; desde: number}[]);
+const T = Object.fromEntries(SECC.map((x) => [x.k, tramo(x.desde, x.n)])) as Record<string, number>;
+const CIERRE = Math.max(170, 6 + vf(R, 'cierre') + 26);
 export const bloquesCatalogo: Bloque[] = [
   {dur: T.gancho, el: <Gancho dur={T.gancho} />},
   {dur: T.bomb, el: <Producto dur={T.bomb} nombre="Bombillones" foto="bombillones.jpg" rot={-3} />},
@@ -76,16 +88,17 @@ export const bloquesCatalogo: Bloque[] = [
   {dur: T.matera, el: <Producto dur={T.matera} nombre="Materas de cuero" foto="matera_grande.jpg" rot={3} abajo={false} />},
   {dur: T.combo, el: <Producto dur={T.combo} nombre="Combos" foto="combo.jpg" rot={-2} />},
   {dur: T.kits, el: <Kits dur={T.kits} />},
-  {dur: CIERRE, el: <Cierre dur={CIERRE} titulo={'Tu ritual,\n*tu raíz.*'} boton="Pedí el tuyo por DM" />, solapa: 6},
+  {dur: CIERRE, el: <><Cierre dur={CIERRE} titulo={'Tu ritual,\n*tu raíz.*'} boton="Pedí el tuyo por DM" /><Voz reel={R} id="cierre" en={6} /></>, solapa: 6},
 ];
 export const duracionCatalogo = duracion(bloquesCatalogo);
 
-// efectos a nivel reel: whoosh que "llega" justo en cada corte
-const CORTES = [2, 3, 4, 6, 7, 8, 9].map(P);
+// efectos a nivel reel: whoosh que "llega" justo en cada corte, y la voz entrando sobre el pulso de cada sección
+const CORTES = SECC.slice(1).map((x) => P(x.desde));
 export const ReelCatalogo: React.FC = () => (
   <AbsoluteFill>
     <Reel bloques={bloquesCatalogo} cierre={CIERRE} />
     {CORTES.map((c, i) => <Sfx key={c} src={i % 2 ? 'whoosh_corto' : 'whoosh'} en={c - (i % 2 ? 6 : 10)} vol={0.55} />)}
     {CORTES.map((c) => <Sfx key={`p${c}`} src="pop" en={c + 2} vol={0.3} />)}
+    {SECC.map((x) => <Voz key={x.k} reel={R} id={x.voz} en={P(x.desde) + VOZ_EN} />)}
   </AbsoluteFill>
 );

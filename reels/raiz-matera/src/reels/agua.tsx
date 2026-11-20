@@ -5,6 +5,21 @@ import {C} from '../marca';
 import {Bloque, Centro, Cierre, duracion, Escena, Etiqueta, FotoFondo, Palabras, Pildora, Sfx, useSacudida} from '../kit';
 import {Cifra, Pava, Termometro, useDibujo} from '../ilus';
 import {Reel, Texto} from './comun';
+import {Voz, vf} from '../voz';
+
+// tiempos atados a la duración de cada frase de la voz en off
+const R = 'reel1-agua';
+const v = (id: string) => vf(R, id);
+const TG = (() => { const g1 = 3; const g2 = Math.max(34, g1 + v('g1') + 3); return {g1, g2, dur: Math.max(82, g2 + v('g2') + 12)}; })();
+const TA = {en: 3, dur: Math.max(64, 3 + v('agua') + 20)};
+const TT = (() => {
+  const PICO = 52, hv = PICO + 4;
+  const BAJA = Math.max(150, hv + v('hierve') + 8);
+  const ideal = BAJA + 30;
+  return {PICO, hv, BAJA, ideal, dur: Math.max(BAJA + 150, ideal + v('ideal') + 20)};
+})();
+const TS = {en: 8, dur: Math.max(185, 8 + v('truco') + 22)};
+const CIERRE = Math.max(170, 6 + v('cierre') + 26);
 
 const cl = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
@@ -18,12 +33,14 @@ const Gancho: React.FC<{dur: number}> = ({dur}) => {
           <Palabras texto={'¿Tu mate sale\n*amargo*?'} tam={130} anim="golpe" cada={4} />
         </Centro>
         <Centro top={1330}>
-          <Pildora texto="No es culpa de la yerba" desde={34} tam={42} />
+          <Pildora texto="No es culpa de la yerba" desde={TG.g2} tam={42} />
         </Centro>
       </AbsoluteFill>
       <Sfx src="impacto" en={0} vol={0.9} />
-      <Sfx src="whoosh_corto" en={32} vol={0.6} />
-      <Sfx src="pop" en={36} vol={0.5} />
+      <Sfx src="whoosh_corto" en={TG.g2 - 2} vol={0.6} />
+      <Sfx src="pop" en={TG.g2 + 2} vol={0.5} />
+      <Voz reel={R} id="g1" en={TG.g1} />
+      <Voz reel={R} id="g2" en={TG.g2} />
     </Escena>
   );
 };
@@ -44,6 +61,7 @@ const EsElAgua: React.FC<{dur: number}> = ({dur}) => {
       <Sfx src="bombo" en={2} vol={0.9} />
       <Sfx src="chisporroteo" en={8} vol={0.55} />
       <Sfx src="whoosh" en={dur - 9} vol={0.7} />
+      <Voz reel={R} id="agua" en={TA.en} />
     </Escena>
   );
 };
@@ -51,7 +69,7 @@ const EsElAgua: React.FC<{dur: number}> = ({dur}) => {
 const Temperatura: React.FC<{dur: number}> = ({dur}) => {
   const f = useCurrentFrame();
   const dib = useDibujo(0, 16);
-  const PICO = 52, BAJA = 150;
+  const {PICO, BAJA} = TT;
   const sube = interpolate(f, [8, PICO], [22, 100], {...cl, easing: Easing.in(Easing.quad)});
   const baja = interpolate(f, [BAJA, BAJA + 32], [100, 75], {...cl, easing: Easing.inOut(Easing.cubic)});
   const temp = f < BAJA ? sube : baja;
@@ -93,6 +111,8 @@ const Temperatura: React.FC<{dur: number}> = ({dur}) => {
       <Sfx src="whoosh" en={BAJA - 4} vol={0.6} />
       <Sfx src="acierto" en={BAJA + 30} vol={0.7} />
       <Sfx src="whoosh" en={dur - 9} vol={0.5} />
+      <Voz reel={R} id="hierve" en={TT.hv} />
+      <Voz reel={R} id="ideal" en={TT.ideal} />
     </Escena>
   );
 };
@@ -118,17 +138,17 @@ const SinTermometro: React.FC<{dur: number}> = ({dur}) => {
       <Sfx src="pop" en={6} vol={0.5} />
       <Sfx src="burbujas" en={42} vol={0.8} />
       <Sfx src="burbujas" en={80} vol={0.5} />
+      <Voz reel={R} id="truco" en={TS.en} />
     </Escena>
   );
 };
 
-const CIERRE = 170;
 export const bloquesAgua: Bloque[] = [
-  {dur: 82, el: <Gancho dur={82} />},
-  {dur: 64, el: <EsElAgua dur={64} />, solapa: 4},
-  {dur: 300, el: <Temperatura dur={300} />, solapa: 6},
-  {dur: 185, el: <SinTermometro dur={185} />, solapa: 6},
-  {dur: CIERRE, el: <Cierre dur={CIERRE} titulo={'*Guardalo* para tu\npróximo mate'} />, solapa: 6},
+  {dur: TG.dur, el: <Gancho dur={TG.dur} />},
+  {dur: TA.dur, el: <EsElAgua dur={TA.dur} />, solapa: 4},
+  {dur: TT.dur, el: <Temperatura dur={TT.dur} />, solapa: 6},
+  {dur: TS.dur, el: <SinTermometro dur={TS.dur} />, solapa: 6},
+  {dur: CIERRE, el: <><Cierre dur={CIERRE} titulo={'*Guardalo* para tu\npróximo mate'} /><Voz reel={R} id="cierre" en={6} /></>, solapa: 6},
 ];
 export const duracionAgua = duracion(bloquesAgua);
 export const ReelAgua: React.FC = () => <Reel bloques={bloquesAgua} cierre={CIERRE} />;

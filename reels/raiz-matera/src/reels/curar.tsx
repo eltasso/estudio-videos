@@ -5,6 +5,18 @@ import {C} from '../marca';
 import {Bloque, Centro, Cierre, duracion, Escena, Etiqueta, FotoCard, FotoFondo, Palabras, Pildora, Sello, Sfx, useSacudida} from '../kit';
 import {Cifra, Cuchara, LluviaYerba, Mate, Reloj, useDibujo} from '../ilus';
 import {Reel, Texto} from './comun';
+import {Voz, vf} from '../voz';
+
+// tiempos atados a la duración de cada frase de la voz en off
+const R = 'reel3-curar';
+const v = (id: string) => vf(R, id);
+const TG = (() => { const g1 = 4; const g2 = Math.max(36, g1 + v('g1') + 3); return {g1, g2, dur: Math.max(88, g2 + v('g2') + 12)}; })();
+const TC = {en: 2, dur: Math.max(82, 2 + v('curar') + 14)};
+const TP1 = {en: 6, texto: Math.max(50, 6 + Math.round(v('p1') * 0.5)), dur: Math.max(150, 6 + v('p1') + 16)};
+const TP2 = (() => { const a = 6; const RL = Math.max(60, a + v('p2a') + 2); return {a, RL, dur: Math.max(175, RL + 100, RL + v('p2b') + 20)}; })();
+const TP3 = {en: 6, dur: Math.max(150, 6 + v('p3') + 16)};
+const TP4 = (() => { const a = 6; const b = Math.max(46, a + v('p4a') + 4); return {a, b, dur: Math.max(130, b + v('p4b') + 18)}; })();
+const CIERRE = Math.max(170, 6 + v('cierre') + 26);
 
 const cl = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
@@ -19,12 +31,14 @@ const Gancho: React.FC<{dur: number}> = ({dur}) => {
         </Centro>
         <FotoCard src="torpedo.jpg" x={540} y={1060} ancho={540} alto={730} rot={-4} desde={8} />
         <Centro top={1420}>
-          <Pildora texto="¡No lo uses todavía!" desde={36} tam={46} fondo={C.rojo} color={C.crema} />
+          <Pildora texto="¡No lo uses todavía!" desde={TG.g2} tam={46} fondo={C.rojo} color={C.crema} />
         </Centro>
       </AbsoluteFill>
       <Sfx src="impacto" en={0} vol={0.85} />
       <Sfx src="whoosh_corto" en={8} vol={0.5} />
-      <Sfx src="error" en={36} vol={0.6} />
+      <Sfx src="error" en={TG.g2} vol={0.6} />
+      <Voz reel={R} id="g1" en={TG.g1} />
+      <Voz reel={R} id="g2" en={TG.g2} />
     </Escena>
   );
 };
@@ -45,6 +59,7 @@ const Curarlo: React.FC<{dur: number}> = ({dur}) => {
       <Sfx src="bombo" en={0} vol={0.8} />
       <Sfx src="pop" en={20} vol={0.5} />
       <Sfx src="whoosh" en={dur - 9} vol={0.6} />
+      <Voz reel={R} id="curar" en={TC.en} />
     </Escena>
   );
 };
@@ -69,13 +84,14 @@ const Paso1: React.FC<{dur: number}> = ({dur}) => {
         </Mate>
       </Centro>
       <Centro top={1430}>
-        <Texto texto="Húmeda, hasta el borde." desde={50} tam={52} />
+        <Texto texto="Húmeda, hasta el borde." desde={TP1.texto} tam={52} />
       </Centro>
       <Sfx src="whoosh" en={0} vol={0.6} />
       <Sfx src="maquina" en={16} vol={0.45} />
       <Sfx src="maquina" en={30} vol={0.4} />
       <Sfx src="maquina" en={44} vol={0.35} />
       <Sfx src="pop" en={64} vol={0.5} />
+      <Voz reel={R} id="p1" en={TP1.en} />
     </Escena>
   );
 };
@@ -83,10 +99,11 @@ const Paso1: React.FC<{dur: number}> = ({dur}) => {
 const Paso2: React.FC<{dur: number}> = ({dur}) => {
   const f = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const chorro = f >= 12 && f < 56;
-  const reloj = spring({frame: f - 60, fps, config: {damping: 12, stiffness: 130}});
-  const vueltas = interpolate(f, [64, 150], [0, 24], {...cl, easing: Easing.inOut(Easing.quad)});
-  const horas = interpolate(f, [64, 150], [0, 24], {...cl, easing: Easing.inOut(Easing.quad)});
+  const {RL} = TP2;
+  const chorro = f >= 12 && f < RL - 4;
+  const reloj = spring({frame: f - RL, fps, config: {damping: 12, stiffness: 130}});
+  const vueltas = interpolate(f, [RL + 4, RL + 90], [0, 24], {...cl, easing: Easing.inOut(Easing.quad)});
+  const horas = interpolate(f, [RL + 4, RL + 90], [0, 24], {...cl, easing: Easing.inOut(Easing.quad)});
   return (
     <Escena dur={dur} entrada="derecha" salida="izquierda">
       <Cabeza n={2} titulo={'Agua *caliente*\ny a esperar'} />
@@ -107,16 +124,18 @@ const Paso2: React.FC<{dur: number}> = ({dur}) => {
         </div>
       </div>
       <Centro top={1440}>
-        <Texto texto={'Sin hervir. Dejalo reposar *un día entero.*'} desde={70} tam={50} />
+        <Texto texto={'Sin hervir. Dejalo reposar *un día entero.*'} desde={RL + 6} tam={50} />
       </Centro>
       <Sfx src="whoosh" en={0} vol={0.6} />
       <Sfx src="cebar" en={12} vol={0.7} />
       <Sfx src="cebar" en={34} vol={0.5} />
-      <Sfx src="pop" en={60} vol={0.5} />
-      <Sfx src="maquina" en={70} vol={0.35} />
-      <Sfx src="maquina" en={92} vol={0.35} />
-      <Sfx src="maquina" en={114} vol={0.35} />
-      <Sfx src="campana" en={150} vol={0.55} />
+      <Sfx src="pop" en={RL} vol={0.5} />
+      <Sfx src="maquina" en={RL + 10} vol={0.35} />
+      <Sfx src="maquina" en={RL + 32} vol={0.35} />
+      <Sfx src="maquina" en={RL + 54} vol={0.35} />
+      <Sfx src="campana" en={RL + 90} vol={0.55} />
+      <Voz reel={R} id="p2a" en={TP2.a} />
+      <Voz reel={R} id="p2b" en={RL} />
     </Escena>
   );
 };
@@ -142,6 +161,7 @@ const Paso3: React.FC<{dur: number}> = ({dur}) => {
       <Sfx src="whoosh" en={0} vol={0.6} />
       <Sfx src="whoosh_corto" en={16} vol={0.5} />
       {[40, 56, 72, 88, 104].map((t) => <Sfx key={t} src="chisporroteo" en={t} vol={0.12} />)}
+      <Voz reel={R} id="p3" en={TP3.en} />
     </Escena>
   );
 };
@@ -153,23 +173,24 @@ const Paso4: React.FC<{dur: number}> = ({dur}) => (
       <Sello tipo="bien" desde={14} tam={440} />
     </Centro>
     <Centro top={1340}>
-      <Palabras texto="¡Y listo para el primer mate!" desde={46} tam={84} cada={3} acento={C.ok} />
+      <Palabras texto="¡Y listo para el primer mate!" desde={TP4.b} tam={84} cada={3} acento={C.ok} />
     </Centro>
     <Sfx src="whoosh" en={0} vol={0.6} />
     <Sfx src="acierto" en={14} vol={0.8} />
-    <Sfx src="pop" en={46} vol={0.4} />
+    <Sfx src="pop" en={TP4.b} vol={0.4} />
+    <Voz reel={R} id="p4a" en={TP4.a} />
+    <Voz reel={R} id="p4b" en={TP4.b} />
   </Escena>
 );
 
-const CIERRE = 170;
 export const bloquesCurar: Bloque[] = [
-  {dur: 88, el: <Gancho dur={88} />},
-  {dur: 82, el: <Curarlo dur={82} />, solapa: 4},
-  {dur: 150, el: <Paso1 dur={150} />, solapa: 6},
-  {dur: 175, el: <Paso2 dur={175} />, solapa: 6},
-  {dur: 150, el: <Paso3 dur={150} />, solapa: 6},
-  {dur: 130, el: <Paso4 dur={130} />, solapa: 6},
-  {dur: CIERRE, el: <Cierre dur={CIERRE} titulo={'*Guardalo* para\ntu mate nuevo'} />, solapa: 6},
+  {dur: TG.dur, el: <Gancho dur={TG.dur} />},
+  {dur: TC.dur, el: <Curarlo dur={TC.dur} />, solapa: 4},
+  {dur: TP1.dur, el: <Paso1 dur={TP1.dur} />, solapa: 6},
+  {dur: TP2.dur, el: <Paso2 dur={TP2.dur} />, solapa: 6},
+  {dur: TP3.dur, el: <Paso3 dur={TP3.dur} />, solapa: 6},
+  {dur: TP4.dur, el: <Paso4 dur={TP4.dur} />, solapa: 6},
+  {dur: CIERRE, el: <><Cierre dur={CIERRE} titulo={'*Guardalo* para\ntu mate nuevo'} /><Voz reel={R} id="cierre" en={6} /></>, solapa: 6},
 ];
 export const duracionCurar = duracion(bloquesCurar);
 export const ReelCurar: React.FC = () => <Reel bloques={bloquesCurar} cierre={CIERRE} />;

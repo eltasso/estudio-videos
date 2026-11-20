@@ -1,20 +1,22 @@
 # Reels para Raíz Matera (@raizmatera.qq)
 
-Cuatro reels verticales (1080×1920, 30 fps) hechos con código: animaciones, efectos de sonido y música propia (generada
-por código, sin derechos de autor). Usan los colores, la tipografía y las fotos de las historias de la cuenta.
+Cuatro reels verticales (1080×1920, 30 fps) hechos con código: animaciones, **voz en off femenina** (Fish Audio, voz
+"Argentina cálida"), efectos de sonido y música propia (generada por código, sin derechos de autor). Usan los colores, la
+tipografía y las fotos de las historias de la cuenta.
 
 | # | Archivo | Dura | De qué se trata | Para qué sirve |
 |---|---------|------|-----------------|----------------|
-| 1 | `salida/reel1-agua.mp4` | 26 s | "¿Tu mate sale amargo? Es el agua": termómetro animado, 70°–80°, truco de la pava | Que lo **guarden** |
-| 2 | `salida/reel2-errores.mp4` | 31 s | "3 errores que arruinan tu mate" + bonus con productos | Que **comenten** ("¿cuántos hacías?") |
-| 3 | `salida/reel3-curar.mp4` | 30 s | "¿Estrenás mate nuevo? No lo uses todavía": cómo curarlo en 4 pasos | Que lo **guarden y compartan** |
-| 4 | `salida/reel4-catalogo.mp4` | 21 s | Publicidad: todos los productos con cortes al ritmo de la música | Que **escriban por DM** |
+| 1 | `salida/reel1-agua.mp4` | 30 s | "¿Tu mate sale amargo? Es el agua": termómetro animado, 70°–80°, truco de la pava | Que lo **guarden** |
+| 2 | `salida/reel2-errores.mp4` | 40 s | "3 errores que arruinan tu mate" + bonus con productos | Que **comenten** ("¿cuántos hacías?") |
+| 3 | `salida/reel3-curar.mp4` | 34 s | "¿Estrenás mate nuevo? No lo uses todavía": cómo curarlo en 4 pasos | Que lo **guarden y compartan** |
+| 4 | `salida/reel4-catalogo.mp4` | 26 s | Publicidad: todos los productos con cortes al ritmo de la música | Que **escriban por DM** |
 
 Cada reel viene en dos versiones:
 
-- `reelX.mp4`: **listo para subir**, con efectos y música de fondo.
-- `reelX_sin-musica.mp4`: solo efectos. Sirve para ponerle **un audio en tendencia** desde Instagram (Agregar audio →
-  bajar el volumen del audio original al 30-40 %). Los audios en tendencia suelen dar más alcance.
+- `reelX.mp4`: **listo para subir**: voz, efectos y música de fondo (la música baja sola cuando habla la voz).
+- `reelX_sin-musica.mp4`: voz y efectos, sin música. Sirve para ponerle **un audio en tendencia** desde Instagram
+  (Agregar audio → dejar el audio original al 100 % y la música bajita, 10-20 %, para que no tape la voz).
+- `salida/sin-voz/`: las versiones anteriores, solo con texto en pantalla, efectos y música (más cortas).
 - `salida/portadas/reelX.jpg`: la portada sugerida. Al subir: *Editar portada → Agregar desde la galería*.
 
 ---
@@ -142,7 +144,12 @@ Todo está en esta carpeta (`reels/raiz-matera`):
 - `src/reels/*.tsx`: el guion de cada reel (textos, tiempos y fotos).
 - `public/fotos/`: las fotos (recortadas de las historias). **Con las fotos originales en buena calidad los reels se ven
   mucho más nítidos**: si tu primo te las pasa, se reemplazan con el mismo nombre y se vuelven a renderizar.
+- `sonido/guiones.json`: **lo que dice la voz** en cada escena, y qué voz de Fish se usa (`_voz.id`, con las otras 4 voces
+  que se probaron anotadas en `_voz.otras`). La velocidad está en `_voz.velocidad` (1.08 = 8 % más rápida que la original).
+- `sonido/voz.py`: genera la voz con Fish Audio (la misma cuenta que usa el estudio). Sólo rehace las frases que cambiaron;
+  `--rehacer reel2-errores/b2` saca otra toma de una frase puntual. Las escenas se estiran solas según lo que dura cada frase.
 - `sonido/generar.py`: genera los efectos y la música (`npm run sonidos`).
 - `node render.mjs`: renderiza todo en `salida/` (o `node render.mjs reel1-agua` para uno solo).
 
-Requisitos para renderizar en una compu: Node 20+, ffmpeg, Python 3 con numpy y scipy, y después `npm install`.
+Requisitos para renderizar en una compu: Node 20+, ffmpeg, Python 3 con numpy, scipy y `fish-audio-sdk`, `npm install`,
+y la clave de Fish en la variable `FISH_API_KEY` (sólo para volver a generar la voz).

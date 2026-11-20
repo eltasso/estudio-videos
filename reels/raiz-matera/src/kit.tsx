@@ -8,9 +8,11 @@ import {C, FUENTE_TEXTO, FUENTE_TITULO, USUARIO} from './marca';
 const cl = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
 // ───────────── sonido ─────────────
+// los efectos van un poco más bajos que la voz en off para que no la tapen
+export const VOL_SFX = 0.62;
 export const Sfx: React.FC<{src: string; en?: number; vol?: number}> = ({src, en = 0, vol = 1}) => (
   <Sequence from={Math.round(en)} layout="none">
-    <Audio src={staticFile(`sfx/${src}.wav`)} volume={vol} />
+    <Audio src={staticFile(`sfx/${src}.wav`)} volume={vol * VOL_SFX} />
   </Sequence>
 );
 

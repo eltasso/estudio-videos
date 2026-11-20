@@ -1,0 +1,59 @@
+{
+  "_voz": {
+    "id": "e5c2cf742d864a288e63a97774b727e4",
+    "nombre": "argentina cálida (Fish Audio, femenina, joven, cálida; elegida por el cliente)",
+    "otras": {
+      "argentina_anuncio": "8430c634564043c4a97e3828f5079baa",
+      "sofi": "25ab5701196f4dba81f8e680bcbf8b54",
+      "locutora_calma": "c964e3267b9448939d5087a6b4ee6007",
+      "locutora_calida": "3ee58468290749bdac0391924b8ba1c6"
+    },
+    "velocidad": 1.08
+  },
+  "reel1-agua": {
+    "g1": "¿Tu mate sale amargo?",
+    "g2": "No es culpa de la yerba.",
+    "agua": "Es el agua.",
+    "hierve": "Si el agua hierve, quema la yerba: el mate sale amargo y se lava enseguida.",
+    "ideal": "Lo ideal es entre setenta y ochenta grados. Más sabor, y muchas más cebadas.",
+    "truco": "¿No tenés termómetro? Apagá el fuego cuando aparecen las primeras burbujitas, antes de que hierva.",
+    "cierre": "Guardalo para tu próximo mate, y seguinos en Raíz Matera."
+  },
+  "reel2-errores": {
+    "g1": "Tres errores que arruinan tu mate.",
+    "g2": "¿Cuántos hacés vos?",
+    "e1a": "Uno: mover la bombilla.",
+    "e1b": "Tapa el filtro y lava la yerba. Ponela una vez, y no la toques más.",
+    "e2a": "Dos: cebar con agua hirviendo.",
+    "e2b": "Quema la yerba y el mate sale amargo. Lo ideal: entre setenta y ochenta grados.",
+    "e3a": "Tres: cebar en cualquier lado.",
+    "e3b": "La montañita se moja entera, y el mate se lava rápido.",
+    "e3c": "Cebá siempre en el mismo lugar, junto a la bombilla. Rinde muchísimo más.",
+    "b1": "Y de yapa: tomar mate en cualquier cosa.",
+    "b2": "Tu momento merece un mate a su altura.",
+    "cierre": "¿Cuántos hacías? Contanos en los comentarios, y seguinos para más."
+  },
+  "reel3-curar": {
+    "g1": "¿Estrenás un mate nuevo?",
+    "g2": "¡No lo uses todavía!",
+    "curar": "Primero hay que curarlo. Son cuatro pasos.",
+    "p1": "Uno: llenalo con yerba usada, húmeda, hasta el borde.",
+    "p2a": "Dos: agregale agua caliente, sin que hierva,",
+    "p2b": "y dejalo reposar un día entero.",
+    "p3": "Tres: vacialo, y con una cuchara raspá suave el interior, para sacar los restos y la telita.",
+    "p4a": "Cuatro: repetilo dos o tres días.",
+    "p4b": "¡Y listo para el primer mate!",
+    "cierre": "Guardalo para cuando estrenes el tuyo. Y si todavía no lo tenés, escribinos."
+  },
+  "reel4-catalogo": {
+    "g": "Todo lo que tu mate estaba esperando.",
+    "bomb": "Bombillones.",
+    "torp": "Torpedo de algarrobo.",
+    "imp": "Imperial: borde labrado y forrado en cuero.",
+    "termo": "Termos.",
+    "matera": "Materas de cuero.",
+    "combo": "Y combos completos.",
+    "kits": "Además, armamos kits materos personalizados, ideales para regalar.",
+    "cierre": "Tu ritual, tu raíz. Pedí el tuyo por mensaje directo."
+  }
+}

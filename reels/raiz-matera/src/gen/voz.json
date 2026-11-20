@@ -1,0 +1,238 @@
+{
+ "reel1-agua": {
+  "g1": {
+   "archivo": "voz/reel1-agua/g1.wav",
+   "frames": 37,
+   "texto": "¿Tu mate sale amargo?",
+   "huella": "4474cba6fcc5"
+  },
+  "g2": {
+   "archivo": "voz/reel1-agua/g2.wav",
+   "frames": 39,
+   "texto": "No es culpa de la yerba.",
+   "huella": "d4aba29c1563"
+  },
+  "agua": {
+   "archivo": "voz/reel1-agua/agua.wav",
+   "frames": 25,
+   "texto": "Es el agua.",
+   "huella": "cba387353f17"
+  },
+  "hierve": {
+   "archivo": "voz/reel1-agua/hierve.wav",
+   "frames": 141,
+   "texto": "Si el agua hierve, quema la yerba: el mate sale amargo y se lava enseguida.",
+   "huella": "428a783693e8"
+  },
+  "ideal": {
+   "archivo": "voz/reel1-agua/ideal.wav",
+   "frames": 140,
+   "texto": "Lo ideal es entre setenta y ochenta grados. Más sabor, y muchas más cebadas.",
+   "huella": "f3381211826d"
+  },
+  "truco": {
+   "archivo": "voz/reel1-agua/truco.wav",
+   "frames": 153,
+   "texto": "¿No tenés termómetro? Apagá el fuego cuando aparecen las primeras burbujitas, antes de que hierva.",
+   "huella": "120cf5776829"
+  },
+  "cierre": {
+   "archivo": "voz/reel1-agua/cierre.wav",
+   "frames": 103,
+   "texto": "Guardalo para tu próximo mate, y seguinos en Raíz Matera.",
+   "huella": "737e08a84e88"
+  }
+ },
+ "reel2-errores": {
+  "g1": {
+   "archivo": "voz/reel2-errores/g1.wav",
+   "frames": 62,
+   "texto": "Tres errores que arruinan tu mate.",
+   "huella": "a203748c0f27"
+  },
+  "g2": {
+   "archivo": "voz/reel2-errores/g2.wav",
+   "frames": 36,
+   "texto": "¿Cuántos hacés vos?",
+   "huella": "d459dbc7f67d"
+  },
+  "e1a": {
+   "archivo": "voz/reel2-errores/e1a.wav",
+   "frames": 51,
+   "texto": "Uno: mover la bombilla.",
+   "huella": "8cef2b4bf54f"
+  },
+  "e1b": {
+   "archivo": "voz/reel2-errores/e1b.wav",
+   "frames": 115,
+   "texto": "Tapa el filtro y lava la yerba. Ponela una vez, y no la toques más.",
+   "huella": "fade9d759bf8"
+  },
+  "e2a": {
+   "archivo": "voz/reel2-errores/e2a.wav",
+   "frames": 62,
+   "texto": "Dos: cebar con agua hirviendo.",
+   "huella": "e86809dc9147"
+  },
+  "e2b": {
+   "archivo": "voz/reel2-errores/e2b.wav",
+   "frames": 147,
+   "texto": "Quema la yerba y el mate sale amargo. Lo ideal: entre setenta y ochenta grados.",
+   "huella": "25e0044bb05a"
+  },
+  "e3a": {
+   "archivo": "voz/reel2-errores/e3a.wav",
+   "frames": 54,
+   "texto": "Tres: cebar en cualquier lado.",
+   "huella": "958c8e96656b"
+  },
+  "e3b": {
+   "archivo": "voz/reel2-errores/e3b.wav",
+   "frames": 96,
+   "texto": "La montañita se moja entera, y el mate se lava rápido.",
+   "huella": "f44eb33643d8"
+  },
+  "e3c": {
+   "archivo": "voz/reel2-errores/e3c.wav",
+   "frames": 127,
+   "texto": "Cebá siempre en el mismo lugar, junto a la bombilla. Rinde muchísimo más.",
+   "huella": "9f90551431d4"
+  },
+  "b1": {
+   "archivo": "voz/reel2-errores/b1.wav",
+   "frames": 80,
+   "texto": "Y de yapa: tomar mate en cualquier cosa.",
+   "huella": "777b9c6cb3a6"
+  },
+  "b2": {
+   "archivo": "voz/reel2-errores/b2.wav",
+   "frames": 61,
+   "texto": "Tu momento merece un mate a su altura.",
+   "huella": "9b3fa33484c3"
+  },
+  "cierre": {
+   "archivo": "voz/reel2-errores/cierre.wav",
+   "frames": 108,
+   "texto": "¿Cuántos hacías? Contanos en los comentarios, y seguinos para más.",
+   "huella": "743e4add87fa"
+  }
+ },
+ "reel3-curar": {
+  "g1": {
+   "archivo": "voz/reel3-curar/g1.wav",
+   "frames": 37,
+   "texto": "¿Estrenás un mate nuevo?",
+   "huella": "3314e78155e0"
+  },
+  "g2": {
+   "archivo": "voz/reel3-curar/g2.wav",
+   "frames": 43,
+   "texto": "¡No lo uses todavía!",
+   "huella": "b747135aa0f1"
+  },
+  "curar": {
+   "archivo": "voz/reel3-curar/curar.wav",
+   "frames": 74,
+   "texto": "Primero hay que curarlo. Son cuatro pasos.",
+   "huella": "18d4b98d0cd0"
+  },
+  "p1": {
+   "archivo": "voz/reel3-curar/p1.wav",
+   "frames": 111,
+   "texto": "Uno: llenalo con yerba usada, húmeda, hasta el borde.",
+   "huella": "e00a4d8e1098"
+  },
+  "p2a": {
+   "archivo": "voz/reel3-curar/p2a.wav",
+   "frames": 90,
+   "texto": "Dos: agregale agua caliente, sin que hierva,",
+   "huella": "a99fb54ea162"
+  },
+  "p2b": {
+   "archivo": "voz/reel3-curar/p2b.wav",
+   "frames": 55,
+   "texto": "y dejalo reposar un día entero.",
+   "huella": "3dde6ab5413a"
+  },
+  "p3": {
+   "archivo": "voz/reel3-curar/p3.wav",
+   "frames": 167,
+   "texto": "Tres: vacialo, y con una cuchara raspá suave el interior, para sacar los restos y la telita.",
+   "huella": "46ff0a8f4a11"
+  },
+  "p4a": {
+   "archivo": "voz/reel3-curar/p4a.wav",
+   "frames": 77,
+   "texto": "Cuatro: repetilo dos o tres días.",
+   "huella": "aaad0f4177a1"
+  },
+  "p4b": {
+   "archivo": "voz/reel3-curar/p4b.wav",
+   "frames": 47,
+   "texto": "¡Y listo para el primer mate!",
+   "huella": "7a9ec0234e28"
+  },
+  "cierre": {
+   "archivo": "voz/reel3-curar/cierre.wav",
+   "frames": 128,
+   "texto": "Guardalo para cuando estrenes el tuyo. Y si todavía no lo tenés, escribinos.",
+   "huella": "a028793a2feb"
+  }
+ },
+ "reel4-catalogo": {
+  "g": {
+   "archivo": "voz/reel4-catalogo/g.wav",
+   "frames": 61,
+   "texto": "Todo lo que tu mate estaba esperando.",
+   "huella": "d923215ed669"
+  },
+  "bomb": {
+   "archivo": "voz/reel4-catalogo/bomb.wav",
+   "frames": 30,
+   "texto": "Bombillones.",
+   "huella": "b066c996f5a7"
+  },
+  "torp": {
+   "archivo": "voz/reel4-catalogo/torp.wav",
+   "frames": 38,
+   "texto": "Torpedo de algarrobo.",
+   "huella": "0103d83a14da"
+  },
+  "imp": {
+   "archivo": "voz/reel4-catalogo/imp.wav",
+   "frames": 89,
+   "texto": "Imperial: borde labrado y forrado en cuero.",
+   "huella": "d82a33c271e5"
+  },
+  "termo": {
+   "archivo": "voz/reel4-catalogo/termo.wav",
+   "frames": 21,
+   "texto": "Termos.",
+   "huella": "b88f59543ce9"
+  },
+  "matera": {
+   "archivo": "voz/reel4-catalogo/matera.wav",
+   "frames": 33,
+   "texto": "Materas de cuero.",
+   "huella": "c3f2fc1c9c3c"
+  },
+  "combo": {
+   "archivo": "voz/reel4-catalogo/combo.wav",
+   "frames": 36,
+   "texto": "Y combos completos.",
+   "huella": "6ea8c12daa6b"
+  },
+  "kits": {
+   "archivo": "voz/reel4-catalogo/kits.wav",
+   "frames": 118,
+   "texto": "Además, armamos kits materos personalizados, ideales para regalar.",
+   "huella": "bf610a1dfc46"
+  },
+  "cierre": {
+   "archivo": "voz/reel4-catalogo/cierre.wav",
+   "frames": 101,
+   "texto": "Tu ritual, tu raíz. Pedí el tuyo por mensaje directo.",
+   "huella": "b2395b6c0b07"
+  }
+ }
+}
