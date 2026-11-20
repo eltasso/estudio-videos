@@ -1,0 +1,6 @@
+node_modules/
+.cache/
+salida/_tmp/
+# se generan con: python3 sonido/generar.py (render.mjs lo hace solo si faltan)
+public/sfx/
+public/musica/

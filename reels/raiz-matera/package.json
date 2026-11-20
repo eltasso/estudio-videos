@@ -1,0 +1,21 @@
+{
+  "name": "reels-raiz-matera",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sonidos": "python3 sonido/generar.py",
+    "render": "node render.mjs"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.472",
+    "@remotion/google-fonts": "4.0.472",
+    "@remotion/renderer": "4.0.472",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.472"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.6.3"
+  }
+}
