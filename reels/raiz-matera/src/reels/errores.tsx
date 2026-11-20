@@ -19,7 +19,7 @@ const Gancho: React.FC<{dur: number}> = ({dur}) => {
         <Centro top={930}>
           <Palabras texto={'errores que *arruinan*\ntu mate'} tam={112} anim="golpe" desde={12} cada={3} />
         </Centro>
-        <Centro top={1310}>
+        <Centro top={1375}>
           <Etiqueta texto="¿Cuántos hacés vos?" desde={44} color={C.crema} tam={40} />
         </Centro>
       </AbsoluteFill>
@@ -109,7 +109,7 @@ const Error3: React.FC<{dur: number}> = ({dur}) => {
           <Mate dib={dib} ancho={540} montania={montania}>
             {(mal || bien) && (
               <g>
-                <rect x={x - 6} y={-170} width={12} height={316} rx={6} fill="url(#chorro)" />
+                <rect x={x - 6} y={-70} width={12} height={216} rx={6} fill="url(#chorro)" />
                 <circle cx={x - 12} cy={140 - (f % 6) * 2} r={5} fill="#bfe0f0" opacity={0.8} />
                 <circle cx={x + 14} cy={138 - (f % 5) * 2} r={4} fill="#bfe0f0" opacity={0.8} />
               </g>
